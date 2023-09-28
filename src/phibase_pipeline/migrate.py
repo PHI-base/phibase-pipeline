@@ -142,22 +142,17 @@ def filter_phi_df(phi_df, approved_pmids=None):
         uniprot_pattern = re.compile(
             r'^([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$'
         )
-
         # Every row must have a PMID since PHI-Canto requires it.
         rows_with_pmid = phi_df['pmid'].notna()
-
         # PHI-Canto doesn't support any protein IDs besides UniProt.
         rows_in_uniprot = phi_df['protein_id_source'].notna()
-
         # Only include UniProt accession numbers that are valid.
         rows_with_valid_uniprot_id = phi_df['protein_id'].str.match(
             uniprot_pattern, na=False
         )
-
         # Only include rows where the host is at the species level (or below).
         # Note that 'Lethal pathogen phenotype' rows will not be filtered out.
         rows_without_host_genus = ~phi_df.host_species.str.match(r'^[A-Z][a-z]+$')
-
         rows_include = (
             rows_with_pmid
             & rows_in_uniprot
@@ -169,7 +164,6 @@ def filter_phi_df(phi_df, approved_pmids=None):
             # rows with PMIDs that exist in the export of approved curation sessions.
             rows_not_already_curated = ~phi_df.pmid.isin(approved_pmids)
             rows_include = rows_include & rows_not_already_curated
-
         return phi_df.loc[rows_include]
 
     return filter_columns(filter_rows(phi_df, approved_pmids))
@@ -231,10 +225,8 @@ def add_allele_ids(df):
 
     # Append the final row because iteration stops early.
     allele_ids.append(f'{next_protein_id}:{next_session_id}-{i}')
-
     df['pathogen_allele_id'] = allele_ids
     df = df.sort_index()  # restore original sort order
-
     return df
 
 
@@ -246,9 +238,7 @@ def add_genotype_ids(df):
             .sort_values(columns)
             .values
         )
-
         i_offset = 0
-
         if append_ids:
             # The genotype IDs for multi-locus genotypes need to start after the
             # end of the ID range for single locus genotypes.
@@ -280,7 +270,6 @@ def add_genotype_ids(df):
 
         df.loc[indexes, 'pathogen_genotype_n'] = genotype_nums
         df.pathogen_genotype_n = df.pathogen_genotype_n.fillna(0).astype(int)
-
         df.loc[indexes, 'pathogen_genotype_id'] = (
             df.session_id + '-genotype-' + df.pathogen_genotype_n.astype(str)
         )
@@ -317,7 +306,6 @@ def add_genotype_ids(df):
         'expression',
     ]
     single_locus_rows = df.multiple_mutation.isna()
-
     multi_locus_columns = [
         'session_id',
         'multiple_mutation',
@@ -330,9 +318,7 @@ def add_genotype_ids(df):
     df = fill_multiple_mutation_ids(df)
     df = add_ids(df, multi_locus_columns, multi_locus_rows, append_ids=True)
     df = add_wt_host_genotype_ids(df)
-
     df = df.drop('pathogen_genotype_n', axis=1)
-
     return df
 
 
