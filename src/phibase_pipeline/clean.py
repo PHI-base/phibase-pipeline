@@ -177,7 +177,6 @@ def clean_phibase_csv(path):
             'unnamed_83': 'host_gene_maps',
         }
     )
-
     phi_df.curation_date = fix_curation_dates(phi_df.curation_date)
 
     # Fix separators in multiple mutation column
@@ -189,7 +188,6 @@ def clean_phibase_csv(path):
         .str.replace(separator_without_space, '; ')
         .str.replace(space_separator, '; ')
     )
-
     # Fix separators in disease column
     phi_df.disease = phi_df.disease.str.replace(',', ';')
 
@@ -198,10 +196,7 @@ def clean_phibase_csv(path):
 
 def load_phibase_cleaned(path):
     dtypes = (
-        pd.read_csv(
-            '_in/cleaned_dtypes.csv',
-            index_col='column',
-        )
+        pd.read_csv('_in/cleaned_dtypes.csv', index_col='column')
         .squeeze('columns')
         .to_dict()
     )
