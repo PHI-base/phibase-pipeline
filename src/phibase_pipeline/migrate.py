@@ -5,11 +5,12 @@ import hashlib
 import itertools
 import json
 import os
-import numpy as np
-import pandas as pd
 import re
 from collections import defaultdict
 from datetime import timedelta
+
+import numpy as np
+import pandas as pd
 
 from phibase_pipeline.clean import load_or_create_cleaned_csv
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
