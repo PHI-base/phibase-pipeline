@@ -12,7 +12,7 @@ from collections import defaultdict
 from datetime import timedelta
 
 from phibase_pipeline.clean import load_or_create_cleaned_csv
-from wild_type import get_all_feature_mappings, get_wt_features
+from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 
 
 def load_bto_id_mapping(path):
