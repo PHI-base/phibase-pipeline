@@ -2,12 +2,12 @@ import pytest
 
 from phibase_pipeline.wild_type import (
     convert_allele_to_wild_type,
+    convert_genotype_to_wild_type,
     convert_metagenotype_to_wild_type,
-    is_genotype_wild_type,
-    is_metagenotype_wild_type,
     get_feature_counts,
     get_wt_feature_mapping,
-    convert_genotype_to_wild_type,
+    is_genotype_wild_type,
+    is_metagenotype_wild_type,
 )
 
 
@@ -249,9 +249,7 @@ def test_get_wt_feature_mapping(session):
 
 
 def test_convert_genotype_to_wild_type():
-    allele_mapping = {
-        'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-2'
-    }
+    allele_mapping = {'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-2'}
     # Genotype with expression
     no_expr_genotype = {
         'loci': [
