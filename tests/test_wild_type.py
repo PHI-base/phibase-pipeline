@@ -6,6 +6,7 @@ from phibase_pipeline.wild_type import (
     is_metagenotype_wild_type,
     get_feature_counts,
     get_wt_feature_mapping,
+    convert_genotype_to_wild_type,
 )
 
 
@@ -244,3 +245,50 @@ def test_get_wt_feature_mapping(session):
     }
     actual = get_wt_feature_mapping(feature_counts, session)
     assert actual == expected
+
+
+def test_convert_genotype_to_wild_type():
+    allele_mapping = {
+        'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-2'
+    }
+    # Genotype with expression
+    no_expr_genotype = {
+        'loci': [
+            [
+                {
+                    'expression': 'Overexpression',
+                    'id': 'Q00000:0123456789abcdef-1',
+                }
+            ]
+        ],
+        'organism_strain': 'Unknown strain',
+        'organism_taxonid': 562,
+    }
+    # Genotype without expression
+    expr_genotype = {
+        'loci': [
+            [
+                {
+                    'id': 'Q00000:0123456789abcdef-1',
+                }
+            ]
+        ],
+        'organism_strain': 'Unknown strain',
+        'organism_taxonid': 562,
+    }
+    expected = {
+        'loci': [
+            [
+                {
+                    'expression': 'Not assayed',
+                    'id': 'Q00000:0123456789abcdef-2',
+                }
+            ]
+        ],
+        'organism_strain': 'Unknown strain',
+        'organism_taxonid': 562,
+    }
+    actual1 = convert_genotype_to_wild_type(allele_mapping, no_expr_genotype)
+    assert actual1 == expected
+    actual2 = convert_genotype_to_wild_type(allele_mapping, expr_genotype)
+    assert actual2 == expected
