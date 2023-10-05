@@ -2,6 +2,7 @@ import pytest
 
 from phibase_pipeline.wild_type import (
     convert_allele_to_wild_type,
+    convert_metagenotype_to_wild_type,
     is_genotype_wild_type,
     is_metagenotype_wild_type,
     get_feature_counts,
@@ -292,3 +293,19 @@ def test_convert_genotype_to_wild_type():
     assert actual1 == expected
     actual2 = convert_genotype_to_wild_type(allele_mapping, expr_genotype)
     assert actual2 == expected
+
+
+def test_convert_metagenotype_to_wild_type():
+    genotype_mapping = {'0123456789abcdef-genotype-1': '0123456789abcdef-genotype-2'}
+    metagenotype = {
+        'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+        'pathogen_genotype': '0123456789abcdef-genotype-1',
+        'type': 'pathogen-host',
+    }
+    expected = {
+        'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+        'pathogen_genotype': '0123456789abcdef-genotype-2',
+        'type': 'pathogen-host',
+    }
+    actual = convert_metagenotype_to_wild_type(genotype_mapping, metagenotype)
+    assert actual == expected
