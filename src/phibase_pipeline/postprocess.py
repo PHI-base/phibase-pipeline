@@ -87,6 +87,8 @@ def merge_duplicate_alleles(curation_sessions):
 
 def remove_curator_orcids(export):
     for session in export['curation_sessions'].values():
+        if 'annotations' not in session:
+            continue
         for annotation in session['annotations']:
             if 'curator_orcid' in annotation['curator']:
                 del annotation['curator']['curator_orcid']
