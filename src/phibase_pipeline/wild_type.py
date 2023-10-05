@@ -104,8 +104,7 @@ def convert_genotype_to_wild_type(allele_mapping, genotype):
     genotype = copy.deepcopy(genotype)
     for locus in genotype['loci']:
         for genotype_allele in locus:
-            if 'expression' in genotype_allele:
-                genotype_allele['expression'] = 'Not assayed'
+            genotype_allele['expression'] = 'Not assayed'
             mutant_allele_id = genotype_allele['id']
             genotype_allele['id'] = allele_mapping[mutant_allele_id]
     return genotype
