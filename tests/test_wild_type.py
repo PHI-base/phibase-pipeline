@@ -5,6 +5,7 @@ from phibase_pipeline.wild_type import (
     is_genotype_wild_type,
     is_metagenotype_wild_type,
     get_feature_counts,
+    get_wt_feature_mapping,
 )
 
 
@@ -218,3 +219,28 @@ def test_get_feature_counts():
     session['alleles'] = {}
     feature_counts['alleles'] = 0
     assert feature_counts == get_feature_counts(session)
+
+
+def test_get_wt_feature_mapping(session):
+    feature_counts = {
+        'alleles': {
+            'Q00000': 2,
+            'P00001': 1,
+        },
+        'genotypes': 2,
+        'metagenotypes': 2,
+    }
+    expected = {
+        'alleles': {
+            'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-3',
+            'P00001:0123456789abcdef-1': 'P00001:0123456789abcdef-2',
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-1': '0123456789abcdef-genotype-3',
+        },
+        'metagenotypes': {
+            '0123456789abcdef-metagenotype-1': '0123456789abcdef-metagenotype-3',
+        },
+    }
+    actual = get_wt_feature_mapping(feature_counts, session)
+    assert actual == expected
