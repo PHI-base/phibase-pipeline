@@ -118,7 +118,7 @@ def test_get_feature_counts():
             '0123456789abcdef-metagenotype-1': None,
             '0123456789abcdef-metagenotype-2': None,
             '0123456789abcdef-metagenotype-3': None,
-        }
+        },
     }
     feature_counts = {
         'alleles': {
@@ -128,4 +128,13 @@ def test_get_feature_counts():
         'genotypes': 1,
         'metagenotypes': 3,
     }
+    assert feature_counts == get_feature_counts(session)
+
+    # Test empty feature objects
+    session['metagenotypes'] = {}
+    feature_counts['metagenotypes'] = 0
+    assert feature_counts == get_feature_counts(session)
+
+    session['alleles'] = {}
+    feature_counts['alleles'] = 0
     assert feature_counts == get_feature_counts(session)
