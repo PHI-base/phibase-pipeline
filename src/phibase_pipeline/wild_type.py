@@ -31,7 +31,9 @@ def get_feature_counts(session):
         id_numbers = []
         feature_ids = session[feature_key]
         if not feature_ids:
-            continue  # session may not have metagenotypes
+            # session may not have some features
+            feature_counts[feature_key] = 0
+            continue
         for feature_id in feature_ids:
             match = re.match(pattern, feature_id)
             if not match:
@@ -40,17 +42,21 @@ def get_feature_counts(session):
             id_numbers.append(id_num)
         feature_counts[feature_key] = max(id_numbers)
 
-    # Additional indexing is needed for alleles
-    allele_numbers = defaultdict(list)
-    for allele_id in session['alleles']:
-        match = re.match(id_patterns['alleles'], allele_id)
-        protein_id = match.group('protein')
-        id_num = int(match.group('n'))
-        allele_numbers[protein_id].append(id_num)
+    if session['alleles']:
+        # Additional indexing is needed for alleles
+        allele_numbers = defaultdict(list)
+        for allele_id in session['alleles']:
+            match = re.match(id_patterns['alleles'], allele_id)
+            protein_id = match.group('protein')
+            id_num = int(match.group('n'))
+            allele_numbers[protein_id].append(id_num)
 
-    feature_counts['alleles'] = {
-        protein_id: max(id_nums) for protein_id, id_nums in allele_numbers.items()
-    }
+        feature_counts['alleles'] = {
+            protein_id: max(id_nums) for protein_id, id_nums in allele_numbers.items()
+        }
+    else:
+        feature_counts['alleles'] = 0
+
     return feature_counts
 
 
