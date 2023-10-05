@@ -264,3 +264,24 @@ def remove_unapproved_sessions(export):
         session = curation_sessions[session_id]
         if session['metadata']['annotation_status'] != 'APPROVED':
             del curation_sessions[session_id]
+
+
+def postprocess_phibase_json(export):
+    curation_sessions = export['curation_sessions']
+    for session in curation_sessions.values():
+        remove_invalid_genotypes(session)
+        remove_invalid_metagenotypes(session)
+        remove_invalid_annotations(session)
+        remove_orphaned_alleles(session)
+        remove_orphaned_genes(session)
+        remove_orphaned_organisms(session)
+        remove_duplicate_annotations(session)
+    merge_duplicate_alleles(curation_sessions)
+
+
+def postprocess_combined_json(export):
+    remove_unapproved_sessions(export)
+    remove_curator_orcids(export)
+    for session in export['curation_sessions'].values():
+        remove_allele_gene_names(session)
+        add_delta_symbol(session)
