@@ -19,6 +19,7 @@ def session():
             'Q00000:0123456789abcdef-1': {
                 'allele_type': 'deletion',
                 'gene': 'Escherichia coli Q00000',
+                'gene_name': 'ABC',
                 'name': 'ABCdelta',
                 'primary_identifier': 'Q00000:0123456789abcdef-1',
                 'synonyms': [],
@@ -27,6 +28,7 @@ def session():
             'Q00000:0123456789abcdef-2': {
                 'allele_type': 'wild_type',
                 'gene': 'Escherichia coli Q00000',
+                'gene_name': 'ABC',
                 'name': 'ABC+',
                 'primary_identifier': 'Q00000:0123456789abcdef-2',
                 'synonyms': [],
@@ -35,6 +37,7 @@ def session():
             'P00001:0123456789abcdef-1': {
                 'allele_type': 'deletion',
                 'gene': 'Homo sapiens P00001',
+                'gene_name': 'CYC',
                 'name': 'CYCdelta',
                 'primary_identifier': 'P00001:0123456789abcdef-1',
                 'synonyms': [],
