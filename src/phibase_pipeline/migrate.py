@@ -717,7 +717,7 @@ def add_organism_objects(canto_json, phi_df):
             ),
         ]
     )
-    
+
     organism_df.taxon_id = organism_df.taxon_id.astype('Int64')
     organism_data = organism_df.drop_duplicates(['session_id', 'taxon_id']).values
     for session_id, taxon_id, species in organism_data:
@@ -1029,6 +1029,8 @@ def add_organism_roles(canto_json):
         )
     )
     for session in canto_json['curation_sessions'].values():
+        if 'organisms' not in session:
+            continue
         for taxon_id, organism in session['organisms'].items():
             taxid = int(taxon_id)
             organism['role'] = (
