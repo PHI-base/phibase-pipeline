@@ -6,6 +6,7 @@ from phibase_pipeline.wild_type import (
     convert_metagenotype_to_wild_type,
     get_feature_counts,
     get_wt_feature_mapping,
+    get_wt_features,
     is_genotype_wild_type,
     is_metagenotype_wild_type,
 )
@@ -309,4 +310,62 @@ def test_convert_metagenotype_to_wild_type():
         'type': 'pathogen-host',
     }
     actual = convert_metagenotype_to_wild_type(genotype_mapping, metagenotype)
+    assert actual == expected
+
+
+def test_get_wt_features(session):
+    feature_mapping = {
+        'alleles': {
+            'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-3',
+            'P00001:0123456789abcdef-1': 'P00001:0123456789abcdef-2',
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-1': '0123456789abcdef-genotype-3',
+        },
+        'metagenotypes': {
+            '0123456789abcdef-metagenotype-1': '0123456789abcdef-metagenotype-3',
+        },
+    }
+    expected = {
+        'alleles': {
+            'P00001:0123456789abcdef-2': {
+                'allele_type': 'wild type',
+                'gene': 'Homo sapiens P00001',
+                'gene_name': 'CYC',
+                'name': 'CYC+',
+                'primary_identifier': 'P00001:0123456789abcdef-2',
+                'synonyms': [],
+            },
+            'Q00000:0123456789abcdef-3': {
+                'allele_type': 'wild type',
+                'gene': 'Escherichia coli Q00000',
+                'gene_name': 'ABC',
+                'name': 'ABC+',
+                'primary_identifier': 'Q00000:0123456789abcdef-3',
+                'synonyms': [],
+            },
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-3': {
+                'loci': [
+                    [
+                        {
+                            'expression': 'Not assayed',
+                            'id': 'Q00000:0123456789abcdef-3',
+                        }
+                    ]
+                ],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 562,
+            }
+        },
+        'metagenotypes': {
+            '0123456789abcdef-metagenotype-3': {
+                'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+                'pathogen_genotype': '0123456789abcdef-genotype-3',
+                'type': 'pathogen-host',
+            }
+        },
+    }
+    actual = get_wt_features(feature_mapping, session)
     assert actual == expected
