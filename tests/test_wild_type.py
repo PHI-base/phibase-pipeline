@@ -1,9 +1,89 @@
+import pytest
+
 from phibase_pipeline.wild_type import (
     convert_allele_to_wild_type,
     is_genotype_wild_type,
     is_metagenotype_wild_type,
     get_feature_counts,
 )
+
+
+@pytest.fixture
+def session():
+    return {
+        'alleles': {
+            # mutant pathogen allele
+            'Q00000:0123456789abcdef-1': {
+                'allele_type': 'deletion',
+                'gene': 'Escherichia coli Q00000',
+                'name': 'ABCdelta',
+                'primary_identifier': 'Q00000:0123456789abcdef-1',
+                'synonyms': [],
+            },
+            # wild type pathogen allele
+            'Q00000:0123456789abcdef-2': {
+                'allele_type': 'wild_type',
+                'gene': 'Escherichia coli Q00000',
+                'name': 'ABC+',
+                'primary_identifier': 'Q00000:0123456789abcdef-2',
+                'synonyms': [],
+            },
+            # mutant host allele
+            'P00001:0123456789abcdef-1': {
+                'allele_type': 'deletion',
+                'gene': 'Homo sapiens P00001',
+                'name': 'CYCdelta',
+                'primary_identifier': 'P00001:0123456789abcdef-1',
+                'synonyms': [],
+            },
+        },
+        'genotypes': {
+            # mutant pathogen genotype
+            '0123456789abcdef-genotype-1': {
+                'loci': [
+                    [
+                        {
+                            'id': 'Q00000:0123456789abcdef-1',
+                        }
+                    ]
+                ],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 562,
+            },
+            # wild type pathogen genotype
+            '0123456789abcdef-genotype-2': {
+                'loci': [
+                    [
+                        {
+                            'id': 'Q00000:0123456789abcdef-2',
+                        }
+                    ]
+                ],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 562,
+            },
+            # wild type host genotype
+            'Homo-sapiens-wild-type-genotype-Unknown-strain': {
+                'loci': [],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 9606,
+            },
+        },
+        'metagenotypes': {
+            # mutant pathogen, wild type host
+            '0123456789abcdef-metagenotype-1': {
+                'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+                'pathogen_genotype': '0123456789abcdef-genotype-1',
+                'type': 'pathogen-host',
+            },
+            # wild type pathogen, wild type host
+            '0123456789abcdef-metagenotype-2': {
+                'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+                'pathogen_genotype': '0123456789abcdef-genotype-2',
+                'type': 'pathogen-host',
+            },
+        },
+    }
 
 
 def test_convert_allele_to_wild_type():
