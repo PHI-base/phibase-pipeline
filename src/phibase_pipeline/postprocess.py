@@ -222,3 +222,22 @@ def remove_orphaned_organisms(session):
                 orphaned_organism_ids.add(organism_id)
     for organism_id in orphaned_organism_ids:
         del session['organisms'][organism_id]
+
+
+def remove_duplicate_annotations(phibase_json):
+    seen = set()
+    curation_sessions = phibase_json['curation_sessions']
+    for session_id, session in curation_sessions.items():
+        unique_annotations = []
+        annotations = session.get('annotations', [])
+        for annotation in annotations:
+            key = (
+                str({k: v for k, v in annotation.items() if k != 'phi4_id'})
+                if 'phi4_id' in annotation
+                else str(annotation)
+            )
+            if key in seen:
+                continue  # skip duplicate annotation
+            unique_annotations.append(annotation)
+            seen.add(key)
+        session['annotations'] = unique_annotations
