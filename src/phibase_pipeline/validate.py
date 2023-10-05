@@ -1,4 +1,5 @@
 import functools
+import pprint
 import re
 from collections import defaultdict
 
@@ -158,6 +159,22 @@ def validate_unique_alleles(alleles):
         allele_keys[allele_key].append(allele_id)
 
 
+def validate_unique_annotations(annotations, session_id):
+    seen = {}
+    for annotation in annotations:
+        if 'phi4_id' in annotation:
+            key = str({k: v for k, v in annotation.items() if k != 'phi4_id'})
+        else:
+            key = str(annotation)
+        dupe_annotation = seen.get(key)
+        assert not dupe_annotation, (
+            f"duplicate annotations: {session_id}\n"
+            f"{pprint.pformat(annotation, indent=4)}\n"
+            f"{pprint.pformat(dupe_annotation, indent=4)}\n"
+        )
+        seen[key] = annotation
+
+
 def validate_unique_metagenotypes(metagenotypes):
     unique_metagenotypes = {}
     for metagenotype_id, metagenotype in metagenotypes.items():
@@ -211,6 +228,7 @@ def validate_export(json_export):
         validate_unique_metagenotypes(metagenotypes)
         # Annotation validation
         validate_disease_ids(annotations)
+        validate_unique_annotations(annotations, session_id)
 
 
 validate_allele_session_ids = functools.partial(
