@@ -255,3 +255,12 @@ def add_delta_symbol(session):
     DELTA = '\N{GREEK CAPITAL LETTER DELTA}'
     for allele in session.get('alleles', {}).values():
         allele['name'] = pattern.sub(DELTA, allele['name'])
+
+
+def remove_unapproved_sessions(export):
+    curation_sessions = export['curation_sessions']
+    # Copy dict keys as list since we'll be deleting dict keys
+    for session_id in list(curation_sessions):
+        session = curation_sessions[session_id]
+        if session['metadata']['annotation_status'] != 'APPROVED':
+            del curation_sessions[session_id]
