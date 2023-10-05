@@ -2,6 +2,7 @@ from phibase_pipeline.wild_type import (
     convert_allele_to_wild_type,
     is_genotype_wild_type,
     is_metagenotype_wild_type,
+    get_feature_counts,
 )
 
 
@@ -99,3 +100,32 @@ def test_is_metagenotype_wild_type():
     mutant_metagenotype = {'pathogen_genotype': '0123456789abcdef-genotype-2'}
     assert is_metagenotype_wild_type(session, wt_metagenotype)
     assert not is_metagenotype_wild_type(session, mutant_metagenotype)
+
+
+def test_get_feature_counts():
+    session = {
+        'alleles': {
+            'Q00000:0123456789abcdef-1': None,
+            'Q00000:0123456789abcdef-2': None,
+            'P00000:0123456789abcdef-1': None,
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-1': None,
+            # wild type genotypes should not be counted
+            'Lolium-perenne-wild-type-genotype-Unknown-strain': None,
+        },
+        'metagenotypes': {
+            '0123456789abcdef-metagenotype-1': None,
+            '0123456789abcdef-metagenotype-2': None,
+            '0123456789abcdef-metagenotype-3': None,
+        }
+    }
+    feature_counts = {
+        'alleles': {
+            'Q00000': 2,
+            'P00000': 1,
+        },
+        'genotypes': 1,
+        'metagenotypes': 3,
+    }
+    assert feature_counts == get_feature_counts(session)
