@@ -8,20 +8,6 @@ def allele_ids_of_genotype(genotype):
             yield allele_id
 
 
-def replace_non_ascii_chars(replacements, export):
-    def process(obj):
-        if isinstance(obj, str):
-            return pattern.sub(lambda m: replacements[m.group(0)], obj)
-        if isinstance(obj, dict):
-            return {process(k): process(v) for k, v in obj.items()}
-        if isinstance(obj, list):
-            return [process(x) for x in obj]
-        return obj
-
-    pattern = re.compile(''.join(('([', *replacements.keys(), '])')))
-    return process(export)
-
-
 def merge_phi_canto_curation(phi_base_export, phi_canto_export):
     curation_sessions = phi_base_export['curation_sessions']
     old_session_count = len(curation_sessions)
