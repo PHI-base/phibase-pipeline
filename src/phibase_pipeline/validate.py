@@ -94,39 +94,39 @@ def validate_one_species_per_genotype(genotypes, session):
 
 def validate_referenced_alleles(genotypes, alleles):
     allele_ids = alleles.keys()
-    for genotype in genotypes.values():
+    for genotype_id, genotype in genotypes.items():
         for locus in genotype['loci']:
             for locus_allele in locus:
                 allele_id = locus_allele['id']
                 assert (
                     allele_id in allele_ids
-                ), f"locus allele ID not in session alleles: {allele_id}"
+                ), f"{genotype_id} locus allele ID not in session alleles: {allele_id}"
 
 
 def validate_referenced_genes(alleles, genes):
     gene_ids = genes.keys()
-    for allele in alleles.values():
+    for allele_id, allele in alleles.items():
         gene_id = allele['gene']
-        assert gene_id in gene_ids, f"allele gene ID not in session genes: {gene_id}"
+        assert gene_id in gene_ids, f"{allele_id} gene ID not in session genes: {gene_id}"
 
 
 def validate_referenced_genotypes(metagenotypes, genotypes):
     genotype_ids = genotypes.keys()
-    for metagenotype in metagenotypes.values():
+    for metagenotype_id, metagenotype in metagenotypes.items():
         for k in ('pathogen_genotype', 'host_genotype'):
             genotype_id = metagenotype[k]
             assert (
                 genotype_id in genotype_ids
-            ), f"metagenotype genotype ID not in session genotypes: {genotype_id}"
+            ), f"{metagenotype_id} genotype ID not in session genotypes: {genotype_id}"
 
 
 def validate_referenced_organisms(genotypes, organisms):
     organism_ids = organisms.keys()
-    for genotype in genotypes.values():
+    for genotype_id, genotype in genotypes.items():
         organism_id = str(genotype['organism_taxonid'])
         assert (
             organism_id in organism_ids
-        ), f"genotype organism ID not in session organisms: {organism_id}"
+        ), f"{genotype_id} organism ID not in session organisms: {organism_id}"
 
 
 def validate_uniprot_ids(genes):
