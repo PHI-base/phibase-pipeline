@@ -717,15 +717,16 @@ def add_organism_objects(canto_json, phi_df):
             ),
         ]
     )
-    organism_df.taxon_id = organism_df.taxon_id.fillna(0).astype(int)
+    
+    organism_df.taxon_id = organism_df.taxon_id.astype('Int64')
     organism_data = organism_df.drop_duplicates(['session_id', 'taxon_id']).values
     for session_id, taxon_id, species in organism_data:
-        if not taxon_id:
-            # TODO: Filter invalid taxon IDs before this point
+        if pd.isna(taxon_id):
+            # TODO: Filter out invalid taxon IDs before this point
             continue
-        curation_sessions[session_id]['organisms'][taxon_id] = {
-            'full_name': species,
-        }
+        organisms = curation_sessions[session_id]['organisms']
+        # Taxon IDs must be strings to match the PHI-Canto export
+        organisms[str(taxon_id)] = {'full_name': species}
 
 
 def add_publication_objects(canto_json, phi_df):
