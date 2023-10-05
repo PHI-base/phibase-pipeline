@@ -241,3 +241,9 @@ def remove_duplicate_annotations(phibase_json):
             unique_annotations.append(annotation)
             seen.add(key)
         session['annotations'] = unique_annotations
+
+
+def remove_allele_gene_names(session):
+    for allele in session.get('alleles', {}).values():
+        if 'gene_name' in allele:
+            del allele['gene_name']
