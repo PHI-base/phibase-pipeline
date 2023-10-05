@@ -4,6 +4,7 @@ from phibase_pipeline.wild_type import (
     convert_allele_to_wild_type,
     convert_genotype_to_wild_type,
     convert_metagenotype_to_wild_type,
+    get_all_feature_mappings,
     get_feature_counts,
     get_wt_feature_mapping,
     get_wt_features,
@@ -368,4 +369,28 @@ def test_get_wt_features(session):
         },
     }
     actual = get_wt_features(feature_mapping, session)
+    assert actual == expected
+
+
+def test_get_all_feature_mappings(session):
+    json_export = {
+        'curation_sessions': {
+            '0123456789abcdef': session,
+        }
+    }
+    expected = {
+        '0123456789abcdef': {
+            'alleles': {
+                'Q00000:0123456789abcdef-1': 'Q00000:0123456789abcdef-3',
+                'P00001:0123456789abcdef-1': 'P00001:0123456789abcdef-2',
+            },
+            'genotypes': {
+                '0123456789abcdef-genotype-1': '0123456789abcdef-genotype-3',
+            },
+            'metagenotypes': {
+                '0123456789abcdef-metagenotype-1': '0123456789abcdef-metagenotype-3',
+            },
+        }
+    }
+    actual = get_all_feature_mappings(json_export)
     assert actual == expected
