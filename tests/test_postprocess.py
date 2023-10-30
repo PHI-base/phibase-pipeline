@@ -57,7 +57,7 @@ def test_merge_phi_canto_curation():
             },
             'abcdef0000000002': {
                 'foo': 'bar',
-            }
+            },
         }
     }
 
