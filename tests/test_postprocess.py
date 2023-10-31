@@ -6,6 +6,7 @@ from phibase_pipeline.postprocess import (
     allele_ids_of_genotype,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
+    remove_curator_orcids,
 )
 
 
@@ -233,3 +234,67 @@ def test_merge_duplicate_alleles():
     # Test that objects are merged
     merge_duplicate_alleles(alleles_to_merge)
     assert alleles_to_merge == merged
+
+
+def test_remove_curator_orcids():
+    # Should not modify sessions with no annotations
+    no_annotations = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'foo': 'bar',
+            }
+        }
+    }
+    # Should not modify sessions with no ORCIDs
+    no_curator_orcids = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {
+                        'curator': {
+                            'community_curated': True,
+                        },
+                        'foo': 'bar',
+                    }
+                ]
+            }
+        }
+    }
+    for obj in (no_annotations, no_curator_orcids):
+        expected = obj
+        actual = copy.deepcopy(obj)
+        remove_curator_orcids(actual)
+        assert actual == expected
+
+    # ORCIDs should be removed
+    actual = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {
+                        'curator': {
+                            'community_curated': True,
+                            'curator_orcid': '0000-0002-1028-6941',
+                        },
+                        'foo': 'bar',
+                    }
+                ]
+            }
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {
+                        'curator': {
+                            'community_curated': True,
+                        },
+                        'foo': 'bar',
+                    }
+                ]
+            }
+        }
+    }
+    remove_curator_orcids(actual)
+    assert actual == expected
