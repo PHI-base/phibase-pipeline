@@ -76,9 +76,9 @@ def test_merge_phi_canto_curation():
     with pytest.raises(AssertionError):
         merge_phi_canto_curation({'curation_sessions': {}}, {'curation_sessions': {}})
 
-    # Merging sessions that already exist
+    # Merging sessions that already exist should raise an error
     with pytest.raises(KeyError, match='session_id [0-9a-f]{16} already exists'):
-        # Merging the same data again will trigger the exception
+        # Merging the same data again to trigger the error
         merge_phi_canto_curation(phi_base_export, phi_canto_export)
 
 
