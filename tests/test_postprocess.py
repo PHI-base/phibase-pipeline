@@ -10,6 +10,14 @@ from phibase_pipeline.postprocess import (
 )
 
 
+def assert_unchanged_after_mutation(func, *objects):
+    for obj in objects:
+        expected = obj
+        actual = copy.deepcopy(obj)
+        func(actual)
+        assert actual == expected
+
+
 def test_allele_ids_of_genotype():
     genotype = {
         'loci': [
