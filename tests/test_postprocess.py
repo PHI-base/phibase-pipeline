@@ -7,6 +7,7 @@ from phibase_pipeline.postprocess import (
     merge_phi_canto_curation,
     merge_duplicate_alleles,
     remove_curator_orcids,
+    remove_invalid_annotations,
 )
 
 
@@ -306,3 +307,84 @@ def test_remove_curator_orcids():
     }
     remove_curator_orcids(actual)
     assert actual == expected
+
+
+def test_remove_invalid_annotations():
+    # Test that the following objects are not modified
+    no_annotations = {
+        'annotations': [],
+    }
+    valid_annotations = {
+        'genes': {
+            'Homo sapiens Q000000': {},
+        },
+        'genotypes': {
+            '0132456789abcdef-genotype-1': {},
+        },
+        'metagenotypes': {
+            '0132456789abcdef-metagenotype-1': {},
+        },
+        'annotations': [
+            {
+                'gene': 'Homo sapiens Q000000',
+            },
+            {
+                'genotype': '0132456789abcdef-genotype-1',
+            },
+            {
+                'metagenotype': '0132456789abcdef-metagenotype-1',
+            },
+        ],
+    }
+    assert_unchanged_after_mutation(
+        remove_invalid_annotations, no_annotations, valid_annotations
+    )
+
+    # Remove annotations with no features
+    annotation_with_no_feature = {
+        'annotations': [
+            {
+                'foo': 'bar',
+            }
+        ],
+    }
+    remove_invalid_annotations(annotation_with_no_feature)
+    assert annotation_with_no_feature == {'annotations': []}
+
+    # Remove annotations that reference non-existent features
+    invalid_annotations = {
+        'genes': {
+            'Homo sapiens Q000000': {},
+        },
+        'genotypes': {
+            '0132456789abcdef-genotype-1': {},
+        },
+        'metagenotypes': {
+            '0132456789abcdef-metagenotype-1': {},
+        },
+        'annotations': [
+            {
+                'gene': 'Homo sapiens Q000001',
+            },
+            {
+                'genotype': '0132456789abcdef-genotype-2',
+            },
+            {
+                'metagenotype': '0132456789abcdef-metagenotype-2',
+            },
+        ],
+    }
+    expected = {
+        'genes': {
+            'Homo sapiens Q000000': {},
+        },
+        'genotypes': {
+            '0132456789abcdef-genotype-1': {},
+        },
+        'metagenotypes': {
+            '0132456789abcdef-metagenotype-1': {},
+        },
+        'annotations': [],
+    }
+    remove_invalid_annotations(invalid_annotations)
+    assert invalid_annotations == expected
