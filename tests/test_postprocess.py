@@ -44,8 +44,7 @@ def test_allele_ids_of_genotype():
 
 
 def test_merge_phi_canto_curation():
-    # Normal merging: assert len(curation_sessions) > old_session_count should
-    # be implicitly tested by this path
+    # Normal merging
     phi_base_export = {
         'curation_sessions': {
             'abcdef0000000001': {
@@ -70,9 +69,12 @@ def test_merge_phi_canto_curation():
             },
         }
     }
-
     merge_phi_canto_curation(phi_base_export, phi_canto_export)
     assert phi_base_export == expected
+
+    # There should be more curation sessions after merging than before
+    with pytest.raises(AssertionError):
+        merge_phi_canto_curation({'curation_sessions': {}}, {'curation_sessions': {}})
 
     # Merging sessions that already exist
     with pytest.raises(KeyError, match='session_id [0-9a-f]{16} already exists'):
