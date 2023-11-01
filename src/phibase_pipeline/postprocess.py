@@ -173,15 +173,13 @@ def remove_orphaned_genes(session):
             annotations = session['annotations']
             for annotation in annotations:
                 annotation_gene_id = annotation.get('gene')
-                if not annotation_gene_id:
-                    continue
                 if annotation_gene_id == gene_id:
                     break
                 # Check annotation extensions
                 uniprot_id = gene['uniquename']
                 gene_in_extensions = any(
                     extension['rangeValue'] == uniprot_id
-                    for extension in annotation['extensions']
+                    for extension in annotation['extension']
                 )
                 if gene_in_extensions:
                     break
