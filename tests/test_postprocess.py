@@ -532,9 +532,9 @@ def test_remove_orphaned_genes():
         'alleles': {},
         'annotations': [
             {
-                'gene': 'Homo sapiens Q00000'
+                'gene': 'Homo sapiens Q00000',
             }
-        ]
+        ],
     }
     gene_in_annotation_extension = {
         'genes': gene,
@@ -546,9 +546,9 @@ def test_remove_orphaned_genes():
                     {
                         'rangeValue': 'Q00000',
                     }
-                ]
+                ],
             }
-        ]
+        ],
     }
     assert_unchanged_after_mutation(
         remove_orphaned_genes,
@@ -591,7 +591,7 @@ def test_remove_orphaned_organisms():
         'genes': {},
         'genotypes': {
             'Homo-sapiens-wild-type-genotype-Unknown-strain': {
-                'organism_taxonid': 9606
+                'organism_taxonid': 9606,
             }
         },
     }
