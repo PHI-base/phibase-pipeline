@@ -9,6 +9,7 @@ from phibase_pipeline.postprocess import (
     remove_curator_orcids,
     remove_invalid_annotations,
     remove_invalid_genotypes,
+    remove_invalid_metagenotypes,
 )
 
 
@@ -437,4 +438,32 @@ def test_remove_invalid_genotypes():
     expected = copy.deepcopy(valid)
     del expected['genotypes']['0123456789abcdef-genotype-1']
     remove_invalid_genotypes(invalid)
+    assert invalid == expected
+
+
+def test_remove_invalid_metagenotypes():
+    valid = {
+        'genotypes': {
+            '0123465789abcdef-genotype-1': {},
+            '0123465789abcdef-genotype-2': {},
+        },
+        'metagenotypes': {
+            '01234568790abcdef-metagenotype-1': {
+                'host_genotype': 'Homo-sapiens-wild-type-genotype-Unknown-strain',
+                'pathogen_genotype': '0123465789abcdef-genotype-2',
+                'type': 'pathogen-host',
+            }
+        },
+    }
+    assert_unchanged_after_mutation(remove_invalid_metagenotypes, valid)
+
+    expected = copy.deepcopy(valid)
+    del expected['metagenotypes']['01234568790abcdef-metagenotype-1']
+
+    # Checks currently only apply to pathogen genotype
+    mg_id = '01234568790abcdef-metagenotype-1'
+    invalid_id = '0123465789abcdef-genotype-3'
+    invalid = copy.deepcopy(valid)
+    invalid['metagenotypes'][mg_id]['pathogen_genotype'] = invalid_id
+    remove_invalid_metagenotypes(invalid)
     assert invalid == expected
