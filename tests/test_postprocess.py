@@ -8,6 +8,7 @@ from phibase_pipeline.postprocess import (
     merge_duplicate_alleles,
     remove_curator_orcids,
     remove_invalid_annotations,
+    remove_invalid_genotypes,
 )
 
 
@@ -390,3 +391,50 @@ def test_remove_invalid_annotations():
     }
     remove_invalid_annotations(invalid_annotations)
     assert invalid_annotations == expected
+
+
+def test_remove_invalid_genotypes():
+    valid = {
+        'genes': {
+            'Homo sapiens Q00000': {
+                'organism': 'Homo sapiens',
+                'uniquename': 'Q00000',
+            }
+        },
+        'organisms': {
+            '9606': {
+                'full_name': 'Homo sapiens',
+            }
+        },
+        'alleles': {
+            'Q00000:0123456789abcdef-1': {
+                'allele_type': 'deletion',
+                'gene': 'Homo sapiens Q00000',
+                'name': 'ABCdelta',
+                'primary_identifier': "Q00000:0d2bc8d23a8667f4-1",
+                'synonyms': [],
+            }
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-1': {
+                'loci': [
+                    [
+                        {
+                            'id': 'Q00000:0123456789abcdef-1',
+                        }
+                    ]
+                ],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 9606,
+            }
+        },
+    }
+    assert_unchanged_after_mutation(remove_invalid_genotypes, valid)
+
+    invalid = copy.deepcopy(valid)
+    invalid['genotypes']['0123456789abcdef-genotype-1']['organism_taxonid'] = 9607
+
+    expected = copy.deepcopy(valid)
+    del expected['genotypes']['0123456789abcdef-genotype-1']
+    remove_invalid_genotypes(invalid)
+    assert invalid == expected
