@@ -11,6 +11,7 @@ from phibase_pipeline.postprocess import (
     remove_invalid_genotypes,
     remove_invalid_metagenotypes,
     remove_orphaned_alleles,
+    remove_orphaned_genes,
 )
 
 
@@ -507,4 +508,63 @@ def test_remove_orphaned_alleles():
         'synonyms': [],
     }
     remove_orphaned_alleles(invalid)
+    assert invalid == expected
+
+
+def test_remove_orphaned_genes():
+    gene = {
+        'Homo sapiens Q00000': {
+            'organism': 'Homo sapiens',
+            'uniquename': 'Q00000',
+        }
+    }
+    gene_in_allele = {
+        'genes': gene,
+        'alleles': {
+            'Q00000:0123456789abcdef-1': {
+                'gene': 'Homo sapiens Q00000',
+            }
+        },
+    }
+    gene_in_annotation = {
+        'genes': gene,
+        'alleles': {},
+        'annotations': [
+            {
+                'gene': 'Homo sapiens Q00000'
+            }
+        ]
+    }
+    gene_in_annotation_extension = {
+        'genes': gene,
+        'alleles': {},
+        'annotations': [
+            {
+                'genotype': '0123456789abcdef-genotype-1',
+                'extension': [
+                    {
+                        'rangeValue': 'Q00000',
+                    }
+                ]
+            }
+        ]
+    }
+    assert_unchanged_after_mutation(
+        remove_orphaned_genes,
+        gene_in_allele,
+        gene_in_annotation,
+        gene_in_annotation_extension,
+    )
+    # Remove genes not used in alleles or annotations
+    invalid = {
+        'genes': gene,
+        'alleles': {},
+        'annotations': [],
+    }
+    expected = {
+        'genes': {},
+        'alleles': {},
+        'annotations': [],
+    }
+    remove_orphaned_genes(invalid)
     assert invalid == expected
