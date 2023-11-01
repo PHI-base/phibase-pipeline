@@ -12,6 +12,7 @@ from phibase_pipeline.postprocess import (
     remove_invalid_metagenotypes,
     remove_orphaned_alleles,
     remove_orphaned_genes,
+    remove_orphaned_organisms,
 )
 
 
@@ -567,4 +568,47 @@ def test_remove_orphaned_genes():
         'annotations': [],
     }
     remove_orphaned_genes(invalid)
+    assert invalid == expected
+
+
+def test_remove_orphaned_organisms():
+    organism = {
+        '9606': {
+            'full_name': 'Homo sapiens',
+        }
+    }
+    in_gene = {
+        'organisms': organism,
+        'genes': {
+            'Homo sapiens Q00000': {
+                'organism': 'Homo sapiens',
+                'uniquename': 'Q00000',
+            }
+        },
+    }
+    in_genotype = {
+        'organisms': organism,
+        'genes': {},
+        'genotypes': {
+            'Homo-sapiens-wild-type-genotype-Unknown-strain': {
+                'organism_taxonid': 9606
+            }
+        },
+    }
+    assert_unchanged_after_mutation(
+        remove_orphaned_organisms,
+        in_gene,
+        in_genotype,
+    )
+    invalid = {
+        'organisms': organism,
+        'genes': {},
+        'genotypes': {},
+    }
+    expected = {
+        'organisms': {},
+        'genes': {},
+        'genotypes': {},
+    }
+    remove_orphaned_organisms(invalid)
     assert invalid == expected
