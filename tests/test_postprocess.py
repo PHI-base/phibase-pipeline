@@ -7,6 +7,7 @@ from phibase_pipeline.postprocess import (
     merge_phi_canto_curation,
     merge_duplicate_alleles,
     remove_curator_orcids,
+    remove_duplicate_annotations,
     remove_invalid_annotations,
     remove_invalid_genotypes,
     remove_invalid_metagenotypes,
@@ -612,3 +613,67 @@ def test_remove_orphaned_organisms():
     }
     remove_orphaned_organisms(invalid)
     assert invalid == expected
+
+
+def test_remove_duplicate_annotations():
+    annotation_1 = {
+        'checked': 'no',
+        'conditions': [
+            'PECO:0000001',
+        ],
+        'creation_date': '2000-01-01',
+        'curator': {
+            'community_curated': False,
+        },
+        'evidence_code': 'Substance quantification evidence',
+        'extension': [],
+        'figure': 'Fig 1',
+        'genotype': '0123456789abcdef-genotype-1',
+        'publication': 'PMID:1',
+        'status': 'new',
+        'submitter_comment': '',
+        'term': 'PHIPO:0000001',
+        'type': 'pathogen_host_interaction_phenotype',
+    }
+    annotation_2 = annotation_1.copy()
+    duplicated = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    annotation_1,
+                    annotation_2,
+                ]
+            }
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    annotation_1,
+                ]
+            }
+        }
+    }
+    remove_duplicate_annotations(duplicated)
+    assert duplicated == expected
+
+    # Test that unique annotations are preserved; mutate values for all keys
+    for k in annotation_2:
+        if k == 'conditions':
+            annotation_2[k][0] = 'foo'
+        elif k == 'curator':
+            annotation_2[k]['community_curated'] = True
+        else:
+            annotation_2[k] = 'foo'
+        assert_unchanged_after_mutation(remove_duplicate_annotations, duplicated)
+
+    # Test that PHI IDs are ignored when comparing
+    annotation_2 = annotation_1.copy()
+    annotation_2['phi4_id'] = ['PHI:1']
+    duplicated['curation_sessions']['0123456789abcdef']['annotations'] = [
+        annotation_1,
+        annotation_2,
+    ]
+    remove_duplicate_annotations(duplicated)
+    assert duplicated == expected
