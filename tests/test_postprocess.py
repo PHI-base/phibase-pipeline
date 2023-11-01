@@ -10,6 +10,7 @@ from phibase_pipeline.postprocess import (
     remove_invalid_annotations,
     remove_invalid_genotypes,
     remove_invalid_metagenotypes,
+    remove_orphaned_alleles,
 )
 
 
@@ -466,4 +467,44 @@ def test_remove_invalid_metagenotypes():
     invalid = copy.deepcopy(valid)
     invalid['metagenotypes'][mg_id]['pathogen_genotype'] = invalid_id
     remove_invalid_metagenotypes(invalid)
+    assert invalid == expected
+
+
+def test_remove_orphaned_alleles():
+    valid = {
+        'alleles': {
+            'Q00000:0123456789abcdef-1': {
+                'allele_type': 'deletion',
+                'gene': 'Homo sapiens Q00000',
+                'name': 'ABCdelta',
+                'primary_identifier': "Q00000:0d2bc8d23a8667f4-1",
+                'synonyms': [],
+            }
+        },
+        'genotypes': {
+            '0123456789abcdef-genotype-1': {
+                'loci': [
+                    [
+                        {
+                            'id': 'Q00000:0123456789abcdef-1',
+                        }
+                    ]
+                ],
+                'organism_strain': 'Unknown strain',
+                'organism_taxonid': 9606,
+            }
+        },
+    }
+    assert_unchanged_after_mutation(remove_orphaned_alleles, valid)
+
+    expected = copy.deepcopy(valid)
+    invalid = copy.deepcopy(valid)
+    invalid['alleles']['Q00000:0123456789abcdef-2'] = {
+        'allele_type': 'wild_type',
+        'gene': 'Homo sapiens Q00000',
+        'name': 'ABC+',
+        'primary_identifier': "Q00000:0d2bc8d23a8667f4-2",
+        'synonyms': [],
+    }
+    remove_orphaned_alleles(invalid)
     assert invalid == expected
