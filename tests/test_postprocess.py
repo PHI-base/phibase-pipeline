@@ -16,6 +16,7 @@ from phibase_pipeline.postprocess import (
     remove_orphaned_alleles,
     remove_orphaned_genes,
     remove_orphaned_organisms,
+    remove_unapproved_sessions,
 )
 
 
@@ -745,3 +746,36 @@ def test_add_delta_symbol():
         expected_allele['name'] = expected_names[k]
         add_delta_symbol(actual)
         assert actual == expected
+
+
+def test_remove_unapproved_sessions():
+    actual = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'metadata': {
+                    'annotation_status': 'APPROVED',
+                }
+            },
+            '1123456789abcdef': {
+                'metadata': {
+                    'annotation_status': 'CURATION_IN_PROGRESS',
+                }
+            },
+            '2123456789abcdef': {
+                'metadata': {
+                    'annotation_status': 'APPROVAL_IN_PROGRESS',
+                }
+            },
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'metadata': {
+                    'annotation_status': 'APPROVED',
+                }
+            }
+        }
+    }
+    remove_unapproved_sessions(actual)
+    assert actual == expected
