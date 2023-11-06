@@ -3,6 +3,7 @@ import copy
 import pytest
 
 from phibase_pipeline.postprocess import (
+    add_delta_symbol,
     allele_ids_of_genotype,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
@@ -706,3 +707,41 @@ def test_remove_allele_gene_names():
     }
     remove_allele_gene_names(actual)
     assert actual == expected
+
+
+def test_add_delta_symbol():
+    template = {
+        'alleles': {
+            'Q00000:0123456789abcef-1': {
+                'allele_type': 'wild_type',
+                'gene': 'Homo sapiens Q00000',
+                'name': None,
+                'gene_name': 'ABC',
+                'primary_identifier': "Q00000:0123456789abcef-1",
+                'synonyms': [],
+            }
+        }
+    }
+    actual_names = {
+        'delta_start': 'ABCdelta',
+        'delta_mid': 'ABCdeltaK',
+        'delta_end': 'deltaABC',
+    }
+    # Delta is only replaced at the end of allele names to maintain parity
+    # with Canto's behavior, but this might not be what we want.
+    expected_names = {
+        'delta_start': 'ABC\N{GREEK CAPITAL LETTER DELTA}',
+        'delta_mid': 'ABCdeltaK',
+        'delta_end': 'deltaABC',
+    }
+
+    actual = copy.deepcopy(template)
+    expected = copy.deepcopy(template)
+    actual_allele = actual['alleles']['Q00000:0123456789abcef-1']
+    expected_allele = expected['alleles']['Q00000:0123456789abcef-1']
+
+    for k in actual_names:
+        actual_allele['name'] = actual_names[k]
+        expected_allele['name'] = expected_names[k]
+        add_delta_symbol(actual)
+        assert actual == expected
