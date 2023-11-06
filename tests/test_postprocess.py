@@ -6,6 +6,7 @@ from phibase_pipeline.postprocess import (
     allele_ids_of_genotype,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
+    remove_allele_gene_names,
     remove_curator_orcids,
     remove_duplicate_annotations,
     remove_invalid_annotations,
@@ -677,3 +678,31 @@ def test_remove_duplicate_annotations():
     ]
     remove_duplicate_annotations(duplicated)
     assert duplicated == expected
+
+
+def test_remove_allele_gene_names():
+    actual = {
+        'alleles': {
+            'Q00000:0123456789abcef-1': {
+                'allele_type': 'wild_type',
+                'gene': 'Homo sapiens Q00000',
+                'name': 'ABC+',
+                'gene_name': 'ABC',
+                'primary_identifier': "Q00000:0123456789abcef-1",
+                'synonyms': [],
+            }
+        }
+    }
+    expected = {
+        'alleles': {
+            'Q00000:0123456789abcef-1': {
+                'allele_type': 'wild_type',
+                'gene': 'Homo sapiens Q00000',
+                'name': 'ABC+',
+                'primary_identifier': "Q00000:0123456789abcef-1",
+                'synonyms': [],
+            }
+        }
+    }
+    remove_allele_gene_names(actual)
+    assert actual == expected
