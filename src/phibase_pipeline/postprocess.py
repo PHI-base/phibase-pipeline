@@ -211,7 +211,7 @@ def remove_orphaned_organisms(session):
 def remove_duplicate_annotations(phibase_json):
     seen = set()
     curation_sessions = phibase_json['curation_sessions']
-    for session_id, session in curation_sessions.items():
+    for session in curation_sessions.values():
         unique_annotations = []
         annotations = session.get('annotations', [])
         for annotation in annotations:
