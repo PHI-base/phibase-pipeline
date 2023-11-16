@@ -1,0 +1,1227 @@
+ID,LABEL
+PHIPO:0000001,pathogen host interaction phenotype
+PHIPO:0000002,single species phenotype
+PHIPO:0000003,tissue phenotype
+PHIPO:0000004,unaffected pathogenicity
+PHIPO:0000005,obsolete abnormal pathogenicity
+PHIPO:0000006,pathogenicity phenotype
+PHIPO:0000007,obsolete functional pathogen effector absent
+PHIPO:0000008,obsolete functional pathogen effector present
+PHIPO:0000009,gain of pathogenicity
+PHIPO:0000010,loss of pathogenicity
+PHIPO:0000011,virulence phenotype
+PHIPO:0000012,unaffected virulence
+PHIPO:0000013,obsolete abnormal virulence
+PHIPO:0000014,increased virulence
+PHIPO:0000015,reduced virulence
+PHIPO:0000016,normal single species phenotype
+PHIPO:0000017,abnormal single species phenotype
+PHIPO:0000018,lipid droplets present in decreased numbers
+PHIPO:0000019,inviable cell
+PHIPO:0000021,increased sensitivity to chemical
+PHIPO:0000022,increased resistance to chemical
+PHIPO:0000023,obsolete abnormal penetration assay phenotype
+PHIPO:0000024,pathogen penetration across the barrier present
+PHIPO:0000025,obsolete normal mating phenotype prior to penetration
+PHIPO:0000026,obsolete normal penetration
+PHIPO:0000027,normal pathogen growth after penetration of the barrier
+PHIPO:0000028,normal formation of pathogen penetration structure
+PHIPO:0000029,obsolete abnormal mating phenotype prior to penetration
+PHIPO:0000030,pathogen penetration across the barrier absent
+PHIPO:0000031,abnormal pathogen growth after penetration of the barrier
+PHIPO:0000032,abnormal formation of pathogen penetration structure
+PHIPO:0000033,obsolete abnormal pathogen growth on host surface
+PHIPO:0000034,cell phenotype
+PHIPO:0000035,mutualism present
+PHIPO:0000036,abnormal lipid droplet morphology
+PHIPO:0000038,mutualism phenotype
+PHIPO:0000039,normal mutualism
+PHIPO:0000040,abnormal mutualism
+PHIPO:0000041,obsolete normal motility phenotype
+PHIPO:0000042,obsolete abnormal motility phenotype
+PHIPO:0000043,abnormal reproduction phenotype
+PHIPO:0000044,normal reproduction phenotype
+PHIPO:0000045,normal asexual reproduction
+PHIPO:0000046,normal sexual reproduction
+PHIPO:0000047,abnormal asexual reproduction
+PHIPO:0000048,abnormal sexual reproduction
+PHIPO:0000049,increased number of sexual spores
+PHIPO:0000050,decreased number of sexual spores
+PHIPO:0000051,increased number of asexual spores
+PHIPO:0000052,decreased number of asexual spores
+PHIPO:0000053,delayed asexual sporulation
+PHIPO:0000054,premature asexual sporulation
+PHIPO:0000055,delayed sexual sporulation
+PHIPO:0000056,premature sexual sporulation
+PHIPO:0000057,normal number of sexual spores
+PHIPO:0000058,obsolete normal timing in production of sexual spores
+PHIPO:0000059,normal number of asexual spores
+PHIPO:0000060,obsolete normal timing in production of asexual spores
+PHIPO:0000061,asexual spores absent
+PHIPO:0000062,sexual spores absent
+PHIPO:0000063,sexual spores present
+PHIPO:0000064,asexual spores present
+PHIPO:0000065,asexual spores increased in size
+PHIPO:0000066,obsolete abnormal timing of asexual spore production
+PHIPO:0000067,asexual spores decreased in size
+PHIPO:0000068,sexual spores increased in size
+PHIPO:0000069,sexual spores decreased in size
+PHIPO:0000070,altered in pigment accumulation in sexual spore
+PHIPO:0000071,abnormal sexual spore size
+PHIPO:0000072,abnormal sexual spore shape
+PHIPO:0000073,abnormal number of sexual spores
+PHIPO:0000074,obsolete abnormal timing of sexual spore production
+PHIPO:0000075,abnormal asexual spore shape
+PHIPO:0000076,altered in pigment accumulation in asexual spore
+PHIPO:0000077,abnormal sexual sporulation
+PHIPO:0000078,abnormal asexual sporulation
+PHIPO:0000079,normal sexual sporulation
+PHIPO:0000080,normal asexual sporulation
+PHIPO:0000081,abnormal asexual spore size
+PHIPO:0000082,abnormal number of asexual spores
+PHIPO:0000083,obsolete abnormal asexual spore motility
+PHIPO:0000084,obsolete increased asexual spore motility
+PHIPO:0000085,obsolete decreased asexual spore motility
+PHIPO:0000086,obsolete normal asexual spore motility
+PHIPO:0000087,obsolete normal binary fission
+PHIPO:0000088,obsolete normal budding
+PHIPO:0000089,obsolete normal fragmentation
+PHIPO:0000090,obsolete normal parthenogenesis
+PHIPO:0000091,obsolete abnormal budding
+PHIPO:0000092,obsolete abnormal binary fission
+PHIPO:0000093,obsolete abnormal parthenogenesis
+PHIPO:0000094,obsolete normal mitosis in asexual reproduction
+PHIPO:0000095,obsolete abnormal mitosis in asexual reproduction
+PHIPO:0000096,abnormal meiosis II
+PHIPO:0000097,abnormal meiosis I
+PHIPO:0000098,normal meiosis II
+PHIPO:0000099,normal meiosis I
+PHIPO:0000100,obsolete increased motility
+PHIPO:0000101,obsolete decreased motility
+PHIPO:0000102,obsolete loss of motility
+PHIPO:0000103,obsolete gain of motility
+PHIPO:0000104,increased size of penetration structure
+PHIPO:0000105,decreased size of penetration structure
+PHIPO:0000106,increased number of penetration structure
+PHIPO:0000107,decreased number of penetration structure
+PHIPO:0000108,delayed timing of penetration structure formation
+PHIPO:0000109,premature penetration structure formation
+PHIPO:0000110,abolished formation of pathogen penetration structure
+PHIPO:0000111,delayed pathogen penetration across the barrier
+PHIPO:0000112,obsolete non-functional penetration structure present
+PHIPO:0000113,obsolete altered functionality of penetration structure
+PHIPO:0000114,increased pathogen penetration across the barrier
+PHIPO:0000115,decreased pathogen penetration across the barrier
+PHIPO:0000116,abolished pathogen growth after penetration of the barrier
+PHIPO:0000117,increased pathogen growth after penetration of the barrier
+PHIPO:0000118,decreased pathogen growth after penetration of the barrier
+PHIPO:0000119,delayed timing of pathogen growth after penetration of the barrier
+PHIPO:0000120,premature pathogen growth after penetration of the barrier
+PHIPO:0000121,abnormal asexual reproductive structure development
+PHIPO:0000122,abnormal endospore formation
+PHIPO:0000124,obsolete abnormal penetration structure present
+PHIPO:0000125,obsolete abnormal pathogen growth post penetration present
+PHIPO:0000126,premature pathogen penetration across the barrier
+PHIPO:0000127,abnormal asexual spore morphology
+PHIPO:0000128,normal asexual spore morphology
+PHIPO:0000129,normal asexual reproductive structure development
+PHIPO:0000130,abnormal sexual spore morphology
+PHIPO:0000131,pathogen host protein-protein interaction phenotype
+PHIPO:0000132,protein-protein interaction phenotype
+PHIPO:0000133,abnormal protein-protein interaction
+PHIPO:0000134,normal protein-protein interaction
+PHIPO:0000135,abolished protein-protein interaction
+PHIPO:0000136,decreased protein-protein interaction
+PHIPO:0000137,increased protein-protein interaction
+PHIPO:0000138,altered protein binding specificity
+PHIPO:0000139,abnormal protein complex binding
+PHIPO:0000140,decreased duration of protein-protein interaction
+PHIPO:0000141,decreased extent and duration of protein-protein interaction
+PHIPO:0000142,RNA binding phenotype
+PHIPO:0000143,DNA binding phenotype
+PHIPO:0000144,normal protein complex binding
+PHIPO:0000145,abnormal DNA binding
+PHIPO:0000146,normal DNA binding
+PHIPO:0000147,abolished DNA binding
+PHIPO:0000148,altered DNA binding specificity
+PHIPO:0000149,decreased DNA binding
+PHIPO:0000150,increased DNA binding
+PHIPO:0000151,abnormal multiple protein binding to DNA
+PHIPO:0000152,abnormal RNA binding
+PHIPO:0000153,normal RNA binding
+PHIPO:0000154,abolished RNA binding
+PHIPO:0000155,decreased RNA binding
+PHIPO:0000156,increased RNA binding
+PHIPO:0000157,obsolete motility phenotype
+PHIPO:0000158,binding phenotype
+PHIPO:0000159,normal subcellular component
+PHIPO:0000160,pathogen penetration across barrier phenotype
+PHIPO:0000161,reproductive phenotype
+PHIPO:0000162,unicellular population growth phenotype
+PHIPO:0000164,pathogen host interaction binding phenotype
+PHIPO:0000165,obsolete abnormal host lesion formation with pathogen
+PHIPO:0000166,obsolete chlorosis phenotype
+PHIPO:0000167,obsolete pathogen host interaction RNA binding phenotype
+PHIPO:0000168,obsolete abnormal pathogen host interaction RNA binding
+PHIPO:0000169,obsolete chlorosis absent
+PHIPO:0000170,obsolete chlorosis present
+PHIPO:0000171,obsolete normal pathogen host interaction RNA binding
+PHIPO:0000172,obsolete abolished pathogen host interaction RNA binding
+PHIPO:0000173,abolished filamentous growth on host surface
+PHIPO:0000174,obsolete decreased pathogen host interaction RNA binding
+PHIPO:0000175,obsolete normal pathogen growth on host surface
+PHIPO:0000176,obsolete increased pathogen host interaction RNA binding
+PHIPO:0000177,obsolete yeast-form growth phenotype
+PHIPO:0000178,obsolete pathogen host interaction DNA binding phenotype
+PHIPO:0000180,obsolete abnormal pathogen host interaction DNA binding
+PHIPO:0000182,absence of host-defense induced lesion by host hypersensitive response
+PHIPO:0000183,obsolete normal pathogen host interaction DNA binding
+PHIPO:0000184,obsolete pathogen adhesion to host phenotype
+PHIPO:0000185,obsolete abnormal pathogen host interaction multiple protein binding to DNA
+PHIPO:0000187,obsolete abolished pathogen host interaction DNA binding
+PHIPO:0000188,pathogen growth on host surface phenotype
+PHIPO:0000189,obsolete altered pathogen host interaction DNA binding specificity
+PHIPO:0000190,delayed host-defense induced lesion formation by host hypersensitive response
+PHIPO:0000191,obsolete decreased pathogen host interaction DNA binding
+PHIPO:0000192,presence of host-defense induced lesion by host hypersensitive response
+PHIPO:0000193,obsolete increased pathogen host interaction DNA binding
+PHIPO:0000195,obsolete normal host lesion formation with pathogen
+PHIPO:0000196,normal aerial height of filament
+PHIPO:0000197,obsolete abnormal pathogen host protein protein interaction
+PHIPO:0000198,obsolete pathogen host interaction transporter phenotype
+PHIPO:0000199,obsolete normal pathogen host protein protein interaction
+PHIPO:0000200,host chlorosis phenotype in presence of pathogen
+PHIPO:0000201,obsolete normal pathogen host protein complex binding
+PHIPO:0000202,obsolete abnormal pathogen host protein complex binding
+PHIPO:0000203,obsolete increased aerial height of filamentous colony affecting colony shape
+PHIPO:0000205,decreased aerial height of filament
+PHIPO:0000206,obsolete altered pathogen and host protein binding specificity
+PHIPO:0000207,loss of mutualism
+PHIPO:0000208,obsolete decreased duration of pathogen host protein-protein interaction
+PHIPO:0000209,obsolete increased stature
+PHIPO:0000210,obsolete decreased extent and duration of pathogen host protein-protein interaction
+PHIPO:0000211,obsolete decreased stature
+PHIPO:0000212,decreased pathogen host protein-protein interaction
+PHIPO:0000213,host chlorosis absent in presence of pathogen
+PHIPO:0000214,increased pathogen host protein-protein interaction
+PHIPO:0000215,host chlorosis present in presence of pathogen
+PHIPO:0000216,obsolete pathogen host interaction disease symptom phenotype
+PHIPO:0000217,obsolete pathogen host interaction primary metabolic process phenotype
+PHIPO:0000218,obsolete abnormal pathogen host interaction toxin biosynthetic process
+PHIPO:0000219,decreased level of pathogen deoxynivalenol within host
+PHIPO:0000220,obsolete pathogen host interaction metabolic process phenotype
+PHIPO:0000224,obsolete altered colour of host lesion with pathogen
+PHIPO:0000226,obsolete pathogen host interaction secondary metabolite biosynthetic process phenotype
+PHIPO:0000227,obsolete pathogen host interaction secondary metabolic process phenotype
+PHIPO:0000228,obsolete normal pathogen host interaction biosynthesis of deoxynivalenol
+PHIPO:0000229,obsolete abnormal pathogen host interaction biosynthesis of deoxynivalenol
+PHIPO:0000230,obsolete normal pathogen host interaction toxin biosynthetic process
+PHIPO:0000231,obsolete pathogen host interaction toxin biosynthetic process phenotype
+PHIPO:0000232,increased level of pathogen deoxynivalenol within host
+PHIPO:0000233,pathogen deoxynivalenol within host present
+PHIPO:0000234,pathogen deoxynivalenol within host absent
+PHIPO:0000235,localization phenotype
+PHIPO:0000236,pathogen host interaction localization phenotype
+PHIPO:0000237,protein localization phenotype
+PHIPO:0000238,obsolete pathogen host interaction protein localization phenotype
+PHIPO:0000239,abnormal protein localization
+PHIPO:0000240,abnormal pathogen protein localization within host
+PHIPO:0000241,abnormal protein complex localization
+PHIPO:0000242,obsolete abnormal pathogen host interaction protein complex localization
+PHIPO:0000243,obsolete abnormal pathogen host interaction protein localization to nucleus
+PHIPO:0000244,abnormal protein localization to nucleus
+PHIPO:0000245,abolished protein localization
+PHIPO:0000246,abolished pathogen protein localization within host
+PHIPO:0000247,abolished pathogen protein localization to host nucleus
+PHIPO:0000248,abolished protein localization to nucleus
+PHIPO:0000249,RNA localization phenotype
+PHIPO:0000250,obsolete pathogen host interaction RNA localization phenotype
+PHIPO:0000251,abnormal RNA localization
+PHIPO:0000252,obsolete abnormal pathogen host interaction RNA localization
+PHIPO:0000253,normal RNA localization
+PHIPO:0000254,obsolete normal pathogen host interaction RNA localization
+PHIPO:0000255,obsolete pathogen host interaction transport phenotype
+PHIPO:0000256,transport phenotype
+PHIPO:0000257,abnormal transport
+PHIPO:0000258,obsolete abnormal pathogen host interaction transport
+PHIPO:0000259,normal protein transport
+PHIPO:0000260,obsolete normal pathogen host interaction protein transport
+PHIPO:0000261,abnormal endocytosis
+PHIPO:0000262,obsolete abnormal pathogen host interaction endocytosis
+PHIPO:0000263,abnormal nuclear transport
+PHIPO:0000264,obsolete abnormal pathogen host interaction nuclear transport
+PHIPO:0000265,abnormal protein transport
+PHIPO:0000266,obsolete abnormal pathogen host interaction protein transport
+PHIPO:0000267,abnormal vacuolar transport
+PHIPO:0000268,obsolete abnormal pathogen host interaction vacuolar transport
+PHIPO:0000269,normal protein localization
+PHIPO:0000270,normal pathogen protein and host protein colocalization within host
+PHIPO:0000271,normal protein localization to nucleus
+PHIPO:0000272,normal pathogen protein localization to host nucleus
+PHIPO:0000274,increased asexual spore germination frequency
+PHIPO:0000275,abnormal tissue phenotype
+PHIPO:0000276,normal tissue phenotype
+PHIPO:0000277,obsolete abnormal filamentous growth
+PHIPO:0000279,obsolete systemic phenotype
+PHIPO:0000280,pathogen effector mediated modulation of host immune system process
+PHIPO:0000281,obsolete stature phenotype
+PHIPO:0000282,obsolete abnormal stature
+PHIPO:0000283,obsolete normal stature
+PHIPO:0000284,pigment phenotype
+PHIPO:0000285,abnormal cellular pigment accumulation
+PHIPO:0000286,normal cellular pigment accumulation
+PHIPO:0000287,increased cellular pigment accumulation
+PHIPO:0000288,decreased cellular pigment accumulation
+PHIPO:0000289,obsolete altered colour
+PHIPO:0000290,obsolete colour present
+PHIPO:0000291,obsolete colour absent
+PHIPO:0000292,decreased filament length
+PHIPO:0000293,obsolete abnormal organism morphology phenotype
+PHIPO:0000294,obsolete normal organism morphology phenotype
+PHIPO:0000295,sinusoidal filament
+PHIPO:0000296,obsolete normal dissemination of pathogen asexual product
+PHIPO:0000297,obsolete normal dissemination of pathogen sexual product
+PHIPO:0000298,obsolete abnormal dissemination of pathogen asexual product
+PHIPO:0000299,obsolete abnormal dissemination of pathogen sexual product
+PHIPO:0000300,abnormal dissemination of asexual spore
+PHIPO:0000301,normal dissemination of asexual spore
+PHIPO:0000302,normal dissemination of sexual spore
+PHIPO:0000303,abnormal dissemination of sexual spore
+PHIPO:0000305,obsolete effector of pathogenicity phenotype
+PHIPO:0000306,obsolete abnormal effector of virulence
+PHIPO:0000307,obsolete normal effector of pathogenicity
+PHIPO:0000308,obsolete normal effector of pathogenicity activation of host defense
+PHIPO:0000309,obsolete normal effector of pathogenicity suppression of host defense
+PHIPO:0000310,obsolete normal effector of virulence
+PHIPO:0000311,obsolete effector of virulence phenotype
+PHIPO:0000312,obsolete abnormal effector of pathogenicity
+PHIPO:0000313,obsolete normal effector of virulence activation of host defense
+PHIPO:0000314,obsolete normal effector of virulence suppression of host defense
+PHIPO:0000315,obsolete abnormal effector of virulence activation of host defense
+PHIPO:0000316,obsolete decreased effector of virulence activation of host defense
+PHIPO:0000317,obsolete increased effector of virulence activation of host defense
+PHIPO:0000318,obsolete abnormal effector of virulence suppression of host defense
+PHIPO:0000319,obsolete decreased effector of virulence suppression of host defense
+PHIPO:0000320,obsolete increased effector of virulence suppression of host defense
+PHIPO:0000321,obsolete abnormal effector of pathogenicity activation of host defense
+PHIPO:0000322,obsolete gain of effector of pathogenicity activation of host defense
+PHIPO:0000323,obsolete loss of effector of pathogenicity activation of host defense
+PHIPO:0000324,obsolete abnormal effector of pathogenicity suppression of host defense
+PHIPO:0000325,obsolete gain of effector of pathogenicity suppression of host defense
+PHIPO:0000326,obsolete loss of effector of pathogenicity suppression of host defense
+PHIPO:0000327,resistance to cyproconazole
+PHIPO:0000328,normal cellular component organization
+PHIPO:0000329,sensitive to cyproconazole
+PHIPO:0000330,abnormal transporter activity
+PHIPO:0000331,pathogen penetration into host present
+PHIPO:0000332,pathogen colonization of host phenotype
+PHIPO:0000333,pathogen cell to cell migration within host phenotype
+PHIPO:0000334,abnormal pathogen cell to cell migration within host
+PHIPO:0000335,normal pathogen cell to cell migration within host
+PHIPO:0000336,obsolete intracellular growth phenotype
+PHIPO:0000337,obsolete extracellular growth phenotype
+PHIPO:0000338,increased pathogen cell to cell migration within host
+PHIPO:0000339,decreased pathogen cell to cell migration within host
+PHIPO:0000340,abolished pathogen cell to cell migration within host
+PHIPO:0000341,obsolete gain of pathogen cell to cell migration within host
+PHIPO:0000342,premature pathogen cell to cell migration within host
+PHIPO:0000343,delayed pathogen cell to cell migration within host
+PHIPO:0000344,obsolete normal pathogen host interaction molecular function
+PHIPO:0000345,obsolete abnormal pathogen host interaction molecular function
+PHIPO:0000346,obsolete host necrotic lesion with pathogen phenotype
+PHIPO:0000347,pathogen host interaction molecular function phenotype
+PHIPO:0000348,obsolete pathogen host interaction catalytic activity phenotype
+PHIPO:0000349,presence of pathogen growth on host surface
+PHIPO:0000350,absence of pathogen growth on host surface
+PHIPO:0000351,obsolete pathogen is able to penetrate host
+PHIPO:0000352,normal formation of pathogen penetration structure prior to entry into host
+PHIPO:0000353,obsolete normal penetration of host by pathogen
+PHIPO:0000355,pathogen penetration into host absent
+PHIPO:0000356,obsolete abnormal penetration of host by pathogen
+PHIPO:0000358,obsolete non-functional pathogen penetration structure in contact with host
+PHIPO:0000359,decreased pathogen penetration into host
+PHIPO:0000360,increased pathogen penetration into host
+PHIPO:0000361,delayed pathogen penetration into host
+PHIPO:0000362,premature pathogen penetration into host
+PHIPO:0000363,absence of pathogen growth within host
+PHIPO:0000364,obsolete abnormal pathogen growth within host
+PHIPO:0000365,decreased pathogen growth within host
+PHIPO:0000366,delayed timing of pathogen growth within host
+PHIPO:0000367,premature pathogen growth within host
+PHIPO:0000368,increased pathogen growth within host
+PHIPO:0000369,abnormal formation of pathogen penetration structure when near host
+PHIPO:0000370,obsolete pathogen penetration structure absent when near host
+PHIPO:0000371,decreased number of pathogen penetration structure when near host
+PHIPO:0000372,decreased size of pathogen penetration structure when near host
+PHIPO:0000373,increased number of pathogen penetration structure when near host
+PHIPO:0000374,increased size of pathogen penetration structure when near host
+PHIPO:0000375,delayed timing of pathogen penetration structure formation when near host
+PHIPO:0000376,premature pathogen penetration structure formation when near host
+PHIPO:0000377,resistance to carboxin
+PHIPO:0000378,sensitive to carboxin
+PHIPO:0000379,abnormal cell wall organization
+PHIPO:0000380,normal transporter activity
+PHIPO:0000381,resistance to benomyl
+PHIPO:0000382,resistance to diethofencarb
+PHIPO:0000383,resistance to carbendazim
+PHIPO:0000384,resistance to thiophanate methyl
+PHIPO:0000385,resistance to oxolinic acid
+PHIPO:0000386,resistance to naftifine
+PHIPO:0000387,resistance to terbinafine
+PHIPO:0000388,resistance to azoxystrobin
+PHIPO:0000389,resistance to iprodione
+PHIPO:0000390,sensitive to diethofencarb
+PHIPO:0000391,sensitive to carbendazim
+PHIPO:0000392,sensitive to thiophanate methyl
+PHIPO:0000393,sensitive to oxolinic acid
+PHIPO:0000394,sensitive to naftifine
+PHIPO:0000395,sensitive to terbinafine
+PHIPO:0000396,sensitive to azoxystrobin
+PHIPO:0000397,sensitive to iprodione
+PHIPO:0000398,sensitive to benomyl
+PHIPO:0000399,obsolete abnormal phialide morphology
+PHIPO:0000400,abnormal cellular component organization
+PHIPO:0000401,obsolete normal phialide morphology
+PHIPO:0000402,individual organism phenotype
+PHIPO:0000403,normal cell phenotype
+PHIPO:0000404,abnormal cell phenotype
+PHIPO:0000405,normal unicellular population growth
+PHIPO:0000406,nucleus absent
+PHIPO:0000407,cellular component organization phenotype
+PHIPO:0000408,obsolete morphology phenotype
+PHIPO:0000409,transporter activity phenotype
+PHIPO:0000410,decreased asexual spore germination frequency
+PHIPO:0000411,molecular function phenotype
+PHIPO:0000413,abnormal molecular function
+PHIPO:0000414,abnormal unicellular population growth
+PHIPO:0000415,abnormal subcellular component
+PHIPO:0000416,normal molecular function
+PHIPO:0000417,obsolete abnormal pathogen host interaction pathogen carbohydrate binding phenotype
+PHIPO:0000418,normal carbohydrate binding
+PHIPO:0000419,abnormal carbohydrate binding
+PHIPO:0000420,normal pathogen chitin fragment binding
+PHIPO:0000421,abolished carbohydrate binding
+PHIPO:0000422,altered carbohydrate binding specificity
+PHIPO:0000423,decreased carbohydrate binding
+PHIPO:0000424,increased carbohydrate binding
+PHIPO:0000425,obsolete pathogen host interaction pathogen carbohydrate binding phenotype
+PHIPO:0000426,obsolete presence of pathogen chitinase binding to pathogen chitin fragments within host interaction
+PHIPO:0000427,obsolete pathogen chitin binding to host chitinase present
+PHIPO:0000428,obsolete normal pathogen host interaction pathogen carbohydrate binding phenotype
+PHIPO:0000429,obsolete normal pathogen and host chitinases bind pathogen chitin and chitin fragments
+PHIPO:0000430,carbohydrate binding phenotype
+PHIPO:0000431,abolished pathogen chitin fragment binding
+PHIPO:0000432,catalytic activity phenotype
+PHIPO:0000433,normal catalytic activity
+PHIPO:0000434,abnormal catalytic activity
+PHIPO:0000435,abolished catalytic activity
+PHIPO:0000436,decreased catalytic activity
+PHIPO:0000437,increased catalytic activity
+PHIPO:0000438,altered substrate specificity
+PHIPO:0000439,pathogen reproductive phenotype within host
+PHIPO:0000440,normal pathogen reproductive phenotype within host
+PHIPO:0000441,abnormal pathogen reproductive phenotype within host
+PHIPO:0000442,normal pathogen asexual reproduction within host
+PHIPO:0000443,normal pathogen sexual reproduction within host
+PHIPO:0000444,decreased number of asexual pathogen spores within host
+PHIPO:0000445,pathogen host interaction host lesion formation phenotype
+PHIPO:0000446,host cell death phenotype
+PHIPO:0000447,increased number of asexual pathogen spores within host
+PHIPO:0000448,abnormal number of asexual pathogen spores within host
+PHIPO:0000449,abnormal pathogen asexual reproduction within host
+PHIPO:0000450,normal pathogen peptidase activity
+PHIPO:0000461,presence of pathogen-associated host defense induced lesions
+PHIPO:0000463,subcellular component phenotype
+PHIPO:0000464,obsolete host necrotic cell death phenotype in response to pathogen
+PHIPO:0000465,absence of pathogen necrotrophic effector-mediated host programmed cell death
+PHIPO:0000466,obsolete host necrotic cell death by pathogen induced hypersensitive response
+PHIPO:0000467,presence of effector-independent host hypersensitive response
+PHIPO:0000468,absence of pathogen asexual spores within host
+PHIPO:0000469,abnormal pathogen asexual sporulation within host
+PHIPO:0000470,obsolete location of pathogen growth within host phenotype
+PHIPO:0000472,normal pathogen asexual sporulation within host
+PHIPO:0000473,presence of pathogen asexual spores within host
+PHIPO:0000474,abnormal number of lipid droplets
+PHIPO:0000475,decreased size of lipid droplet
+PHIPO:0000477,presence of pathogen necrotrophic effector-mediated host programmed cell death
+PHIPO:0000478,lipid droplet phenotype
+PHIPO:0000479,increased size of lipid droplet
+PHIPO:0000480,presence of pathogen-associated host lesions
+PHIPO:0000481,absence of pathogen-associated host lesions
+PHIPO:0000483,obsolete normal pathogen host interaction phenotype
+PHIPO:0000484,obsolete abnormal pathogen host interaction phenotype
+PHIPO:0000492,metabolic process phenotype
+PHIPO:0000493,primary metabolic process phenotype
+PHIPO:0000494,secondary metabolic process phenotype
+PHIPO:0000495,secondary metabolite biosynthetic process phenotype
+PHIPO:0000496,toxin biosynthetic process phenotype
+PHIPO:0000497,normal toxin biosynthetic process
+PHIPO:0000498,abnormal toxin biosynthetic process
+PHIPO:0000499,obsolete normal synthesis of deoxynivalenol
+PHIPO:0000500,obsolete abnormal biosynthesis of deoxynivalenol
+PHIPO:0000501,obsolete increased level of deoxynivalenol
+PHIPO:0000502,obsolete decreased level of deoxynivalenol
+PHIPO:0000503,obsolete deoxynivalenol absent from cell
+PHIPO:0000504,obsolete deoxynivalenol present
+PHIPO:0000505,phenotype
+PHIPO:0000506,obsolete single species
+PHIPO:0000507,obsolete pathogen host interaction
+PHIPO:0000509,population phenotype
+PHIPO:0000510,pathogen host interaction cell phenotype
+PHIPO:0000511,obsolete pathogen host interaction cell population phenotype
+PHIPO:0000512,obsolete pathogen host interaction host tissue phenotype
+PHIPO:0000513,inviable population
+PHIPO:0000514,population viability phenotype
+PHIPO:0000517,lipid droplets present in increased numbers
+PHIPO:0000518,lipid droplets present in normal numbers
+PHIPO:0000519,resistance to piperacillin
+PHIPO:0000520,resistance to florfenicol
+PHIPO:0000521,resistance to boscalid
+PHIPO:0000523,resistance to sordarin
+PHIPO:0000524,resistance to ketoconazole
+PHIPO:0000526,resistance to carbenicillin
+PHIPO:0000527,resistance to enrofloxacin
+PHIPO:0000528,resistance to prochloraz
+PHIPO:0000529,resistance to virginiamycin
+PHIPO:0000530,resistance to triadimefon
+PHIPO:0000531,resistance to cercosporamide
+PHIPO:0000532,resistance to oxytetracycline
+PHIPO:0000533,resistance to gramicidin D
+PHIPO:0000534,resistance to actinomycin D
+PHIPO:0000536,resistance to triclosan
+PHIPO:0000537,resistance to captan
+PHIPO:0000538,resistance to isoniazid
+PHIPO:0000539,resistance to ciprofloxacin
+PHIPO:0000541,resistance to benznidazole
+PHIPO:0000542,resistance to ethambutol
+PHIPO:0000543,resistance to teicoplanin
+PHIPO:0000544,resistance to cycloheximide
+PHIPO:0000545,resistance to chlorothalonil
+PHIPO:0000546,resistance to cefotetan
+PHIPO:0000548,resistance to hygromycin B
+PHIPO:0000549,resistance to triclabendazole
+PHIPO:0000550,resistance to ampicillin
+PHIPO:0000551,resistance to brassinin
+PHIPO:0000553,resistance to aztreonam
+PHIPO:0000554,resistance to nisin
+PHIPO:0000555,resistance to tetracycline
+PHIPO:0000556,resistance to moxifloxacin
+PHIPO:0000557,resistance to myriocin
+PHIPO:0000558,resistance to benzylpenicillin
+PHIPO:0000559,resistance to latrunculin A
+PHIPO:0000560,resistance to clindamycin
+PHIPO:0000561,resistance to tylosin
+PHIPO:0000562,resistance to trovafloxacin
+PHIPO:0000563,resistance to furazolidone
+PHIPO:0000564,resistance to mecillinam
+PHIPO:0000565,resistance to cefixime
+PHIPO:0000566,resistance to tridemorph
+PHIPO:0000567,resistance to mancozeb
+PHIPO:0000569,resistance to netilmicin
+PHIPO:0000570,resistance to sulfanilamide
+PHIPO:0000571,resistance to leptomycin B
+PHIPO:0000572,resistance to bleomycin
+PHIPO:0000573,resistance to gentamycin C1
+PHIPO:0000574,resistance to pyrazinecarboxamide
+PHIPO:0000575,resistance to micafungin
+PHIPO:0000576,resistance to strobilurin A
+PHIPO:0000577,resistance to nikkomycin Z
+PHIPO:0000578,resistance to nifurtimox
+PHIPO:0000579,resistance to rotenone
+PHIPO:0000580,resistance to sulfadimethoxine
+PHIPO:0000581,resistance to flucytosine
+PHIPO:0000582,resistance to cefuroxime
+PHIPO:0000583,resistance to antimycin A
+PHIPO:0000584,resistance to brefeldin A
+PHIPO:0000586,resistance to anidulafungin
+PHIPO:0000587,resistance to vinclozolin
+PHIPO:0000588,resistance to trimethoprim
+PHIPO:0000589,resistance to mupirocin
+PHIPO:0000590,resistance to voriconazole
+PHIPO:0000591,resistance to alexidine
+PHIPO:0000592,resistance to fludioxonil
+PHIPO:0000593,resistance to oxacillin
+PHIPO:0000594,resistance to cefpodoxime proxetil
+PHIPO:0000596,resistance to eflornithine
+PHIPO:0000597,resistance to polymyxin B1
+PHIPO:0000598,resistance to pyrimethanil
+PHIPO:0000599,resistance to telithromycin
+PHIPO:0000600,resistance to capreomycin
+PHIPO:0000601,resistance to amikacin
+PHIPO:0000602,resistance to ethionamide
+PHIPO:0000603,resistance to doxycycline
+PHIPO:0000604,resistance to meropenem
+PHIPO:0000605,resistance to 4-aminosalicylic acid
+PHIPO:0000606,resistance to rifampicin
+PHIPO:0000607,resistance to flutriafol
+PHIPO:0000608,resistance to rifabutin
+PHIPO:0000609,resistance to nalidixic acid
+PHIPO:0000610,resistance to linezolid
+PHIPO:0000611,resistance to fusidic acid
+PHIPO:0000612,resistance to tunicamycin
+PHIPO:0000613,resistance to epoxyconazole
+PHIPO:0000615,resistance to D-cycloserine
+PHIPO:0000616,resistance to kanamycin A
+PHIPO:0000617,resistance to verapamil
+PHIPO:0000618,resistance to streptomycin sulfate
+PHIPO:0000619,resistance to farnesol
+PHIPO:0000620,resistance to fenpropidin
+PHIPO:0000621,resistance to gatifloxacin
+PHIPO:0000622,resistance to erythromycin A
+PHIPO:0000623,resistance to bifonazole
+PHIPO:0000624,resistance to azithromycin
+PHIPO:0000625,resistance to posaconazole
+PHIPO:0000626,resistance to prothionamide
+PHIPO:0000627,resistance to copper
+PHIPO:0000628,resistance to resveratrol
+PHIPO:0000629,resistance to colistin
+PHIPO:0000630,resistance to oligomycin
+PHIPO:0000631,resistance to cefepime
+PHIPO:0000632,resistance to hydrogen peroxide
+PHIPO:0000633,resistance to tigecycline
+PHIPO:0000634,resistance to tricyclazole
+PHIPO:0000635,resistance to closantel
+PHIPO:0000636,resistance to diniconazole
+PHIPO:0000639,resistance to quinupristin-dalfopristin
+PHIPO:0000640,resistance to sparfloxacin
+PHIPO:0000641,resistance to cefaclor
+PHIPO:0000642,resistance to plumbagin
+PHIPO:0000643,resistance to imipenem
+PHIPO:0000644,resistance to streptomycin
+PHIPO:0000645,resistance to ticarcillin
+PHIPO:0000646,resistance to fenhexamid
+PHIPO:0000647,resistance to abamectin
+PHIPO:0000648,resistance to miltefosine
+PHIPO:0000649,resistance to methicillin
+PHIPO:0000650,resistance to ertapenem
+PHIPO:0000651,resistance to neomycin
+PHIPO:0000652,resistance to rapamycin
+PHIPO:0000653,resistance to fluconazole
+PHIPO:0000654,resistance to valinomycin
+PHIPO:0000655,resistance to salicylhydroxamic acid
+PHIPO:0000656,resistance to nicotinamide
+PHIPO:0000657,resistance to sulbactam
+PHIPO:0000658,resistance to amoxicillin
+PHIPO:0000659,resistance to gentamicin
+PHIPO:0000660,resistance to ceftazidime
+PHIPO:0000661,resistance to sulfisoxazole
+PHIPO:0000662,resistance to bacitracin
+PHIPO:0000663,resistance to difenoconazole
+PHIPO:0000664,resistance to spiroxamine
+PHIPO:0000665,resistance to ofloxacin
+PHIPO:0000666,resistance to cyclosporine A
+PHIPO:0000667,resistance to cefotaxime
+PHIPO:0000668,resistance to cefoxitin
+PHIPO:0000669,resistance to fenarimol
+PHIPO:0000670,resistance to levofloxacin
+PHIPO:0000671,resistance to spectinomycin
+PHIPO:0000672,resistance to pentamidine
+PHIPO:0000673,resistance to thiabendazole
+PHIPO:0000674,resistance to chlortetracycline
+PHIPO:0000675,resistance to itraconazole
+PHIPO:0000676,resistance to nitrofurantoin
+PHIPO:0000677,resistance to ceftriaxone
+PHIPO:0000678,resistance to paromomycin
+PHIPO:0000679,resistance to tebuconazole
+PHIPO:0000681,resistance to nystatin
+PHIPO:0000682,resistance to propiconazole
+PHIPO:0000684,resistance to minocycline
+PHIPO:0000685,resistance to tobramycin
+PHIPO:0000686,resistance to caspofungin
+PHIPO:0000688,resistance to amphotericin B
+PHIPO:0000689,resistance to chloramphenicol
+PHIPO:0000690,resistance to novobiocin
+PHIPO:0000691,resistance to emamectin
+PHIPO:0000692,resistance to penicillin
+PHIPO:0000693,resistance to carbapenems
+PHIPO:0000694,resistance to daptomycin
+PHIPO:0000695,resistance to clarithromycin
+PHIPO:0000696,resistance to copper sulphate
+PHIPO:0000697,resistance to fosfomycin
+PHIPO:0000698,resistance to trichostatin A
+PHIPO:0000699,resistance to doripenem
+PHIPO:0000700,resistance to miconazole
+PHIPO:0000701,resistance to vancomycin
+PHIPO:0000703,resistance to aureobasidin A
+PHIPO:0000704,resistance to lincomycin
+PHIPO:0000705,resistance to norfloxacin
+PHIPO:0000706,resistance to tiamulin
+PHIPO:0000707,resistance to hymexazol
+PHIPO:0000708,resistance to cephalexin
+PHIPO:0000709,resistance to clofazimine
+PHIPO:0000710,resistance to dicloxacillin
+PHIPO:0000711,resistance to camptothecin
+PHIPO:0000712,resistance to cefazolin
+PHIPO:0000713,sensitive to mupirocin
+PHIPO:0000716,sensitive to cefixime
+PHIPO:0000717,sensitive to minocycline
+PHIPO:0000718,sensitive to polymyxin B1
+PHIPO:0000719,sensitive to fusidic acid
+PHIPO:0000720,sensitive to brefeldin A
+PHIPO:0000721,sensitive to ethionamide
+PHIPO:0000722,sensitive to rotenone
+PHIPO:0000723,sensitive to pyrazinecarboxamide
+PHIPO:0000724,sensitive to alexidine
+PHIPO:0000726,sensitive to chloramphenicol
+PHIPO:0000727,sensitive to clofazimine
+PHIPO:0000728,sensitive to emamectin
+PHIPO:0000729,sensitive to miltefosine
+PHIPO:0000730,sensitive to sulfadimethoxine
+PHIPO:0000732,sensitive to doripenem
+PHIPO:0000733,sensitive to cefaclor
+PHIPO:0000734,sensitive to plumbagin
+PHIPO:0000735,sensitive to cefotaxime
+PHIPO:0000736,sensitive to benznidazole
+PHIPO:0000737,sensitive to cyclosporine A
+PHIPO:0000738,sensitive to spectinomycin
+PHIPO:0000739,sensitive to latrunculin A
+PHIPO:0000740,sensitive to oxacillin
+PHIPO:0000741,sensitive to difenoconazole
+PHIPO:0000742,sensitive to triclosan
+PHIPO:0000743,sensitive to tridemorph
+PHIPO:0000744,sensitive to virginiamycin
+PHIPO:0000745,sensitive to neomycin
+PHIPO:0000746,sensitive to voriconazole
+PHIPO:0000747,sensitive to brassinin
+PHIPO:0000748,sensitive to daptomycin
+PHIPO:0000749,sensitive to bleomycin
+PHIPO:0000750,sensitive to aztreonam
+PHIPO:0000751,sensitive to fludioxonil
+PHIPO:0000753,sensitive to ceftriaxone
+PHIPO:0000754,sensitive to leptomycin B
+PHIPO:0000755,sensitive to amikacin
+PHIPO:0000756,sensitive to resveratrol
+PHIPO:0000757,sensitive to fenhexamid
+PHIPO:0000758,sensitive to cefpodoxime proxetil
+PHIPO:0000759,sensitive to myriocin
+PHIPO:0000760,sensitive to gentamicin
+PHIPO:0000761,sensitive to valinomycin
+PHIPO:0000762,sensitive to tigecycline
+PHIPO:0000763,sensitive to moxifloxacin
+PHIPO:0000764,sensitive to kanamycin A
+PHIPO:0000765,sensitive to methicillin
+PHIPO:0000766,sensitive to pentamidine
+PHIPO:0000767,sensitive to gentamycin C1
+PHIPO:0000768,sensitive to thiabendazole
+PHIPO:0000769,sensitive to gatifloxacin
+PHIPO:0000770,sensitive to mecillinam
+PHIPO:0000771,sensitive to ampicillin
+PHIPO:0000772,sensitive to cefotetan
+PHIPO:0000773,sensitive to nystatin
+PHIPO:0000774,sensitive to vinclozolin
+PHIPO:0000775,sensitive to flucytosine
+PHIPO:0000776,sensitive to trichostatin A
+PHIPO:0000777,sensitive to oxytetracycline
+PHIPO:0000778,sensitive to eflornithine
+PHIPO:0000779,sensitive to streptomycin
+PHIPO:0000780,sensitive to epoxyconazole
+PHIPO:0000781,sensitive to trimethoprim
+PHIPO:0000782,sensitive to nifurtimox
+PHIPO:0000783,sensitive to clarithromycin
+PHIPO:0000784,sensitive to nisin
+PHIPO:0000785,sensitive to sulfanilamide
+PHIPO:0000786,sensitive to oligomycin
+PHIPO:0000788,sensitive to fosfomycin
+PHIPO:0000789,sensitive to telithromycin
+PHIPO:0000791,sensitive to nitrofurantoin
+PHIPO:0000792,sensitive to linezolid
+PHIPO:0000793,sensitive to anidulafungin
+PHIPO:0000795,sensitive to carbenicillin
+PHIPO:0000796,sensitive to tunicamycin
+PHIPO:0000797,sensitive to caspofungin
+PHIPO:0000798,sensitive to fenarimol
+PHIPO:0000799,sensitive to ciprofloxacin
+PHIPO:0000800,sensitive to farnesol
+PHIPO:0000801,sensitive to amphotericin B
+PHIPO:0000802,sensitive to vancomycin
+PHIPO:0000803,sensitive to ketoconazole
+PHIPO:0000804,sensitive to strobilurin A
+PHIPO:0000805,sensitive to colistin
+PHIPO:0000806,sensitive to trovafloxacin
+PHIPO:0000807,sensitive to triclabendazole
+PHIPO:0000808,sensitive to pyrimethanil
+PHIPO:0000809,sensitive to florfenicol
+PHIPO:0000810,sensitive to flutriafol
+PHIPO:0000811,sensitive to teicoplanin
+PHIPO:0000812,sensitive to norfloxacin
+PHIPO:0000814,sensitive to closantel
+PHIPO:0000815,sensitive to penicillin
+PHIPO:0000816,sensitive to prothionamide
+PHIPO:0000817,sensitive to isoniazid
+PHIPO:0000818,sensitive to salicylhydroxamic acid
+PHIPO:0000819,sensitive to carbapenems
+PHIPO:0000820,sensitive to abamectin
+PHIPO:0000822,sensitive to antimycin A
+PHIPO:0000823,sensitive to cercosporamide
+PHIPO:0000824,sensitive to tiamulin
+PHIPO:0000825,sensitive to tebuconazole
+PHIPO:0000826,sensitive to ticarcillin
+PHIPO:0000827,sensitive to nicotinamide
+PHIPO:0000828,sensitive to tricyclazole
+PHIPO:0000829,sensitive to paromomycin
+PHIPO:0000830,sensitive to ofloxacin
+PHIPO:0000831,sensitive to triadimefon
+PHIPO:0000832,sensitive to copper sulphate
+PHIPO:0000833,sensitive to imipenem
+PHIPO:0000834,sensitive to quinupristin-dalfopristin
+PHIPO:0000835,sensitive to aureobasidin A
+PHIPO:0000836,sensitive to rifampicin
+PHIPO:0000837,sensitive to rifabutin
+PHIPO:0000838,sensitive to diniconazole
+PHIPO:0000839,sensitive to actinomycin D
+PHIPO:0000840,sensitive to dicloxacillin
+PHIPO:0000841,sensitive to cefuroxime
+PHIPO:0000842,sensitive to piperacillin
+PHIPO:0000843,sensitive to bacitracin
+PHIPO:0000844,sensitive to propiconazole
+PHIPO:0000845,sensitive to meropenem
+PHIPO:0000846,sensitive to chlorothalonil
+PHIPO:0000847,sensitive to posaconazole
+PHIPO:0000848,sensitive to cephalexin
+PHIPO:0000850,sensitive to 4-aminosalicylic acid
+PHIPO:0000851,sensitive to captan
+PHIPO:0000853,sensitive to capreomycin
+PHIPO:0000854,sensitive to gramicidin D
+PHIPO:0000855,sensitive to doxycycline
+PHIPO:0000858,sensitive to bifonazole
+PHIPO:0000859,sensitive to micafungin
+PHIPO:0000860,sensitive to ertapenem
+PHIPO:0000861,sensitive to cycloheximide
+PHIPO:0000862,sensitive to ceftazidime
+PHIPO:0000863,sensitive to camptothecin
+PHIPO:0000864,sensitive to netilmicin
+PHIPO:0000865,sensitive to benzylpenicillin
+PHIPO:0000866,sensitive to hymexazol
+PHIPO:0000867,sensitive to streptomycin sulfate
+PHIPO:0000868,sensitive to chlortetracycline
+PHIPO:0000869,sensitive to D-cycloserine
+PHIPO:0000870,sensitive to miconazole
+PHIPO:0000871,sensitive to erythromycin A
+PHIPO:0000872,sensitive to copper
+PHIPO:0000873,sensitive to rapamycin
+PHIPO:0000874,sensitive to tobramycin
+PHIPO:0000875,sensitive to verapamil
+PHIPO:0000876,sensitive to furazolidone
+PHIPO:0000877,sensitive to cefoxitin
+PHIPO:0000878,sensitive to fenpropidin
+PHIPO:0000879,sensitive to itraconazole
+PHIPO:0000880,sensitive to sulfisoxazole
+PHIPO:0000881,sensitive to lincomycin
+PHIPO:0000882,sensitive to tetracycline
+PHIPO:0000883,sensitive to levofloxacin
+PHIPO:0000884,sensitive to cefazolin
+PHIPO:0000885,sensitive to novobiocin
+PHIPO:0000886,sensitive to amoxicillin
+PHIPO:0000887,sensitive to ethambutol
+PHIPO:0000888,sensitive to tylosin
+PHIPO:0000889,sensitive to clindamycin
+PHIPO:0000890,sensitive to fluconazole
+PHIPO:0000891,sensitive to hygromycin B
+PHIPO:0000892,sensitive to boscalid
+PHIPO:0000893,sensitive to cefepime
+PHIPO:0000894,sensitive to prochloraz
+PHIPO:0000895,sensitive to mancozeb
+PHIPO:0000896,sensitive to spiroxamine
+PHIPO:0000897,sensitive to enrofloxacin
+PHIPO:0000898,sensitive to nalidixic acid
+PHIPO:0000899,sensitive to sordarin
+PHIPO:0000901,sensitive to azithromycin
+PHIPO:0000902,sensitive to sparfloxacin
+PHIPO:0000903,sensitive to nikkomycin Z
+PHIPO:0000904,sensitive to sulbactam
+PHIPO:0000924,host defense-induced oxidative burst level phenotype
+PHIPO:0000925,abnormal cell wall organization or biogenesis
+PHIPO:0000927,host defense-induced reactive oxygen species present
+PHIPO:0000928,host defense-induced reactive oxygen species absent
+PHIPO:0000929,abnormal cellular process
+PHIPO:0000930,cellular process phenotype
+PHIPO:0000931,cell wall organization or biogenesis phenotype
+PHIPO:0000932,normal cellular process
+PHIPO:0000934,abnormal nucleus
+PHIPO:0000935,decreased cell wall integrity
+PHIPO:0000936,cell lysis
+PHIPO:0000937,asexual spore lysis present
+PHIPO:0000938,vegetative cell lysis
+PHIPO:0000939,asexual spore lysis absent
+PHIPO:0000940,abnormal germ tube
+PHIPO:0000941,short germ tube
+PHIPO:0000943,sensitive to hydrogen peroxide
+PHIPO:0000944,altered level of substance in cell
+PHIPO:0000945,altered cellular reactive oxygen species level
+PHIPO:0000946,decreased cellular reactive oxygen species level
+PHIPO:0000947,increased cellular reactive oxygen species level
+PHIPO:0000948,mutualism absent
+PHIPO:0000949,pathogen entry into host phenotype
+PHIPO:0000950,obsolete pathogen spore germination on host phenotype
+PHIPO:0000951,pathogen growth within host phenotype
+PHIPO:0000952,abolished pathogen growth within host
+PHIPO:0000953,pathogen penetration structure present when near host
+PHIPO:0000954,presence of pathogen growth within host
+PHIPO:0000955,abolished formation of pathogen penetration structure when near host
+PHIPO:0000956,normal asexual spore germination frequency
+PHIPO:0000959,normal cellular melanin accumulation
+PHIPO:0000961,obsolete cell morphology phenotype
+PHIPO:0000962,decreased filamentous growth on host surface
+PHIPO:0000964,loss of virulence
+PHIPO:0000965,obsolete loss of virulence of gain of pathogenicity mutant
+PHIPO:0000966,pathogen penetration structure present
+PHIPO:0000967,abolished pathogen penetration across the barrier
+PHIPO:0000968,absent pathogen growth after penetration of the barrier
+PHIPO:0000969,present pathogen growth after penetration of the barrier
+PHIPO:0000970,autophagosomes present in decreased numbers
+PHIPO:0000971,abolished formation of autophagosomes
+PHIPO:0000972,abolished protein localization to autophagosome
+PHIPO:0000973,autophagosome phenotype
+PHIPO:0000974,decreased unicellular population growth
+PHIPO:0000975,increased unicellular population growth
+PHIPO:0000976,decreased lipid droplet degradation
+PHIPO:0000977,sensitive to sodium dodecyl sulfate
+PHIPO:0000978,sensitive to sodium chloride
+PHIPO:0000979,sensitive to dithiothreitol
+PHIPO:0000980,normal sexual spore morphology
+PHIPO:0000981,abnormal meiosis
+PHIPO:0000982,normal meiosis
+PHIPO:0000983,abnormal meiotic cell cycle
+PHIPO:0000984,normal meiotic cell cycle
+PHIPO:0000985,decreased extent of pathogen-associated host lesions
+PHIPO:0000986,increased extent of pathogen-associated host lesions
+PHIPO:0000987,obsolete altered level of substance phenotype in a pathogen host interaction
+PHIPO:0000988,obsolete altered protein level in a pathogen host interaction
+PHIPO:0000989,decreased level of pathogen protein within host
+PHIPO:0000990,obsolete absence of pathogen protein with host
+PHIPO:0000991,increased level of host defense-induced protein
+PHIPO:0000992,increased expression of a host defense-related protein involved in a pathogen interaction
+PHIPO:0000993,obsolete altered RNA level in a pathogen host interaction
+PHIPO:0000994,obsolete decreased RNA level in a pathogen host interaction
+PHIPO:0000995,decreased level of pathogen RNA within host
+PHIPO:0000998,pathogen morphology phenotype during colonization of host
+PHIPO:0000999,abnormal pathogen morphology during colonization of host
+PHIPO:0001000,abnormal pathogen swollen terminal hyphae during cell to cell migration
+PHIPO:0001001,abnormal organization of pathogen septin collar during cell to cell migration
+PHIPO:0001002,host morphology phenotype during pathogen invasion
+PHIPO:0001003,normal formation of extra-invasive hyphal membrane
+PHIPO:0001004,normal pathogen morphology during colonization of host
+PHIPO:0001005,normal host morphology during pathogen invasion
+PHIPO:0001006,abnormal host morphology during pathogen invasion
+PHIPO:0001007,obsolete pathogen colonization of host morphology phenotype
+PHIPO:0001008,abnormal transport during vegetative growth
+PHIPO:0001009,abnormal vesicle-mediated transport during vegetative growth
+PHIPO:0001010,normal vesicle-mediated transport during vegetative growth
+PHIPO:0001011,normal transport
+PHIPO:0001012,obsolete pathogen host interaction polysaccharide localization phenotype
+PHIPO:0001013,obsolete abnormal pathogen host interaction polysaccharide localization
+PHIPO:0001014,increased level of host defense-induced callose deposition
+PHIPO:0001015,decreased level of host defense-induced callose deposition
+PHIPO:0001016,obsolete altered level of host callose deposition induced by pathogen
+PHIPO:0001017,long germ tube
+PHIPO:0001018,abnormal asexual spore germination
+PHIPO:0001019,decreased rate of asexual spore germination
+PHIPO:0001020,sensitive to calcofluor white
+PHIPO:0001021,sensitive to congo red
+PHIPO:0001022,altered cellular cAMP level
+PHIPO:0001023,decreased cellular cAMP level
+PHIPO:0001024,increased cellular cAMP level
+PHIPO:0001025,altered protein level
+PHIPO:0001026,increased protein level
+PHIPO:0001027,decreased protein level
+PHIPO:0001028,abolished protein localization to plasma membrane
+PHIPO:0001029,"abolished protein localization to plasma membrane, with protein mislocalized to cytoplasm"
+PHIPO:0001030,altered cellular toxin level
+PHIPO:0001031,decreased cellular toxin level
+PHIPO:0001032,decreased level of pyocyanin
+PHIPO:0001033,pyocyanin absent from cell
+PHIPO:0001034,substance absent from cell
+PHIPO:0001035,decreased level of substance in cell
+PHIPO:0001036,increased level of substance in cell
+PHIPO:0001037,increased cellular toxin level
+PHIPO:0001038,normal level of substance in cell
+PHIPO:0001039,normal cellular toxin level
+PHIPO:0001040,obsolete decreased level of a substance in a pathogen host interaction
+PHIPO:0001041,obsolete increased level of a substance in a pathogen host interaction
+PHIPO:0001042,obsolete substance absent in a pathogen host interaction
+PHIPO:0001043,level of pathogen produced toxin within host phenotype
+PHIPO:0001044,obsolete protein absent in a pathogen host interaction
+PHIPO:0001045,decreased level of pathogen produced toxin within host
+PHIPO:0001046,increased level of pathogen produced toxin within host
+PHIPO:0001047,pathogen toxin within host absent
+PHIPO:0001048,obsolete normal level of substance phenotype in a pathogen host interaction
+PHIPO:0001049,unicellular colony shape phenotype
+PHIPO:0001051,abnormal unicellular colony shape
+PHIPO:0001052,hyper-smooth unicellular colony shape
+PHIPO:0001053,hyper-rugose unicellular colony shape
+PHIPO:0001055,obsolete increased size of colony
+PHIPO:0001057,normal unicellular colony shape
+PHIPO:0001058,normal rugose unicellular colony shape
+PHIPO:0001059,increased level of pyocyanin
+PHIPO:0001060,altered RNA level
+PHIPO:0001061,decreased RNA level
+PHIPO:0001062,increased RNA level
+PHIPO:0001063,RNA absent from cell
+PHIPO:0001064,normal RNA level
+PHIPO:0001067,obsolete pathogen host interaction organism level phenotype
+PHIPO:0001068,survival of host organism with pathogen
+PHIPO:0001069,death of host organism with pathogen
+PHIPO:0001070,host organism viability with pathogen phenotype
+PHIPO:0001071,obsolete viable host organism with pathogen
+PHIPO:0001072,obsolete inviable host organism with pathogen
+PHIPO:0001074,sensitive to iron ion starvation
+PHIPO:0001075,auxotrophic growth
+PHIPO:0001076,growth auxotrophic for lysine
+PHIPO:0001077,decreased cellular melanin accumulation
+PHIPO:0001078,absence of cellular melanin accumulation
+PHIPO:0001079,obsolete pathogen host interaction pigment phenotype
+PHIPO:0001080,altered pathogen pigment accumulation within host
+PHIPO:0001081,absence of melanin accumulation in pathogen asexual spore within host
+PHIPO:0001083,host defense-induced callose deposition present
+PHIPO:0001084,increased unicellular population growth rate
+PHIPO:0001085,decreased unicellular population growth rate
+PHIPO:0001086,abnormal cellular component assembly
+PHIPO:0001088,decreased rate of hyphae formation
+PHIPO:0001089,decreased rate of germination tube formation
+PHIPO:0001090,abolished protein secretion
+PHIPO:0001091,abolished chitinase activity
+PHIPO:0001092,increased chitin level in asexual spore
+PHIPO:0001094,abnormal localization
+PHIPO:0001095,abnormal localization of chitin in cell
+PHIPO:0001096,resistance to stress
+PHIPO:0001097,resistance to cell wall stress
+PHIPO:0001098,sensitive to stress
+PHIPO:0001099,obsolete increased RNA level in a pathogen host interaction
+PHIPO:0001100,increased level of pathogen RNA within host
+PHIPO:0001101,absence of pathogen asexual sporulation structures within host
+PHIPO:0001102,presence of pathogen asexual sporulation structures within host lesion
+PHIPO:0001104,increased level of host defense-induced RNA
+PHIPO:0001105,gliotoxin absent from cell
+PHIPO:0001106,presence of pathogen host protein-protein interaction
+PHIPO:0001107,absence of pathogen host protein-protein interaction
+PHIPO:0001108,pathogen host interaction pH phenotype
+PHIPO:0001109,obsolete abnormal pathogen-induced host pH
+PHIPO:0001110,obsolete pathogen-induced decrease in host pH
+PHIPO:0001111,obsolete pathogen-induced increase in host pH
+PHIPO:0001112,obsolete normal pH within a pathogen host interaction
+PHIPO:0001113,host defense induced acidification in phagolysome present
+PHIPO:0001114,decreased number of pathogen asexual sporulation structures within host lesion
+PHIPO:0001115,decreased phosphopantetheinyl transferase activity
+PHIPO:0001116,host immune system signaling pathway pathogen-host interaction phenotype
+PHIPO:0001117,host immune signaling pathway activated by pathogen
+PHIPO:0001118,abnormal protein modification
+PHIPO:0001119,abnormal protein phosphorylation
+PHIPO:0001120,decreased protein phosphorylation
+PHIPO:0001121,abnormal sexual reproductive structure development
+PHIPO:0001122,decreased number of sexual sporulation structures
+PHIPO:0001123,viable population
+PHIPO:0001124,decreased growth on erucic acid carbon source
+PHIPO:0001125,decreased growth on oleic acid carbon source
+PHIPO:0001126,decreased growth on palmitic acid carbon source
+PHIPO:0001127,decreased growth on myristic acid carbon source
+PHIPO:0001128,effector-mediated suppression of host PAMP-triggered immunity present
+PHIPO:0001130,stunted host growth during pathogen colonization
+PHIPO:0001131,increased number of host side shoots during pathogen colonization
+PHIPO:0001132,increased size of pathogen vacuoles during host colonization
+PHIPO:0001133,increased cellular melanin accumulation
+PHIPO:0001134,sensitive to potassium chloride
+PHIPO:0001135,sensitive to sorbitol
+PHIPO:0001136,abolished development of asexual reproductive structure
+PHIPO:0001137,increased number of hyphal septa
+PHIPO:0001138,decreased number of asexual reproductive structures
+PHIPO:0001139,decreased number of septum in asexual spore
+PHIPO:0001140,host PAMP-triggered immunity signaling activated by pathogen present
+PHIPO:0001141,obsolete host effector triggered immunity signaling induced hypersensitive response activated by pathogen
+PHIPO:0001142,normal pathogen protein localization to host chloroplast
+PHIPO:0001143,abolished pathogen protein localization to host chloroplast
+PHIPO:0001144,decreased level of host defense-related RNA involved in a pathogen interaction
+PHIPO:0001145,effector-mediated suppression of host effector triggered immunity present
+PHIPO:0001147,cellular metabolic process phenotype
+PHIPO:0001148,unaltered reactive oxygen species production
+PHIPO:0001149,decreased reactive oxygen species production
+PHIPO:0001150,abnormal spatial extent of reactive oxygen species production
+PHIPO:0001151,normal host size during pathogen invasion
+PHIPO:0001152,increased host membrane blebbing during pathogen invasion
+PHIPO:0001153,hyphal hyper branching
+PHIPO:0001154,decreased pathogen chitin fragment binding
+PHIPO:0001155,decreased level of pathogen reactive oxygen species production within host
+PHIPO:0001156,increased level of pathogen reactive oxygen species production within host
+PHIPO:0001157,obsolete unaltered pathogen reactive oxygen species production within host
+PHIPO:0001159,pathogen tissue to tissue migration within host phenotype
+PHIPO:0001160,abolished pathogen tissue to tissue migration within host
+PHIPO:0001161,host defense-induced phenolic compound absent
+PHIPO:0001162,obsolete host reproductive phenotype induced by pathogen
+PHIPO:0001163,obsolete pathogen host interaction reproductive phenotype
+PHIPO:0001164,obsolete abnormal host reproductive structure development induced by pathogen
+PHIPO:0001165,abnormal host seed development induced by pathogen
+PHIPO:0001166,absence of host seed development induced by pathogen
+PHIPO:0001167,pathogen modulation of host immune system process phenotype
+PHIPO:0001168,presence of pathogen inhibition of host immune response protease
+PHIPO:0001173,pathogen modulation of host process phenotype
+PHIPO:0001174,decreased level of host defense-induced RNA
+PHIPO:0001175,normal pathogen protein localization within host
+PHIPO:0001176,effector-mediated immune suppression phenotype
+PHIPO:0001179,infective ability phenotype
+PHIPO:0001180,absence of effector-independent host hypersensitive response
+PHIPO:0001182,normal level of deoxynivalenol
+PHIPO:0001183,obsolete host resistance to pathogen phenotype
+PHIPO:0001184,obsolete loss of functional host resistance gene
+PHIPO:0001185,obsolete gain of functional host resistance gene
+PHIPO:0001186,obsolete functional host resistance gene present
+PHIPO:0001187,obsolete functional host resistance gene absent
+PHIPO:0001188,obsolete gene-for-gene interaction phenotype
+PHIPO:0001189,obsolete compatible interaction
+PHIPO:0001190,obsolete incompatible interaction
+PHIPO:0001191,presence of melanin accumulation in pathogen asexual spore within host
+PHIPO:0001192,decreased level of host defense-induced reactive oxygen species
+PHIPO:0001193,increased level of host defense-induced reactive oxygen species
+PHIPO:0001194,inhibition of pathogen chorismate mutase by host absent
+PHIPO:0001195,inhibition of pathogen chorismate mutase by host present
+PHIPO:0001196,host defense-induced substance level phenotype
+PHIPO:0001197,level of pathogen produced substance within host phenotype
+PHIPO:0001198,outcome of interaction phenotype
+PHIPO:0001199,disease absent
+PHIPO:0001200,disease present
+PHIPO:0001201,obsolete pathogen effector phenotype
+PHIPO:0001202,obsolete loss of functional pathogen effector
+PHIPO:0001203,obsolete gain of functional pathogen effector
+PHIPO:0001204,decreased extent of host-defense induced lesion by host hypersensitive response
+PHIPO:0001205,abnormal filament morphology
+PHIPO:0001206,normal filament morphology
+PHIPO:0001207,normal filament length
+PHIPO:0001208,unicellular colony morphology phenotype
+PHIPO:0001210,normal hyphal growth
+PHIPO:0001212,decreased hyphal growth
+PHIPO:0001213,abolished hyphal growth
+PHIPO:0001214,hyphal growth phenotype
+PHIPO:0001215,abnormal hyphal growth
+PHIPO:0001216,nutrient phenotype
+PHIPO:0001217,stress phenotype
+PHIPO:0001218,chemical phenotype
+PHIPO:0001219,normal growth on voriconazole
+PHIPO:0001220,physical quality phenotype
+PHIPO:0001221,abnormal anatomical structure physical quality phenotype
+PHIPO:0001222,cell viability phenotype
+PHIPO:0001223,normal organism morphology
+PHIPO:0001224,increased chitin hydrolysis present
+PHIPO:0001225,chitin hydrolysis present
+PHIPO:0001226,decreased level of host defense-induced reducing sugar in apoplast
+PHIPO:0001227,increased level of host defense-induced reducing sugar in apoplast
+PHIPO:0001228,pathogen reactive oxygen species production within host present
+PHIPO:0001229,presence of pathogen tissue to tissue migration within host
+PHIPO:0001230,host defense-induced phenolic compound present
+PHIPO:0001231,host defense-induced RNA present
+PHIPO:0001232,pathogen RNA within host present
+PHIPO:0001233,pathogen inhibition of host defense induced acidification in phagolysome
+PHIPO:0001234,increased hyphal growth
+PHIPO:0001235,host defense-related RNA involved in a pathogen interaction present
+PHIPO:0001236,effector-mediated suppression of host effector triggered immunity absent
+PHIPO:0001237,effector-mediated suppression of host PAMP-triggered immunity absent
+PHIPO:0001238,increased chitinase activity
+PHIPO:0001239,pathogen inhibition of host defense induced alkalization
+PHIPO:0001240,host defense induced alkalization present
+PHIPO:0001241,decreased chitinase activity
+PHIPO:0001242,pathogen binding of chitin with host present
+PHIPO:0001243,pathogen binding of chitin with host absent
+PHIPO:0001244,increased number of pathogen asexual sporulation structures within host lesion
+PHIPO:0001245,increased protein phosphorylation involved in host PAMP-triggered immunity (MAPK) signaling activated by pathogen
+PHIPO:0001246,host PAMP-triggered immunity activated by pathogen present
+PHIPO:0001247,pathogen modulation of host metabolic process phenotype
+PHIPO:0001248,pathogen modulation of chitin hydrolysis by host present
+PHIPO:0001249,chitin hydrolysis absent
+PHIPO:0001250,abnormal host structure induced by pathogen
+PHIPO:0001251,host defense-induced protein present
+PHIPO:0001252,decreased pathogen tissue to tissue migration within host
+PHIPO:0001253,host immune system inflammatory response activated by pathogen present
+PHIPO:0001254,decreased host immune inflammatory response with pathogen
+PHIPO:0001255,increased host immune inflammatory response with pathogen
+PHIPO:0001256,host defense-related protein involved in a pathogen interaction present
+PHIPO:0001257,decreased level of host defense-induced protein
+PHIPO:0001258,decreased expression of a host defense-related protein involved in a pathogen interaction
+PHIPO:0001259,host cell viability with pathogen phenotype
+PHIPO:0001260,host cell viable with pathogen
+PHIPO:0001261,host cell inviable with pathogen
+PHIPO:0001262,host defense-induced protein level phenotype
+PHIPO:0001263,host defense-induced RNA level phenotype
+PHIPO:0001264,host physiological process affected by pathogen phenotype
+PHIPO:0001265,host hemorrhage with pathogen present
+PHIPO:0001266,increased host hemorrhage with pathogen
+PHIPO:0001267,level of pathogen produced RNA within host phenotype
+PHIPO:0001268,presence of host gall during pathogen invasion
+PHIPO:0001269,decreased number of host galls during pathogen invasion
+PHIPO:0001270,sensitive to calcium ion starvation
+PHIPO:0001271,presence of pathogen sexual spores within host
+PHIPO:0001272,stunted growth
+PHIPO:0001273,abnormal host morphology during phagocytosis of pathogen
+PHIPO:0001274,host immune system phagocytosis of pathogen present
+PHIPO:0001275,presence of viable pathogen sexual spores within host
+PHIPO:0001276,increased number of host galls during pathogen invasion
+PHIPO:0001277,presence of pathogen induced host DNA synthesis
+PHIPO:0001278,decreased pathogen induced host DNA synthesis
+PHIPO:0001279,abolished peptidase activity
+PHIPO:0001280,increased pathogen induced host DNA synthesis
+PHIPO:0001281,presence of host protein phosphorylation with pathogen
+PHIPO:0001282,absence of host protein phosphorylation with pathogen
+PHIPO:0001283,increased host protein phosphorylation with pathogen
+PHIPO:0001284,decreased host protein phosphorylation with pathogen
+PHIPO:0001285,increased level of host defense-related RNA involved in a pathogen interaction
+PHIPO:0001286,presence of pathogen protein host DNA interaction
+PHIPO:0001287,normal growth on tolnaftate
+PHIPO:0001288,resistance to tolnaftate
+PHIPO:0001289,sensitive to tolnaftate
+PHIPO:0001290,normal growth on azoxystrobin
+PHIPO:0001291,resistance to fenpicoxamid
+PHIPO:0001292,sensitive to fenpicoxamid
+PHIPO:0001293,normal growth on fenpicoxamid
+PHIPO:0001294,inhibition of pathogen polygalacturonase by host present
+PHIPO:0001295,inhibition of pathogen polygalacturonase by host decreased
+PHIPO:0001296,resistance to arborcandin C
+PHIPO:0001297,sensitive to arborcandin C
+PHIPO:0001298,normal growth on arborcandin C
+PHIPO:0001299,normal growth on pyrrolnitrin
+PHIPO:0001300,sensitive to pyrrolnitrin
+PHIPO:0001301,resistance to pyrrolnitrin
+PHIPO:0001302,resistance to osmotic stress
+PHIPO:0001303,sensitive to osmotic stress
+PHIPO:0001304,resistance to salt stress
+PHIPO:0001305,resistance to non-ionic osmotic stress
+PHIPO:0001306,sensitive to salt stress
+PHIPO:0001307,sensitive to non-ionic osmotic stress
+PHIPO:0001308,normal growth on chemical
+PHIPO:0001309,normal growth on benomyl
+PHIPO:0001310,normal growth on carbendazim
+PHIPO:0001311,normal growth on chlorothalonil
+PHIPO:0001312,normal growth on zoxamide
+PHIPO:0001313,resistance to zoxamide
+PHIPO:0001314,sensitive to zoxamide
+PHIPO:0001315,normal growth on cymoxanil
+PHIPO:0001316,resistance to cymoxanil
+PHIPO:0001317,sensitive to cymoxanil
+PHIPO:0001318,normal growth on metalaxyl
+PHIPO:0001319,resistance to metalaxyl
+PHIPO:0001320,sensitive to metalaxyl
+PHIPO:0001321,normal growth on flumorph
+PHIPO:0001322,resistance to flumorph
+PHIPO:0001323,sensitive to flumorph
+PHIPO:0001324,normal growth on pyrimethanil
+PHIPO:0001325,normal growth on tebuconazole
+PHIPO:0001326,normal growth on prochloraz
+PHIPO:0001327,normal growth on iprodione
+PHIPO:0001328,normal growth on myclobutanil
+PHIPO:0001329,normal growth on fluazinam
+PHIPO:0001330,normal growth on thiram
+PHIPO:0001331,normal growth on procymidone
+PHIPO:0001332,resistance to procymidone
+PHIPO:0001333,resistance to thiram
+PHIPO:0001334,resistance to fluazinam
+PHIPO:0001335,resistance to myclobutanil
+PHIPO:0001336,sensitive to myclobutanil
+PHIPO:0001337,sensitive to fluazinam
+PHIPO:0001338,sensitive to thiram
+PHIPO:0001339,sensitive to procymidone
+PHIPO:0001340,resistance to nocodazole
+PHIPO:0001341,normal growth on thiabendazole
+PHIPO:0001342,resistance to triflumizole
+PHIPO:0001343,sensitive to triflumizole
+PHIPO:0001344,normal growth on triflumizole
+PHIPO:0001345,resistance to bitertanol
+PHIPO:0001346,sensitive to bitertanol
+PHIPO:0001347,normal growth on bitertanol
+PHIPO:0001348,resistance to pyrifenox
+PHIPO:0001349,sensitive to pyrifenox
+PHIPO:0001350,normal growth on pyrifenox

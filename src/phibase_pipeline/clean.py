@@ -1,9 +1,13 @@
 import csv
 import os
 import re
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+
+DATA_DIR = Path(__file__).parent / 'data'
 
 
 def get_normalized_column_names(phi_df):
@@ -196,7 +200,7 @@ def clean_phibase_csv(path):
 
 def load_phibase_cleaned(path):
     dtypes = (
-        pd.read_csv('_in/cleaned_dtypes.csv', index_col='column')
+        pd.read_csv(DATA_DIR / 'cleaned_dtypes.csv', index_col='column')
         .squeeze('columns')
         .to_dict()
     )

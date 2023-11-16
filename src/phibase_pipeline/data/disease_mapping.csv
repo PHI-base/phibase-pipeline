@@ -1,0 +1,694 @@
+term_label,term_id
+abdominal infection,abdominal infection
+abortion,PHIDO:0000002
+abscess,
+acute diarrhea,acute diarrhea
+acute enteric disease,PHIDO:0000003
+acute gastroenteritis,PHIDO:0000004
+acute glomerulonephritis,glomerulonephritis
+acute hepatopancreatic necrosis disease,acute hepatopancreatic necrosis disease 
+acute pulmonary pertussis,PHIDO:0000271
+acute respiratory tract disease,PHIDO:0000311
+aflatoxicosis,PHIDO:0000005
+african sleeping sickness,PHIDO:0000006
+african trypanosomiasis,PHIDO:0000006
+agalactia syndrome,PHIDO:0000007
+airsacculitis,PHIDO:0000008
+airsacculitis (chicken),PHIDO:0000008
+alternaria brown spot,PHIDO:0000009
+alternaria leaf blotch,PHIDO:0000010
+american foulbrood,PHIDO:0000011
+angular leaf spot,PHIDO:0000012
+angular leaf spot (cucumber),PHIDO:0000012
+animal disease,PHIDO:0000406
+anthracnose,PHIDO:0000013
+anthracnose (cruciferae),PHIDO:0000013
+anthracnose (cucumber),PHIDO:0000013
+anthracnose (cucurbitaceae),PHIDO:0000013
+anthracnose (ficus),PHIDO:0000013
+anthracnose (maize),PHIDO:0000013
+anthracnose (mango),PHIDO:0000013
+anthracnose (poplar),PHIDO:0000013
+anthracnose (rubber tree),PHIDO:0000013
+anthracnose leaf spot,PHIDO:0000014
+anthrax,PHIDO:0000015
+anthrax-like lung infection,
+apple scab,PHIDO:0000016
+arthritis,PHIDO:0000017
+ascending pyelonephritis,PHIDO:0000018
+ascochyta blight,PHIDO:0000019
+ascochyta blight (chickpea),PHIDO:0000019
+aspergillosis,PHIDO:0000020
+asymptomatic colonization,PHIDO:0000021
+avian colibacillosis,PHIDO:0000022
+avian colisepticemia,colisepticemia
+bacteremia,PHIDO:0000023
+bacterial blight,PHIDO:0000024
+bacterial blight (cassava),PHIDO:0000024
+bacterial blight (cotton),PHIDO:0000024
+bacterial blight (pelargonium),PHIDO:0000024
+bacterial blight (rice),PHIDO:0000024
+bacterial blight (soybean),PHIDO:0000024
+bacterial canker,PHIDO:0000025
+bacterial cold water disease,PHIDO:0000026
+bacterial cold-water disease,PHIDO:0000026
+bacterial grain rot,PHIDO:0000027
+bacterial infection,bacterial infection
+bacterial leaf blight,PHIDO:0000028
+bacterial leaf blight (rice),PHIDO:0000028
+bacterial leaf spot,PHIDO:0000029
+bacterial leaf streak,PHIDO:0000030
+bacterial leaf streak (rice),PHIDO:0000030
+bacterial midrib rot,PHIDO:0000031
+bacterial midrib rot (lettuce),PHIDO:0000031
+bacterial panicle blight,PHIDO:0000032
+bacterial panicle blight (rice),PHIDO:0000032
+bacterial sepsis,PHIDO:0000327
+bacterial speck,PHIDO:0000033
+bacterial speck (tomato),PHIDO:0000033
+bacterial spot,PHIDO:0000034
+bacterial spot (carambola),PHIDO:0000034
+bacterial spot (pepper),PHIDO:0000034
+bacterial spot (tomato),PHIDO:0000034
+bacterial wilt,PHIDO:0000035
+bakanae,PHIDO:0000036
+banana fusarium wilt,PHIDO:0000037
+bark canker (poplar),PHIDO:0000286
+barley leaf scald,PHIDO:0000038
+barley powdery mildew,PHIDO:0000039
+barley smut,PHIDO:0000040
+barley stem blight,PHIDO:0000041
+basal meningitis,PHIDO:0000042
+basal plate rot,PHIDO:0000043
+basal plate rot (onion),PHIDO:0000043
+bean brown spot,PHIDO:0000044
+biocontrol: non pathogenic,
+bitter rot,bitter rot
+black leaf mold,PHIDO:0000046
+black leaf mold (tomato),PHIDO:0000046
+black rot,PHIDO:0000047
+black rot (citrus),PHIDO:0000047
+black rot (cruciferae),PHIDO:0000047
+black shank (tobacco),PHIDO:0000363
+black sigatoka,PHIDO:0000048
+black spot,PHIDO:0000049
+black spot (pear),PHIDO:0000049
+blackhead disease,PHIDO:0000050
+blackhead toppling disease,PHIDO:0000367
+blackleg,PHIDO:0000051
+blackleg (rapeseed),PHIDO:0000051
+blackleg disease,blackleg (potato)
+blackleg disease (potato),blackleg (potato)
+blackpoint,PHIDO:0000052
+blackpoint (barley),PHIDO:0000052
+blackpoint (wheat),PHIDO:0000052
+blast,PHIDO:0000053
+blast (rice),PHIDO:0000315
+blast disease,PHIDO:0000053
+blight,blight
+blight (bean),blight
+blight (chestnut),PHIDO:0000080
+blight (rice),blight
+blood infection,PHIDO:0000054
+blood infections,PHIDO:0000054
+bloodstream infection,PHIDO:0000054
+bloodstream infections,PHIDO:0000055
+bloody diarrhea,PHIDO:0000056
+blossom blight,PHIDO:0000057
+blue mold,PHIDO:0000058
+blue mold (citrus),PHIDO:0000058
+blue mold rot,PHIDO:0000059
+blue rot,blue rot
+bordetellosis,PHIDO:0000060
+bovine mastitis,PHIDO:0000061
+bronchial fibrosis,bronchial fibrosis
+brown blotch,PHIDO:0000062
+brown blotch (mushroom),PHIDO:0000062
+brown leaf spot,PHIDO:0000063
+brown rot,PHIDO:0000064
+brown rot (drupe),PHIDO:0000064
+brown rot (potato),PHIDO:0000064
+brown spot,PHIDO:0000065
+brown spot (bean),PHIDO:0000065
+brown spot (citrus),PHIDO:0000065
+brucellosis,PHIDO:0000066
+bubonic plague,PHIDO:0000067
+buckeye rot (potato),buckeye rot
+butt rot,PHIDO:0000068
+butt rot (conifer),PHIDO:0000068
+campylobacteriosis,PHIDO:0000069
+candidemia,PHIDO:0000070
+candidiasis,PHIDO:0000071
+canker (citrus),PHIDO:0000085
+canker (tomato),canker
+canker stain,PHIDO:0000072
+carcinogenesis,
+caseous salpingitis,PHIDO:0000073
+cassava bacterial blight,PHIDO:0000074
+catheter-associated urinary tract infection,catheter-associated urinary tract infection
+cellulitis,PHIDO:0000075
+center rot (onion),center rot
+cerebral cryptococcomas,PHIDO:0000076
+cerebral malaria,PHIDO:0000077
+chagas disease,PHIDO:0000078
+chancroid,PHIDO:0000079
+chestnut blight,PHIDO:0000080
+chlorosis,
+cholera,PHIDO:0000081
+chorioamnionitis,chorioamnionitis
+chronic cervical lymphadenitis,cervical lymphadenitis
+chronic gastritis,chronic gastritis
+chronic implant-associated infections,PHIDO:0000082
+chronic lung infection,PHIDO:0000222
+chronic periodontitis,chronic periodontitis
+chronic respiratory tract disease,chronic respiratory tract infection
+chronic septicemia,chronic septicemia
+citrus black rot,PHIDO:0000083
+citrus brown spot,PHIDO:0000084
+citrus canker,PHIDO:0000085
+citrus green mold,PHIDO:0000086
+citrus variegated chlorosis,PHIDO:0000087
+clostridial myonecrosis,PHIDO:0000088
+coccidioidomycosis,PHIDO:0000089
+colibacillosis,PHIDO:0000090
+colitis,PHIDO:0000091
+collar rot,PHIDO:0000092
+colonic hyperplasia (mouse),PHIDO:0000241
+common root rot,PHIDO:0000093
+common root rot (barley),PHIDO:0000093
+common root rot (wheat),PHIDO:0000093
+common scab (potato),common scab
+community-acquired infection,community-acquired infection
+contagious agalactia,PHIDO:0000094
+corky root rot,PHIDO:0000095
+corky root rot (tomato),PHIDO:0000095
+corn smut,PHIDO:0000096
+corneal infection,PHIDO:0000097
+cotyledon disease,PHIDO:0000412
+covered smut,PHIDO:0000098
+crohn's disease,PHIDO:0000099
+crown gall,PHIDO:0000100
+crown gall (grape),PHIDO:0000100
+crown infection,PHIDO:0000101
+crown rot,PHIDO:0000102
+crucifer anthracnose,PHIDO:0000103
+cryptococcal meningitis,cryptococcal meningitis
+cryptococcal meningoencephalitis,PHIDO:0000104
+cryptococcosis,PHIDO:0000105
+cucumber anthracnose,PHIDO:0000106
+cucumber fusarium wilt,PHIDO:0000107
+curvularia leaf spot,PHIDO:0000108
+cutaneo-mucous infection,PHIDO:0000109
+cutaneo-mucous infections,PHIDO:0000109
+cutaneous infection,cutaneous infection
+cyst (potato),PHIDO:0000292
+cystic fibrosis,PHIDO:0000110
+cystic fibrosis-like conditions,PHIDO:0000111
+cystic fibrosis-like disease,
+cystitis,PHIDO:0000112
+deaths in neonates,PHIDO:0000113
+dental caries,dental caries
+denture stomatitis,PHIDO:0000114
+dermatophytosis,PHIDO:0000115
+diarrhea,PHIDO:0000116
+diarrheal disease,PHIDO:0000116
+diarrheal diseases,PHIDO:0000117
+diphtheria,PHIDO:0000118
+disease,PHIDO:0000001
+diseases of the skeletal system in children,PHIDO:0000119
+disseminated candidiasis,PHIDO:0000120
+disseminated cryptococcosis,PHIDO:0000121
+disseminated disease,PHIDO:0000122
+dothistroma needle blight,PHIDO:0000123
+downy mildew,PHIDO:0000124
+downy mildew (arabidopsis),PHIDO:0000124
+dry bubble,PHIDO:0000125
+ear rot,PHIDO:0000126
+ear rot (corn),PHIDO:0000126
+ear rot (maize),PHIDO:0000126
+early blight (potato),PHIDO:0000127
+early blight of potato,PHIDO:0000127
+early ripening,PHIDO:0000128
+early senescence,PHIDO:0000129
+edwardsiellosis,PHIDO:0000130
+endocarditis,PHIDO:0000131
+enteric disease,PHIDO:0000199
+enteric diseases,PHIDO:0000132
+enteric fever,PHIDO:0000133
+enteric redmouth disease,PHIDO:0000134
+enteric septicemia,PHIDO:0000135
+enteric septicemia (catfish),PHIDO:0000135
+enteritis,PHIDO:0000136
+enterococcal endocarditis,PHIDO:0000137
+enterotoxemia,PHIDO:0000138
+epizootic infection (poultry),PHIDO:0000139
+epizootic infectious disease,PHIDO:0000139
+ergot,PHIDO:0000140
+erythematous candidiasis,PHIDO:0000141
+extraintestinal infection,PHIDO:0000142
+extraintestinal infections,PHIDO:0000142
+false smut (rice),PHIDO:0000316
+far east scarlet-like fever,PHIDO:0000143
+fatal canine hemorrhagic gastroenteritis,PHIDO:0000144
+fatal foal necrotizing enterocolitis,PHIDO:0000145
+fatal septicemia,PHIDO:0000146
+fibrinous serositis,PHIDO:0000147
+fire blight,PHIDO:0000148
+flax rust,PHIDO:0000149
+floral disease,PHIDO:0000407
+foliar blight,PHIDO:0000150
+foliar infection,PHIDO:0000151
+food poisoning,PHIDO:0000152
+foodborne outbreaks,PHIDO:0000153
+foolish seedling,PHIDO:0000154
+fowl typhoid,fowl typhoid
+frog-eye leaf spot,frogeye leaf spot
+frog-eye leafspot,PHIDO:0000155
+fruit decay,PHIDO:0000157
+fruit disease,PHIDO:0000156
+fruit infection,PHIDO:0000156
+fruit rot,PHIDO:0000157
+fungal infection,fungal infection
+fungal keratitis,PHIDO:0000158
+fungal meningitis,PHIDO:0000159
+furunculosis,PHIDO:0000160
+fusarium crown rot,PHIDO:0000161
+fusarium ear blight,PHIDO:0000162
+fusarium head blight,PHIDO:0000163
+fusarium wilt,PHIDO:0000164
+fusarium wilt (banana),PHIDO:0000164
+fusarium wilt (cucumber),PHIDO:0000164
+gas gangrene (human),PHIDO:0000191
+gas pharyngitis,gas pharyngitis
+gastric infection,PHIDO:0000165
+gastric infections,PHIDO:0000165
+gastric pharyngitis,PHIDO:0000166
+gastroenteritis,PHIDO:0000167
+gastrointestinal disease,PHIDO:0000168
+gastrointestinal infection,PHIDO:0000168
+genital tract infection,PHIDO:0000169
+glanders,glanders
+glasser's disease,PHIDO:0000170
+glume blotch,PHIDO:0000171
+glume blotch (wheat),PHIDO:0000171
+gonorrhea,PHIDO:0000172
+granuloma,PHIDO:0000173
+grape rot,grape rot
+gray mold,PHIDO:0000178
+green mold,PHIDO:0000174
+green mold (citrus),PHIDO:0000174
+green mold decay,PHIDO:0000175
+green mold rot,PHIDO:0000176
+green muscardine,PHIDO:0000177
+green rot,green rot
+grey leaf spot (maize),gray leaf spot
+grey mold,PHIDO:0000178
+group a streptococcal infection,Streptococcus infection
+group a streptococcal infections,PHIDO:0000179
+group b streptococcal infection,Streptococcus infection
+group b streptococcal infections,PHIDO:0000180
+gut-associated disease,
+gut-associated diseases,PHIDO:0000181
+haemophilus influenzae disease,Haemophilus influenzae infection
+halo blight,PHIDO:0000182
+head blight,PHIDO:0000163
+head blight (wheat),PHIDO:0000163
+healthcare-associated bacterial infection,PHIDO:0000183
+hemolymph bleeding,PHIDO:0000184
+hemolytic uremic syndrome,PHIDO:0000185
+hemorrhagic colitis,PHIDO:0000186
+hemorrhagic septicemia,PHIDO:0000187
+histoplasmosis,PHIDO:0000188
+histoplasmosis (pulmonary disease),PHIDO:0000188
+hospital-acquired infection,PHIDO:0000189
+human african trypanosomiasis,PHIDO:0000190
+human gas gangrene,PHIDO:0000191
+hydrosalpinx,PHIDO:0000192
+hyperparasitemia,hyperparasitemia
+hypocotyl disease,PHIDO:0000413
+immunosuppression,PHIDO:0000193
+impetigo,PHIDO:0000194
+infection,infectious disease
+infectious bronchitis,PHIDO:0000195
+infectious coryza,PHIDO:0000196
+infective endocarditis,PHIDO:0000197
+infertility,PHIDO:0000198
+intestinal disease,PHIDO:0000199
+intestinal infection,PHIDO:0000199
+intra-abdominal infections,PHIDO:0000200
+invasive aspergillosis,PHIDO:0000201
+invasive candidiasis,invasive candidiasis
+invasive disease,PHIDO:0000202
+invasive pulmonary aspergillosis,PHIDO:0000203
+keratitis,PHIDO:0000204
+keratoconjonctivitis,PHIDO:0000205
+keratoconjunctivitis,PHIDO:0000205
+knot (olive),PHIDO:0000258
+late blight,PHIDO:0000206
+late blight (potato),PHIDO:0000206
+leaf anthracnose (maize),PHIDO:0000013
+leaf blight,PHIDO:0000207
+leaf blight (maize),PHIDO:0000207
+leaf blotch,PHIDO:0000208
+leaf blotch (barley),PHIDO:0000208
+leaf blotch (wheat),PHIDO:0000208
+leaf disease,PHIDO:0000411
+leaf mold,PHIDO:0000209
+leaf mold (tomato),PHIDO:0000209
+leaf rust,leaf rust
+leaf rust (poplar),PHIDO:0000287
+leaf scald,PHIDO:0000210
+leaf scald (barley),PHIDO:0000210
+leaf spot,PHIDO:0000211
+leaf spot (celery),PHIDO:0000211
+leaf spot (eggplant),PHIDO:0000211
+leaf spot (maize),PHIDO:0000211
+leaf spot (soybean),PHIDO:0000211
+leaf spot (sugar beet),PHIDO:0000211
+leaf spot (sweet pepper),PHIDO:0000211
+legionellosis,PHIDO:0000212
+legionnaires' disease,PHIDO:0000213
+leishmaniasis,PHIDO:0000214
+leptospirosis,PHIDO:0000215
+lettuce midrib rot,PHIDO:0000216
+life threatening infections,PHIDO:0000217
+life-threatening infection,
+light leaf spot,PHIDO:0000218
+listeriosis,PHIDO:0000219
+localized infection,localized infection
+luminescent vibriosis,PHIDO:0000220
+luminous vibriosis,PHIDO:0000221
+lung disease,PHIDO:0000222
+lung infection,PHIDO:0000222
+lung infections,PHIDO:0000222
+lyme borreliosis,PHIDO:0000223
+lyme disease,PHIDO:0000224
+maize anthracnose,PHIDO:0000225
+maize ear rot,PHIDO:0000226
+maize grey leaf spot,PHIDO:0000227
+maize leaf anthracnose,PHIDO:0000228
+maize leaf spot,PHIDO:0000229
+maize smut,PHIDO:0000230
+maize stalk rot,PHIDO:0000231
+malaria,PHIDO:0000232
+mango anthracnose,PHIDO:0000233
+mastitis,PHIDO:0000234
+melioidosis,PHIDO:0000235
+melon wilt,PHIDO:0000236
+meningitis,PHIDO:0000237
+meningococcal infection,PHIDO:0000238
+meningoencephalitis,PHIDO:0000239
+meningoencephalitis (fish),PHIDO:0000239
+midrib rot (lettuce),PHIDO:0000216
+mucormycosis,PHIDO:0000240
+murine colonic hyperplasia,PHIDO:0000241
+muskmelon wilt,PHIDO:0000242
+mycopathogen,
+mycosis,PHIDO:0000243
+mycotic mastitis,PHIDO:0000244
+nail infection,nail infection
+nausea,PHIDO:0000245
+necrotic abscesses,?
+necrotic enteritis,PHIDO:0000246
+necrotic leaf spots,PHIDO:0000247
+necrotic skin lesions,
+necrotizing fasciitis,PHIDO:0000248
+necrotizing myositis,necrotizing myositis
+nematode trapping fungus,
+neonatal death,?
+neonatal meningitis,PHIDO:0000249
+neonatal pneumonia,PHIDO:0000250
+neonatal sepsis,PHIDO:0000251
+net blotch,PHIDO:0000252
+neurofibromatosis,neurofibromatosis
+non-pathogenic,
+non-pathogenic: biocontrol,
+non-pathogenic: probiotic,
+northern corn leaf blight,PHIDO:0000253
+northern leaf blight,PHIDO:0000253
+nosocomial bacteremia,PHIDO:0000254
+nosocomial bacterial infection,PHIDO:0000183
+nosocomial diarrhea,nosocomial diarrhea
+nosocomial infection,PHIDO:0000255
+nosocomial pneumonia,PHIDO:0000281
+ocular disease,PHIDO:0000257
+ocular diseases,PHIDO:0000257
+olive knot,PHIDO:0000258
+opportunistic infection,PHIDO:0000259
+opportunistic infections,PHIDO:0000259
+oral candidiasis,PHIDO:0000260
+oral mucosa infection,PHIDO:0000261
+oropharyngeal candidiasis,PHIDO:0000262
+osteomyelitis,PHIDO:0000263
+otitis media,PHIDO:0000264
+ovine brucellosis,PHIDO:0000265
+panicle blight,PHIDO:0000266
+paracoccidioidomycosis,PHIDO:0000267
+pasteurellosis,PHIDO:0000268
+peptic ulcer disease,peptic ulcer disease
+periapical periodontitis,periapical periodontitis
+periapical periodontitis lesions,periapical periodontitis
+periodontitis,PHIDO:0000269
+peritonitis,PHIDO:0000270
+pertussis,PHIDO:0000271
+phaeohyphomycosis,PHIDO:0000272
+pharyngitis,PHIDO:0000273
+phoma stem canker,PHIDO:0000274
+phytophthora blight,PHIDO:0000275
+pierce's disease of grapes,PHIDO:0000276
+pine wilt,PHIDO:0000277
+plague,PHIDO:0000278
+plane canker stain,PHIDO:0000279
+plant disease,PHIDO:0000405
+pleuropneumonia,pleuropneumonia
+pleuropneumonia (pig),PHIDO:0000288
+pneumococcal infection,Pneumococcus infection
+pneumococcal meningitis,pneumococcal meningitis
+pneumococcal pneumonia,PHIDO:0000280
+pneumonia,PHIDO:0000281
+pneumonia (pig),PHIDO:0000281
+pneumonic plague,PHIDO:0000282
+pneumonitis,PHIDO:0000283
+pod disease,PHIDO:0000415
+pokkah boeng,PHIDO:0000284
+poplar anthracnose,PHIDO:0000285
+poplar bark cankers,PHIDO:0000286
+poplar leaf rust,PHIDO:0000287
+porcine contagious pleuropneumoniae,porcine contagious pleuropneumonia
+porcine pleuropneumonia,PHIDO:0000288
+postpartum infection,PHIDO:0000289
+potato brown rot,PHIDO:0000290
+potato buckeye rot,PHIDO:0000291
+potato cyst,PHIDO:0000292
+potato late blight,PHIDO:0000293
+potato rot,PHIDO:0000294
+potato scab,PHIDO:0000295
+potato wart,PHIDO:0000417
+powdery mildew,PHIDO:0000296
+powdery mildew (barley),PHIDO:0000296
+powdery mildew (cereals),PHIDO:0000296
+powdery mildew (grass),PHIDO:0000296
+powdery mildew (wheat),PHIDO:0000296
+probiotic gut bacteria,PHIDO:0000297
+prosthetic joint infection,prosthetic joint infection
+pseudobacteremia,PHIDO:0000298
+pseudomembranous colitis,PHIDO:0000299
+pullorum disease,PHIDO:0000300
+pulmonary aspergillosis,PHIDO:0000301
+pulmonary cryptococcosis,PHIDO:0000302
+pulmonary cryptococcosis (lung infection),PHIDO:0000302
+pulmonary disease,PHIDO:0000304
+pulmonary diseases,PHIDO:0000303
+pulmonary infection,PHIDO:0000304
+pulmonary infections,PHIDO:0000304
+purple seed stain,PHIDO:0000305
+pyelonephritis,PHIDO:0000306
+q fever,PHIDO:0000307
+reduced virulence,
+relapsing fever,PHIDO:0000308
+respiratory disease,PHIDO:0000309
+respiratory disease (poultry),PHIDO:0000311
+respiratory illness,PHIDO:0000310
+respiratory infection,PHIDO:0000309
+respiratory infections,PHIDO:0000311
+rice bacterial blight,PHIDO:0000312
+rice bacterial leaf blight,PHIDO:0000313
+rice bacterial leaf streak,PHIDO:0000314
+rice blast,PHIDO:0000315
+rice false smut,PHIDO:0000316
+ringworm,PHIDO:0000317
+root disease,PHIDO:0000409
+root rot,PHIDO:0000318
+root rot (conifer),PHIDO:0000318
+root rot (soybean),PHIDO:0000318
+rot,rot
+rot (grape),grape rot
+rot (potato),PHIDO:0000294
+rot (wheat),rot
+rotting of tubers,PHIDO:0000319
+rubber anthracnose,PHIDO:0000320
+salmonellosis,PHIDO:0000321
+salmonellosis (cattle),PHIDO:0000321
+salpingitis,salpingitis
+saprophytic,
+scab (apple),PHIDO:0000016
+scab (potato),PHIDO:0000295
+scab (wheat),PHIDO:0000389
+scald,PHIDO:0000322
+sclerotinia head rot,PHIDO:0000323
+sclerotinia stem rot,PHIDO:0000324
+seed disease,PHIDO:0000416
+seedling blight,PHIDO:0000325
+seedling blight (maize),PHIDO:0000325
+seedling rot,seedling rot
+self-limiting gastroenteritis,PHIDO:0000326
+sepsis,PHIDO:0000327
+septic shock,septic shock
+septicemia,PHIDO:0000328
+septicemia anserum exsudativa,septicemia anserum exsudativa
+septoria leaf blotch,PHIDO:0000329
+septoria nodorum blotch,PHIDO:0000330
+septoria tritici blotch,PHIDO:0000331
+serositis,serositis
+sexually transmitted disease,PHIDO:0000332
+sheath blight (rice),sheath blight
+sheath brown rot,PHIDO:0000333
+shigellosis,PHIDO:0000334
+sinusitis,PHIDO:0000335
+sinusitis (turkey),PHIDO:0000335
+skeletal disease (children),PHIDO:0000119
+skin infection,PHIDO:0000336
+skin infections,PHIDO:0000336
+skin lesion,
+skin lesions,PHIDO:0000337
+smut,PHIDO:0000338
+smut (barley),PHIDO:0000338
+smut (corn),PHIDO:0000338
+smut (maize),PHIDO:0000338
+soft rot,PHIDO:0000339
+soft rot (potato),PHIDO:0000339
+soft tissue infection,soft tissue infection
+soft tissue lesion,
+southern corn leaf blight,PHIDO:0000340
+soybean root rot,PHIDO:0000341
+soybean stem rot,PHIDO:0000342
+spontaneous abortion,miscarriage
+sporadic diarrhea,PHIDO:0000343
+sporotrichosis,sporotrichosis
+spot blotch,PHIDO:0000344
+spot blotch (barley),PHIDO:0000344
+spot blotch (wheat),PHIDO:0000344
+stagonospora nodorum blotch,PHIDO:0000345
+stagonospora nodorum blotch (wheat),PHIDO:0000345
+stalk rot,PHIDO:0000346
+stalk rot (corn),PHIDO:0000346
+stalk rot (maize),PHIDO:0000346
+stem base disease,PHIDO:0000410
+stem blight (barley),PHIDO:0000041
+stem canker,PHIDO:0000347
+stem canker (oilseed rape),PHIDO:0000347
+stem disease,PHIDO:0000408
+stem necrosis,PHIDO:0000348
+stem rot,PHIDO:0000349
+stem rot (chrysanthemum),PHIDO:0000349
+stem rot (muskmelon),PHIDO:0000349
+stem rot (soybean),PHIDO:0000349
+stem rust,PHIDO:0000350
+stewart's wilt,PHIDO:0000351
+stewart's wilt (sweet corn),PHIDO:0000351
+storage rot,PHIDO:0000352
+storage rots,PHIDO:0000352
+streptococcal pharyngitis,PHIDO:0000353
+streptococcal sepsis,PHIDO:0000327
+streptococcal sore throat (strep throat),PHIDO:0000353
+streptococcal toxic shock syndrome,PHIDO:0000354
+streptococcal toxic shock-like syndrome,streptococcal toxic shock-like syndrome
+streptococcicosis,PHIDO:0000355
+streptococcosis,PHIDO:0000355
+stripe rust (wheat),PHIDO:0000391
+subacute cervical lymphadenitis,cervical lymphadenitis
+subcutaneous infection,subcutaneous infection
+sudden death syndrome,PHIDO:0000356
+sugarbeet leaf spot,PHIDO:0000357
+sulcal caries,sulcal caries
+swollen head syndrome,PHIDO:0000358
+systemic candidiasis,systemic candidiasis
+systemic cryptococcosis,PHIDO:0000359
+systemic disease (cattle),systemic infection
+systemic disease (poultry),systemic infection
+systemic infection,systemic infection
+take-all,PHIDO:0000360
+tan spot,PHIDO:0000361
+tan spot (wheat),PHIDO:0000361
+tick-borne relapsing fever,PHIDO:0000362
+tobacco black shank,PHIDO:0000363
+tobacco wild fire,PHIDO:0000364
+tomato leaf mold,PHIDO:0000365
+tomato wilt,PHIDO:0000366
+toppling disease,PHIDO:0000367
+toxic megacolon,PHIDO:0000368
+toxic shock syndrome,PHIDO:0000369
+toxoplasmic encephalitis,PHIDO:0000370
+toxoplasmosis,PHIDO:0000371
+tracheitis,PHIDO:0000372
+tracheitis (chicken),PHIDO:0000372
+traveler's diarrhea,PHIDO:0000373
+tuber rot,PHIDO:0000319
+tuberculosis,PHIDO:0000374
+tularemia,PHIDO:0000375
+tumor,
+twig canker,twig canker
+typhoid,typhoid
+typhoid fever-like disease,
+typhoid-like disease,PHIDO:0000376
+typhoid-like disease (mice),PHIDO:0000376
+ulcer disease,PHIDO:0000377
+ulcerative colitis,ulcerative colitis
+upper genital tract infection,PHIDO:0000378
+upper genital tract infections,PHIDO:0000378
+urinary tract infection,PHIDO:0000379
+urogenital tract infection,urogenital tract infection
+urolithiasis,urolithiasis
+uterine wall infection,uterine wall infection
+vaginal candidiasis,PHIDO:0000380
+vaginal infection,vaginal infection
+valsa canker,Valsa canker
+valsa canker (apple),Valsa canker
+vascular wilt,PHIDO:0000381
+vascular wilt (banana),PHIDO:0000381
+vegetative disorder,
+verticillium wilt,PHIDO:0000382
+vibriosis,PHIDO:0000383
+vine blight,PHIDO:0000384
+vomiting,PHIDO:0000385
+vulvovaginal candidiasis,PHIDO:0000386
+water soaking,
+wheat glume blotch,PHIDO:0000387
+wheat powdery mildew,PHIDO:0000388
+wheat scab,PHIDO:0000389
+wheat stagonospora nodorum blotch,PHIDO:0000390
+wheat stripe rust,PHIDO:0000391
+wheat yellow rust,PHIDO:0000392
+white mold,PHIDO:0000393
+white muscardine,PHIDO:0000394
+white root rot,PHIDO:0000395
+wildfire,PHIDO:0000396
+wildfire disease,PHIDO:0000396
+wilt,PHIDO:0000397
+wilt (banana),PHIDO:0000397
+wilt (melon),PHIDO:0000397
+wilt (muskmelon),PHIDO:0000397
+wilt (tomato),PHIDO:0000397
+wilt rot (muskmelon),PHIDO:0000242
+witches' broom,PHIDO:0000398
+wound infection,wound infection
+yellow mold,PHIDO:0000399
+yellow mold (peanut),PHIDO:0000399
+yellow rust,PHIDO:0000400
+yellow rust (wheat),PHIDO:0000400
+yellow wilt (sunflower),yellow wilt
+yersiniosis,PHIDO:0000401
+zoonosis glanders,PHIDO:0000402
+zoonosis q fever,PHIDO:0000307
+zoonotic infection,PHIDO:0000404
+zoonotic q fever,PHIDO:0000307

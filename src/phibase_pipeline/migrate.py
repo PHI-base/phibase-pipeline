@@ -8,12 +8,16 @@ import os
 import re
 from collections import defaultdict
 from datetime import timedelta
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from phibase_pipeline.clean import load_or_create_cleaned_csv
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
+
+
+DATA_DIR = Path(__file__).parent / 'data'
 
 
 def load_bto_id_mapping(path):
@@ -1024,8 +1028,8 @@ def add_organism_roles(canto_json):
     pathogen_taxids, host_taxids = (
         set(pd.read_csv(path)['ncbi_taxid'])
         for path in (
-            '_in/phicanto_pathogen_species.csv',
-            '_in/phicanto_host_species.csv',
+            DATA_DIR / 'phicanto_pathogen_species.csv',
+            DATA_DIR / 'phicanto_host_species.csv',
         )
     )
     for session in canto_json['curation_sessions'].values():
@@ -1073,18 +1077,20 @@ def main():
         'in_vitro_growth_mapping.csv'
     )
     disease_mapping = load_disease_column_mapping(
-        '_in/phido.csv', 'disease_mapping.csv'
+        phido_path=DATA_DIR / 'phido.csv',
+        extra_path=DATA_DIR / 'disease_mapping.csv',
     )
-    exp_tech_df = load_exp_tech_mapping('allele_mapping.csv')
-    bto_mapping = load_bto_id_mapping('_in/bto.csv')
-    phipo_mapping = load_phipo_mapping('_in/phipo.csv')
-    canto_export = load_json('_in/canto_export.json')
+    exp_tech_df = load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
+    bto_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
+    phipo_mapping = load_phipo_mapping(DATA_DIR / 'phipo.csv')
+
+    canto_export = load_json('canto_export.json')
 
     approved_pmids = get_approved_pmids(canto_export)
 
     phi_df = load_or_create_cleaned_csv(
-        base_path='_in/phi-base_v4-15_2023-05-02.csv',
-        cleaned_path='_in/phi-base_v4-15_cleaned.csv',
+        base_path='phi-base_v4-15_2023-05-02.csv',
+        cleaned_path='phi-base_v4-15_cleaned.csv',
     )
 
     phi_df = filter_phi_df(phi_df, approved_pmids)
@@ -1137,7 +1143,7 @@ def main():
     # Timestamps are not JSON serializable
     phi_df.curation_date = phi_df.curation_date.astype('str')
 
-    with open('_out/phi-base_4.15.json', 'w+', encoding='utf8') as json_file:
+    with open('phi-base_4.15.json', 'w+', encoding='utf8') as json_file:
         json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
 
 
