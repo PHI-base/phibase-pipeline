@@ -97,7 +97,7 @@ def clean_phibase_csv(path):
             'pubmed': 'PubMed',
         },
     }
-    tissue_replacements = load_tissue_replacements('bto_renames.csv')
+    tissue_replacements = load_tissue_replacements(DATA_DIR / 'bto_renames.csv')
     column_replacements['tissue'] = tissue_replacements
     ligatures = {
         '\N{LATIN SMALL LIGATURE FF}': 'ff',

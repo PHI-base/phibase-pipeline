@@ -1072,9 +1072,11 @@ def get_phi_id_column(phi_df):
 
 
 def main():
-    phenotype_mapping_df = load_phenotype_column_mapping('phenotype_mapping.csv')
+    phenotype_mapping_df = load_phenotype_column_mapping(
+        DATA_DIR / 'phenotype_mapping.csv'
+    )
     in_vitro_growth_classifier = load_in_vitro_growth_classifier(
-        'in_vitro_growth_mapping.csv'
+        DATA_DIR / 'in_vitro_growth_mapping.csv'
     )
     disease_mapping = load_disease_column_mapping(
         phido_path=DATA_DIR / 'phido.csv',
