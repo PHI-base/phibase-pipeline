@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from phibase_pipeline.clean import load_or_create_cleaned_csv
+from phibase_pipeline.clean import clean_phibase_csv
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 
 
@@ -1071,7 +1071,7 @@ def get_phi_id_column(phi_df):
     return phi_ids
 
 
-def main():
+def make_combined_export(phibase_path, phicanto_path):
     phenotype_mapping_df = load_phenotype_column_mapping(
         DATA_DIR / 'phenotype_mapping.csv'
     )
@@ -1086,14 +1086,11 @@ def main():
     bto_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
     phipo_mapping = load_phipo_mapping(DATA_DIR / 'phipo.csv')
 
-    canto_export = load_json('canto_export.json')
+    canto_export = load_json(phicanto_path)
 
     approved_pmids = get_approved_pmids(canto_export)
 
-    phi_df = load_or_create_cleaned_csv(
-        base_path='phi-base_v4-15_2023-05-02.csv',
-        cleaned_path='phi-base_v4-15_cleaned.csv',
-    )
+    phi_df = clean_phibase_csv(phibase_path)
 
     phi_df = filter_phi_df(phi_df, approved_pmids)
     phi_df = add_session_ids(phi_df)
@@ -1142,10 +1139,4 @@ def main():
     add_annotation_objects(canto_json, phenotype_lookup, phi_df)
     add_organism_roles(canto_json)
 
-    with open('phi-base_4.15.json', 'w+', encoding='utf8') as json_file:
-        json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
-
-
-if __name__ == "__main__":
-    os.chdir(os.path.abspath(os.path.dirname(__file__)))
-    main()
+    return canto_json
