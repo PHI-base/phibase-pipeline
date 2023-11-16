@@ -453,7 +453,7 @@ def get_disease_annotations(phi_df):
             annotation = {
                 'checked': 'yes',
                 'conditions': [],
-                'creation_date': row.curation_date,
+                'creation_date': str(row.curation_date),
                 'curator': {'community_curated': False},
                 'evidence_code': '',
                 'extension': extension,
@@ -910,7 +910,7 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
         annotation_template = {
             'checked': 'yes',
             'conditions': [],
-            'creation_date': row.curation_date,
+            'creation_date': str(row.curation_date),
             'evidence_code': 'Unknown',  # TODO: Add evidence codes
             'extension': [],
             'curator': {'community_curated': False},
@@ -1139,9 +1139,6 @@ def main():
     add_wt_features(all_feature_mapping, canto_json)
     add_annotation_objects(canto_json, phenotype_lookup, phi_df)
     add_organism_roles(canto_json)
-
-    # Timestamps are not JSON serializable
-    phi_df.curation_date = phi_df.curation_date.astype('str')
 
     with open('phi-base_4.15.json', 'w+', encoding='utf8') as json_file:
         json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
