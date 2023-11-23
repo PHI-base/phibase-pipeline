@@ -47,7 +47,11 @@ def load_exp_tech_mapping(path):
             return ' | '.join(column.dropna().unique())
 
     unique_columns = ['exp_technique_stable', 'gene_protein_modification']
-    df = pd.read_csv(path).groupby(unique_columns, dropna=False).agg(join_rows)
+    df = (
+        pd.read_csv(path)
+        .groupby(unique_columns, dropna=False, sort=False)
+        .agg(join_rows)
+    )
     valid_rows = (df != '?').all(axis=1)
     assert ~df.index.duplicated().any()
     return df[valid_rows].reset_index()
