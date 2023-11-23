@@ -6,6 +6,7 @@ import pandas as pd
 from phibase_pipeline.migrate import (
     load_bto_id_mapping,
     load_exp_tech_mapping,
+    load_phenotype_column_mapping,
     load_phipo_mapping,
 )
 
@@ -75,3 +76,37 @@ def test_load_exp_tech_mapping():
     assert actual.equals(expected), actual.compare(
         expected, result_names=('actual', 'expected')
     )
+
+
+def test_load_phenotype_column_mapping():
+    data = [
+        {
+            'column_1': 'in_vitro_growth',
+            'value_1': 'increased',
+            'column_2': 'is_filamentous',
+            'value_2': 'FALSE',
+            'primary_id': 'PHIPO:0000975',
+            'primary_label': 'increased unicellular population growth',
+            'eco_id': np.nan,
+            'eco_label': np.nan,
+            'feature': 'pathogen_genotype',
+            'extension_relation': np.nan,
+            'extension_range': np.nan,
+        },
+        {
+            'column_1': 'mutant_phenotype',
+            'value_1': 'enhanced antagonism',
+            'column_2': np.nan,
+            'value_2': np.nan,
+            'primary_id': np.nan,
+            'primary_label': np.nan,
+            'eco_id': np.nan,
+            'eco_label': np.nan,
+            'feature': 'metagenotype',
+            'extension_relation': 'infective_ability',
+            'extension_range': 'PHIPO:0000207',
+        },
+    ]
+    expected = pd.DataFrame(data, index=[0, 2], dtype='str')
+    actual = load_phenotype_column_mapping(DATA_DIR / 'phenotype_mapping.csv')
+    pd.testing.assert_frame_equal(actual, expected)
