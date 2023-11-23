@@ -21,7 +21,7 @@ def test_load_bto_id_mapping():
     }
     expected = pd.Series(data, name='term_id').rename_axis('term_label')
     actual = load_bto_id_mapping(DATA_DIR / 'bto.csv')
-    assert actual.equals(expected)
+    pd.testing.assert_series_equal(actual, expected)
 
 
 def test_load_phipo_mapping():
@@ -73,9 +73,7 @@ def test_load_exp_tech_mapping():
     ]
     expected = pd.DataFrame.from_records(data)
     actual = load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
-    assert actual.equals(expected), actual.compare(
-        expected, result_names=('actual', 'expected')
-    )
+    pd.testing.assert_frame_equal(actual, expected)
 
 
 def test_load_phenotype_column_mapping():
