@@ -1,0 +1,7 @@
+exp_technique_stable,gene_protein_modification,exp_technique_transient,allele_type,name,description,expression,evidence_code,eco
+AA substitution with overexpression,D144P-Y222A,,amino acid substitution(s),,"D144P-Y222A",Overexpression,Unknown,
+AA substitution and deletion,"ABCdelta, D144A-Y222A",,amino acid substitution(s),,"D144A,Y222A",Overexpression,Unknown,
+AA substitution and deletion,"ABCdelta, D144A-Y222A",,deletion,,,,Unknown,
+missing mapping,D144A-Y222A,,?,,"D144A,Y222A",Overexpression,Unknown,
+duplicate row,D144A-Y222A,,amino acid substitution(s),,"D144A,Y222A",Overexpression,Unknown,
+duplicate row,D144A-Y222A,,amino acid substitution(s),,"D144A,Y222A",Overexpression,Unknown,
