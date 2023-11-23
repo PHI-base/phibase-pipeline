@@ -5,6 +5,7 @@ import pandas as pd
 
 from phibase_pipeline.migrate import (
     load_bto_id_mapping,
+    load_disease_column_mapping,
     load_exp_tech_mapping,
     load_phenotype_column_mapping,
     load_phipo_mapping,
@@ -108,3 +109,20 @@ def test_load_phenotype_column_mapping():
     expected = pd.DataFrame(data, index=[0, 2], dtype='str')
     actual = load_phenotype_column_mapping(DATA_DIR / 'phenotype_mapping.csv')
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_load_disease_column_mapping():
+    expected = {
+        'american foulbrood': 'PHIDO:0000011',
+        'angular leaf spot': 'PHIDO:0000012',
+        'anthracnose': 'PHIDO:0000013',
+        'anthracnose leaf spot': 'PHIDO:0000014',
+        'anthracnose (cruciferae)': 'PHIDO:0000013',
+        'anthracnose (cucumber)': 'PHIDO:0000013',
+        'anthracnose (cucurbitaceae)': 'PHIDO:0000013',
+    }
+    actual = load_disease_column_mapping(
+        phido_path=DATA_DIR / 'phido.csv',
+        extra_path=DATA_DIR / 'disease_mapping.csv',
+    )
+    assert actual == expected
