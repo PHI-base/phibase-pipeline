@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from phibase_pipeline.migrate import (
+    add_session_ids,
     get_approved_pmids,
     load_bto_id_mapping,
     load_disease_column_mapping,
@@ -356,3 +357,23 @@ def test_get_approved_pmids():
     expected = {123, 124}
     actual = get_approved_pmids(input)
     assert actual == expected
+
+
+def test_add_session_ids():
+    df = pd.DataFrame({'pmid': [123, 456, 789]})
+    expected = pd.DataFrame(
+        {
+            'pmid': [
+                123,
+                456,
+                789,
+            ],
+            'session_id': [
+                'a665a45920422f9d',
+                'b3a8e0e1f9ab1bfe',
+                '35a9e381b1a27567',
+            ],
+        }
+    )
+    add_session_ids(df)
+    pd.testing.assert_frame_equal(df, expected)
