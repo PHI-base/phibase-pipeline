@@ -10,6 +10,7 @@ from phibase_pipeline.migrate import (
     load_in_vitro_growth_classifier,
     load_phenotype_column_mapping,
     load_phipo_mapping,
+    split_compound_rows,
 )
 
 DATA_DIR = Path(__file__).parent / 'data'
@@ -139,3 +140,24 @@ def test_load_in_vitro_growth_classifier():
     ).rename_axis('ncbi_taxid')
     actual = load_in_vitro_growth_classifier(DATA_DIR / 'in_vitro_growth_mapping.csv')
     pd.testing.assert_series_equal(actual, expected)
+
+
+def test_split_compound_rows():
+    df = pd.DataFrame(
+        {
+            'a': ['alpha', 'beta'],
+            'b': ['charlie', 'delta'],
+            'c': ['echo; foxtrot', 'golf'],
+        },
+        index=[7, 8],
+    )
+    expected = pd.DataFrame(
+        {
+            'a': ['alpha', 'alpha', 'beta'],
+            'b': ['charlie', 'charlie', 'delta'],
+            'c': ['echo', 'foxtrot', 'golf'],
+        },
+        index=[0, 1, 2],
+    )
+    actual = split_compound_rows(df, column='c', sep='; ')
+    pd.testing.assert_frame_equal(actual, expected)
