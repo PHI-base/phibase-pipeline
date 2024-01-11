@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from phibase_pipeline.migrate import (
+    get_approved_pmids,
     load_bto_id_mapping,
     load_disease_column_mapping,
     load_exp_tech_mapping,
@@ -333,3 +334,25 @@ split_compound_columns_data = {
 def test_split_compound_columns(df, expected):
     actual = split_compound_columns(df)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_get_approved_pmids():
+    input = {
+        'curation_sessions': {
+            '0123456879abcdef': {
+                'metadata': {'annotation_status': 'APPROVED'},
+                'publications': {'PMID:123': {}},
+            },
+            '1123456879abcdef': {
+                'metadata': {'annotation_status': 'APPROVED'},
+                'publications': {'PMID:124': {}},
+            },
+            '2123456879abcdef': {
+                'metadata': {'annotation_status': 'CURATION_IN_PROGRESS'},
+                'publications': {'PMID:125': {}},
+            },
+        }
+    }
+    expected = {123, 124}
+    actual = get_approved_pmids(input)
+    assert actual == expected
