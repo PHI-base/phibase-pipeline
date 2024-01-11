@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from phibase_pipeline.migrate import (
+    add_gene_ids,
     add_session_ids,
     get_approved_pmids,
     load_bto_id_mapping,
@@ -376,4 +377,27 @@ def test_add_session_ids():
         }
     )
     add_session_ids(df)
+    pd.testing.assert_frame_equal(df, expected)
+
+
+def test_add_gene_ids():
+    df = pd.DataFrame(
+        {
+            'pathogen_species': ['Fusarium graminearum'],
+            'protein_id': ['Q00909'],
+            'host_genotype_id': ['UniProt: P43296'],
+            'host_species': ['Arabidopsis thaliana'],
+        }
+    )
+    expected = pd.DataFrame(
+        {
+            'pathogen_species': ['Fusarium graminearum'],
+            'protein_id': ['Q00909'],
+            'host_genotype_id': ['UniProt: P43296'],
+            'host_species': ['Arabidopsis thaliana'],
+            'canto_host_gene_id': ['Arabidopsis thaliana P43296'],
+            'canto_pathogen_gene_id': ['Fusarium graminearum Q00909']
+        }
+    )
+    add_gene_ids(df)
     pd.testing.assert_frame_equal(df, expected)
