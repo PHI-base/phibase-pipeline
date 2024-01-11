@@ -2,6 +2,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from phibase_pipeline.migrate import (
     load_bto_id_mapping,
@@ -10,6 +11,7 @@ from phibase_pipeline.migrate import (
     load_in_vitro_growth_classifier,
     load_phenotype_column_mapping,
     load_phipo_mapping,
+    split_compound_columns,
     split_compound_rows,
 )
 
@@ -160,4 +162,174 @@ def test_split_compound_rows():
         index=[0, 1, 2],
     )
     actual = split_compound_rows(df, column='c', sep='; ')
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+split_compound_columns_data = {
+    'pathogen_strain': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11; B11'],
+                'host_strain': ['cv. Alpha'],
+                'name': ['alpha'],
+                'allele_type': ['deletion'],
+                'description': ['echo'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'B11'],
+                'host_strain': ['cv. Alpha', 'cv. Alpha'],
+                'name': ['alpha', 'alpha'],
+                'allele_type': ['deletion', 'deletion'],
+                'description': ['echo', 'echo'],
+                'other': ['golf', 'golf'],
+            },
+            index=[0, 1],
+        ),
+    ),
+    'host_strain': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11'],
+                'host_strain': ['cv. Alpha; cv. Beta'],
+                'name': ['alpha'],
+                'allele_type': ['deletion'],
+                'description': ['echo'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'A11'],
+                'host_strain': ['cv. Alpha', 'cv. Beta'],
+                'name': ['alpha', 'alpha'],
+                'allele_type': ['deletion', 'deletion'],
+                'description': ['echo', 'echo'],
+                'other': ['golf', 'golf'],
+            },
+            index=[0, 1],
+        ),
+    ),
+    'name': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11'],
+                'host_strain': ['cv. Alpha'],
+                'name': ['alpha | beta'],
+                'allele_type': ['deletion'],
+                'description': ['echo'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'A11'],
+                'host_strain': ['cv. Alpha', 'cv. Alpha'],
+                'name': ['alpha', 'beta'],
+                'allele_type': ['deletion', 'deletion'],
+                'description': ['echo', 'echo'],
+                'other': ['golf', 'golf'],
+            },
+            index=[0, 1],
+        ),
+    ),
+    'allele_type': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11'],
+                'host_strain': ['cv. Alpha'],
+                'name': ['alpha'],
+                'allele_type': ['deletion | wild_type'],
+                'description': ['echo'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'A11'],
+                'host_strain': ['cv. Alpha', 'cv. Alpha'],
+                'name': ['alpha', 'alpha'],
+                'allele_type': ['deletion', 'wild_type'],
+                'description': ['echo', 'echo'],
+                'other': ['golf', 'golf'],
+            },
+            index=[0, 1],
+        ),
+    ),
+    'description': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11'],
+                'host_strain': ['cv. Alpha'],
+                'name': ['alpha'],
+                'allele_type': ['deletion'],
+                'description': ['echo | foxtrot'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'A11'],
+                'host_strain': ['cv. Alpha', 'cv. Alpha'],
+                'name': ['alpha', 'alpha'],
+                'allele_type': ['deletion', 'deletion'],
+                'description': ['echo', 'foxtrot'],
+                'other': ['golf', 'golf'],
+            },
+            index=[0, 1],
+        ),
+    ),
+    'two_fields': (
+        # Input
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11; B11'],
+                'host_strain': ['cv. Alpha'],
+                'name': ['alpha'],
+                'allele_type': ['deletion | wild_type'],
+                'description': ['echo'],
+                'other': ['golf'],
+            },
+            index=[9],
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'pathogen_strain': ['A11', 'A11', 'B11', 'B11'],
+                'host_strain': ['cv. Alpha', 'cv. Alpha', 'cv. Alpha', 'cv. Alpha'],
+                'name': ['alpha', 'alpha', 'alpha', 'alpha'],
+                'allele_type': ['deletion', 'wild_type', 'deletion', 'wild_type'],
+                'description': ['echo', 'echo', 'echo', 'echo'],
+                'other': ['golf', 'golf', 'golf', 'golf'],
+            },
+            index=[0, 1, 2, 3],
+        ),
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    'df,expected',
+    split_compound_columns_data.values(),
+    ids=split_compound_columns_data.keys(),
+)
+def test_split_compound_columns(df, expected):
+    actual = split_compound_columns(df)
     pd.testing.assert_frame_equal(actual, expected)
