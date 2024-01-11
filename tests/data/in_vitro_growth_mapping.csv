@@ -1,0 +1,5 @@
+group,genus,species,ncbi_taxid,is_filamentous
+Actinomycetota,Clavibacter,Clavibacter michiganensis,28447,Yes
+Fungi,Candida,Candida dubliniensis,42374,Either
+Fungi,Puccinia,Puccinia striiformis,27350,Invalid
+Bacteria,Aeromonas,Aeromonas salmonicida,645,No

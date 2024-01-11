@@ -7,6 +7,7 @@ from phibase_pipeline.migrate import (
     load_bto_id_mapping,
     load_disease_column_mapping,
     load_exp_tech_mapping,
+    load_in_vitro_growth_classifier,
     load_phenotype_column_mapping,
     load_phipo_mapping,
 )
@@ -126,3 +127,15 @@ def test_load_disease_column_mapping():
         extra_path=DATA_DIR / 'disease_mapping.csv',
     )
     assert actual == expected
+
+
+def test_load_in_vitro_growth_classifier():
+    expected = pd.Series(
+        data={
+            28447: True,
+            645: False,
+        },
+        name='is_filamentous',
+    ).rename_axis('ncbi_taxid')
+    actual = load_in_vitro_growth_classifier(DATA_DIR / 'in_vitro_growth_mapping.csv')
+    pd.testing.assert_series_equal(actual, expected)
