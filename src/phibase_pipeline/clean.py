@@ -35,7 +35,7 @@ def load_tissue_replacements(path):
 def fix_curation_dates(curation_dates):
     def get_fixed_numeric_dates(dates):
         # Convert Excel numeric dates
-        has_numeric_date = curation_dates.str.match('^\d+$')
+        has_numeric_date = curation_dates.str.match('^\d+$', na=False)
         numeric_dates = curation_dates.loc[has_numeric_date].astype(int)
         converted_dates = pd.to_datetime(numeric_dates, unit='D', origin='1899-12-30')
         return converted_dates

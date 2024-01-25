@@ -160,7 +160,9 @@ def filter_phi_df(phi_df, approved_pmids=None):
         )
         # Only include rows where the host is at the species level (or below).
         # Note that 'Lethal pathogen phenotype' rows will not be filtered out.
-        rows_without_host_genus = ~phi_df.host_species.str.match(r'^[A-Z][a-z]+$')
+        rows_without_host_genus = ~phi_df.host_species.str.match(
+            r'^[A-Z][a-z]+$', na=False
+        )
         rows_include = (
             rows_with_pmid
             & rows_in_uniprot
@@ -375,7 +377,9 @@ def add_disease_term_ids(mapping, df):
         term_labels = disease.lower().replace(', ', '; ').split('; ')
         for term_label in term_labels:
             term_id = mapping.get(term_label)
-            if term_id is not np.nan and term_id.startswith('PHIDO'):
+            if term_id is None or term_id is np.nan:
+                continue
+            if term_id.startswith('PHIDO'):
                 term_ids.append(term_id)
         id_string = (
             '; '.join(t for t in term_ids if t is not np.nan) if term_ids else np.nan
