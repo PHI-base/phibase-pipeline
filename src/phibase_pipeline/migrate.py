@@ -1079,7 +1079,7 @@ def get_phi_id_column(phi_df):
     return phi_ids
 
 
-def make_combined_export(phibase_path, phicanto_path):
+def make_phibase_json(phibase_path, approved_pmids):
     phenotype_mapping_df = load_phenotype_column_mapping(
         DATA_DIR / 'phenotype_mapping.csv'
     )
@@ -1093,10 +1093,6 @@ def make_combined_export(phibase_path, phicanto_path):
     exp_tech_df = load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
     bto_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
     phipo_mapping = load_phipo_mapping(DATA_DIR / 'phipo.csv')
-
-    canto_export = load_json(phicanto_path)
-
-    approved_pmids = get_approved_pmids(canto_export)
 
     phi_df = clean_phibase_csv(phibase_path)
 
@@ -1119,18 +1115,18 @@ def make_combined_export(phibase_path, phicanto_path):
     )
     phi_df['gene'] = phi_df.gene.str.replace(re.compile(r'\s*\(.+?\)'), '')
 
-    canto_json = get_canto_json_template(phi_df)
+    phibase_json = get_canto_json_template(phi_df)
 
-    add_gene_objects(canto_json, phi_df)
-    add_organism_objects(canto_json, phi_df)
-    add_allele_objects(canto_json, phi_df)
-    add_genotype_objects(canto_json, phi_df)
-    add_metagenotype_objects(canto_json, phi_df)
-    add_metadata_objects(canto_json, phi_df)
-    add_publication_objects(canto_json, phi_df)
+    add_gene_objects(phibase_json, phi_df)
+    add_organism_objects(phibase_json, phi_df)
+    add_allele_objects(phibase_json, phi_df)
+    add_genotype_objects(phibase_json, phi_df)
+    add_metagenotype_objects(phibase_json, phi_df)
+    add_metadata_objects(phibase_json, phi_df)
+    add_publication_objects(phibase_json, phi_df)
 
     # Prepare for adding annotations
-    all_feature_mapping = get_all_feature_mappings(canto_json)
+    all_feature_mapping = get_all_feature_mappings(phibase_json)
     phi_df = add_filamentous_classifier_column(in_vitro_growth_classifier, phi_df)
     phi_df = add_disease_term_ids(disease_mapping, phi_df)
     phi_df['phi_ids'] = get_phi_id_column(phi_df)
@@ -1139,12 +1135,18 @@ def make_combined_export(phibase_path, phicanto_path):
     phenotype_lookup = make_phenotype_mapping(
         phenotype_mapping_df, phipo_mapping, phi_df
     )
-
     # Needed for converting allele names to wild type
-    add_pathogen_gene_names_to_alleles(canto_json, phi_df)
+    add_pathogen_gene_names_to_alleles(phibase_json, phi_df)
+    add_wt_features(all_feature_mapping, phibase_json)
+    add_annotation_objects(phibase_json, phenotype_lookup, phi_df)
+    return phibase_json
 
-    add_wt_features(all_feature_mapping, canto_json)
-    add_annotation_objects(canto_json, phenotype_lookup, phi_df)
-    add_organism_roles(canto_json)
 
-    return canto_json
+def make_combined_export(phibase_path, phicanto_path):
+    phicanto_json = load_json(phicanto_path)
+    approved_pmids = get_approved_pmids(phicanto_json)
+    phibase_json = make_phibase_json(phibase_path, approved_pmids)
+    combined_export = phicanto_json
+    combined_export['curation_sessions'].update(phibase_json['curation_sessions'])
+    add_organism_roles(combined_export)
+    return combined_export
