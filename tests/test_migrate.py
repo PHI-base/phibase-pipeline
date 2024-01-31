@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from phibase_pipeline.migrate import (
+    add_allele_ids,
     add_gene_ids,
     add_session_ids,
     get_approved_pmids,
@@ -396,8 +397,322 @@ def test_add_gene_ids():
             'host_genotype_id': ['UniProt: P43296'],
             'host_species': ['Arabidopsis thaliana'],
             'canto_host_gene_id': ['Arabidopsis thaliana P43296'],
-            'canto_pathogen_gene_id': ['Fusarium graminearum Q00909']
+            'canto_pathogen_gene_id': ['Fusarium graminearum Q00909'],
         }
     )
     add_gene_ids(df)
     pd.testing.assert_frame_equal(df, expected)
+
+
+test_add_allele_ids_data = {
+    'identical_alleles': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+    'different_protein_id': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q9LUW0',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q9LUW0',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q9LUW0:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+    'different_allele_type': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'wild_type',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'wild_type',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-2',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+    'different_name': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'wild_type',
+                    'name': 'TRI5+',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'wild_type',
+                    'name': 'TRI5+',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-2',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+    'different_description': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test B',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test B',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-2',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences should be ignored',
+                    'ignore_b': 'differences should be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+    'different_ignored': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences could be ignored',
+                    'ignore_b': 'differences might be ignored',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences may be ignored',
+                    'ignore_b': 'differences must be ignored',
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences could be ignored',
+                    'ignore_b': 'differences might be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'protein_id': 'Q00909',
+                    'allele_type': 'deletion',
+                    'name': 'TRI5delta',
+                    'description': 'test A',
+                    'ignore_a': 'differences may be ignored',
+                    'ignore_b': 'differences must be ignored',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                },
+            ]
+        ),
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    'df,expected',
+    test_add_allele_ids_data.values(),
+    ids=test_add_allele_ids_data.keys(),
+)
+def test_add_allele_ids(df, expected):
+    actual = add_allele_ids(df.copy())
+    pd.testing.assert_frame_equal(actual, expected)
