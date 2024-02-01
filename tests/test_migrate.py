@@ -8,6 +8,7 @@ from phibase_pipeline.migrate import (
     add_allele_ids,
     add_gene_ids,
     add_session_ids,
+    fill_multiple_mutation_ids,
     get_approved_pmids,
     load_bto_id_mapping,
     load_disease_column_mapping,
@@ -715,4 +716,49 @@ test_add_allele_ids_data = {
 )
 def test_add_allele_ids(df, expected):
     actual = add_allele_ids(df.copy())
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_fill_multiple_mutation_ids():
+    df = pd.DataFrame.from_records(
+        [
+            {
+                'phi_molconn_id': 'PHI:1',
+                'multiple_mutation': 'PHI:2',
+            },
+            {
+                'phi_molconn_id': 'PHI:2',
+                'multiple_mutation': 'PHI:1',
+            },
+            {
+                'phi_molconn_id': 'PHI:1',
+                'multiple_mutation': 'PHI:3; PHI:2',
+            },
+            {
+                'phi_molconn_id': 'PHI:4',
+                'multiple_mutation': np.nan,
+            },
+        ]
+    )
+    expected = pd.DataFrame.from_records(
+        [
+            {
+                'phi_molconn_id': 'PHI:1',
+                'multiple_mutation': 'PHI:1; PHI:2',
+            },
+            {
+                'phi_molconn_id': 'PHI:2',
+                'multiple_mutation': 'PHI:1; PHI:2',
+            },
+            {
+                'phi_molconn_id': 'PHI:1',
+                'multiple_mutation': 'PHI:1; PHI:2; PHI:3',
+            },
+            {
+                'phi_molconn_id': 'PHI:4',
+                'multiple_mutation': np.nan,
+            },
+        ]
+    )
+    actual = fill_multiple_mutation_ids(df.copy())
     pd.testing.assert_frame_equal(actual, expected)
