@@ -7,6 +7,7 @@ import pytest
 from phibase_pipeline.migrate import (
     add_allele_ids,
     add_gene_ids,
+    add_genotype_ids,
     add_session_ids,
     fill_multiple_mutation_ids,
     get_approved_pmids,
@@ -761,4 +762,273 @@ def test_fill_multiple_mutation_ids():
         ]
     )
     actual = fill_multiple_mutation_ids(df.copy())
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+test_add_genotype_ids_data = {
+    'single_locus_diff_expression': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Knockdown',
+                },
+            ],
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_strain': 'PH-1',
+                    'pathogen_id': 5518,
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Knockdown',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+            ],
+        ),
+    ),
+    'single_locus_identical': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+            ],
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': np.nan,
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+            ],
+        ),
+    ),
+    'multi_locus_unique': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:2',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+            ],
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1; PHI:3',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:2; PHI:3',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_strain': 'PH-1',
+                    'pathogen_id': 5518,
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+            ],
+        ),
+    ),
+    'multi_locus_identical': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                },
+            ],
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1; PHI:3',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+                {
+                    'phi_molconn_id': 'PHI:3',
+                    'session_id': '0123456789abcdef',
+                    'multiple_mutation': 'PHI:1; PHI:3',
+                    'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
+                    'pathogen_id': 5518,
+                    'pathogen_strain': 'PH-1',
+                    'host_species': 'Triticum aestivum',
+                    'host_id': 4565,
+                    'host_strain': 'cv. Chinese Spring',
+                    'expression': 'Overexpression',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                },
+            ],
+        ),
+    ),
+}
+
+@pytest.mark.parametrize(
+    'df,expected',
+    test_add_genotype_ids_data.values(),
+    ids=test_add_genotype_ids_data.keys(),
+)
+def test_add_genotype_ids(df, expected):
+    actual = add_genotype_ids(df.copy())
     pd.testing.assert_frame_equal(actual, expected)
