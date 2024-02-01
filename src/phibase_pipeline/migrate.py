@@ -240,6 +240,21 @@ def add_allele_ids(df):
     return df
 
 
+def fill_multiple_mutation_ids(df):
+    # Ensure all multiple mutations are symmetric and reflexive.
+    indexer = df.multiple_mutation.notna()
+    df2 = df.loc[indexer]
+    sep = '; '
+    multi_mut_ids = (
+        df2.phi_molconn_id.str.cat(df2.multiple_mutation, sep)
+        .str.split(sep)
+        .apply(lambda x: sorted(set(x)))
+        .str.join(sep)
+    )
+    df.loc[indexer, 'multiple_mutation'] = multi_mut_ids
+    return df
+
+
 def add_genotype_ids(df):
     def add_ids(df, columns, indexer, append_ids=False):
         values = (
@@ -283,20 +298,6 @@ def add_genotype_ids(df):
         df.loc[indexes, 'pathogen_genotype_id'] = (
             df.session_id + '-genotype-' + df.pathogen_genotype_n.astype(str)
         )
-        return df
-
-    def fill_multiple_mutation_ids(df):
-        # Ensure all multiple mutations are symmetric and reflexive.
-        indexer = df.multiple_mutation.notna()
-        df2 = df.loc[indexer]
-        sep = '; '
-        multi_mut_ids = (
-            df2.phi_molconn_id.str.cat(df2.multiple_mutation, sep)
-            .str.split(sep)
-            .apply(lambda x: sorted(set(x)))
-            .str.join(sep)
-        )
-        df.loc[indexer, 'multiple_mutation'] = multi_mut_ids
         return df
 
     def add_wt_host_genotype_ids(df):
