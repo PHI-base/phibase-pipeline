@@ -325,9 +325,13 @@ def add_genotype_ids(df):
     ]
     multi_locus_rows = df.multiple_mutation.notna()
 
-    df = add_ids(df, single_locus_columns, single_locus_rows)
-    df = fill_multiple_mutation_ids(df)
-    df = add_ids(df, multi_locus_columns, multi_locus_rows, append_ids=True)
+    if single_locus_rows.any():
+        df = add_ids(df, single_locus_columns, single_locus_rows)
+    if multi_locus_rows.any():
+        # Only need to append IDs if single locus genotypes have been added
+        has_genotypes = single_locus_rows.any()
+        df = fill_multiple_mutation_ids(df)
+        df = add_ids(df, multi_locus_columns, multi_locus_rows, append_ids=has_genotypes)
     df = add_wt_host_genotype_ids(df)
     df = df.drop('pathogen_genotype_n', axis=1)
     return df
