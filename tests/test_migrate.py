@@ -125,13 +125,19 @@ def test_load_phenotype_column_mapping():
 
 def test_load_disease_column_mapping():
     expected = {
+        # From PHIDO
         'american foulbrood': 'PHIDO:0000011',
         'angular leaf spot': 'PHIDO:0000012',
         'anthracnose': 'PHIDO:0000013',
         'anthracnose leaf spot': 'PHIDO:0000014',
+        # From disease mapping
+        'airsacculitis': 'PHIDO:0000008',
+        'bacterial canker': 'PHIDO:0000025',
         'anthracnose (cruciferae)': 'PHIDO:0000013',
-        'anthracnose (cucumber)': 'PHIDO:0000013',
         'anthracnose (cucurbitaceae)': 'PHIDO:0000013',
+        'anthracnose (cucumber)': 'PHIDO:0000013',
+        'biocontrol: non pathogenic': np.nan,
+        'blight': 'blight',
     }
     actual = load_disease_column_mapping(
         phido_path=DATA_DIR / 'phido.csv',
