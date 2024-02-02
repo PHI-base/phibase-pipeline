@@ -382,14 +382,14 @@ def add_disease_term_ids(mapping, df):
     for disease in unique_diseases:
         if disease is np.nan:
             continue
-        term_ids = []
+        term_ids = set()
         term_labels = disease.lower().replace(', ', '; ').split('; ')
         for term_label in term_labels:
             term_id = mapping.get(term_label)
             if term_id is None or term_id is np.nan:
                 continue
             if term_id.startswith('PHIDO'):
-                term_ids.append(term_id)
+                term_ids.add(term_id)
         id_string = (
             '; '.join(t for t in term_ids if t is not np.nan) if term_ids else np.nan
         )
