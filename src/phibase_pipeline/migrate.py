@@ -412,7 +412,7 @@ def get_tissue_ids(tissue_mapping, phi_df):
         .str.split(sep)
         .explode()
         .map(lookup)
-        .fillna('')
+        .dropna()
         .groupby(level=0)
         .agg(sep.join)
         .reindex_like(phi_df)
