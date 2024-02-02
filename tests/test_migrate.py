@@ -14,6 +14,7 @@ from phibase_pipeline.migrate import (
     add_session_ids,
     fill_multiple_mutation_ids,
     get_approved_pmids,
+    get_tissue_ids,
     load_bto_id_mapping,
     load_disease_column_mapping,
     load_exp_tech_mapping,
@@ -1333,3 +1334,29 @@ def test_add_disease_term_ids():
     )
     actual = add_disease_term_ids(mapping, df)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_get_tissue_ids():
+    df = pd.DataFrame(
+        [
+            ['culture condition:-induced cell'],
+            ['tissues, cell types and enzyme sources; culture condition:-induced cell'],
+            ['invalid tissue'],
+            [
+                'culture condition:-induced cell; invalid tissue; tissues, cell types and enzyme sources'
+            ],
+        ],
+        columns=['tissue'],
+    )
+    expected = pd.Series(
+        [
+            'BTO:0000001',
+            'BTO:0000000; BTO:0000001',
+            np.nan,
+            'BTO:0000001; BTO:0000000',
+        ],
+        name='tissue',
+    )
+    tissue_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
+    actual = get_tissue_ids(tissue_mapping, df)
+    pd.testing.assert_series_equal(actual, expected)
