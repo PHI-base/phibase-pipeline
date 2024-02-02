@@ -342,6 +342,9 @@ def add_metagenotype_ids(df):
     df = df.sort_values(columns)
     metagenotype_nums = []
     has_host_id = df.host_id.notna()
+    if not has_host_id.any():
+        df['metagenotype_id'] = np.nan
+        return df
     rows_df = df.loc[has_host_id, columns]
     i = 1
     for current_row, next_row in itertools.pairwise(rows_df.values):
