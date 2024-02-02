@@ -8,6 +8,7 @@ from phibase_pipeline.migrate import (
     add_allele_ids,
     add_gene_ids,
     add_genotype_ids,
+    add_metagenotype_ids,
     add_session_ids,
     fill_multiple_mutation_ids,
     get_approved_pmids,
@@ -1024,6 +1025,7 @@ test_add_genotype_ids_data = {
     ),
 }
 
+
 @pytest.mark.parametrize(
     'df,expected',
     test_add_genotype_ids_data.values(),
@@ -1031,4 +1033,238 @@ test_add_genotype_ids_data = {
 )
 def test_add_genotype_ids(df, expected):
     actual = add_genotype_ids(df.copy())
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+test_add_metagenotype_ids_data = {
+    'empty_dataframe': pytest.param(
+        pd.DataFrame(),
+        None,
+        marks=[pytest.mark.xfail],
+    ),
+    'single_metagenotype': (
+        # Input
+        pd.DataFrame(
+            {
+                'session_id': ['0123456789abcdef'],
+                'pathogen_genotype_id': ['0123456789abcdef-genotype-1'],
+                'canto_host_genotype_id': [
+                    'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring'
+                ],
+                'host_id': [4565],
+            }
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'session_id': ['0123456789abcdef'],
+                'pathogen_genotype_id': ['0123456789abcdef-genotype-1'],
+                'canto_host_genotype_id': [
+                    'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring'
+                ],
+                'host_id': [4565],
+                'metagenotype_id': ['0123456789abcdef-metagenotype-1'],
+            }
+        ),
+    ),
+    'identical_metagenotypes': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-1',
+                },
+            ]
+        ),
+    ),
+    'different_pathogen_genotypes': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-2',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-1',
+                },
+            ]
+        ),
+    ),
+    'different_host_genotypes': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Bobwhite',
+                    'host_id': 4565,
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Bobwhite',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-2',
+                },
+            ]
+        ),
+    ),
+    'multiple_sessions': (
+        # Input
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+                {
+                    'session_id': '1123456789abcdef',
+                    'pathogen_genotype_id': '1123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                },
+            ]
+        ),
+        # Expected
+        pd.DataFrame.from_records(
+            [
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-1',
+                },
+                {
+                    'session_id': '0123456789abcdef',
+                    'pathogen_genotype_id': '0123456789abcdef-genotype-2',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '0123456789abcdef-metagenotype-2',
+                },
+                {
+                    'session_id': '1123456789abcdef',
+                    'pathogen_genotype_id': '1123456789abcdef-genotype-1',
+                    'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
+                    'host_id': 4565,
+                    'metagenotype_id': '1123456789abcdef-metagenotype-1',
+                },
+            ]
+        ),
+    ),
+    'no_hosts': (
+        # Input
+        pd.DataFrame(
+            {
+                'session_id': ['0123456789abcdef'],
+                'pathogen_genotype_id': ['0123456789abcdef-genotype-1'],
+                'canto_host_genotype_id': [
+                    'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring'
+                ],
+                'host_id': [np.nan],
+            }
+        ),
+        # Expected
+        pd.DataFrame(
+            {
+                'session_id': ['0123456789abcdef'],
+                'pathogen_genotype_id': ['0123456789abcdef-genotype-1'],
+                'canto_host_genotype_id': [
+                    'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring'
+                ],
+                'host_id': [np.nan],
+                'metagenotype_id': [np.nan],
+            }
+        ),
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    'df,expected',
+    test_add_metagenotype_ids_data.values(),
+    ids=test_add_metagenotype_ids_data.keys(),
+)
+def test_add_metagenotype_ids(df, expected):
+    actual = add_metagenotype_ids(df.copy())
     pd.testing.assert_frame_equal(actual, expected)
