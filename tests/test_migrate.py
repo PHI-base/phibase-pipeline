@@ -6,6 +6,7 @@ import pytest
 
 from phibase_pipeline.migrate import (
     add_allele_ids,
+    add_disease_term_ids,
     add_filamentous_classifier_column,
     add_gene_ids,
     add_genotype_ids,
@@ -1300,4 +1301,35 @@ def test_add_filamentous_classifier_column():
         DATA_DIR / 'in_vitro_growth_mapping.csv'
     )
     actual = add_filamentous_classifier_column(filamentous_classifier, df)
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_add_disease_term_ids():
+    df = pd.DataFrame(
+        [
+            ['airsacculitis'],
+            ['airsacculitis; bacterial canker'],
+            ['anthracnose (Cruciferae)'],
+            ['anthracnose (cucurbitaceae); anthracnose (cucumber)'],
+            ['biocontrol: non pathogenic'],
+            [np.nan],
+        ],
+        columns=['disease']
+    )
+    expected = pd.DataFrame(
+        [
+            ['airsacculitis', 'PHIDO:0000008'],
+            ['airsacculitis; bacterial canker', 'PHIDO:0000008; PHIDO:0000025'],
+            ['anthracnose (Cruciferae)', 'PHIDO:0000013'],
+            ['anthracnose (cucurbitaceae); anthracnose (cucumber)', 'PHIDO:0000013'],
+            ['biocontrol: non pathogenic', np.nan],
+            [np.nan, np.nan],
+        ],
+        columns=['disease', 'disease_id']
+    )
+    mapping = load_disease_column_mapping(
+        phido_path=DATA_DIR / 'phido.csv',
+        extra_path=DATA_DIR / 'disease_mapping.csv',
+    )
+    actual = add_disease_term_ids(mapping, df)
     pd.testing.assert_frame_equal(actual, expected)
