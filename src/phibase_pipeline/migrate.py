@@ -338,6 +338,7 @@ def add_genotype_ids(df):
 
 
 def add_metagenotype_ids(df):
+    original_index = df.index
     columns = ['session_id', 'pathogen_genotype_id', 'canto_host_genotype_id']
     df = df.sort_values(columns)
     metagenotype_nums = []
@@ -362,7 +363,7 @@ def add_metagenotype_ids(df):
     df.loc[has_host_id, 'metagenotype_id'] = (
         session_ids + '-metagenotype-' + metagenotype_ss
     )
-    return df
+    return df.reindex(original_index)
 
 
 def add_filamentous_classifier_column(filamentous_classifier, df):
