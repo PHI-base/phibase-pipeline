@@ -6,6 +6,7 @@ import pytest
 
 from phibase_pipeline.migrate import (
     add_allele_ids,
+    add_filamentous_classifier_column,
     add_gene_ids,
     add_genotype_ids,
     add_metagenotype_ids,
@@ -1267,4 +1268,30 @@ test_add_metagenotype_ids_data = {
 )
 def test_add_metagenotype_ids(df, expected):
     actual = add_metagenotype_ids(df.copy())
+    pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_add_filamentous_classifier_column():
+    df = pd.DataFrame(
+        [
+            ['Clavibacter michiganensis', 28447],
+            ['Candida dubliniensis', 42374],
+            ['Puccinia striiformis', 27350],
+            ['Aeromonas salmonicida', 645],
+        ],
+        columns=['pathogen_species', 'pathogen_id'],
+    )
+    expected = pd.DataFrame(
+        [
+            ['Clavibacter michiganensis', 28447, True],
+            ['Candida dubliniensis', 42374, np.nan],
+            ['Puccinia striiformis', 27350, np.nan],
+            ['Aeromonas salmonicida', 645, False],
+        ],
+        columns=['pathogen_species', 'pathogen_id', 'is_filamentous'],
+    )
+    filamentous_classifier = load_in_vitro_growth_classifier(
+        DATA_DIR / 'in_vitro_growth_mapping.csv'
+    )
+    actual = add_filamentous_classifier_column(filamentous_classifier, df)
     pd.testing.assert_frame_equal(actual, expected)
