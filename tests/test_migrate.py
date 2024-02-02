@@ -1314,7 +1314,7 @@ def test_add_disease_term_ids():
             ['biocontrol: non pathogenic'],
             [np.nan],
         ],
-        columns=['disease']
+        columns=['disease'],
     )
     expected = pd.DataFrame(
         [
@@ -1325,7 +1325,7 @@ def test_add_disease_term_ids():
             ['biocontrol: non pathogenic', np.nan],
             [np.nan, np.nan],
         ],
-        columns=['disease', 'disease_id']
+        columns=['disease', 'disease_id'],
     )
     mapping = load_disease_column_mapping(
         phido_path=DATA_DIR / 'phido.csv',
