@@ -983,6 +983,20 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
             pathogen_annotation['extension'] = annotation['extension']
             curation_sessions[session_id]['annotations'].append(pathogen_annotation)
 
+        gene_annotations = [
+            annotation
+            for annotation in annotation_data
+            if annotation['feature_type'] == 'gene'
+        ]
+        for annotation in gene_annotations:
+            gene_annotation = annotation_template.copy()
+            gene_annotation['type'] = 'biological_process'
+            gene_annotation['term'] = annotation['term']
+            gene_annotation['gene'] = row.canto_pathogen_gene_id
+            gene_annotation['conditions'] = annotation['conditions']
+            gene_annotation['extension'] = annotation['extension']
+            curation_sessions[session_id]['annotations'].append(gene_annotation)
+
 
 def add_wt_features(all_feature_mapping, canto_json):
     curation_sessions = canto_json['curation_sessions']
