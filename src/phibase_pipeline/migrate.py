@@ -845,74 +845,12 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
                 mapping_dict[index].append(data)
         return mapping_dict
 
-    def merge_annotation_extensions(mapping_dict):
-        def has_many_unique(annotations):
-            unique = set()
-            for annotation in annotations:
-                extension_ranges = (
-                    extension['rangeValue'] for extension in annotation['extension']
-                )
-                key = (annotation['term'], *extension_ranges)
-                unique.add(key)
-            return len(unique) > 1
-
-        # Merge mutant phenotype annotation extensions
-        for k, annotations in mapping_dict.items():
-            if len(annotations) < 2:
-                continue  # nothing to merge with one or fewer annotations
-            specific_metagenotype_annotations = (
-                annotation['feature_type'] == 'metagenotype'
-                and annotation['term'] != 'PHIPO:0000001'
-                for annotation in annotations
-            )
-            if not any(specific_metagenotype_annotations):
-                # we have to merge onto a more specific interaction phenotype since
-                # the infective_ability extension is invalid for pathogen phenotypes
-                continue
-            annotations_to_merge = [
-                annotation
-                for annotation in annotations
-                if annotation['feature_type'] == 'metagenotype'
-                and annotation['term'] == 'PHIPO:0000001'
-                for extension in annotation['extension']
-                if extension['relation'] == 'infective_ability'
-            ]
-            if not annotations_to_merge:
-                continue
-            if has_many_unique(annotations_to_merge):
-                raise NotImplementedError(f'{k}: multiple annotations to merge')
-            annotation_to_merge = annotations_to_merge[0]
-            if len(annotation_to_merge['extension']) > 1:
-                raise NotImplementedError(f'{k}: multiple extensions to merge')
-            extension_to_merge = annotation_to_merge['extension'][0]
-
-            annotations_to_merge_into = [
-                annotation
-                for annotation in annotations
-                if annotation['feature_type'] == 'metagenotype'
-                and (
-                    not annotation['extension']
-                    or all(
-                        extension['relation'] != 'infective_ability'
-                        for extension in annotation['extension']
-                    )
-                )
-            ]
-            for annotation in annotations_to_merge_into:
-                annotation['extension'].append(extension_to_merge)
-
-            # Exclude annotations that have been merged
-            mapping_dict[k] = [
-                d for d in mapping_dict[k] if d['term'] != 'PHIPO:0000001'
-            ]
-
     mapping_dict = combine_column_mapping(
         phipo_mapping,
         index_mapping_by_record_id(
             split_mapping_by_column(phenotype_mapping_df), phi_df
         ),
     )
-    merge_annotation_extensions(mapping_dict)
     return mapping_dict
 
 
