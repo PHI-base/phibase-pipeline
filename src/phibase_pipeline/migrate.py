@@ -928,7 +928,7 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
             'checked': 'yes',
             'conditions': [],
             'creation_date': str(row.curation_date),
-            'evidence_code': 'Unknown',  # TODO: Add evidence codes
+            'evidence_code': '',  # TODO: Add evidence codes
             'extension': [],
             'curator': {'community_curated': False},
             'figure': '',
