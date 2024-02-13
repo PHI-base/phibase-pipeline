@@ -259,8 +259,8 @@ def postprocess_phibase_json(export):
         remove_orphaned_alleles(session)
         remove_orphaned_genes(session)
         remove_orphaned_organisms(session)
-        remove_duplicate_annotations(session)
     merge_duplicate_alleles(curation_sessions)
+    remove_duplicate_annotations(export)
 
 
 def postprocess_combined_json(export):
