@@ -14,6 +14,11 @@ import numpy as np
 import pandas as pd
 
 from phibase_pipeline.clean import clean_phibase_csv
+from phibase_pipeline.postprocess import (
+    merge_phi_canto_curation,
+    postprocess_combined_json,
+    postprocess_phibase_json
+)
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 
 
@@ -1107,7 +1112,9 @@ def make_combined_export(phibase_path, phicanto_path):
     phicanto_json = load_json(phicanto_path)
     approved_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phibase_path, approved_pmids)
-    combined_export = phicanto_json
-    combined_export['curation_sessions'].update(phibase_json['curation_sessions'])
+    postprocess_phibase_json(phibase_json)
+    combined_export = phibase_json
+    combined_export['curation_sessions'].update(phicanto_json['curation_sessions'])
     add_organism_roles(combined_export)
+    postprocess_combined_json(combined_export)
     return combined_export
