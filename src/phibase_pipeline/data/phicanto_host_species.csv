@@ -35,6 +35,7 @@ ncbi_taxid,scientific_name,common_name
 3712,Brassica oleracea,wild cabbage
 3711,Brassica rapa,field mustard
 6239,Caenorhabditis elegans,roundworm
+385388,Camellia oleifera,
 9612,Canis lupus,gray wolf
 4072,Capsicum annuum,
 4073,Capsicum frutescens,hot pepper
@@ -67,6 +68,7 @@ ncbi_taxid,scientific_name,common_name
 292731,Cotinus obovatus,
 2567903,Coturnix coromandelica,rain quail
 29159,Crassostrea gigas,Pacific oyster
+298176,Crassostrea hongkongensis,
 6565,Crassostrea virginica,eastern oyster
 7959,Ctenopharyngodon idella,grass carp
 39473,Cucumis anguria,gherkin
@@ -87,6 +89,8 @@ ncbi_taxid,scientific_name,common_name
 7227,Drosophila melanogaster,fruit fly
 685034,Dysdercus peruvianus,
 6396,Eisenia fetida,common brandling worm
+94232,Epinephelus coioides,
+1074816,Epinephelus fuscoguttatus x Epinephelus lanceolatus,
 9796,Equus caballus,horse
 38414,Eragrostis curvula,weeping love grass
 32224,Eriobotrya japonica,loquat
@@ -189,6 +193,7 @@ ncbi_taxid,scientific_name,common_name
 52904,Scophthalmus maximus,turbot
 4550,Secale cereale,rye
 7048,Sitophilus oryzae,rice weevil
+315333,Solanum albicans,
 4108,Solanum chacoense,chaco potato
 856898,Solanum huancabambense,
 4081,Solanum lycopersicum,tomato
@@ -216,6 +221,7 @@ ncbi_taxid,scientific_name,common_name
 3906,Vicia faba,fava bean
 3917,Vigna unguiculata,cowpea
 29760,Vitis vinifera,wine grape
+2599121,Vitis x labruscana,
 163159,Xenopsylla cheopis,oriental rat flea
 69721,Zantedeschia aethiopica,pig-lily
 94108,Zantedeschia elliotiana,
