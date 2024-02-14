@@ -50,23 +50,23 @@ def merge_duplicate_alleles(curation_sessions):
 
     for session in curation_sessions.values():
         allele_merge_mapping = {}
-        allele_keys = {}
+        allele_id_lookup = {}
         alleles = session.get('alleles', [])
         if len(alleles) < 2:
             # No duplicates unless 2 or more alleles
             continue
-        for allele_id, allele in alleles.items():
-            allele_key = get_allele_key(allele)
-            existing_allele_id = allele_keys.get(allele_key)
-            if existing_allele_id:
+        for source_allele_id, source_allele in alleles.items():
+            source_allele_key = get_allele_key(source_allele)
+            target_allele_id = allele_id_lookup.get(source_allele_key)
+            if target_allele_id:
                 # Current allele is a duplicate; mark it for merging
                 # and merge its synonyms with its duplicate allele.
-                existing_allele = alleles[existing_allele_id]
-                allele_merge_mapping[allele_id] = existing_allele_id
-                if allele['synonyms']:
-                    merge_synonyms(allele, existing_allele)
+                target_allele = alleles[target_allele_id]
+                allele_merge_mapping[source_allele_id] = target_allele_id
+                if source_allele['synonyms']:
+                    merge_synonyms(source_allele, target_allele)
             else:
-                allele_keys[allele_key] = allele_id
+                allele_id_lookup[source_allele_key] = source_allele_id
 
         update_references_to_alleles(allele_merge_mapping, session['genotypes'])
         for merged_allele_id in allele_merge_mapping:
