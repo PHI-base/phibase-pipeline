@@ -2,6 +2,7 @@ import argparse
 import json
 
 from phibase_pipeline.migrate import make_combined_export
+from phibase_pipeline.validate import validate_export
 
 
 parser = argparse.ArgumentParser(
@@ -29,6 +30,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 canto_json = make_combined_export(args.phibase, args.phicanto)
+validate_export(canto_json)
 
 with open(args.output, 'w+', encoding='utf8') as json_file:
     json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
