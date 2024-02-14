@@ -1,3 +1,4 @@
+from collections import defaultdict
 import re
 
 
@@ -31,11 +32,12 @@ def merge_duplicate_alleles(curation_sessions):
                 key_parts.append(v)
         return tuple(key_parts)
 
-    def merge_synonyms(existing_allele, dupe_allele):
-        existing_synonyms = existing_allele['synonyms']
-        for synonym in dupe_allele['synonyms']:
-            if synonym not in existing_synonyms:
-                existing_synonyms.append(synonym)
+    def merge_synonyms(source_allele, target_allele):
+        source_synonyms = source_allele['synonyms']
+        target_synonyms = target_allele['synonyms']
+        for synonym in source_synonyms:
+            if synonym not in target_synonyms:
+                target_synonyms.append(synonym)
 
     def update_references_to_alleles(allele_mapping, genotypes):
         for genotype in genotypes.values():
@@ -62,7 +64,7 @@ def merge_duplicate_alleles(curation_sessions):
                 existing_allele = alleles[existing_allele_id]
                 allele_merge_mapping[allele_id] = existing_allele_id
                 if allele['synonyms']:
-                    merge_synonyms(existing_allele, allele)
+                    merge_synonyms(allele, existing_allele)
             else:
                 allele_keys[allele_key] = allele_id
 
