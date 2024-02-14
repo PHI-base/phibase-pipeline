@@ -261,13 +261,13 @@ def postprocess_phibase_json(export):
         remove_orphaned_alleles(session)
         remove_orphaned_genes(session)
         remove_orphaned_organisms(session)
-    merge_duplicate_alleles(curation_sessions)
     remove_duplicate_annotations(export)
 
 
 def postprocess_combined_json(export):
     remove_unapproved_sessions(export)
     remove_curator_orcids(export)
+    merge_duplicate_alleles(export['curation_sessions'])
     for session in export['curation_sessions'].values():
         remove_allele_gene_names(session)
         add_delta_symbol(session)
