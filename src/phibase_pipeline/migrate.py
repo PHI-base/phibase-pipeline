@@ -1021,13 +1021,13 @@ def add_organism_roles(canto_json):
 
 
 def add_pathogen_gene_names_to_alleles(canto_json, phi_df):
-    gene_lookup = phi_df.set_index('protein_id')['gene'].to_dict()
-    for session in canto_json['curation_sessions'].values():
+    name_lookup = phi_df.set_index(['session_id', 'protein_id'])['gene'].to_dict()
+    for session_id, session in canto_json['curation_sessions'].items():
         genes = session['genes']
         for allele in session['alleles'].values():
             gene = genes[allele['gene']]
             uniprot_id = gene['uniquename']
-            gene_name = gene_lookup[uniprot_id]
+            gene_name = name_lookup[(session_id, uniprot_id)]
             allele['gene_name'] = gene_name
 
 
