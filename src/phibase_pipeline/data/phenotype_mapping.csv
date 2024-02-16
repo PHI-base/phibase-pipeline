@@ -250,6 +250,7 @@
 "mating_defect","yes (reduced)",,,"?",,,,"?",,
 "mutant_phenotype","lethal",,,"PHIPO:0000513","inviable population",,,"pathogen_genotype",,
 "mutant_phenotype","effector (plant avirulence determinant)",,,"GO:0140418","effector-mediated modulation of host process by symbiont",,,"gene",,
+"mutant_phenotype","effector (plant avirulence determinant)",,,"PHIPO:0000001","pathogen-host interaction phenotype",,,"metagenotype",,
 "mutant_phenotype","enhanced antagonism",,,"N/A",,,,"metagenotype","infective_ability","PHIPO:0000207"
 "mutant_phenotype","chemistry target: resistance to chemical",,,"?","?",,,"pathogen_genotype",,
 "mutant_phenotype","chemistry target: sensitivity to chemical",,,"?","?",,,"pathogen_genotype",,
