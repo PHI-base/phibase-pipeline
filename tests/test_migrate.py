@@ -15,6 +15,7 @@ from phibase_pipeline.migrate import (
     fill_multiple_mutation_ids,
     get_approved_pmids,
     get_tissue_ids,
+    get_wt_metagenotype_ids,
     load_bto_id_mapping,
     load_disease_column_mapping,
     load_exp_tech_mapping,
@@ -1361,3 +1362,33 @@ def test_get_tissue_ids():
     tissue_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
     actual = get_tissue_ids(tissue_mapping, df)
     pd.testing.assert_series_equal(actual, expected)
+
+
+def test_get_wt_metagenotype_ids():
+    all_feature_mapping = {
+        'f86e79b5ed64a342': {
+            'alleles': {'P26215:f86e79b5ed64a342-1': 'P26215:f86e79b5ed64a342-2'},
+            'genotypes': {'f86e79b5ed64a342-genotype-1': 'f86e79b5ed64a342-genotype-2'},
+            'metagenotypes': {
+                'f86e79b5ed64a342-metagenotype-1': 'f86e79b5ed64a342-metagenotype-2'
+            },
+        }
+    }
+    phi_df = pd.DataFrame(
+        {
+            'metagenotype_id': [
+                'f86e79b5ed64a342-metagenotype-1',
+                'f86e79b5ed64a342-metagenotype-3',
+            ]
+        }
+    )
+    actual = get_wt_metagenotype_ids(all_feature_mapping, phi_df)
+    expected = pd.Series(
+        [
+            'f86e79b5ed64a342-metagenotype-2',
+            np.nan,
+        ],
+        name='metagenotype_id',
+    )
+    pd.testing.assert_series_equal(actual, expected)
+
