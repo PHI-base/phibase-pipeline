@@ -14,6 +14,7 @@ from phibase_pipeline.migrate import (
     add_session_ids,
     fill_multiple_mutation_ids,
     get_approved_pmids,
+    get_canto_json_template,
     get_disease_annotations,
     get_tissue_ids,
     get_wt_metagenotype_ids,
@@ -1486,4 +1487,42 @@ def test_get_disease_annotations():
     phi_df = pd.DataFrame.from_dict(data, orient='index')
     phi_df.curation_date = pd.to_datetime(phi_df.curation_date)
     actual = get_disease_annotations(phi_df)
+    assert actual == expected
+
+
+def test_get_canto_json_template():
+    phi_df = pd.DataFrame(
+        {
+            'session_id': [
+                '3a7f9b2e8c4d71e5',
+                'b6e0a5f3d92c8b17',
+            ]
+        }
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {},
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {},
+            },
+            'b6e0a5f3d92c8b17': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {},
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {},
+            },
+        },
+        'schema_version': 1,
+    }
+    actual = get_canto_json_template(phi_df)
     assert actual == expected
