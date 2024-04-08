@@ -14,6 +14,7 @@ from phibase_pipeline.migrate import (
     add_session_ids,
     fill_multiple_mutation_ids,
     get_approved_pmids,
+    get_disease_annotations,
     get_tissue_ids,
     get_wt_metagenotype_ids,
     load_bto_id_mapping,
@@ -1392,3 +1393,97 @@ def test_get_wt_metagenotype_ids():
     )
     pd.testing.assert_series_equal(actual, expected)
 
+
+def test_get_disease_annotations():
+    data = {
+        13543: {
+            'session_id': 'addf90acaa7ff81f',
+            'wt_metagenotype_id': 'addf90acaa7ff81f-metagenotype-20',
+            'disease_id': 'PHIDO:0000120',
+            'tissue': 'kidney',
+            'tissue_id': 'BTO:0000671',
+            'phi_ids': 'PHI:10643; PHI:10644; PHI:10645',
+            'curation_date': '2020-09-01 00:00:00',
+            'pmid': 32612591,
+        },
+        # No tissue extensions
+        11750: {
+            'session_id': '3fce7a4d71754edb',
+            'wt_metagenotype_id': '3fce7a4d71754edb-metagenotype-12',
+            'disease_id': 'PHIDO:0000174',
+            'tissue': np.nan,
+            'tissue_id': np.nan,
+            'phi_ids': 'PHI:9498',
+            'curation_date': '2019-10-01 00:00:00',
+            'pmid': 28754208,
+        },
+        # No metagenotype: don't convert
+        6081: {
+            'session_id': 'a188a67835808502',
+            'wt_metagenotype_id': np.nan,
+            'disease_id': 'PHIDO:0000065',
+            'tissue': 'leaf',
+            'tissue_id': 'BTO:0000713',
+            'phi_ids': 'PHI:6106',
+            'curation_date': '2016-04-01 00:00:00',
+            'pmid': 26954255,
+        },
+        # No disease term ID: don't convert
+        4637: {
+            'session_id': '19561d4e39de7238',
+            'wt_metagenotype_id': '19561d4e39de7238-metagenotype-33',
+            'disease_id': np.nan,
+            'tissue': np.nan,
+            'tissue_id': np.nan,
+            'phi_ids': 'PHI:4712',
+            'curation_date': '2015-05-01 00:00:00',
+            'pmid': 25845292,
+        },
+    }
+    expected = {
+        '3fce7a4d71754edb': [
+            {
+                'checked': 'yes',
+                'conditions': [],
+                'creation_date': '2019-10-01',
+                'curator': {'community_curated': False},
+                'evidence_code': '',
+                'extension': [],
+                'figure': '',
+                'metagenotype': '3fce7a4d71754edb-metagenotype-12',
+                'phi4_id': ['PHI:9498'],
+                'publication': 'PMID:28754208',
+                'status': 'new',
+                'term': 'PHIDO:0000174',
+                'type': 'disease_name',
+            }
+        ],
+        'addf90acaa7ff81f': [
+            {
+                'checked': 'yes',
+                'conditions': [],
+                'creation_date': '2020-09-01',
+                'curator': {'community_curated': False},
+                'evidence_code': '',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'kidney',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'BTO:0000671',
+                        'relation': 'infects_tissue',
+                    }
+                ],
+                'figure': '',
+                'metagenotype': 'addf90acaa7ff81f-metagenotype-20',
+                'phi4_id': ['PHI:10643', 'PHI:10644', 'PHI:10645'],
+                'publication': 'PMID:32612591',
+                'status': 'new',
+                'term': 'PHIDO:0000120',
+                'type': 'disease_name',
+            }
+        ],
+    }
+    phi_df = pd.DataFrame.from_dict(data, orient='index')
+    phi_df.curation_date = pd.to_datetime(phi_df.curation_date)
+    actual = get_disease_annotations(phi_df)
+    assert actual == expected
