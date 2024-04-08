@@ -475,7 +475,7 @@ def get_disease_annotations(phi_df):
             annotation = {
                 'checked': 'yes',
                 'conditions': [],
-                'creation_date': str(row.curation_date),
+                'creation_date': str(row.curation_date.date()),
                 'curator': {'community_curated': False},
                 'evidence_code': '',
                 'extension': extension,
@@ -870,7 +870,7 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
         annotation_template = {
             'checked': 'yes',
             'conditions': [],
-            'creation_date': str(row.curation_date),
+            'creation_date': str(row.curation_date.date()),
             'evidence_code': '',  # TODO: Add evidence codes
             'extension': [],
             'curator': {'community_curated': False},
