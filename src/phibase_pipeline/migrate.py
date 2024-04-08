@@ -491,7 +491,7 @@ def get_disease_annotations(phi_df):
     return disease_annotations
 
 
-def get_canto_json_template(df):
+def get_canto_json_template(phi_df):
     def populate_curation_sessions(df):
         return {
             session_id: {
@@ -508,7 +508,7 @@ def get_canto_json_template(df):
         }
 
     return {
-        'curation_sessions': populate_curation_sessions(df),
+        'curation_sessions': populate_curation_sessions(phi_df),
         'schema_version': 1,
     }
 
