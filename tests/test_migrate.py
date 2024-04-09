@@ -9,6 +9,7 @@ from phibase_pipeline.migrate import (
     add_disease_term_ids,
     add_filamentous_classifier_column,
     add_gene_ids,
+    add_gene_objects,
     add_genotype_ids,
     add_metagenotype_ids,
     add_session_ids,
@@ -1525,4 +1526,37 @@ def test_get_canto_json_template():
         'schema_version': 1,
     }
     actual = get_canto_json_template(phi_df)
+    assert actual == expected
+
+
+def test_add_gene_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'genes': {}},
+            'b6e0a5f3d92c8b17': {'genes': {}},
+        }
+    }
+    phi_df = pd.DataFrame(
+        {
+            'session_id': ['b6e0a5f3d92c8b17'],
+            'canto_pathogen_gene_id': ['Escherichia coli P10486'],
+            'pathogen_species': ['Escherichia coli'],
+            'protein_id': ['P10486'],
+        }
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'genes': {}},
+            'b6e0a5f3d92c8b17': {
+                'genes': {
+                    'Escherichia coli P10486': {
+                        'organism': 'Escherichia coli',
+                        'uniquename': 'P10486',
+                    }
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_gene_objects(actual, phi_df)
     assert actual == expected
