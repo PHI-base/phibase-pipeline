@@ -562,7 +562,11 @@ def add_allele_objects(canto_json, phi_df):
             allele_name, synonym = format_gene_name_and_synonym(
                 row.allele_type, row.gene, synonym
             )
-        synonym_list = [] if synonym is np.nan else [synonym]
+        synonym_list = (
+            []
+            if synonym is np.nan
+            else synonym if isinstance(synonym, list) else [synonym]
+        )
         allele = {
             'allele_type': row.allele_type,
             'description': row.description,
