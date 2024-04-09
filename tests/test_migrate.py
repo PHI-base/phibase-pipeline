@@ -6,6 +6,7 @@ import pytest
 
 from phibase_pipeline.migrate import (
     add_allele_ids,
+    add_allele_objects,
     add_disease_term_ids,
     add_filamentous_classifier_column,
     add_gene_ids,
@@ -1559,4 +1560,84 @@ def test_add_gene_objects():
     }
     actual = canto_json
     add_gene_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_allele_objects():
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_allele_id': 'P10486:3a7f9b2e8c4d71e5-1',
+                'allele_type': 'deletion',
+                'canto_pathogen_gene_id': 'Escherichia coli P10486',
+                'description': np.nan,
+                'gene': 'hsdR',
+                'name': 'hsdRdelta',
+                'pathogen_gene_synonym': 'T1R1delta',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_allele_id': 'P10486:3a7f9b2e8c4d71e5-2',
+                'allele_type': 'wild_type',
+                'canto_pathogen_gene_id': 'Escherichia coli P10486',
+                'description': 'test',
+                'gene': 'hsdR',
+                'name': 'hsdR+',
+                'pathogen_gene_synonym': np.nan,
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'pathogen_allele_id': 'P10486:b6e0a5f3d92c8b17-1',
+                'allele_type': 'deletion',
+                'canto_pathogen_gene_id': 'Escherichia coli P10486',
+                'description': np.nan,
+                'gene': 'hsdR',
+                'name': 'hsdRdelta',
+                'pathogen_gene_synonym': ['FOO', 'BAR'],
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'alleles': {
+                    'P10486:3a7f9b2e8c4d71e5-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Escherichia coli P10486',
+                        'name': 'hsdRdelta',
+                        'primary_identifier': 'P10486:3a7f9b2e8c4d71e5-1',
+                        'synonyms': ['T1R1delta'],
+                    },
+                    'P10486:3a7f9b2e8c4d71e5-2': {
+                        'allele_type': 'wild_type',
+                        'description': 'test',
+                        'gene': 'Escherichia coli P10486',
+                        'name': 'hsdR+',
+                        'primary_identifier': 'P10486:3a7f9b2e8c4d71e5-2',
+                        'synonyms': [],
+                    },
+                }
+            },
+            'b6e0a5f3d92c8b17': {
+                'alleles': {
+                    'P10486:b6e0a5f3d92c8b17-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Escherichia coli P10486',
+                        'name': 'hsdRdelta',
+                        'primary_identifier': 'P10486:b6e0a5f3d92c8b17-1',
+                        'synonyms': ['FOO', 'BAR'],
+                    }
+                }
+            },
+        }
+    }
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'alleles': {}},
+            'b6e0a5f3d92c8b17': {'alleles': {}},
+        }
+    }
+    actual = canto_json
+    add_allele_objects(actual, phi_df)
     assert actual == expected
