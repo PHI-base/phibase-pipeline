@@ -13,6 +13,7 @@ from phibase_pipeline.migrate import (
     add_gene_objects,
     add_genotype_ids,
     add_metagenotype_ids,
+    add_mutant_genotype_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
     fill_multiple_mutation_ids,
@@ -1739,4 +1740,123 @@ def test_add_wild_type_genotype_objects():
     }
     actual = canto_json
     add_wild_type_genotype_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_mutant_genotype_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'genotypes': {}},
+            'b6e0a5f3d92c8b17': {'genotypes': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            # genotype with three alleles
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': 562,
+                'pathogen_strain': 'K12',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'pathogen_allele_id': 'P0A8V2:3a7f9b2e8c4d71e5-1',
+                'expression': 'Overexpression',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': 562,
+                'pathogen_strain': 'K12',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'pathogen_allele_id': 'P00579:3a7f9b2e8c4d71e5-1',
+                'expression': 'Overexpression',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': 562,
+                'pathogen_strain': 'K12',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'pathogen_allele_id': 'P08956:3a7f9b2e8c4d71e5-1',
+                'expression': 'Not assayed',
+            },
+            # genotype from another species with one allele
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': 5518,
+                'pathogen_strain': 'PH-1',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-2',
+                'pathogen_allele_id': 'I1RF61:3a7f9b2e8c4d71e5-1',
+                'expression': 'Knockdown',
+            },
+            # genotype from another session
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'pathogen_id': 562,
+                'pathogen_strain': 'K12',
+                'pathogen_genotype_id': 'b6e0a5f3d92c8b17-genotype-1',
+                'pathogen_allele_id': 'P0A8V2:b6e0a5f3d92c8b17-1',
+                'expression': 'Not assayed',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'genotypes': {
+                    '3a7f9b2e8c4d71e5-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Overexpression',
+                                    'id': 'P00579:3a7f9b2e8c4d71e5-1',
+                                }
+                            ],
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P08956:3a7f9b2e8c4d71e5-1',
+                                }
+                            ],
+                            [
+                                {
+                                    'expression': 'Overexpression',
+                                    'id': 'P0A8V2:3a7f9b2e8c4d71e5-1',
+                                }
+                            ],
+                        ],
+                        'organism_strain': 'K12',
+                        'organism_taxonid': 562,
+                    },
+                    '3a7f9b2e8c4d71e5-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Knockdown',
+                                    'id': 'I1RF61:3a7f9b2e8c4d71e5-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                }
+            },
+            'b6e0a5f3d92c8b17': {
+                'genotypes': {
+                    'b6e0a5f3d92c8b17-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P0A8V2:b6e0a5f3d92c8b17-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'K12',
+                        'organism_taxonid': 562,
+                    }
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_mutant_genotype_objects(actual, phi_df)
     assert actual == expected
