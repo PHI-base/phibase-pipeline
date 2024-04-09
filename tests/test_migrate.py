@@ -14,6 +14,7 @@ from phibase_pipeline.migrate import (
     add_genotype_ids,
     add_metagenotype_ids,
     add_session_ids,
+    add_wild_type_genotype_objects,
     fill_multiple_mutation_ids,
     get_approved_pmids,
     get_canto_json_template,
@@ -1672,3 +1673,70 @@ def test_get_curation_date_df():
     ).rename_axis('session_id')
     actual = get_curation_date_df(phi_df)
     pd.testing.assert_frame_equal(actual, expected)
+
+
+def test_add_wild_type_genotype_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'genotypes': {}},
+            'b6e0a5f3d92c8b17': {'genotypes': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'canto_host_genotype_id': 'Mus-musculus-wild-type-genotype-BALB/c',
+                'host_strain': 'BALB/c',
+                'host_id': '10090',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'canto_host_genotype_id': 'Mus-musculus-wild-type-genotype-BALB/c',
+                'host_strain': 'BALB/c',
+                'host_id': '10090',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'canto_host_genotype_id': 'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin',
+                'host_strain': 'cv. Ruixin',
+                'host_id': '3654',
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'canto_host_genotype_id': 'Mus-musculus-wild-type-genotype-BALB/c',
+                'host_strain': 'BALB/c',
+                'host_id': '10090',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'genotypes': {
+                    'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin': {
+                        'loci': [],
+                        'organism_strain': 'cv. Ruixin',
+                        'organism_taxonid': 3654,
+                    },
+                    'Mus-musculus-wild-type-genotype-BALB/c': {
+                        'loci': [],
+                        'organism_strain': 'BALB/c',
+                        'organism_taxonid': 10090,
+                    },
+                },
+            },
+            'b6e0a5f3d92c8b17': {
+                'genotypes': {
+                    'Mus-musculus-wild-type-genotype-BALB/c': {
+                        'loci': [],
+                        'organism_strain': 'BALB/c',
+                        'organism_taxonid': 10090,
+                    }
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_wild_type_genotype_objects(actual, phi_df)
+    assert actual == expected
