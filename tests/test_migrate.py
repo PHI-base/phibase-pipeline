@@ -13,6 +13,7 @@ from phibase_pipeline.migrate import (
     add_gene_objects,
     add_genotype_ids,
     add_metagenotype_ids,
+    add_metagenotype_objects,
     add_mutant_genotype_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
@@ -1859,4 +1860,71 @@ def test_add_mutant_genotype_objects():
     }
     actual = canto_json
     add_mutant_genotype_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_metagenotype_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'metagenotypes': {}},
+            'b6e0a5f3d92c8b17': {'metagenotypes': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-1',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'canto_host_genotype_id': 'Zea-mays-wild-type-genotype-B73-line',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-1',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'canto_host_genotype_id': 'Zea-mays-wild-type-genotype-B73-line',
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-2',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-2',
+                'canto_host_genotype_id': 'Glycine-max-wild-type-genotype-Unknown-strain',
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'metagenotype_id': 'b6e0a5f3d92c8b17-metagenotype-1',
+                'pathogen_genotype_id': 'b6e0a5f3d92c8b17-genotype-1',
+                'canto_host_genotype_id': 'Mus-musculus-wild-type-genotype-Unknown-strain',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'metagenotypes': {
+                    '3a7f9b2e8c4d71e5-metagenotype-1': {
+                        'pathogen_genotype': '3a7f9b2e8c4d71e5-genotype-1',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-B73-line',
+                        'type': 'pathogen-host',
+                    },
+                    '3a7f9b2e8c4d71e5-metagenotype-2': {
+                        'pathogen_genotype': '3a7f9b2e8c4d71e5-genotype-2',
+                        'host_genotype': 'Glycine-max-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                }
+            },
+            'b6e0a5f3d92c8b17': {
+                'metagenotypes': {
+                    'b6e0a5f3d92c8b17-metagenotype-1': {
+                        'pathogen_genotype': 'b6e0a5f3d92c8b17-genotype-1',
+                        'host_genotype': 'Mus-musculus-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    }
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_metagenotype_objects(actual, phi_df)
     assert actual == expected
