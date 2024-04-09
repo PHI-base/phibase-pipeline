@@ -17,6 +17,7 @@ from phibase_pipeline.migrate import (
     fill_multiple_mutation_ids,
     get_approved_pmids,
     get_canto_json_template,
+    get_curation_date_df,
     get_disease_annotations,
     get_tissue_ids,
     get_wt_metagenotype_ids,
@@ -1641,3 +1642,33 @@ def test_add_allele_objects():
     actual = canto_json
     add_allele_objects(actual, phi_df)
     assert actual == expected
+
+
+def test_get_curation_date_df():
+    phi_df = pd.DataFrame(
+        {
+            'session_id': ['3a7f9b2e8c4d71e5'],
+            'curation_date': ['2023-01-12'],
+        }
+    )
+    expected = pd.DataFrame.from_dict(
+        {
+            '3a7f9b2e8c4d71e5': {
+                'start': '2023-01-12',
+                'end': '2023-01-12',
+                'created': '2023-01-12 09:00:00',
+                'accepted': '2023-01-12 10:00:00',
+                'curation_accepted': '2023-01-12 10:00:00',
+                'curation_in_progress': '2023-01-12 11:00:00',
+                'first_submitted': '2023-01-12 12:00:00',
+                'first_approved': '2023-01-12 14:00:00',
+                'needs_approval': '2023-01-12 12:00:00',
+                'approval_in_progress': '2023-01-12 13:00:00',
+                'approved': '2023-01-12 14:00:00',
+                'annotation_status': '2023-01-12 14:00:00',
+            }
+        },
+        orient='index',
+    ).rename_axis('session_id')
+    actual = get_curation_date_df(phi_df)
+    pd.testing.assert_frame_equal(actual, expected)
