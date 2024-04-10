@@ -16,6 +16,7 @@ from phibase_pipeline.migrate import (
     add_metagenotype_objects,
     add_mutant_genotype_objects,
     add_organism_objects,
+    add_publication_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
     fill_multiple_mutation_ids,
@@ -1982,4 +1983,36 @@ def test_add_organism_objects():
     }
     actual = canto_json
     add_organism_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_publication_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'publications': {}},
+            'b6e0a5f3d92c8b17': {'publications': {}},
+        }
+    }
+    phi_df = pd.DataFrame(
+        {
+            'session_id': [
+                '3a7f9b2e8c4d71e5',
+                '3a7f9b2e8c4d71e5',
+                'b6e0a5f3d92c8b17',
+            ],
+            'pmid': [
+                123,
+                123,
+                456,
+            ],
+        }
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'publications': {'PMID:123': {}}},
+            'b6e0a5f3d92c8b17': {'publications': {'PMID:456': {}}},
+        }
+    }
+    actual = canto_json
+    add_publication_objects(actual, phi_df)
     assert actual == expected
