@@ -18,6 +18,7 @@ from phibase_pipeline.migrate import (
     add_metagenotype_objects,
     add_mutant_genotype_objects,
     add_organism_objects,
+    add_phenotype_annotations,
     add_publication_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
@@ -2157,4 +2158,177 @@ def test_add_disease_annotations():
     }
     actual = canto_json
     add_disease_annotations(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_phenotype_annotations():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'annotations': []},
+            'b6e0a5f3d92c8b17': {'annotations': []},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'record_id': 'Record 1',
+                'curation_date': pd.to_datetime('2023-01-12'),
+                'phi_ids': 'PHI:1; PHI:2',
+                'pmid': 123456,
+                'comments': 'test comment',
+                'tissue': 'leaf',
+                'tissue_id': 'BTO:0000713',
+                'metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-1',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'canto_pathogen_gene_id': 'Fusarium graminearum Q00909',
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'record_id': 'Record 2',
+                'curation_date': pd.to_datetime('2023-02-12'),
+                'phi_ids': 'PHI:7',
+                'pmid': 458412,
+                'comments': np.nan,
+                'tissue': np.nan,
+                'tissue_id': np.nan,
+                'metagenotype_id': 'b6e0a5f3d92c8b17-metagenotype-1',
+                'pathogen_genotype_id': 'b6e0a5f3d92c8b17-genotype-1',
+                'canto_pathogen_gene_id': 'Hyaloperonospora arabidopsidis M4C4U1',
+            },
+        ]
+    )
+    phenotype_lookup = {
+        'Record 1': [
+            {
+                'conditions': ['PECO:0005224'],
+                'term': 'PHIPO:0000001',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'reduced virulence',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000015',
+                        'relation': 'infective_ability',
+                    },
+                ],
+                'feature_type': 'metagenotype',
+            },
+            {
+                'conditions': ['PECO:0005224'],
+                'term': 'PHIPO:0001210',
+                # TODO: Find a pathogen phenotype extension
+                'extension': [],
+                'feature_type': 'pathogen_genotype',
+            },
+            {
+                'conditions': [],
+                'term': 'GO:0140418',
+                # TODO: Find a GO annotation extension
+                'extension': [],
+                'feature_type': 'gene',
+            }
+        ],
+        'Record 2': [
+            {
+                'conditions': [],
+                'term': 'PHIPO:0000001',
+                'extension': [],
+                'feature_type': 'metagenotype',
+            },
+        ],
+    }
+    annotations_1 = [
+        # metagenotype annotation
+        {
+            'checked': 'yes',
+            'conditions': ['PECO:0005224'],
+            'creation_date': '2023-01-12',
+            'evidence_code': '',
+            'extension': [
+                {
+                    'rangeDisplayName': 'reduced virulence',
+                    'rangeType': 'Ontology',
+                    'rangeValue': 'PHIPO:0000015',
+                    'relation': 'infective_ability',
+                },
+                {
+                    'rangeDisplayName': 'leaf',
+                    'rangeType': 'Ontology',
+                    'rangeValue': 'BTO:0000713',
+                    'relation': 'infects_tissue',
+                },
+            ],
+            'curator': {'community_curated': False},
+            'figure': '',
+            'phi4_id': ['PHI:1', 'PHI:2'],
+            'publication': 'PMID:123456',
+            'status': 'new',
+            'term': 'PHIPO:0000001',
+            'type': 'pathogen_host_interaction_phenotype',
+            'submitter_comment': 'test comment',
+            'metagenotype': '3a7f9b2e8c4d71e5-metagenotype-1',
+        },
+        # pathogen genotype annotation
+        {
+            'checked': 'yes',
+            'conditions': ['PECO:0005224'],
+            'creation_date': '2023-01-12',
+            'evidence_code': '',
+            'extension': [],
+            'curator': {'community_curated': False},
+            'figure': '',
+            'phi4_id': ['PHI:1', 'PHI:2'],
+            'publication': 'PMID:123456',
+            'status': 'new',
+            'term': 'PHIPO:0001210',
+            'type': 'pathogen_phenotype',
+            'submitter_comment': 'test comment',
+            'genotype': '3a7f9b2e8c4d71e5-genotype-1',
+        },
+        # gene annotation
+        {
+            'checked': 'yes',
+            'creation_date': '2023-01-12',
+            'evidence_code': '',
+            'extension': [],
+            'curator': {'community_curated': False},
+            'figure': '',
+            'phi4_id': ['PHI:1', 'PHI:2'],
+            'publication': 'PMID:123456',
+            'status': 'new',
+            'term': 'GO:0140418',
+            'type': 'biological_process',
+            'submitter_comment': 'test comment',
+            'gene': 'Fusarium graminearum Q00909',
+        },
+    ]
+    annotations_2 = [
+        {
+            'checked': 'yes',
+            'conditions': [],
+            'creation_date': '2023-02-12',
+            'evidence_code': '',
+            'extension': [],
+            'curator': {'community_curated': False},
+            'figure': '',
+            'phi4_id': ['PHI:7'],
+            'publication': 'PMID:458412',
+            'status': 'new',
+            'term': 'PHIPO:0000001',
+            'type': 'pathogen_host_interaction_phenotype',
+            'metagenotype': 'b6e0a5f3d92c8b17-metagenotype-1',
+        },
+    ]
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'annotations': annotations_1,
+            },
+            'b6e0a5f3d92c8b17': {
+                'annotations': annotations_2,
+            },
+        }
+    }
+    actual = canto_json
+    add_phenotype_annotations(actual, phenotype_lookup, phi_df)
     assert actual == expected
