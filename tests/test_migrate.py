@@ -40,6 +40,7 @@ from phibase_pipeline.migrate import (
     load_in_vitro_growth_classifier,
     load_phenotype_column_mapping,
     load_phipo_mapping,
+    make_phenotype_mapping,
     split_compound_columns,
     split_compound_rows,
 )
@@ -2761,4 +2762,123 @@ def test_add_genotype_objects():
     }
     actual = canto_json
     add_genotype_objects(canto_json, phi_df)
+    assert actual == expected
+
+
+def test_make_phenotype_mapping():
+    phenotype_mapping_df = pd.DataFrame.from_records(
+        [
+            {
+                'column_1': 'mutant_phenotype',
+                'value_1': 'unaffected pathogenicity',
+                'column_2': np.nan,
+                'value_2': np.nan,
+                'primary_id': np.nan,
+                'primary_label': np.nan,
+                'eco_id': np.nan,
+                'eco_label': np.nan,
+                'feature': 'metagenotype',
+                'extension_relation': 'infective_ability',
+                'extension_range': 'PHIPO:0000004',
+            },
+            {
+                'column_1': 'in_vitro_growth',
+                'value_1': 'defective on minimal media',
+                'column_2': 'is_filamentous',
+                'value_2': False,
+                'primary_id': 'PHIPO:0000974',
+                'primary_label': 'decreased unicellular population growth',
+                'eco_id': 'PECO:0005020',
+                'eco_label': 'minimal medium',
+                'feature': 'pathogen_genotype',
+                'extension_relation': np.nan,
+                'extension_range': np.nan,
+            },
+            {
+                'column_1': 'mutant_phenotype',
+                'value_1': 'effector (plant avirulence determinant)',
+                'column_2': np.nan,
+                'value_2': np.nan,
+                'primary_id': 'GO:0140418',
+                'primary_label': 'effector-mediated modulation of host process by symbiont',
+                'eco_id': np.nan,
+                'eco_label': np.nan,
+                'feature': 'gene',
+                'extension_relation': np.nan,
+                'extension_range': np.nan,
+            },
+            {
+                'column_1': 'postpenetration_defect',
+                'value_1': 'no',
+                'column_2': np.nan,
+                'value_2': np.nan,
+                'primary_id': 'PHIPO:0000954',
+                'primary_label': 'presence of pathogen growth within host',
+                'eco_id': np.nan,
+                'eco_label': np.nan,
+                'feature': 'metagenotype',
+                'extension_relation': np.nan,
+                'extension_range': np.nan,
+            },
+        ],
+    )
+    phipo_mapping = {
+        'PHIPO:0000004': 'unaffected pathogenicity',
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'record_id': 'Record 1',
+                'mutant_phenotype': 'unaffected pathogenicity',
+                'in_vitro_growth': 'defective on minimal media',
+                'is_filamentous': False,
+                'postpenetration_defect': 'no',
+            },
+            {
+                'record_id': 'Record 2',
+                'mutant_phenotype': 'effector (plant avirulence determinant)',
+                'in_vitro_growth': np.nan,
+                'is_filamentous': np.nan,
+                'postpenetration_defect': np.nan,
+            },
+        ]
+    )
+    expected = {
+        'Record 1': [
+            {
+                'conditions': ['PECO:0005020'],
+                'term': 'PHIPO:0000974',
+                'extension': [],
+                'feature_type': 'pathogen_genotype',
+            },
+            {
+                'conditions': [],
+                'term': 'PHIPO:0000001',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'unaffected pathogenicity',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000004',
+                        'relation': 'infective_ability',
+                    }
+                ],
+                'feature_type': 'metagenotype',
+            },
+            {
+                'conditions': [],
+                'term': 'PHIPO:0000954',
+                'extension': [],
+                'feature_type': 'metagenotype',
+            },
+        ],
+        'Record 2': [
+            {
+                'conditions': [],
+                'term': 'GO:0140418',
+                'extension': [],
+                'feature_type': 'gene',
+            }
+        ],
+    }
+    actual = make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df)
     assert actual == expected
