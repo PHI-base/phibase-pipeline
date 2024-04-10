@@ -30,6 +30,7 @@ from phibase_pipeline.migrate import (
     get_canto_json_template,
     get_curation_date_df,
     get_disease_annotations,
+    get_phi_id_column,
     get_tissue_ids,
     get_wt_metagenotype_ids,
     load_bto_id_mapping,
@@ -2647,3 +2648,32 @@ def test_add_pathogen_gene_names_to_alleles():
     actual = canto_json
     add_pathogen_gene_names_to_alleles(actual, phi_df)
     assert actual == expected
+
+
+def test_get_phi_id_column():
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'phi_molconn_id': 'PHI:1',
+                'multiple_mutation': np.nan,
+            },
+            {
+                'phi_molconn_id': 'PHI:2',
+                'multiple_mutation': 'PHI:11; PHI:10',
+            },
+            {
+                'phi_molconn_id': 'PHI:3',
+                'multiple_mutation': 'PHI:3; PHI:7; PHI:8',
+            },
+        ]
+    )
+    expected = pd.Series(
+        [
+            'PHI:1',
+            'PHI:2; PHI:10; PHI:11',
+            'PHI:3; PHI:7; PHI:8',
+        ],
+        name='phi_molconn_id',
+    )
+    actual = get_phi_id_column(phi_df)
+    pd.testing.assert_series_equal(actual, expected)
