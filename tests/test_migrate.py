@@ -18,6 +18,7 @@ from phibase_pipeline.migrate import (
     add_metagenotype_objects,
     add_mutant_genotype_objects,
     add_organism_objects,
+    add_organism_roles,
     add_phenotype_annotations,
     add_publication_objects,
     add_session_ids,
@@ -2550,4 +2551,50 @@ def test_add_wt_features():
     }
     actual = canto_json
     add_wt_features(all_feature_mapping, actual)
+    assert actual == expected
+
+
+def test_add_organism_roles():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'organisms': {
+                    '0': {
+                        'full_name': 'Imaginary species',
+                    },
+                    '161934': {
+                        'full_name': 'Beta vulgaris',
+                    },
+                    '562': {
+                        'full_name': 'Escherichia coli',
+                    },
+                }
+            },
+            # Empty on purpose, to test empty sessions
+            'b6e0a5f3d92c8b17': {},
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'organisms': {
+                    '0': {
+                        'full_name': 'Imaginary species',
+                        'role': 'unknown',
+                    },
+                    '161934': {
+                        'full_name': 'Beta vulgaris',
+                        'role': 'host',
+                    },
+                    '562': {
+                        'full_name': 'Escherichia coli',
+                        'role': 'pathogen',
+                    },
+                }
+            },
+            'b6e0a5f3d92c8b17': {},
+        }
+    }
+    actual = canto_json
+    add_organism_roles(actual)
     assert actual == expected
