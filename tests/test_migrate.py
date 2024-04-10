@@ -13,6 +13,7 @@ from phibase_pipeline.migrate import (
     add_gene_ids,
     add_gene_objects,
     add_genotype_ids,
+    add_genotype_objects,
     add_metadata_objects,
     add_metagenotype_ids,
     add_metagenotype_objects,
@@ -2677,3 +2678,87 @@ def test_get_phi_id_column():
     )
     actual = get_phi_id_column(phi_df)
     pd.testing.assert_series_equal(actual, expected)
+
+
+def test_add_genotype_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'genotypes': {}},
+            'b6e0a5f3d92c8b17': {'genotypes': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': 5518,
+                'pathogen_strain': 'PH-1',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-2',
+                'pathogen_allele_id': 'I1RF61:3a7f9b2e8c4d71e5-1',
+                'expression': 'Knockdown',
+                'canto_host_genotype_id': 'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin',
+                'host_strain': 'cv. Ruixin',
+                'host_id': '3654',
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'pathogen_id': 5518,
+                'pathogen_strain': 'PH-1',
+                'pathogen_genotype_id': 'b6e0a5f3d92c8b17-genotype-2',
+                'pathogen_allele_id': 'I1RF61:b6e0a5f3d92c8b17-1',
+                'expression': 'Knockdown',
+                'canto_host_genotype_id': 'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin',
+                'host_strain': 'cv. Ruixin',
+                'host_id': '3654',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'genotypes': {
+                    '3a7f9b2e8c4d71e5-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Knockdown',
+                                    'id': 'I1RF61:3a7f9b2e8c4d71e5-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                    'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin': {
+                        'loci': [],
+                        'organism_strain': 'cv. Ruixin',
+                        'organism_taxonid': 3654,
+                    },
+                },
+            },
+            'b6e0a5f3d92c8b17': {
+                'genotypes': {
+                    'b6e0a5f3d92c8b17-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Knockdown',
+                                    'id': 'I1RF61:b6e0a5f3d92c8b17-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                    'Citrullus-lanatus-wild-type-genotype-cv.-Ruixin': {
+                        'loci': [],
+                        'organism_strain': 'cv. Ruixin',
+                        'organism_taxonid': 3654,
+                    },
+                },
+            },
+        }
+    }
+    actual = canto_json
+    add_genotype_objects(canto_json, phi_df)
+    assert actual == expected
