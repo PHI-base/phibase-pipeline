@@ -12,6 +12,7 @@ from phibase_pipeline.migrate import (
     add_gene_ids,
     add_gene_objects,
     add_genotype_ids,
+    add_metadata_objects,
     add_metagenotype_ids,
     add_metagenotype_objects,
     add_mutant_genotype_objects,
@@ -2015,4 +2016,92 @@ def test_add_publication_objects():
     }
     actual = canto_json
     add_publication_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_metadata_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'metadata': {}},
+            'b6e0a5f3d92c8b17': {'metadata': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'protein_id': 'Q000909',
+                'curation_date': '2023-01-12',
+                'pmid': 123,
+            },
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'protein_id': 'M4C4U1',
+                'curation_date': '2023-01-12',
+                'pmid': 123,
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'protein_id': 'Q000909',
+                'curation_date': '2023-02-15',
+                'pmid': 456,
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'metadata': {
+                    'accepted_timestamp': '2023-01-12 10:00:00',
+                    'annotation_mode': 'standard',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2023-01-12 14:00:00',
+                    'approval_in_progress_timestamp': '2023-01-12 13:00:00',
+                    'approved_timestamp': '2023-01-12 14:00:00',
+                    'canto_session': '3a7f9b2e8c4d71e5',
+                    'curation_accepted_date': '2023-01-12 10:00:00',
+                    'curation_in_progress_timestamp': '2023-01-12 11:00:00',
+                    'curation_pub_id': 'PMID:123',
+                    'curator_role': 'Molecular Connections',
+                    'first_approved_timestamp': '2023-01-12 14:00:00',
+                    'has_community_curation': False,
+                    'needs_approval_timestamp': '2023-01-12 12:00:00',
+                    'session_created_timestamp': '2023-01-12 09:00:00',
+                    'session_first_submitted_timestamp': '2023-01-12 12:00:00',
+                    'session_genes_count': '2',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                }
+            },
+            'b6e0a5f3d92c8b17': {
+                'metadata': {
+                    'accepted_timestamp': '2023-02-15 10:00:00',
+                    'annotation_mode': 'standard',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2023-02-15 14:00:00',
+                    'approval_in_progress_timestamp': '2023-02-15 13:00:00',
+                    'approved_timestamp': '2023-02-15 14:00:00',
+                    'canto_session': 'b6e0a5f3d92c8b17',
+                    'curation_accepted_date': '2023-02-15 10:00:00',
+                    'curation_in_progress_timestamp': '2023-02-15 11:00:00',
+                    'curation_pub_id': 'PMID:456',
+                    'curator_role': 'Molecular Connections',
+                    'first_approved_timestamp': '2023-02-15 14:00:00',
+                    'has_community_curation': False,
+                    'needs_approval_timestamp': '2023-02-15 12:00:00',
+                    'session_created_timestamp': '2023-02-15 09:00:00',
+                    'session_first_submitted_timestamp': '2023-02-15 12:00:00',
+                    'session_genes_count': '1',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_metadata_objects(actual, phi_df)
     assert actual == expected
