@@ -22,6 +22,7 @@ from phibase_pipeline.migrate import (
     add_publication_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
+    add_wt_features,
     fill_multiple_mutation_ids,
     get_approved_pmids,
     get_canto_json_template,
@@ -2331,4 +2332,222 @@ def test_add_phenotype_annotations():
     }
     actual = canto_json
     add_phenotype_annotations(actual, phenotype_lookup, phi_df)
+    assert actual == expected
+
+
+def test_add_wt_features():
+    canto_json = {
+        'curation_sessions': {
+            'f86e79b5ed64a342': {
+                'alleles': {
+                    'P26215:f86e79b5ed64a342-1': {
+                        'allele_type': 'disruption',
+                        'gene': 'Bipolaris zeicola P26215',
+                        'name': 'PGN1',
+                        'primary_identifier': 'P26215:f86e79b5ed64a342-1',
+                        'synonyms': [],
+                        'gene_name': 'PGN1',
+                    }
+                },
+                'genotypes': {
+                    'f86e79b5ed64a342-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P26215:f86e79b5ed64a342-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                },
+                'metagenotypes': {
+                    'f86e79b5ed64a342-metagenotype-1': {
+                        'pathogen_genotype': 'f86e79b5ed64a342-genotype-1',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    }
+                },
+            },
+            '2d4bcfa71ccca168': {
+                'alleles': {
+                    'P22287:2d4bcfa71ccca168-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fulvia fulva P22287',
+                        'name': 'AVR9delta',
+                        'primary_identifier': 'P22287:2d4bcfa71ccca168-1',
+                        'synonyms': [],
+                        'gene_name': 'AVR9',
+                    }
+                },
+                'genotypes': {
+                    '2d4bcfa71ccca168-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'id': 'P22287:2d4bcfa71ccca168-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 5499,
+                    },
+                },
+                'metagenotypes': {
+                    '2d4bcfa71ccca168-metagenotype-1': {
+                        'pathogen_genotype': '2d4bcfa71ccca168-genotype-1',
+                        'host_genotype': 'Solanum-lycopersicum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    }
+                },
+            },
+        }
+    }
+    all_feature_mapping = {
+        'f86e79b5ed64a342': {
+            'alleles': {
+                'P26215:f86e79b5ed64a342-1': 'P26215:f86e79b5ed64a342-2',
+            },
+            'genotypes': {
+                'f86e79b5ed64a342-genotype-1': 'f86e79b5ed64a342-genotype-2',
+            },
+            'metagenotypes': {
+                'f86e79b5ed64a342-metagenotype-1': 'f86e79b5ed64a342-metagenotype-2',
+            },
+        },
+        '2d4bcfa71ccca168': {
+            'alleles': {
+                'P22287:2d4bcfa71ccca168-1': 'P22287:2d4bcfa71ccca168-2',
+            },
+            'genotypes': {
+                '2d4bcfa71ccca168-genotype-1': '2d4bcfa71ccca168-genotype-2',
+            },
+            'metagenotypes': {
+                '2d4bcfa71ccca168-metagenotype-1': '2d4bcfa71ccca168-metagenotype-2',
+            },
+        },
+    }
+    expected = {
+        'curation_sessions': {
+            'f86e79b5ed64a342': {
+                'alleles': {
+                    'P26215:f86e79b5ed64a342-1': {
+                        'allele_type': 'disruption',
+                        'gene': 'Bipolaris zeicola P26215',
+                        'name': 'PGN1',
+                        'primary_identifier': 'P26215:f86e79b5ed64a342-1',
+                        'synonyms': [],
+                        'gene_name': 'PGN1',
+                    },
+                    'P26215:f86e79b5ed64a342-2': {
+                        'allele_type': 'wild type',
+                        'gene': 'Bipolaris zeicola P26215',
+                        'name': 'PGN1+',
+                        'primary_identifier': 'P26215:f86e79b5ed64a342-2',
+                        'synonyms': [],
+                        'gene_name': 'PGN1',
+                    },
+                },
+                'genotypes': {
+                    'f86e79b5ed64a342-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P26215:f86e79b5ed64a342-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                    'f86e79b5ed64a342-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P26215:f86e79b5ed64a342-2',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                },
+                'metagenotypes': {
+                    'f86e79b5ed64a342-metagenotype-1': {
+                        'pathogen_genotype': 'f86e79b5ed64a342-genotype-1',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    'f86e79b5ed64a342-metagenotype-2': {
+                        'pathogen_genotype': 'f86e79b5ed64a342-genotype-2',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                },
+            },
+            '2d4bcfa71ccca168': {
+                'alleles': {
+                    'P22287:2d4bcfa71ccca168-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fulvia fulva P22287',
+                        'name': 'AVR9delta',
+                        'primary_identifier': 'P22287:2d4bcfa71ccca168-1',
+                        'synonyms': [],
+                        'gene_name': 'AVR9',
+                    },
+                    'P22287:2d4bcfa71ccca168-2': {
+                        'allele_type': 'wild type',
+                        'gene': 'Fulvia fulva P22287',
+                        'name': 'AVR9+',
+                        'primary_identifier': 'P22287:2d4bcfa71ccca168-2',
+                        'synonyms': [],
+                        'gene_name': 'AVR9',
+                    },
+                },
+                'genotypes': {
+                    '2d4bcfa71ccca168-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'id': 'P22287:2d4bcfa71ccca168-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 5499,
+                    },
+                    '2d4bcfa71ccca168-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'id': 'P22287:2d4bcfa71ccca168-2',
+                                    'expression': 'Not assayed',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 5499,
+                    },
+                },
+                'metagenotypes': {
+                    '2d4bcfa71ccca168-metagenotype-1': {
+                        'pathogen_genotype': '2d4bcfa71ccca168-genotype-1',
+                        'host_genotype': 'Solanum-lycopersicum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    '2d4bcfa71ccca168-metagenotype-2': {
+                        'pathogen_genotype': '2d4bcfa71ccca168-genotype-2',
+                        'host_genotype': 'Solanum-lycopersicum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                },
+            },
+        }
+    }
+    actual = canto_json
+    add_wt_features(all_feature_mapping, actual)
     assert actual == expected
