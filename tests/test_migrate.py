@@ -2227,7 +2227,7 @@ def test_add_phenotype_annotations():
                 # TODO: Find a GO annotation extension
                 'extension': [],
                 'feature_type': 'gene',
-            }
+            },
         ],
         'Record 2': [
             {
