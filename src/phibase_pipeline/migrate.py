@@ -937,10 +937,11 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
         ]
         for annotation in gene_annotations:
             gene_annotation = annotation_template.copy()
+            # Gene annotations cannot have conditions
+            del gene_annotation['conditions']
             gene_annotation['type'] = 'biological_process'
             gene_annotation['term'] = annotation['term']
             gene_annotation['gene'] = row.canto_pathogen_gene_id
-            gene_annotation['conditions'] = annotation['conditions']
             gene_annotation['extension'] = annotation['extension']
             curation_sessions[session_id]['annotations'].append(gene_annotation)
 
