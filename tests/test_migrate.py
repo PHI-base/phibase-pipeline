@@ -7,6 +7,7 @@ import pytest
 from phibase_pipeline.migrate import (
     add_allele_ids,
     add_allele_objects,
+    add_disease_annotations,
     add_disease_term_ids,
     add_filamentous_classifier_column,
     add_gene_ids,
@@ -2104,4 +2105,56 @@ def test_add_metadata_objects():
     }
     actual = canto_json
     add_metadata_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_disease_annotations():
+    canto_json = {'curation_sessions': {'addf90acaa7ff81f': {'annotations': []}}}
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': 'addf90acaa7ff81f',
+                'wt_metagenotype_id': 'addf90acaa7ff81f-metagenotype-20',
+                'disease_id': 'PHIDO:0000120',
+                'tissue': 'kidney',
+                'tissue_id': 'BTO:0000671',
+                'phi_ids': 'PHI:10643; PHI:10644; PHI:10645',
+                'curation_date': '2020-09-01 00:00:00',
+                'pmid': 32612591,
+            }
+        ]
+    )
+    phi_df.curation_date = pd.to_datetime(phi_df.curation_date)
+    expected = {
+        'curation_sessions': {
+            'addf90acaa7ff81f': {
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2020-09-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'kidney',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000671',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'figure': '',
+                        'metagenotype': 'addf90acaa7ff81f-metagenotype-20',
+                        'phi4_id': ['PHI:10643', 'PHI:10644', 'PHI:10645'],
+                        'publication': 'PMID:32612591',
+                        'status': 'new',
+                        'term': 'PHIDO:0000120',
+                        'type': 'disease_name',
+                    }
+                ]
+            }
+        }
+    }
+    actual = canto_json
+    add_disease_annotations(actual, phi_df)
     assert actual == expected
