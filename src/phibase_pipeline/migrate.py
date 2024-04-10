@@ -1038,7 +1038,10 @@ def add_pathogen_gene_names_to_alleles(canto_json, phi_df):
 
 def get_phi_id_column(phi_df):
     sep = '; '
-    sort_uniques = lambda x: x if x is np.nan else sorted(list(set(x)))
+    sort_by_id_num = lambda x: int(x.split(':')[1])
+    sort_uniques = lambda x: x if x is np.nan else sorted(
+        list(set(x)), key=sort_by_id_num
+    )
     phi_ids = (
         phi_df.phi_molconn_id
         .str.cat(phi_df.multiple_mutation, sep)
