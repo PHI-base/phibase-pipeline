@@ -7,6 +7,7 @@ import pytest
 from phibase_pipeline.migrate import (
     add_allele_ids,
     add_allele_objects,
+    add_annotation_objects,
     add_disease_annotations,
     add_disease_term_ids,
     add_filamentous_classifier_column,
@@ -2881,4 +2882,110 @@ def test_make_phenotype_mapping():
         ],
     }
     actual = make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df)
+    assert actual == expected
+
+
+def test_add_annotation_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'annotations': []},
+        }
+    }
+    phenotype_lookup = phenotype_lookup = {
+        'Record 1': [
+            {
+                'conditions': ['PECO:0005224'],
+                'term': 'PHIPO:0000001',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'reduced virulence',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000015',
+                        'relation': 'infective_ability',
+                    },
+                ],
+                'feature_type': 'metagenotype',
+            },
+        ]
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'record_id': 'Record 1',
+                'curation_date': pd.to_datetime('2023-01-12'),
+                'phi_ids': 'PHI:1; PHI:2',
+                'pmid': 123456,
+                'comments': 'test comment',
+                'tissue': 'leaf',
+                'tissue_id': 'BTO:0000713',
+                'metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-1',
+                'wt_metagenotype_id': '3a7f9b2e8c4d71e5-metagenotype-2',
+                'disease_id': 'PHIDO:0000120',
+                'pathogen_genotype_id': '3a7f9b2e8c4d71e5-genotype-1',
+                'canto_pathogen_gene_id': 'Fusarium graminearum Q00909',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': ['PECO:0005224'],
+                        'creation_date': '2023-01-12',
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'reduced virulence',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'PHIPO:0000015',
+                                'relation': 'infective_ability',
+                            },
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            },
+                        ],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:1', 'PHI:2'],
+                        'publication': 'PMID:123456',
+                        'status': 'new',
+                        'term': 'PHIPO:0000001',
+                        'type': 'pathogen_host_interaction_phenotype',
+                        'submitter_comment': 'test comment',
+                        'metagenotype': '3a7f9b2e8c4d71e5-metagenotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2023-01-12',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'figure': '',
+                        'metagenotype': '3a7f9b2e8c4d71e5-metagenotype-2',
+                        'phi4_id': ['PHI:1', 'PHI:2'],
+                        'publication': 'PMID:123456',
+                        'status': 'new',
+                        'term': 'PHIDO:0000120',
+                        'type': 'disease_name',
+                    },
+                ]
+            }
+        }
+    }
+    actual = canto_json
+    add_annotation_objects(canto_json, phenotype_lookup, phi_df)
     assert actual == expected
