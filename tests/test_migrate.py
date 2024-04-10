@@ -19,6 +19,7 @@ from phibase_pipeline.migrate import (
     add_mutant_genotype_objects,
     add_organism_objects,
     add_organism_roles,
+    add_pathogen_gene_names_to_alleles,
     add_phenotype_annotations,
     add_publication_objects,
     add_session_ids,
@@ -2597,4 +2598,52 @@ def test_add_organism_roles():
     }
     actual = canto_json
     add_organism_roles(actual)
+    assert actual == expected
+
+
+def test_add_pathogen_gene_names_to_alleles():
+    canto_json = {
+        'curation_sessions': {
+            'b6e0a5f3d92c8b17': {
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'uniquename': 'Q00909',
+                    },
+                },
+                'alleles': {
+                    'Q00909:b6e0a5f3d92c8b17-1': {
+                        'gene': 'Fusarium graminearum Q00909',
+                    }
+                },
+            }
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'protein_id': 'Q00909',
+                'gene': 'TRI5',
+            }
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            'b6e0a5f3d92c8b17': {
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'uniquename': 'Q00909',
+                    },
+                },
+                'alleles': {
+                    'Q00909:b6e0a5f3d92c8b17-1': {
+                        'gene': 'Fusarium graminearum Q00909',
+                        'gene_name': 'TRI5',
+                    }
+                },
+            }
+        }
+    }
+    actual = canto_json
+    add_pathogen_gene_names_to_alleles(actual, phi_df)
     assert actual == expected
