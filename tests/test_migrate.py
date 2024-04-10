@@ -15,6 +15,7 @@ from phibase_pipeline.migrate import (
     add_metagenotype_ids,
     add_metagenotype_objects,
     add_mutant_genotype_objects,
+    add_organism_objects,
     add_session_ids,
     add_wild_type_genotype_objects,
     fill_multiple_mutation_ids,
@@ -1927,4 +1928,58 @@ def test_add_metagenotype_objects():
     }
     actual = canto_json
     add_metagenotype_objects(actual, phi_df)
+    assert actual == expected
+
+
+def test_add_organism_objects():
+    canto_json = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {'organisms': {}},
+            'b6e0a5f3d92c8b17': {'organisms': {}},
+        }
+    }
+    phi_df = pd.DataFrame.from_records(
+        [
+            {
+                'session_id': '3a7f9b2e8c4d71e5',
+                'pathogen_id': '562',
+                'pathogen_species': 'Escherichia coli',
+                'host_id': '10090',
+                'host_species': 'Mus musculus',
+            },
+            {
+                'session_id': 'b6e0a5f3d92c8b17',
+                'pathogen_id': '562',
+                'pathogen_species': 'Escherichia coli',
+                'host_id': '10090',
+                'host_species': 'Mus musculus',
+            },
+        ]
+    )
+    expected = {
+        'curation_sessions': {
+            '3a7f9b2e8c4d71e5': {
+                'organisms': {
+                    '562': {
+                        'full_name': 'Escherichia coli',
+                    },
+                    '10090': {
+                        'full_name': 'Mus musculus',
+                    },
+                }
+            },
+            'b6e0a5f3d92c8b17': {
+                'organisms': {
+                    '562': {
+                        'full_name': 'Escherichia coli',
+                    },
+                    '10090': {
+                        'full_name': 'Mus musculus',
+                    },
+                }
+            },
+        }
+    }
+    actual = canto_json
+    add_organism_objects(actual, phi_df)
     assert actual == expected
