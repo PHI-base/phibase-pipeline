@@ -1355,8 +1355,7 @@ def test_add_disease_term_ids():
         phido_path=DATA_DIR / 'phido.csv',
         extra_path=DATA_DIR / 'disease_mapping.csv',
     )
-    input = df.copy()
-    actual = add_disease_term_ids(mapping, input)
+    actual = add_disease_term_ids(mapping, df)
     pd.testing.assert_frame_equal(actual, expected)
 
 

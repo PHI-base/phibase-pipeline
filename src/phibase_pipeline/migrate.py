@@ -397,6 +397,7 @@ def add_disease_term_ids(mapping, df):
                 continue
             if term_id.startswith('PHIDO'):
                 term_ids.add(term_id)
+        term_ids = sorted(term_ids, key=lambda x: int(x.split(':')[1]))
         id_string = (
             '; '.join(t for t in term_ids if t is not np.nan) if term_ids else np.nan
         )
