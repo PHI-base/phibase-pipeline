@@ -214,6 +214,8 @@ def add_gene_ids(df):
         return df
 
     def add_host_gene_ids(df):
+        if not pd.api.types.is_string_dtype(df.host_genotype_id):
+            return df
         host_gene_ids = df.host_genotype_id.str.extract(
             'UniProt: ([A-Z0-9]+)', expand=False
         )
