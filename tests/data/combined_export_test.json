@@ -1,0 +1,98 @@
+{
+   "curation_sessions": {
+      "144c8f8625c95e5e": {
+         "alleles": {
+            "Q7WT47:144c8f8625c95e5e-7": {
+               "allele_type": "nucleotide_insertion",
+               "description": "618-A",
+               "gene": "Enterococcus faecalis Q7WT47",
+               "name": "lsa",
+               "primary_identifier": "Q7WT47:144c8f8625c95e5e-7",
+               "synonyms": []
+            }
+         },
+         "annotations": [
+            {
+               "conditions": [
+                  "PECO:0000102",
+                  "PECO:0005225",
+                  "PECO:0000004",
+                  "PECO:0005186"
+               ],
+               "creation_date": "2023-11-03",
+               "curator": {
+                  "community_curated": true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension": [
+                  {
+                     "rangeDisplayName": "high",
+                     "rangeType": "Ontology",
+                     "rangeValue": "FYPO_EXT:0000001",
+                     "relation": "has_severity"
+                  }
+               ],
+               "figure": "Table 1",
+               "genotype": "144c8f8625c95e5e-genotype-1",
+               "publication": "PMID:12821484",
+               "status": "new",
+               "submitter_comment": "",
+               "term": "PHIPO:0000560",
+               "type": "pathogen_phenotype"
+            }
+         ],
+         "genes": {
+            "Enterococcus faecalis Q7WT47": {
+               "organism": "Enterococcus faecalis",
+               "uniquename": "Q7WT47"
+            }
+         },
+         "genotypes": {
+            "144c8f8625c95e5e-genotype-1": {
+               "loci": [
+                  [
+                     {
+                        "expression": "Not assayed",
+                        "id": "Q7WT47:144c8f8625c95e5e-7"
+                     }
+                  ]
+               ],
+               "organism_strain": "UCN32",
+               "organism_taxonid": 1351
+            }
+         },
+         "metadata": {
+            "accepted_timestamp": "2023-11-02 23:41:46",
+            "annotation_mode": "advanced",
+            "annotation_status": "APPROVED",
+            "annotation_status_datestamp": "2024-01-31 11:51:14",
+            "approval_in_progress_timestamp": "2024-01-31 11:51:12",
+            "approved_timestamp": "2024-01-31 11:51:14",
+            "canto_session": "144c8f8625c95e5e",
+            "curation_accepted_date": "2023-11-02 23:41:46",
+            "curation_in_progress_timestamp": "2023-11-02 23:41:56",
+            "curation_pub_id": "PMID:12821484",
+            "curator_role": "community",
+            "first_approved_timestamp": "2024-01-31 11:51:14",
+            "has_community_curation": true,
+            "needs_approval_timestamp": "2024-01-31 11:51:09",
+            "session_created_timestamp": "2023-11-02 23:41:39",
+            "session_first_submitted_timestamp": "2024-01-31 11:51:09",
+            "session_genes_count": "1",
+            "session_term_suggestions_count": "0",
+            "session_unknown_conditions_count": "0",
+            "term_suggestion_count": "0",
+            "unknown_conditions_count": "0"
+         },
+         "organisms": {
+            "1351": {
+               "full_name": "Enterococcus faecalis"
+            }
+         },
+         "publications": {
+            "PMID:12821484": {}
+         }
+      }
+   },
+   "schema_version": 1
+}
