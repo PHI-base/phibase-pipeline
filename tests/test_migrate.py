@@ -41,6 +41,7 @@ from phibase_pipeline.migrate import (
     load_in_vitro_growth_classifier,
     load_phenotype_column_mapping,
     load_phipo_mapping,
+    make_combined_export,
     make_phenotype_mapping,
     make_phibase_json,
     split_compound_columns,
@@ -3513,4 +3514,461 @@ def test_make_phibase_json():
         'schema_version': 1,
     }
     actual = make_phibase_json(phibase_path, approved_pmids)
+    assert actual == expected
+
+
+def test_make_combined_export():
+    phibase_path = DATA_DIR / 'combined_export_test.csv'
+    phicanto_path = DATA_DIR / 'combined_export_test.json'
+    expected = {
+        'curation_sessions': {
+            'f86e79b5ed64a342': {
+                'alleles': {
+                    'P26215:f86e79b5ed64a342-1': {
+                        'allele_type': 'disruption',
+                        'gene': 'Bipolaris zeicola P26215',
+                        'name': 'PGN1',
+                        'primary_identifier': 'P26215:f86e79b5ed64a342-1',
+                        'synonyms': [],
+                    },
+                    'P26215:f86e79b5ed64a342-2': {
+                        'allele_type': 'wild type',
+                        'gene': 'Bipolaris zeicola P26215',
+                        'name': 'PGN1+',
+                        'primary_identifier': 'P26215:f86e79b5ed64a342-2',
+                        'synonyms': [],
+                    },
+                },
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'unaffected pathogenicity',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'PHIPO:0000004',
+                                'relation': 'infective_ability',
+                            },
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            },
+                        ],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:3'],
+                        'publication': 'PMID:2152162',
+                        'status': 'new',
+                        'term': 'PHIPO:0000001',
+                        'type': 'pathogen_host_interaction_phenotype',
+                        'submitter_comment': 'Expression during all infection stages. pathogen formerly called Cochliobolus carbonum teleomorph name',
+                        'metagenotype': 'f86e79b5ed64a342-metagenotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:3'],
+                        'publication': 'PMID:2152162',
+                        'status': 'new',
+                        'term': 'PHIPO:0000331',
+                        'type': 'pathogen_host_interaction_phenotype',
+                        'submitter_comment': 'Expression during all infection stages. pathogen formerly called Cochliobolus carbonum teleomorph name',
+                        'metagenotype': 'f86e79b5ed64a342-metagenotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:3'],
+                        'publication': 'PMID:2152162',
+                        'status': 'new',
+                        'term': 'PHIPO:0000954',
+                        'type': 'pathogen_host_interaction_phenotype',
+                        'submitter_comment': 'Expression during all infection stages. pathogen formerly called Cochliobolus carbonum teleomorph name',
+                        'metagenotype': 'f86e79b5ed64a342-metagenotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:3'],
+                        'publication': 'PMID:2152162',
+                        'status': 'new',
+                        'term': 'PHIPO:0000024',
+                        'type': 'pathogen_phenotype',
+                        'submitter_comment': 'Expression during all infection stages. pathogen formerly called Cochliobolus carbonum teleomorph name',
+                        'genotype': 'f86e79b5ed64a342-genotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'figure': '',
+                        'metagenotype': 'f86e79b5ed64a342-metagenotype-2',
+                        'phi4_id': ['PHI:3'],
+                        'publication': 'PMID:2152162',
+                        'status': 'new',
+                        'term': 'PHIDO:0000211',
+                        'type': 'disease_name',
+                    },
+                ],
+                'genes': {
+                    'Bipolaris zeicola P26215': {
+                        'organism': 'Bipolaris zeicola',
+                        'uniquename': 'P26215',
+                    }
+                },
+                'genotypes': {
+                    'f86e79b5ed64a342-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P26215:f86e79b5ed64a342-1',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                    'Zea-mays-wild-type-genotype-Unknown-strain': {
+                        'loci': [],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 4577,
+                    },
+                    'f86e79b5ed64a342-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'P26215:f86e79b5ed64a342-2',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                },
+                'metadata': {
+                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'annotation_mode': 'standard',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2000-05-10 14:00:00',
+                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
+                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'canto_session': 'f86e79b5ed64a342',
+                    'curation_accepted_date': '2000-05-10 10:00:00',
+                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_pub_id': 'PMID:2152162',
+                    'curator_role': 'Molecular Connections',
+                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'has_community_curation': False,
+                    'needs_approval_timestamp': '2000-05-10 12:00:00',
+                    'session_created_timestamp': '2000-05-10 09:00:00',
+                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'session_genes_count': '1',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {
+                    'f86e79b5ed64a342-metagenotype-1': {
+                        'pathogen_genotype': 'f86e79b5ed64a342-genotype-1',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    'f86e79b5ed64a342-metagenotype-2': {
+                        'pathogen_genotype': 'f86e79b5ed64a342-genotype-2',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                },
+                'organisms': {
+                    '5017': {'full_name': 'Bipolaris zeicola', 'role': 'pathogen'},
+                    '4577': {'full_name': 'Zea mays', 'role': 'host'},
+                },
+                'publications': {'PMID:2152162': {}},
+            },
+            '2d4bcfa71ccca168': {
+                'alleles': {
+                    'P22287:2d4bcfa71ccca168-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fulvia fulva P22287',
+                        'name': 'AVR9Δ',
+                        'primary_identifier': 'P22287:2d4bcfa71ccca168-1',
+                        'synonyms': [],
+                    },
+                    'P22287:2d4bcfa71ccca168-2': {
+                        'allele_type': 'wild type',
+                        'gene': 'Fulvia fulva P22287',
+                        'name': 'AVR9+',
+                        'primary_identifier': 'P22287:2d4bcfa71ccca168-2',
+                        'synonyms': [],
+                    },
+                },
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:7'],
+                        'publication': 'PMID:1799694',
+                        'status': 'new',
+                        'term': 'PHIPO:0000001',
+                        'type': 'pathogen_host_interaction_phenotype',
+                        'metagenotype': '2d4bcfa71ccca168-metagenotype-1',
+                    },
+                    {
+                        'checked': 'yes',
+                        'creation_date': '2000-05-10',
+                        'evidence_code': '',
+                        'extension': [],
+                        'curator': {'community_curated': False},
+                        'figure': '',
+                        'phi4_id': ['PHI:7'],
+                        'publication': 'PMID:1799694',
+                        'status': 'new',
+                        'term': 'GO:0140418',
+                        'type': 'biological_process',
+                        'gene': 'Fulvia fulva P22287',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2000-05-10',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            }
+                        ],
+                        'figure': '',
+                        'metagenotype': '2d4bcfa71ccca168-metagenotype-2',
+                        'phi4_id': ['PHI:7'],
+                        'publication': 'PMID:1799694',
+                        'status': 'new',
+                        'term': 'PHIDO:0000209',
+                        'type': 'disease_name',
+                    },
+                ],
+                'genes': {
+                    'Fulvia fulva P22287': {
+                        'organism': 'Fulvia fulva',
+                        'uniquename': 'P22287',
+                    }
+                },
+                'genotypes': {
+                    '2d4bcfa71ccca168-genotype-1': {
+                        'loci': [[{'id': 'P22287:2d4bcfa71ccca168-1'}]],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 5499,
+                    },
+                    'Solanum-lycopersicum-wild-type-genotype-Unknown-strain': {
+                        'loci': [],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 4081,
+                    },
+                    '2d4bcfa71ccca168-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'id': 'P22287:2d4bcfa71ccca168-2',
+                                    'expression': 'Not assayed',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 5499,
+                    },
+                },
+                'metadata': {
+                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'annotation_mode': 'standard',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2000-05-10 14:00:00',
+                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
+                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'canto_session': '2d4bcfa71ccca168',
+                    'curation_accepted_date': '2000-05-10 10:00:00',
+                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_pub_id': 'PMID:1799694',
+                    'curator_role': 'Molecular Connections',
+                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'has_community_curation': False,
+                    'needs_approval_timestamp': '2000-05-10 12:00:00',
+                    'session_created_timestamp': '2000-05-10 09:00:00',
+                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'session_genes_count': '1',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {
+                    '2d4bcfa71ccca168-metagenotype-1': {
+                        'pathogen_genotype': '2d4bcfa71ccca168-genotype-1',
+                        'host_genotype': 'Solanum-lycopersicum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    '2d4bcfa71ccca168-metagenotype-2': {
+                        'pathogen_genotype': '2d4bcfa71ccca168-genotype-2',
+                        'host_genotype': 'Solanum-lycopersicum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                },
+                'organisms': {
+                    '5499': {'full_name': 'Fulvia fulva', 'role': 'pathogen'},
+                    '4081': {'full_name': 'Solanum lycopersicum', 'role': 'host'},
+                },
+                'publications': {'PMID:1799694': {}},
+            },
+            '144c8f8625c95e5e': {
+                'alleles': {
+                    'Q7WT47:144c8f8625c95e5e-7': {
+                        'allele_type': 'nucleotide_insertion',
+                        'description': '618-A',
+                        'gene': 'Enterococcus faecalis Q7WT47',
+                        'name': 'lsa',
+                        'primary_identifier': 'Q7WT47:144c8f8625c95e5e-7',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
+                    {
+                        'conditions': [
+                            'PECO:0000102',
+                            'PECO:0005225',
+                            'PECO:0000004',
+                            'PECO:0005186',
+                        ],
+                        'creation_date': '2023-11-03',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Cell growth assay',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'high',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'FYPO_EXT:0000001',
+                                'relation': 'has_severity',
+                            }
+                        ],
+                        'figure': 'Table 1',
+                        'genotype': '144c8f8625c95e5e-genotype-1',
+                        'publication': 'PMID:12821484',
+                        'status': 'new',
+                        'submitter_comment': '',
+                        'term': 'PHIPO:0000560',
+                        'type': 'pathogen_phenotype',
+                    }
+                ],
+                'genes': {
+                    'Enterococcus faecalis Q7WT47': {
+                        'organism': 'Enterococcus faecalis',
+                        'uniquename': 'Q7WT47',
+                    }
+                },
+                'genotypes': {
+                    '144c8f8625c95e5e-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'expression': 'Not assayed',
+                                    'id': 'Q7WT47:144c8f8625c95e5e-7',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'UCN32',
+                        'organism_taxonid': 1351,
+                    }
+                },
+                'metadata': {
+                    'accepted_timestamp': '2023-11-02 23:41:46',
+                    'annotation_mode': 'advanced',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2024-01-31 11:51:14',
+                    'approval_in_progress_timestamp': '2024-01-31 11:51:12',
+                    'approved_timestamp': '2024-01-31 11:51:14',
+                    'canto_session': '144c8f8625c95e5e',
+                    'curation_accepted_date': '2023-11-02 23:41:46',
+                    'curation_in_progress_timestamp': '2023-11-02 23:41:56',
+                    'curation_pub_id': 'PMID:12821484',
+                    'curator_role': 'community',
+                    'first_approved_timestamp': '2024-01-31 11:51:14',
+                    'has_community_curation': True,
+                    'needs_approval_timestamp': '2024-01-31 11:51:09',
+                    'session_created_timestamp': '2023-11-02 23:41:39',
+                    'session_first_submitted_timestamp': '2024-01-31 11:51:09',
+                    'session_genes_count': '1',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'organisms': {
+                    '1351': {'full_name': 'Enterococcus faecalis', 'role': 'pathogen'}
+                },
+                'publications': {'PMID:12821484': {}},
+            },
+        },
+        'schema_version': 1,
+    }
+    actual = make_combined_export(phibase_path, phicanto_path)
     assert actual == expected
