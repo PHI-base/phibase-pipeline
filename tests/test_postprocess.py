@@ -785,9 +785,9 @@ def test_remove_unapproved_sessions():
     assert actual == expected
 
 
-def test_load_chemical_data():
-    actual = load_chemical_data(DATA_DIR / 'chemical_data.csv')
-    expected = {
+@pytest.fixture
+def chemical_data():
+    return {
         'PHIPO:0000707': {
             'chebi_id': 'CHEBI:5827',
             'chebi_label': 'hymexazol',
@@ -831,4 +831,9 @@ def test_load_chemical_data():
             'smiles': None,
         },
     }
+
+
+def test_load_chemical_data(chemical_data):
+    actual = load_chemical_data(DATA_DIR / 'chemical_data.csv')
+    expected = chemical_data
     assert actual == expected
