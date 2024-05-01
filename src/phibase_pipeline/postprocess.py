@@ -252,7 +252,7 @@ def remove_allele_gene_names(session):
 
 
 def add_delta_symbol(session):
-    """ Replace 'delta' with the capital delta symbol in allele names. """
+    """Replace 'delta' with the capital delta symbol in allele names."""
     pattern = re.compile(r'delta$')
     DELTA = '\N{GREEK CAPITAL LETTER DELTA}'
     for allele in session.get('alleles', {}).values():
