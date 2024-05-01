@@ -1,10 +1,12 @@
 import copy
+from pathlib import Path
 
 import pytest
 
 from phibase_pipeline.postprocess import (
     add_delta_symbol,
     allele_ids_of_genotype,
+    load_chemical_data,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
     remove_allele_gene_names,
@@ -18,6 +20,8 @@ from phibase_pipeline.postprocess import (
     remove_orphaned_organisms,
     remove_unapproved_sessions,
 )
+
+DATA_DIR = Path(__file__).parent / 'data'
 
 
 def assert_unchanged_after_mutation(func, *objects):
@@ -778,4 +782,53 @@ def test_remove_unapproved_sessions():
         }
     }
     remove_unapproved_sessions(actual)
+    assert actual == expected
+
+
+def test_load_chemical_data():
+    actual = load_chemical_data(DATA_DIR / 'chemical_data.csv')
+    expected = {
+        'PHIPO:0000707': {
+            'chebi_id': 'CHEBI:5827',
+            'chebi_label': 'hymexazol',
+            'frac': '32',
+            'cas': '10004-44-1',
+            'smiles': 'Cc1cc(O)no1',
+        },
+        'PHIPO:0000581': {
+            'chebi_id': 'CHEBI:5100',
+            'chebi_label': 'flucytosine',
+            'frac': None,
+            'cas': '2022-85-7',
+            'smiles': 'Nc1nc(=O)[nH]cc1F',
+        },
+        'PHIPO:0000647': {
+            'chebi_id': 'CHEBI:39214',
+            'chebi_label': 'abamectin',
+            'frac': None,
+            'cas': '71751-41-2',
+            'smiles': None,
+        },
+        'PHIPO:0000545': {
+            'chebi_id': 'CHEBI:3639',
+            'chebi_label': 'chlorothalonil',
+            'frac': 'M05',
+            'cas': None,
+            'smiles': 'Clc1c(Cl)c(C#N)c(Cl)c(C#N)c1Cl',
+        },
+        'PHIPO:0000705': {
+            'chebi_id': None,
+            'chebi_label': 'norfloxacin',
+            'frac': None,
+            'cas': '70458-96-7',
+            'smiles': None,
+        },
+        'PHIPO:0000690': {
+            'chebi_id': 'CHEBI:28368',
+            'chebi_label': None,
+            'frac': None,
+            'cas': '303-81-1',
+            'smiles': None,
+        },
+    }
     assert actual == expected

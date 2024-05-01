@@ -1,0 +1,8 @@
+phipo_id,chebi_id,chebi_label,frac,cas,smiles
+ PHIPO:0000707, CHEBI:5827, hymexazol,32, 10004-44-1,Cc1cc(O)no1
+PHIPO:0000581 ,CHEBI:5100 ,flucytosine,,2022-85-7 ,Nc1nc(=O)[nH]cc1F
+ PHIPO:0000647 , CHEBI:39214 , abamectin ,, 71751-41-2 ,
+PHIPO:0000545,CHEBI:3639,chlorothalonil,M05 ,,Clc1c(Cl)c(C#N)c(Cl)c(C#N)c1Cl
+,CHEBI:71415,nitrofurantoin,,67-20-9,
+PHIPO:0000705,,norfloxacin,,70458-96-7,
+PHIPO:0000690,CHEBI:28368,,,303-81-1,

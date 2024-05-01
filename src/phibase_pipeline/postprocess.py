@@ -1,6 +1,22 @@
 from collections import defaultdict
 import re
 
+import numpy as np
+import pandas as pd
+
+
+def load_chemical_data(path):
+    df = pd.read_csv(path)
+    for col in df.columns:
+        df[col] = df[col].str.strip()
+    mapping = (
+        df.dropna(subset='phipo_id')
+        .set_index('phipo_id')
+        .replace({np.nan: None})
+        .to_dict(orient='index')
+    )
+    return mapping
+
 
 def allele_ids_of_genotype(genotype):
     for locus in genotype['loci']:
