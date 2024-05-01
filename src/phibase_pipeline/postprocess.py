@@ -1,8 +1,12 @@
 from collections import defaultdict
+from pathlib import Path
 import re
 
 import numpy as np
 import pandas as pd
+
+
+DATA_DIR = Path(__file__).parent / 'data'
 
 
 def load_chemical_data(path):
@@ -259,6 +263,34 @@ def add_delta_symbol(session):
         allele['name'] = pattern.sub(DELTA, allele['name'])
 
 
+def add_chemical_extensions(export, chemical_data):
+    extensions_and_relations = [
+        ('chebi_id', 'chebi_id'),
+        ('frac', 'frac_code'),
+        ('cas', 'cas_number'),
+        ('smiles', 'smiles'),
+    ]
+    for session in export['curation_sessions'].values():
+        for annotation in session.get('annotations', []):
+            extensions = annotation.get('extension')
+            if extensions is None:
+                continue
+            term_data = chemical_data.get(annotation.get('term'))
+            if not term_data:
+                continue
+            for ext_name, relation in extensions_and_relations:
+                range_value = term_data[ext_name]
+                if range_value:
+                    extensions.append(
+                        {
+                            'rangeDisplayName': '',
+                            'rangeType': 'Text',
+                            'rangeValue': range_value,
+                            'relation': relation,
+                        }
+                    )
+
+
 def remove_unapproved_sessions(export):
     curation_sessions = export['curation_sessions']
     # Copy dict keys as list since we'll be deleting dict keys
@@ -281,9 +313,11 @@ def postprocess_phibase_json(export):
 
 
 def postprocess_combined_json(export):
+    chemical_data = load_chemical_data(DATA_DIR / 'chemical_data.csv')
     remove_unapproved_sessions(export)
     remove_curator_orcids(export)
     merge_duplicate_alleles(export['curation_sessions'])
+    add_chemical_extensions(export, chemical_data)
     for session in export['curation_sessions'].values():
         remove_allele_gene_names(session)
         add_delta_symbol(session)

@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from phibase_pipeline.postprocess import (
+    add_chemical_extensions,
     add_delta_symbol,
     allele_ids_of_genotype,
     load_chemical_data,
@@ -836,4 +837,157 @@ def chemical_data():
 def test_load_chemical_data(chemical_data):
     actual = load_chemical_data(DATA_DIR / 'chemical_data.csv')
     expected = chemical_data
+    assert actual == expected
+
+
+def test_add_chemical_extensions(chemical_data):
+    export = {
+        'curation_sessions': {
+            '1234567890abcdef': {
+                'annotations': [
+                    {
+                        'term': 'PHIPO:0000707',
+                        'extension': [],
+                    },
+                    {
+                        'term': 'PHIPO:0000545',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            },
+                        ],
+                    },
+                    {
+                        'term': 'PHIPO:0000690',
+                        'extension': [],
+                    },
+                ]
+            },
+            '1234567890defabc': {
+                'annotations': [
+                    {
+                        'term': 'PHIPO:0000705',
+                        'extension': [],
+                    },
+                    {
+                        'term': 'PHIPO:0000708',
+                        'extension': [],
+                    },
+                    {
+                        'evidence code': 'Unknown',
+                    },
+                ]
+            },
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '1234567890abcdef': {
+                'annotations': [
+                    {
+                        'term': 'PHIPO:0000707',
+                        'extension': [
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'CHEBI:5827',
+                                'relation': 'chebi_id',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': '32',
+                                'relation': 'frac_code',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': '10004-44-1',
+                                'relation': 'cas_number',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'Cc1cc(O)no1',
+                                'relation': 'smiles',
+                            },
+                        ],
+                    },
+                    {
+                        'term': 'PHIPO:0000545',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'leaf',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0000713',
+                                'relation': 'infects_tissue',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'CHEBI:3639',
+                                'relation': 'chebi_id',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'M05',
+                                'relation': 'frac_code',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'Clc1c(Cl)c(C#N)c(Cl)c(C#N)c1Cl',
+                                'relation': 'smiles',
+                            },
+                        ],
+                    },
+                    {
+                        'term': 'PHIPO:0000690',
+                        'extension': [
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': 'CHEBI:28368',
+                                'relation': 'chebi_id',
+                            },
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': '303-81-1',
+                                'relation': 'cas_number',
+                            },
+                        ],
+                    },
+                ]
+            },
+            '1234567890defabc': {
+                'annotations': [
+                    {
+                        'term': 'PHIPO:0000705',
+                        'extension': [
+                            {
+                                'rangeDisplayName': '',
+                                'rangeType': 'Text',
+                                'rangeValue': '70458-96-7',
+                                'relation': 'cas_number',
+                            },
+                        ],
+                    },
+                    {
+                        'term': 'PHIPO:0000708',
+                        'extension': [],
+                    },
+                    {
+                        'evidence code': 'Unknown',
+                    },
+                ]
+            },
+        }
+    }
+    actual = export
+    add_chemical_extensions(actual, chemical_data)
     assert actual == expected
