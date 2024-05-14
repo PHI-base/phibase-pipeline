@@ -15,7 +15,6 @@ import pandas as pd
 
 from phibase_pipeline.clean import clean_phibase_csv
 from phibase_pipeline.postprocess import (
-    merge_phi_canto_curation,
     postprocess_combined_json,
     postprocess_phibase_json
 )
