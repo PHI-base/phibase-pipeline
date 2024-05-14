@@ -110,6 +110,7 @@ def clean_phibase_csv(path):
         phi_df
         .replace('\N{NO-BREAK SPACE}', ' ', regex=True)
         .replace(r'^\s+|\s+$', '', regex=True)
+        .replace('', np.nan)
         .replace('no data found', np.nan)
         .replace(ligatures, regex=True)
         .replace(column_replacements)
