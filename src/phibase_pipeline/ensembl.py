@@ -12,6 +12,8 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
     strain = genotype['organism_strain']
     taxon_id = str(genotype['organism_taxonid'])
     species_name = session['organisms'][taxon_id]['full_name']
+    uniprot_id = None
+    allele_display_name = None
     for locus in genotype['loci']:
         for locus_allele in locus:
             expression = locus_allele.get('expression')
