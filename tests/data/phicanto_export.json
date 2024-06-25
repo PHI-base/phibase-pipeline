@@ -1,0 +1,293 @@
+{
+    "curation_sessions": {
+        "cc6cf06675cc6e13": {
+            "alleles": {
+                "A0A0L0V3D9:cc6cf06675cc6e13-13": {
+                    "allele_type": "wild_type",
+                    "gene": "Puccinia striiformis A0A0L0V3D9",
+                    "name": "PSTG_12806+",
+                    "primary_identifier": "A0A0L0V3D9:cc6cf06675cc6e13-13",
+                    "synonyms": []
+                },
+                "A0A0L0V3D9:cc6cf06675cc6e13-16": { 
+                    "allele_type": "partial_amino_acid_deletion",
+                    "description": "1-23",
+                    "gene": "Puccinia striiformis A0A0L0V3D9",
+                    "name": "Pst_12806deltaSP",
+                    "primary_identifier": "A0A0L0V3D9:cc6cf06675cc6e13-16",
+                    "synonyms": []
+                },
+                "Q7X9A6:cc6cf06675cc6e13-13": {
+                    "allele_type": "wild_type",
+                    "gene": "Triticum aestivum Q7X9A6",
+                    "name": "PetC-TaISP+",
+                    "primary_identifier": "Q7X9A6:cc6cf06675cc6e13-13",
+                    "synonyms": []
+                }
+            },
+            "annotations": [
+                {
+                    "checked": "no",
+                    "conditions": [
+                        "PECO:0005028",
+                        "PECO:0005236"
+                    ],
+                    "creation_date": "2020-01-20",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "Macroscopic observation (qualitative observation)",
+                    "extension": [
+                        {
+                            "rangeDisplayName": "leaf",
+                            "rangeType": "Ontology",
+                            "rangeValue": "BTO:0000713",
+                            "relation": "infects_tissue"
+                        },
+                        {
+                            "rangeDisplayName": "Pst_12806deltaSP(1-23)[Not assayed] Puccinia striiformis (CYR32) / wild type Nicotiana benthamiana (Unknown strain)",
+                            "rangeType": "Metagenotype",
+                            "rangeValue": "cc6cf06675cc6e13-metagenotype-1",
+                            "relation": "compared_to_control"
+                        }
+                    ],
+                    "figure": "Figure 2a",
+                    "metagenotype": "cc6cf06675cc6e13-metagenotype-1",
+                    "publication": "PMID:31804478",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "PHIPO:0000182",
+                    "type": "pathogen_host_interaction_phenotype"
+                },
+                {
+                    "checked": "no",
+                    "conditions": [
+                        "PECO:0005028",
+                        "PECO:0005238"
+                    ],
+                    "creation_date": "2020-01-21",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "Microscopy",
+                    "extension": [
+                        {
+                            "rangeDisplayName": "leaf",
+                            "rangeType": "Ontology",
+                            "rangeValue": "BTO:0000713",
+                            "relation": "infects_tissue"
+                        },
+                        {
+                            "rangeDisplayName": "increased virulence",
+                            "rangeType": "Ontology",
+                            "rangeValue": "PHIPO:0000014",
+                            "relation": "infective_ability"
+                        }
+                    ],
+                    "figure": "Figure 3a, b",
+                    "metagenotype": "cc6cf06675cc6e13-metagenotype-1",
+                    "publication": "PMID:31804478",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "PHIPO:0001015",
+                    "type": "pathogen_host_interaction_phenotype"
+                },
+                {
+                    "conditions": [],
+                    "creation_date": "2021-03-16",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "Reporter gene assay",
+                    "extension": [
+                        {
+                            "rangeDisplayName": "petC",
+                            "rangeType": "Gene",
+                            "rangeValue": "Q7X9A6",
+                            "relation": "assayed_using"
+                        },
+                        {
+                            "rangeDisplayName": "PSTG_12806",
+                            "rangeType": "Gene",
+                            "rangeValue": "A0A0L0V3D9",
+                            "relation": "assayed_using"
+                        }
+                    ],
+                    "figure": "Figure 5d",
+                    "metagenotype": "cc6cf06675cc6e13-metagenotype-14",
+                    "publication": "PMID:31804478",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "PHIPO:0001106",
+                    "type": "pathogen_host_interaction_phenotype"
+                },
+                {
+                    "conditions": [],
+                    "creation_date": "2021-03-16",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "",
+                    "extension": [
+                        {
+                            "rangeDisplayName": "leaf",
+                            "rangeType": "Ontology",
+                            "rangeValue": "BTO:0000713",
+                            "relation": "infects_tissue"
+                        }
+                    ],
+                    "metagenotype": "cc6cf06675cc6e13-metagenotype-15",
+                    "publication": "PMID:31804478",
+                    "status": "new",
+                    "term": "PHIDO:0000391",
+                    "type": "disease_name"
+                }
+            ],
+            "genes": {
+                "Puccinia striiformis A0A0L0V3D9": {
+                    "organism": "Puccinia striiformis",
+                    "uniquename": "A0A0L0V3D9"
+                },
+                "Puccinia striiformis A0A0L0W290": {
+                    "organism": "Puccinia striiformis",
+                    "uniquename": "A0A0L0W290"
+                },
+                "Triticum aestivum Q7X9A6": {
+                    "organism": "Triticum aestivum",
+                    "uniquename": "Q7X9A6"
+                }
+            },
+            "genotypes": {
+                "Nicotiana-benthamiana-wild-type-genotypeUnknown-strain": {
+                    "loci": [],
+                    "organism_strain": "Unknown strain",
+                    "organism_taxonid": 4100
+                },
+                "Triticum-aestivum-wild-type-genotypeChinese-Spring": {
+                    "loci": [],
+                    "organism_strain": "cv. Chinese Spring",
+                    "organism_taxonid": 4565
+                },
+                "cc6cf06675cc6e13-genotype-1": {
+                    "loci": [
+                        [
+                            {
+                                "expression": "Not assayed",
+                                "id": "A0A0L0V3D9:cc6cf06675cc6e13-16"
+                            }
+                        ]
+                    ],
+                    "organism_strain": "CYR32",
+                    "organism_taxonid": 27350
+                },
+                "cc6cf06675cc6e13-genotype-14": {
+                    "loci": [
+                        [
+                            {
+                                "expression": "Wild type product level",
+                                "id": "A0A0L0V3D9:cc6cf06675cc6e13-13"
+                            }
+                        ]
+                    ],
+                    "organism_strain": "CYR31",
+                    "organism_taxonid": 27350
+                },
+                "cc6cf06675cc6e13-genotype-16": {
+                    "loci": [
+                        [
+                            {
+                                "expression": "Not assayed",
+                                "id": "Q7X9A6:cc6cf06675cc6e13-13"
+                            }
+                        ]
+                    ],
+                    "organism_strain": "cv. Suwon 11",
+                    "organism_taxonid": 4565
+                }
+            },
+            "metadata": {
+                "accepted_timestamp": "2020-01-20 11:41:57",
+                "annotation_mode": "advanced",
+                "annotation_status": "APPROVED",
+                "annotation_status_datestamp": "2023-06-20 10:32:34",
+                "approval_in_progress_timestamp": "2023-06-20 10:32:29",
+                "approved_timestamp": "2023-06-20 10:32:34",
+                "canto_session": "cc6cf06675cc6e13",
+                "curation_accepted_date": "2020-01-20 11:41:57",
+                "curation_in_progress_timestamp": "2023-06-20 10:18:23",
+                "curation_pub_id": "PMID:31804478",
+                "curator_role": "PHI-base",
+                "first_approved_timestamp": "2020-04-03 11:46:49",
+                "has_community_curation": false,
+                "needs_approval_timestamp": "2023-06-20 10:32:23",
+                "previous_approved_timestamp": "2022-03-21 12:32:18",
+                "reactivated_timestamp": "2023-06-20 10:18:23",
+                "session_created_timestamp": "2020-01-20 11:41:43",
+                "session_first_submitted_timestamp": "2020-01-29 14:38:15",
+                "session_genes_count": "3",
+                "session_reactivated_timestamp": "2023-06-20 10:18:23",
+                "session_term_suggestions_count": "0",
+                "session_unknown_conditions_count": "0",
+                "term_suggestion_count": "0",
+                "unknown_conditions_count": "0"
+            },
+            "metagenotypes": {
+                "cc6cf06675cc6e13-metagenotype-1": {
+                    "host_genotype": "Nicotiana-benthamiana-wild-type-genotypeUnknown-strain",
+                    "pathogen_genotype": "cc6cf06675cc6e13-genotype-1",
+                    "type": "pathogen-host"
+                },
+                "cc6cf06675cc6e13-metagenotype-14": {
+                    "host_genotype": "cc6cf06675cc6e13-genotype-16",
+                    "pathogen_genotype": "cc6cf06675cc6e13-genotype-1",
+                    "type": "pathogen-host"
+                },
+                "cc6cf06675cc6e13-metagenotype-15": {
+                    "host_genotype": "cc6cf06675cc6e13-genotype-16",
+                    "pathogen_genotype": "cc6cf06675cc6e13-genotype-14",
+                    "type": "pathogen-host"
+                }
+            },
+            "organisms": {
+                "27350": {
+                    "full_name": "Puccinia striiformis"
+                },
+                "4100": {
+                    "full_name": "Nicotiana benthamiana"
+                },
+                "4565": {
+                    "full_name": "Triticum aestivum"
+                }
+            },
+            "publications": {
+                "PMID:31804478": {}
+            }
+        },
+        "010b2ec99d0d70e8" : {
+            "metadata" : {
+                "accepted_timestamp" : "2022-06-06 13:02:15",
+                "annotation_mode" : "advanced",
+                "annotation_status" : "APPROVAL_IN_PROGRESS",
+                "annotation_status_datestamp" : "2022-11-23 11:47:48",
+                "approval_in_progress_timestamp" : "2022-11-23 11:47:48",
+                "canto_session" : "010b2ec99d0d70e8",
+                "curation_accepted_date" : "2022-06-06 13:02:15",
+                "curation_in_progress_timestamp" : "2022-06-27 09:11:56",
+                "curation_pub_id" : "PMID:35468894",
+                "curator_role" : "community",
+                "needs_approval_timestamp" : "2022-06-27 14:44:15",
+                "session_created_timestamp" : "2022-06-06 13:01:47",
+                "session_first_submitted_timestamp" : "2022-06-27 14:44:15",
+                "session_genes_count" : "10",
+                "session_term_suggestions_count" : "6",
+                "session_unknown_conditions_count" : "8",
+                "term_suggestion_count" : "6",
+                "unknown_conditions_count" : "8"
+            },
+            "publications" : {
+                "PMID:35468894" : {}
+            }
+        }
+    },
+    "schema_version": 1
+}
