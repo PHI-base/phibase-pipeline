@@ -9,6 +9,7 @@ from phibase_pipeline.ensembl import (
     get_canto_columns,
     get_genotype_data,
     get_metagenotype_data,
+    get_uniprot_columns,
 )
 
 
@@ -59,4 +60,17 @@ def test_get_metagenotype_data(phicanto_export):
 def test_get_canto_columns(phicanto_export):
     expected = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
     actual = get_canto_columns(phicanto_export)
+    assert_frame_equal(expected, actual)
+
+
+def test_get_uniprot_columns():
+    expected = pd.read_csv(
+        TEST_DATA_DIR / 'get_uniprot_columns_expected.csv',
+        dtype={
+            'taxid_species': 'Int64',
+            'taxid_strain': 'Int64',
+        }
+    )
+    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'uniprot_test_data.csv')
+    actual = get_uniprot_columns(uniprot_data)
     assert_frame_equal(expected, actual)

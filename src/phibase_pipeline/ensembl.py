@@ -1,5 +1,6 @@
 import json
 
+import numpy as np
 import pandas as pd
 
 
@@ -132,3 +133,51 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
                 }
             )
     return pd.DataFrame.from_records(records)
+
+
+def get_uniprot_columns(uniprot_data):
+
+    def get_ensembl_id_column(df):
+        ensembl_columns = df.columns[df.columns.str.startswith('ensembl_')]
+        # DataFrame.sum is only safe due to no overlap between columns
+        combined_column = (
+            df[ensembl_columns]
+            .fillna('')
+            .sum(axis=1)
+            .replace('', np.nan)
+        )
+        return combined_column
+
+    renames = {
+        'Entry': 'uniprot',
+        'Organism (ID)': 'taxid',
+        'Taxonomic lineage (Ids)': 'lineage',
+        'Ensembl': 'ensembl_genomes',
+        'EnsemblBacteria': 'ensembl_bacteria',
+        'EnsemblFungi': 'ensembl_fungi',
+        'EnsemblMetazoa': 'ensembl_metazoa',
+        'EnsemblPlants': 'ensembl_plants',
+    }
+    columns = list(renames.keys())
+    df = uniprot_data[columns].rename(columns=renames).copy()
+    df['uniprot_matches'] = 'none'
+    species_taxids = (
+        df.lineage
+        .str.extract(r'(\d+) \(species\)', expand=False)
+        .astype('Int64')
+    )
+    is_strain_taxid = species_taxids.notna()
+    df['taxid_species'] = df.taxid.mask(is_strain_taxid, species_taxids)
+    df['taxid_strain'] = df.taxid.where(is_strain_taxid).astype('Int64')
+    uniprot_match_values = {
+        'strain': df.taxid_strain.notna(),
+        'species': df.taxid_strain.isna(),
+        'none': df.uniprot.isna(),
+    }
+    for value, cond in uniprot_match_values.items():
+        df.loc[cond, 'uniprot_matches'] = value
+    df['ensembl'] = get_ensembl_id_column(df)
+    columns = [
+        'uniprot', 'ensembl', 'taxid_species', 'taxid_strain', 'uniprot_matches'
+    ]
+    return df[columns]
