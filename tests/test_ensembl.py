@@ -6,6 +6,7 @@ import pytest
 from pandas.testing import assert_frame_equal
 
 from phibase_pipeline.ensembl import (
+    get_canto_columns,
     get_genotype_data,
     get_metagenotype_data,
 )
@@ -53,3 +54,9 @@ def test_get_metagenotype_data(phicanto_export):
     }
     actual = get_metagenotype_data(session, metagenotype_id)
     assert expected == actual
+
+
+def test_get_canto_columns(phicanto_export):
+    expected = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
+    actual = get_canto_columns(phicanto_export)
+    assert_frame_equal(expected, actual)
