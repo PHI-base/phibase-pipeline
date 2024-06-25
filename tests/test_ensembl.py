@@ -33,7 +33,7 @@ def test_get_genotype_data(phicanto_export):
         )
     }
     actual = get_genotype_data(session, genotype_id, suffix)
-    assert actual == expected
+    assert expected == actual
 
 
 def test_get_metagenotype_data(phicanto_export):
