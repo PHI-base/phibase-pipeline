@@ -78,7 +78,7 @@ def load_disease_column_mapping(phido_path, extra_path):
     }
     phido_df = pd.read_csv(phido_path).rename(columns=renames)
     phido_df = phido_df[phido_df.term_id.str.match(term_id_pattern)]
-    obo_term_ids = phido_df.term_id.str.replace(term_id_pattern, r'PHIDO:\1')
+    obo_term_ids = phido_df.term_id.str.replace(term_id_pattern, r'PHIDO:\1', regex=True)
     phido_df.term_id = obo_term_ids
     phido_df.term_label = phido_df.term_label.str.lower()
     extra_df = pd.read_csv(extra_path)
@@ -93,7 +93,7 @@ def load_in_vitro_growth_classifier(path):
     classifier_column = (
         df.set_index('ncbi_taxid').is_filamentous
         .loc[lambda x: x.isin(('yes', 'no'))]
-        .replace({'yes': True, 'no': False})
+        .map({'yes': True, 'no': False})
     )
     return classifier_column
 
@@ -1089,7 +1089,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     phi_df['pathogen_gene_synonym'] = phi_df.gene.str.extract(
         r'\((.+?)\)', expand=False
     )
-    phi_df['gene'] = phi_df.gene.str.replace(re.compile(r'\s*\(.+?\)'), '')
+    phi_df['gene'] = phi_df.gene.str.replace(r'\s*\(.+?\)', '', regex=True)
 
     phibase_json = get_canto_json_template(phi_df)
 

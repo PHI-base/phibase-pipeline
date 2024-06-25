@@ -19,10 +19,10 @@ def get_normalized_column_names(phi_df):
         phi_df.columns
         .str.strip()
         .str.lower()
-        .str.replace(leading_trailing_underscores, '')
-        .str.replace(slash_or_hyphen, '_')
-        .str.replace(not_word_nor_space, '')
-        .str.replace(whitespace, '_')
+        .str.replace(leading_trailing_underscores, '', regex=True)
+        .str.replace(slash_or_hyphen, '_', regex=True)
+        .str.replace(not_word_nor_space, '', regex=True)
+        .str.replace(whitespace, '_', regex=True)
         .str.replace('invitro', 'in_vitro')
     )
     return column_names
@@ -45,7 +45,7 @@ def fix_curation_dates(curation_dates):
         month_day_pattern = re.compile(r'^([A-Z][a-z]{2})-(\d+)$')
         has_month_day_date = dates.str.match(month_day_pattern, na=False)
         month_day_dates = dates.loc[has_month_day_date]
-        fixed_dates = month_day_dates.str.replace(month_day_pattern, r'\2-\1')
+        fixed_dates = month_day_dates.str.replace(month_day_pattern, r'\2-\1', regex=True)
         return fixed_dates
 
     def get_fixed_day_month_dates(dates, numeric_dates):
@@ -193,8 +193,8 @@ def clean_phibase_csv(path):
         phi_df.multiple_mutation = (
             phi_df.multiple_mutation
             .str.rstrip(';')
-            .str.replace(separator_without_space, '; ')
-            .str.replace(space_separator, '; ')
+            .str.replace(separator_without_space, '; ', regex=True)
+            .str.replace(space_separator, '; ', regex=True)
         )
     # Fix separators in disease column
     phi_df.disease = phi_df.disease.str.replace(',', ';')
