@@ -38,3 +38,20 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
     }
     suffixed = {k + suffix: v for k, v in record.items()}
     return suffixed
+
+
+def get_metagenotype_data(session, metagenotype_id):
+    metagenotype = session['metagenotypes'][metagenotype_id]
+    pathogen_genotype_id = metagenotype['pathogen_genotype']
+    host_genotype_id = metagenotype['host_genotype']
+    pathogen_columns = get_genotype_data(
+        session, pathogen_genotype_id, suffix='_a'
+    )
+    if pathogen_columns is None:
+        return None
+    host_columns = get_genotype_data(
+        session, host_genotype_id, suffix='_b'
+    )
+    if host_columns is None:
+        return None
+    return {**pathogen_columns, **host_columns}
