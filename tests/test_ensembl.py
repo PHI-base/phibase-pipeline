@@ -13,7 +13,7 @@ from phibase_pipeline.ensembl import (
 )
 
 
-TEST_DATA_DIR = Path(__file__).parent / 'data'
+TEST_DATA_DIR = Path(__file__).parent / 'data' / 'ensembl'
 
 @pytest.fixture
 def phicanto_export():
