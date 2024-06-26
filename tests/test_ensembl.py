@@ -9,6 +9,7 @@ from phibase_pipeline.ensembl import (
     combine_canto_uniprot_data,
     get_canto_columns,
     get_genotype_data,
+    get_high_level_terms,
     get_metagenotype_data,
     get_uniprot_columns,
 )
@@ -92,3 +93,217 @@ def test_combine_canto_uniprot_data():
     )
     actual = combine_canto_uniprot_data(canto_data, uniprot_data)
     assert_frame_equal(expected, actual)
+
+
+@pytest.mark.parametrize(
+    'annotation,expected',
+    (
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000022',
+                'type': 'pathogen_phenotype'
+            },
+            ['Resistance to chemical'],
+            id='resistance_to_chemical',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000021',
+                'type': 'pathogen_phenotype'
+            },
+            ['Sensitivity to chemical'],
+            id='sensitivity_to_chemical',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000513',
+                'type': 'pathogen_phenotype'
+            },
+            ['Lethal'],
+            id='lethal',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'loss of mutualism',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000207',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000001',
+                'type': 'pathogen_phenotype'
+            },
+            ['Loss of mutualism'],
+            id='loss_of_mutualism',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'increased virulence',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000014',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000001',
+                'type': 'pathogen_phenotype'
+            },
+            ['Increased virulence'],
+            id='increased_virulence',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'loss of pathogenicity',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000010',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000001',
+                'type': 'pathogen_phenotype'
+            },
+            ['Loss of pathogenicity'],
+            id='loss_of_pathogenicity',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'reduced virulence',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000015',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000001',
+                'type': 'pathogen_phenotype'
+            },
+            ['Reduced virulence'],
+            id='reduced_virulence',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'unaffected pathogenicity',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000004',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000001',
+                'type': 'pathogen_phenotype'
+            },
+            ['Unaffected pathogenicity'],
+            id='unaffected_pathogenicity',
+        ),
+        pytest.param(
+            {
+                'checked': 'no',
+                'conditions': [],
+                'creation_date': '2024-06-26',
+                'curator': {'community_curated' : True},
+                'evidence_code': 'Cell growth assay',
+                'extension': [
+                    {
+                        'rangeDisplayName': 'reduced virulence',
+                        'rangeType': 'Ontology',
+                        'rangeValue': 'PHIPO:0000015',
+                        'relation': 'infective_ability'
+                    },
+                ],
+                'genotype': '0123456789abcdef-genotype-1',
+                'publication': 'PMID:1234567',
+                'status': 'new',
+                'submitter_comment': '',
+                'term': 'PHIPO:0000021',
+                'type': 'pathogen_phenotype'
+            },
+            ['Reduced virulence', 'Sensitivity to chemical'],
+            id='primary_and_ext',
+        ),
+    )
+)
+def test_get_high_level_terms(annotation, expected):
+    actual = get_high_level_terms(annotation)
+    assert expected == actual

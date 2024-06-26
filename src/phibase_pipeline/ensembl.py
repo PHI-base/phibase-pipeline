@@ -229,3 +229,31 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')
     return merged_df[column_order]
+
+
+def get_high_level_terms(annotation):
+    term_mapping = {
+        'PHIPO:0000022': 'Resistance to chemical',
+        'PHIPO:0000021': 'Sensitivity to chemical',
+        'PHIPO:0000513': 'Lethal',
+    }
+    extension_mapping = {
+        'PHIPO:0000207': 'Loss of mutualism',
+        'PHIPO:0000014': 'Increased virulence',
+        'PHIPO:0000010': 'Loss of pathogenicity',
+        'PHIPO:0000015': 'Reduced virulence',
+        'PHIPO:0000004': 'Unaffected pathogenicity',
+    }
+    high_level_terms = set()
+    primary_term_id = annotation.get('term')
+    if not primary_term_id:
+        return []
+    hlt_1 = term_mapping.get(primary_term_id)
+    if hlt_1:
+        high_level_terms.add(hlt_1)
+    for extension in annotation.get('extension', []):
+        ext_term_id = extension['rangeValue']
+        hlt_2 = extension_mapping.get(ext_term_id)
+        if hlt_2:
+            high_level_terms.add(hlt_2)
+    return list(sorted(high_level_terms))
