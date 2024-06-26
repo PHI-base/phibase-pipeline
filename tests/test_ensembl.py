@@ -6,6 +6,7 @@ import pytest
 from pandas.testing import assert_frame_equal
 
 from phibase_pipeline.ensembl import (
+    combine_canto_uniprot_data,
     get_canto_columns,
     get_genotype_data,
     get_metagenotype_data,
@@ -73,4 +74,21 @@ def test_get_uniprot_columns():
     )
     uniprot_data = pd.read_csv(TEST_DATA_DIR / 'uniprot_test_data.csv')
     actual = get_uniprot_columns(uniprot_data)
+    assert_frame_equal(expected, actual)
+
+
+def test_combine_canto_uniprot_data():
+    canto_data = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
+    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'get_uniprot_columns_expected.csv')
+    expected = pd.read_csv(
+        TEST_DATA_DIR / 'combine_canto_uniprot_data_expected.csv',
+        dtype={
+            'phibase_id': 'object',
+            'ensembl_a': 'object',
+            'taxid_strain_a': 'Int64',
+            'taxid_strain_b': 'Int64',
+            'high_level_terms': 'object',
+        }
+    )
+    actual = combine_canto_uniprot_data(canto_data, uniprot_data)
     assert_frame_equal(expected, actual)

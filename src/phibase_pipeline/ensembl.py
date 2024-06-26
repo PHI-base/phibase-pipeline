@@ -181,3 +181,51 @@ def get_uniprot_columns(uniprot_data):
         'uniprot', 'ensembl', 'taxid_species', 'taxid_strain', 'uniprot_matches'
     ]
     return df[columns]
+
+
+def combine_canto_uniprot_data(canto_df, uniprot_df):
+    column_order = [
+        'phibase_id',
+        'uniprot_a',
+        'ensembl_a',
+        'taxid_species_a',
+        'organism_a',
+        'taxid_strain_a',
+        'strain_a',
+        'uniprot_matches_a',
+        'modification_a',
+        'uniprot_b',
+        'ensembl_b',
+        'taxid_species_b',
+        'organism_b',
+        'taxid_strain_b',
+        'strain_b',
+        'uniprot_matches_b',
+        'modification_b',
+        'phenotype',
+        'disease',
+        'host_tissue',
+        'evidence_code',
+        'interaction_type',
+        'pmid',
+        'high_level_terms',
+    ]
+    uniprot_a_df, uniprot_b_df = (
+        (
+            uniprot_df
+            .rename(columns=lambda s: s + f'{suffix}')
+            .set_index(f'uniprot{suffix}')
+        )
+        for suffix in ('_a', '_b')
+    )
+    merge_args = {'right_index': True, 'how': 'left'}
+    merged_df = (
+        canto_df
+        .merge(uniprot_a_df, left_on='uniprot_a', **merge_args)
+        .merge(uniprot_b_df, left_on='uniprot_b', **merge_args)
+    )
+    merged_df['phibase_id'] = pd.Series(dtype='object')
+    merged_df['high_level_terms'] = pd.Series(dtype='object')
+    merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
+    merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')
+    return merged_df[column_order]
