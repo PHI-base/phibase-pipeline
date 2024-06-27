@@ -234,6 +234,9 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
     merged_df['high_level_terms'] = pd.Series(dtype='object')
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')
+    # TODO: Fix this in the get_uniprot_columns
+    merged_df.uniprot_matches_a = merged_df.uniprot_matches_a.fillna('none')
+    merged_df.uniprot_matches_b = merged_df.uniprot_matches_b.fillna('none')
     return merged_df[column_order]
 
 
