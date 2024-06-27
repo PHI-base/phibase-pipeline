@@ -4,6 +4,9 @@ import numpy as np
 import pandas as pd
 
 
+pd.set_option('future.no_silent_downcasting', True)
+
+
 def get_genotype_data(session, genotype_id, suffix='_a'):
     genotype = session['genotypes'][genotype_id]
     if len(genotype['loci']) > 1:
@@ -128,7 +131,7 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
                     'pmid': pmid,
                 }
             )
-    return pd.DataFrame.from_records(records)
+    return pd.DataFrame.from_records(records).fillna(np.nan)
 
 
 def get_uniprot_columns(uniprot_data):
