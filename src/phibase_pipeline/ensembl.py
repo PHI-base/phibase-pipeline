@@ -317,3 +317,14 @@ def get_effector_gene_ids(canto_export):
                 uniprot_id = genes[gene_id]['uniquename']
                 uniprot_ids.add(uniprot_id)
     return uniprot_ids
+
+
+def make_ensembl_canto_export(export_path, uniprot_data_path, out_path):
+    with open(export_path, encoding='utf-8') as export_file:
+        canto_export = json.load(export_file)
+    uniprot_data_df = pd.read_csv(uniprot_data_path)
+    uniprot_df = get_uniprot_columns(uniprot_data_df)
+    effector_ids = get_effector_gene_ids(canto_export)
+    canto_df = get_canto_columns(canto_export, effector_ids)
+    combined_df = combine_canto_uniprot_data(canto_df, uniprot_df)
+    combined_df.to_csv(out_path, index=False)

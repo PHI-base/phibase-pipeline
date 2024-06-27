@@ -14,6 +14,7 @@ from phibase_pipeline.ensembl import (
     get_metagenotype_data,
     get_physical_interaction_data,
     get_uniprot_columns,
+    make_ensembl_canto_export,
 )
 
 
@@ -348,3 +349,15 @@ def test_get_physical_interaction_data():
     interacting_gene_id = 'Oryza sativa Q5NBT9'
     actual = get_physical_interaction_data(session, gene_id, interacting_gene_id)
     assert expected == actual
+
+
+def test_make_ensembl_canto_export(tmpdir):
+    expected = pd.read_csv(
+        TEST_DATA_DIR / 'combine_canto_uniprot_data_expected.csv'
+    )
+    export_path = TEST_DATA_DIR / 'phicanto_export.json'
+    uniprot_data_path = TEST_DATA_DIR / 'uniprot_test_data.csv'
+    out_path = tmpdir / 'ensembl_canto_export.csv'
+    make_ensembl_canto_export(export_path, uniprot_data_path, out_path)
+    actual = pd.read_csv(out_path)
+    assert_frame_equal(expected, actual, check_dtype=False)
