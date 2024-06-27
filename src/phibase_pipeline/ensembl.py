@@ -90,6 +90,7 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
         'evidence_code',
         'interaction_type',
         'pmid',
+        'high_level_terms',
     ]
     interaction_type_map = {
         'disease_name': 'interspecies interaction',
@@ -136,7 +137,7 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
                     'high_level_terms': high_level_term_str,
                 }
             )
-    return pd.DataFrame.from_records(records).fillna(np.nan)
+    return pd.DataFrame.from_records(records).fillna(np.nan)[column_order]
 
 
 def get_uniprot_columns(uniprot_data):
