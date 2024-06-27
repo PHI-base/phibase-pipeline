@@ -101,10 +101,6 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
         for annotation in session.get('annotations', []):
             if metagenotype_id := annotation.get('metagenotype'):
                 data = get_metagenotype_data(session, metagenotype_id)
-            elif genotype_id := annotation.get('genotype'):
-                # not loading single species phenotypes yet
-                # data = get_genotype_data(session, genotype_id)
-                continue
             elif annotation['type'] == 'physical_interaction':
                 interaction_type = 'protein-protein interaction'
                 data = get_physical_interaction_columns(
