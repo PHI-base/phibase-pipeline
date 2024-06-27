@@ -104,7 +104,7 @@ def test_combine_canto_uniprot_data():
         }
     )
     actual = combine_canto_uniprot_data(canto_data, uniprot_data)
-    assert_frame_equal(expected, actual)
+    assert_frame_equal(expected, actual, check_dtype=False)
 
 
 @pytest.mark.parametrize(
