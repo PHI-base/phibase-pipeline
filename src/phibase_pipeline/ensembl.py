@@ -120,6 +120,10 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
             phenotype = None if is_disease else term_id
             disease = term_id if is_disease else None
             tissue_ids = get_tissue_ids(annotation)
+            high_level_terms = get_high_level_terms(annotation)
+            high_level_term_str = (
+                '; '.join(high_level_terms) if high_level_terms else None
+            )
             records.append(
                 {
                     **data,
@@ -129,6 +133,7 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
                     'evidence_code': annotation['evidence_code'] or None,
                     'interaction_type': interaction_type,
                     'pmid': pmid,
+                    'high_level_terms': high_level_term_str,
                 }
             )
     return pd.DataFrame.from_records(records).fillna(np.nan)
