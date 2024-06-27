@@ -1,0 +1,72 @@
+{
+    "alleles": {},
+    "annotations": [
+        {
+            "checked": "no",
+            "creation_date": "2021-04-19",
+            "curator": {
+                "community_curated": false
+            },
+            "evidence_code": "Two-hybrid",
+            "figure": "Figure 5a",
+            "gene": "Magnaporthe oryzae G4MXR2",
+            "interacting_genes": [
+                "Oryza sativa Q5NBT9"
+            ],
+            "publication": "PMID:30610168",
+            "status": "new",
+            "submitter_comment": "Other methods also used, coIP and BiFC.",
+            "type": "physical_interaction"
+        }
+    ],
+    "genes": {
+        "Magnaporthe oryzae G4MXR2": {
+            "organism": "Magnaporthe oryzae",
+            "uniquename": "G4MXR2"
+        },
+        "Oryza sativa Q5NBT9": {
+            "organism": "Oryza sativa",
+            "uniquename": "Q5NBT9"
+        }
+    },
+    "genotypes": {},
+    "metadata": {
+        "accepted_timestamp": "2019-09-30 12:36:40",
+        "annotation_mode": "advanced",
+        "annotation_status": "APPROVED",
+        "annotation_status_datestamp": "2023-05-23 12:47:00",
+        "approval_in_progress_timestamp": "2023-05-23 12:46:53",
+        "approved_timestamp": "2023-05-23 12:47:00",
+        "canto_session": "79c56f92435923ab",
+        "curation_accepted_date": "2019-09-30 12:36:40",
+        "curation_in_progress_timestamp": "2023-05-23 12:04:10",
+        "curation_pub_id": "PMID:30610168",
+        "curator_role": "PHI-base",
+        "first_approved_timestamp": "2021-04-28 11:01:38",
+        "has_community_curation": false,
+        "message_for_curators": "",
+        "needs_approval_timestamp": "2023-05-23 12:46:42",
+        "previous_approved_timestamp": "2021-04-29 16:07:49",
+        "reactivated_timestamp": "2023-05-23 12:04:10",
+        "session_created_timestamp": "2019-09-30 12:36:33",
+        "session_first_submitted_timestamp": "2019-09-30 17:32:31",
+        "session_genes_count": "2",
+        "session_reactivated_timestamp": "2023-05-23 12:04:10",
+        "session_term_suggestions_count": "0",
+        "session_unknown_conditions_count": "0",
+        "term_suggestion_count": "0",
+        "unknown_conditions_count": "0"
+    },
+    "metagenotypes": {},
+    "organisms": {
+        "318829": {
+            "full_name": "Magnaporthe oryzae"
+        },
+        "4530": {
+            "full_name": "Oryza sativa"
+        }
+    },
+    "publications": {
+        "PMID:30610168": {}
+    }
+}

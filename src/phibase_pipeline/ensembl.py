@@ -45,6 +45,29 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
     return suffixed
 
 
+def get_physical_interaction_data(session, gene_id, interacting_gene_id):
+    genes = session['genes']
+    organisms = session['organisms']
+    data = {}
+    for gid, suffix in ((gene_id, '_a'), (interacting_gene_id, '_b')):
+        gene = genes[gid]
+        uniprot_id = gene['uniquename']
+        organism_name = gene['organism']
+        taxid = next(
+            taxid for taxid, organism in organisms.items()
+            if organism['full_name'] == organism_name
+        )
+        gene_data = {
+            'uniprot': uniprot_id,
+            'taxid': int(taxid),
+            'organism': organism_name,
+            'strain': None,
+            'modification': None,
+        }
+        data.update({k + suffix: v for k, v in gene_data.items()})
+    return data
+
+
 def get_metagenotype_data(session, metagenotype_id):
     metagenotype = session['metagenotypes'][metagenotype_id]
     pathogen_genotype_id = metagenotype['pathogen_genotype']
@@ -63,9 +86,6 @@ def get_metagenotype_data(session, metagenotype_id):
 
 
 def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFrame:
-
-    def get_physical_interaction_columns(session, gene_id, interacting_id):
-        raise NotImplementedError
 
     def get_tissue_ids(annotation):
         tissue_ids = [
@@ -109,28 +129,35 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
             data = None
             if metagenotype_id := annotation.get('metagenotype'):
                 data = get_metagenotype_data(session, metagenotype_id)
+                is_disease = annotation['type'] == 'disease_name'
+                term_id = annotation['term']
+                phenotype = None if is_disease else term_id
+                disease = term_id if is_disease else None
+                tissue_ids = get_tissue_ids(annotation)
+                high_level_terms = get_high_level_terms(annotation)
+                has_effector_gene = (
+                    data['uniprot_a'] in effector_ids
+                    or data['uniprot_b'] in effector_ids
+                )
+                if has_effector_gene:
+                    high_level_terms.extend(['Effector'])
+                high_level_term_str = (
+                    '; '.join(high_level_terms) if high_level_terms else None
+                )
             elif annotation['type'] == 'physical_interaction':
-                interaction_type = 'protein-protein interaction'
-                data = get_physical_interaction_columns(
+                data = get_physical_interaction_data(
                     session,
                     gene_id=annotation['gene'],
-                    interacting_id=None,
+                    interacting_gene_id=annotation['interacting_genes'][0],
                 )
+                phenotype = None
+                disease = None
+                tissue_ids = None
+                high_level_term_str = None
 
             if data is None:
                 continue
             interaction_type = interaction_type_map.get(annotation['type'])
-            is_disease = annotation['type'] == 'disease_name'
-            term_id = annotation['term']
-            phenotype = None if is_disease else term_id
-            disease = term_id if is_disease else None
-            tissue_ids = get_tissue_ids(annotation)
-            high_level_terms = get_high_level_terms(annotation)
-            if data['uniprot_a'] in effector_ids or data['uniprot_b'] in effector_ids:
-                high_level_terms.extend(['Effector'])
-            high_level_term_str = (
-                '; '.join(high_level_terms) if high_level_terms else None
-            )
             records.append(
                 {
                     **data,
@@ -236,10 +263,10 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
     )
     merged_df.taxid_species_a = merged_df.taxid_species_a.mask(
         merged_df.uniprot_a.isna(), merged_df.taxid_a
-    ).astype(int)
+    )
     merged_df.taxid_species_b = merged_df.taxid_species_b.mask(
         merged_df.uniprot_b.isna(), merged_df.taxid_b
-    ).astype(int)
+    )
     merged_df['phibase_id'] = pd.Series(dtype='object')
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')

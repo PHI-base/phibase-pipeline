@@ -12,6 +12,7 @@ from phibase_pipeline.ensembl import (
     get_genotype_data,
     get_high_level_terms,
     get_metagenotype_data,
+    get_physical_interaction_data,
     get_uniprot_columns,
 )
 
@@ -324,4 +325,26 @@ def test_get_high_level_terms(annotation, expected):
 def test_get_effector_gene_ids(effector_export):
     expected = set(('A0A507D1H9', 'A0A2K9YVY7', 'M4B6G6'))
     actual = get_effector_gene_ids(effector_export)
+    assert expected == actual
+
+
+def test_get_physical_interaction_data():
+    session_path = TEST_DATA_DIR / 'physical_interaction_session.json'
+    with open(session_path, encoding='utf-8') as f:
+        session = json.load(f)
+    expected = {
+        'uniprot_a': 'G4MXR2',
+        'taxid_a': 318829,
+        'organism_a': 'Magnaporthe oryzae',
+        'strain_a': None,
+        'modification_a': None,
+        'uniprot_b': 'Q5NBT9',
+        'taxid_b': 4530,
+        'organism_b': 'Oryza sativa',
+        'strain_b': None,
+        'modification_b': None,
+    }
+    gene_id = 'Magnaporthe oryzae G4MXR2'
+    interacting_gene_id = 'Oryza sativa Q5NBT9'
+    actual = get_physical_interaction_data(session, gene_id, interacting_gene_id)
     assert expected == actual

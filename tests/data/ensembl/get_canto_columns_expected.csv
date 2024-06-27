@@ -4,3 +4,4 @@ A0A0L0V3D9,27350,Puccinia striiformis,CYR32,Pst_12806deltaSP(1-23) (partial amin
 A0A0L0V3D9,27350,Puccinia striiformis,CYR32,Pst_12806deltaSP(1-23) (partial amino acid deletion) [Not assayed],Q7X9A6,4565,Triticum aestivum,cv. Suwon 11,PetC-TaISP+ (wild type) [Not assayed],PHIPO:0001106,,,Reporter gene assay,interspecies interaction,31804478,
 A0A0L0V3D9,27350,Puccinia striiformis,CYR31,PSTG_12806+ (wild type) [Wild type product level],Q7X9A6,4565,Triticum aestivum,cv. Suwon 11,PetC-TaISP+ (wild type) [Not assayed],,PHIDO:0000391,BTO:0000713,,interspecies interaction,31804478,
 A0A507D1H9,286115,Synchytrium endobioticum,MB42,AvrSen1deltaSP(1-30) (partial amino acid deletion) [Not assayed],,4113,Solanum tuberosum,Aventra,,PHIPO:0000182,,BTO:0000713,Macroscopic observation (quantitative observation),gene-for-gene interaction,31246152,Effector
+G4MXR2,318829,Magnaporthe oryzae,,,Q5NBT9,4530,Oryza sativa,,,,,,Two-hybrid,protein-protein interaction,30610168,
