@@ -103,6 +103,7 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
     for session in curation_sessions.values():
         pmid = int(next(iter(session['publications'].keys())).replace('PMID:', ''))
         for annotation in session.get('annotations', []):
+            data = None
             if metagenotype_id := annotation.get('metagenotype'):
                 data = get_metagenotype_data(session, metagenotype_id)
             elif annotation['type'] == 'physical_interaction':
