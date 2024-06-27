@@ -1,0 +1,89 @@
+{
+    "curation_sessions": {
+        "59484877a87d5786": {
+            "annotations": [
+                {
+                    "checked": "no",
+                    "creation_date": "2020-03-13",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "IMP",
+                    "extension": [],
+                    "gene": "Synchytrium endobioticum A0A507D1H9",
+                    "publication": "PMID:31246152",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "GO:0140418",
+                    "type": "biological_process"
+                }
+            ],
+            "genes": {
+                "Synchytrium endobioticum A0A507D1H9": {
+                    "organism": "Synchytrium endobioticum",
+                    "uniquename": "A0A507D1H9"
+                }
+            }
+        },
+        "69e99b22bfebf3b0": {
+            "annotations": [
+                {
+                    "checked": "no",
+                    "conditions": [],
+                    "creation_date": "2020-02-26",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "IGI",
+                    "extension": [],
+                    "gene": "Zymoseptoria tritici A0A2K9YVY7",
+                    "publication": "PMID:29434355",
+                    "status": "new",
+                    "term": "GO:0140418",
+                    "type": "biological_process",
+                    "with_gene": "A0A1D5VHV3"
+                }
+            ],
+            "genes": {
+                "Triticum aestivum A0A1D5VHV3": {
+                    "organism": "Triticum aestivum",
+                    "uniquename": "A0A1D5VHV3"
+                },
+                "Zymoseptoria tritici A0A2K9YVY7": {
+                    "organism": "Zymoseptoria tritici",
+                    "uniquename": "A0A2K9YVY7"
+                }
+            }
+        },
+        "f41d30e250b8f9b0": {
+            "annotations": [
+                {
+                    "checked": "no",
+                    "conditions": [],
+                    "creation_date": "2020-01-22",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "IMP",
+                    "extension": [],
+                    "gene": "Hyaloperonospora arabidopsidis M4B6G6",
+                    "publication": "PMID:20601497",
+                    "status": "new",
+                    "term": "GO:0140418",
+                    "type": "biological_process"
+                }
+            ],
+            "genes": {
+                "Arabidopsis thaliana F4J339": {
+                    "organism": "Arabidopsis thaliana",
+                    "uniquename": "F4J339"
+                },
+                "Hyaloperonospora arabidopsidis M4B6G6": {
+                    "organism": "Hyaloperonospora arabidopsidis",
+                    "uniquename": "M4B6G6"
+                }
+            }
+        }
+    },
+    "schema_version": 1
+}

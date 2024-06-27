@@ -262,3 +262,18 @@ def get_high_level_terms(annotation):
         if hlt_2:
             high_level_terms.add(hlt_2)
     return list(sorted(high_level_terms))
+
+
+def get_effector_gene_ids(canto_export):
+    EFFECTOR_TERM_ID = 'GO:0140418'
+    uniprot_ids = set()
+    for session in canto_export['curation_sessions'].values():
+        genes = session.get('genes')
+        if not genes:
+            continue
+        for annotation in session.get('annotations', []):
+            if annotation.get('term') == EFFECTOR_TERM_ID:
+                gene_id = annotation['gene']
+                uniprot_id = genes[gene_id]['uniquename']
+                uniprot_ids.add(uniprot_id)
+    return uniprot_ids

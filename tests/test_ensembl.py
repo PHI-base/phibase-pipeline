@@ -8,6 +8,7 @@ from pandas.testing import assert_frame_equal
 from phibase_pipeline.ensembl import (
     combine_canto_uniprot_data,
     get_canto_columns,
+    get_effector_gene_ids,
     get_genotype_data,
     get_high_level_terms,
     get_metagenotype_data,
@@ -20,6 +21,13 @@ TEST_DATA_DIR = Path(__file__).parent / 'data' / 'ensembl'
 @pytest.fixture
 def phicanto_export():
     path = TEST_DATA_DIR / 'phicanto_export.json'
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def effector_export():
+    path = TEST_DATA_DIR / 'phicanto_export_effector.json'
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
@@ -306,4 +314,10 @@ def test_combine_canto_uniprot_data():
 )
 def test_get_high_level_terms(annotation, expected):
     actual = get_high_level_terms(annotation)
+    assert expected == actual
+
+
+def test_get_effector_gene_ids(effector_export):
+    expected = set(('A0A507D1H9', 'A0A2K9YVY7', 'M4B6G6'))
+    actual = get_effector_gene_ids(effector_export)
     assert expected == actual
