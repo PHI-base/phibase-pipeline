@@ -14,8 +14,8 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
     alleles = session['alleles']
     genes = session['genes']
     strain = genotype['organism_strain']
-    taxon_id = str(genotype['organism_taxonid'])
-    species_name = session['organisms'][taxon_id]['full_name']
+    taxon_id = genotype['organism_taxonid']
+    species_name = session['organisms'][str(taxon_id)]['full_name']
     uniprot_id = None
     allele_display_name = None
     for locus in genotype['loci']:
@@ -36,6 +36,7 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
             uniprot_id = gene['uniquename']
     record = {
         'uniprot': uniprot_id,
+        'taxid': taxon_id,
         'organism': species_name,
         'strain': strain,
         'modification': allele_display_name,
@@ -77,10 +78,12 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
 
     column_order = [
         'uniprot_a',
+        'taxid_a',
         'organism_a',
         'strain_a',
         'modification_a',
         'uniprot_b',
+        'taxid_b',
         'organism_b',
         'strain_b',
         'modification_b',
@@ -180,7 +183,6 @@ def get_uniprot_columns(uniprot_data):
     uniprot_match_values = {
         'strain': df.taxid_strain.notna(),
         'species': df.taxid_strain.isna(),
-        'none': df.uniprot.isna(),
     }
     for value, cond in uniprot_match_values.items():
         df.loc[cond, 'uniprot_matches'] = value
@@ -232,6 +234,12 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
         .merge(uniprot_a_df, left_on='uniprot_a', **merge_args)
         .merge(uniprot_b_df, left_on='uniprot_b', **merge_args)
     )
+    merged_df.taxid_species_a = merged_df.taxid_species_a.mask(
+        merged_df.uniprot_a.isna(), merged_df.taxid_a
+    ).astype(int)
+    merged_df.taxid_species_b = merged_df.taxid_species_b.mask(
+        merged_df.uniprot_b.isna(), merged_df.taxid_b
+    ).astype(int)
     merged_df['phibase_id'] = pd.Series(dtype='object')
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')

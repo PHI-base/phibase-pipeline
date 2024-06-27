@@ -38,6 +38,7 @@ def test_get_genotype_data(phicanto_export):
     suffix = '_a'
     expected = {
         'uniprot_a': 'A0A0L0V3D9',
+        'taxid_a': 27350,
         'organism_a': 'Puccinia striiformis',
         'strain_a': 'CYR32',
         'modification_a': (
@@ -53,12 +54,14 @@ def test_get_metagenotype_data(phicanto_export):
     metagenotype_id = 'cc6cf06675cc6e13-metagenotype-1'
     expected = {
         'uniprot_a': 'A0A0L0V3D9',
+        'taxid_a': 27350,
         'organism_a': 'Puccinia striiformis',
         'strain_a': 'CYR32',
         'modification_a': (
             'Pst_12806deltaSP(1-23) (partial amino acid deletion) [Not assayed]'
         ),
         'uniprot_b': None,
+        'taxid_b': 4100,
         'organism_b': 'Nicotiana benthamiana',
         'strain_b': 'Unknown strain',
         'modification_b': None,
