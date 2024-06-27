@@ -61,7 +61,7 @@ def get_metagenotype_data(session, metagenotype_id):
     return {**pathogen_columns, **host_columns}
 
 
-def get_canto_columns(canto_export: dict) -> pd.DataFrame:
+def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFrame:
 
     def get_physical_interaction_columns(session, gene_id, interacting_id):
         raise NotImplementedError
@@ -123,6 +123,8 @@ def get_canto_columns(canto_export: dict) -> pd.DataFrame:
             disease = term_id if is_disease else None
             tissue_ids = get_tissue_ids(annotation)
             high_level_terms = get_high_level_terms(annotation)
+            if data['uniprot_a'] in effector_ids or data['uniprot_b'] in effector_ids:
+                high_level_terms.extend(['Effector'])
             high_level_term_str = (
                 '; '.join(high_level_terms) if high_level_terms else None
             )
@@ -231,7 +233,6 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
         .merge(uniprot_b_df, left_on='uniprot_b', **merge_args)
     )
     merged_df['phibase_id'] = pd.Series(dtype='object')
-    merged_df['high_level_terms'] = pd.Series(dtype='object')
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')
     # TODO: Fix this in the get_uniprot_columns

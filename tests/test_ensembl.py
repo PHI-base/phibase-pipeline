@@ -69,7 +69,8 @@ def test_get_metagenotype_data(phicanto_export):
 
 def test_get_canto_columns(phicanto_export):
     expected = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
-    actual = get_canto_columns(phicanto_export)
+    effector_ids = set(['A0A507D1H9'])
+    actual = get_canto_columns(phicanto_export, effector_ids)
     assert_frame_equal(expected, actual)
 
 

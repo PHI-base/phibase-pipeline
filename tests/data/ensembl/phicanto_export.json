@@ -287,6 +287,138 @@
             "publications" : {
                 "PMID:35468894" : {}
             }
+        },
+        "59484877a87d5786": {
+            "alleles": {
+                "A0A507D1H9:59484877a87d5786-14": {
+                    "allele_type": "partial_amino_acid_deletion",
+                    "description": "1-30",
+                    "gene": "Synchytrium endobioticum A0A507D1H9",
+                    "name": "AvrSen1deltaSP",
+                    "primary_identifier": "A0A507D1H9:59484877a87d5786-14",
+                    "synonyms": []
+                }
+            },
+            "annotations": [
+                {
+                    "checked": "no",
+                    "conditions": [
+                        "PECO:0005028"
+                    ],
+                    "creation_date": "2020-01-08",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "Macroscopic observation (quantitative observation)",
+                    "extension": [
+                        {
+                            "rangeDisplayName": "leaf",
+                            "rangeType": "Ontology",
+                            "rangeValue": "BTO:0000713",
+                            "relation": "infects_tissue"
+                        },
+                        {
+                            "rangeDisplayName": "compatible interaction, recognizable pathogen effector present, functional host resistance gene absent",
+                            "rangeType": "Ontology",
+                            "rangeValue": "PHIPO_EXT:0000012",
+                            "relation": "gene_for_gene_interaction"
+                        }
+                    ],
+                    "figure": "Figure 3",
+                    "metagenotype": "59484877a87d5786-metagenotype-1",
+                    "publication": "PMID:31246152",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "PHIPO:0000182",
+                    "type": "gene_for_gene_phenotype"
+                },
+                {
+                    "checked": "no",
+                    "creation_date": "2020-03-13",
+                    "curator": {
+                        "community_curated": false
+                    },
+                    "evidence_code": "IMP",
+                    "extension": [],
+                    "gene": "Synchytrium endobioticum A0A507D1H9",
+                    "publication": "PMID:31246152",
+                    "status": "new",
+                    "submitter_comment": "",
+                    "term": "GO:0140418",
+                    "type": "biological_process"
+                }
+            ],
+            "genes": {
+                "Synchytrium endobioticum A0A507D1H9": {
+                    "organism": "Synchytrium endobioticum",
+                    "uniquename": "A0A507D1H9"
+                }
+            },
+            "genotypes": {
+                "59484877a87d5786-genotype-1": {
+                    "comment": "pathotype 1 (D1)",
+                    "loci": [
+                        [
+                            {
+                                "expression": "Not assayed",
+                                "id": "A0A507D1H9:59484877a87d5786-14"
+                            }
+                        ]
+                    ],
+                    "organism_strain": "MB42",
+                    "organism_taxonid": 286115
+                },
+                "Solanum-tuberosum-wild-type-genotypeAventra": {
+                    "loci": [],
+                    "organism_strain": "Aventra",
+                    "organism_taxonid": 4113
+                }
+            },
+            "metadata": {
+                "accepted_timestamp": "2020-01-08 11:22:46",
+                "annotation_mode": "advanced",
+                "annotation_status": "APPROVED",
+                "annotation_status_datestamp": "2021-03-24 11:57:46",
+                "approval_in_progress_timestamp": "2021-03-23 16:07:37",
+                "approved_timestamp": "2021-03-24 11:57:46",
+                "canto_session": "59484877a87d5786",
+                "curation_accepted_date": "2020-01-08 11:22:46",
+                "curation_in_progress_timestamp": "2020-11-18 12:44:02",
+                "curation_pub_id": "PMID:31246152",
+                "curator_role": "PHI-base",
+                "first_approved_timestamp": "2020-02-04 17:01:39",
+                "has_community_curation": false,
+                "message_for_curators": "",
+                "needs_approval_timestamp": "2020-11-18 14:23:07",
+                "previous_approved_timestamp": "2021-03-03 12:29:11",
+                "reactivated_timestamp": "2020-11-18 12:44:02",
+                "session_created_timestamp": "2020-01-08 11:22:34",
+                "session_first_submitted_timestamp": "2020-01-08 12:39:55",
+                "session_genes_count": "1",
+                "session_reactivated_timestamp": "2020-11-18 12:44:02",
+                "session_term_suggestions_count": "0",
+                "session_unknown_conditions_count": "0",
+                "term_suggestion_count": "0",
+                "unknown_conditions_count": "0"
+            },
+            "metagenotypes": {
+                "59484877a87d5786-metagenotype-1": {
+                    "host_genotype": "Solanum-tuberosum-wild-type-genotypeAventra",
+                    "pathogen_genotype": "59484877a87d5786-genotype-1",
+                    "type": "pathogen-host"
+                }
+            },
+            "organisms": {
+                "286115": {
+                    "full_name": "Synchytrium endobioticum"
+                },
+                "4113": {
+                    "full_name": "Solanum tuberosum"
+                }
+            },
+            "publications": {
+                "PMID:31246152": {}
+            }
         }
     },
     "schema_version": 1
