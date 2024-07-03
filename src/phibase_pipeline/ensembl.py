@@ -129,6 +129,8 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
             data = None
             if metagenotype_id := annotation.get('metagenotype'):
                 data = get_metagenotype_data(session, metagenotype_id)
+                if data is None:
+                    continue  # Multi-allele genotypes not handled yet
                 is_disease = annotation['type'] == 'disease_name'
                 term_id = annotation['term']
                 phenotype = None if is_disease else term_id
