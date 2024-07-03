@@ -197,6 +197,7 @@ def get_uniprot_columns(uniprot_data):
         'EnsemblFungi': 'ensembl_fungi',
         'EnsemblMetazoa': 'ensembl_metazoa',
         'EnsemblPlants': 'ensembl_plants',
+        'EnsemblProtists': 'ensembl_protists',
     }
     columns = list(renames.keys())
     df = uniprot_data[columns].rename(columns=renames).copy()
