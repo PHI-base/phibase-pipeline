@@ -185,6 +185,7 @@ def get_uniprot_columns(uniprot_data):
             .fillna('')
             .sum(axis=1)
             .replace('', np.nan)
+            .str.rstrip(';')  # UniProt uses trailing semicolon
         )
         return combined_column
 
