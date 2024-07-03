@@ -164,7 +164,7 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
                     'phenotype': phenotype,
                     'disease': disease,
                     'host_tissue': tissue_ids,
-                    'evidence_code': annotation['evidence_code'] or None,
+                    'evidence_code': annotation.get('evidence_code'),
                     'interaction_type': interaction_type,
                     'pmid': pmid,
                     'high_level_terms': high_level_term_str,
