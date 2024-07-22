@@ -160,13 +160,17 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
             if data is None:
                 continue
             interaction_type = interaction_type_map.get(annotation['type'])
+            # Sometimes the evidence_code is an empty string instead of null
+            evidence_code = annotation.get('evidence_code')
+            if evidence_code == '':
+                evidence_code = None
             records.append(
                 {
                     **data,
                     'phenotype': phenotype,
                     'disease': disease,
                     'host_tissue': tissue_ids,
-                    'evidence_code': annotation.get('evidence_code'),
+                    'evidence_code': evidence_code,
                     'interaction_type': interaction_type,
                     'pmid': pmid,
                     'high_level_terms': high_level_term_str,
