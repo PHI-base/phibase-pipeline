@@ -341,4 +341,6 @@ def make_ensembl_canto_export(export_path, uniprot_data_path, out_path):
     effector_ids = get_effector_gene_ids(canto_export)
     canto_df = get_canto_columns(canto_export, effector_ids)
     combined_df = combine_canto_uniprot_data(canto_df, uniprot_df)
+    # Add empty columns for compatibility with Ensembl's pipeline
+    combined_df[['empty1', 'empty2', 'empty3']] = np.nan
     combined_df.to_csv(out_path, index=False)

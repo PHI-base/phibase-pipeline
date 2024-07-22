@@ -353,7 +353,7 @@ def test_get_physical_interaction_data():
 
 def test_make_ensembl_canto_export(tmpdir):
     expected = pd.read_csv(
-        TEST_DATA_DIR / 'combine_canto_uniprot_data_expected.csv'
+        TEST_DATA_DIR / 'make_ensembl_canto_export_expected.csv'
     )
     export_path = TEST_DATA_DIR / 'phicanto_export.json'
     uniprot_data_path = TEST_DATA_DIR / 'uniprot_test_data.csv'
