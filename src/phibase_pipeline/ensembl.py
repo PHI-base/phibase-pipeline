@@ -278,6 +278,11 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
     # TODO: Fix this in the get_uniprot_columns
     merged_df.uniprot_matches_a = merged_df.uniprot_matches_a.fillna('none')
     merged_df.uniprot_matches_b = merged_df.uniprot_matches_b.fillna('none')
+    # These columns aren't needed since Ensembl are loading these IDs by
+    # using the UniProtKB accession number.
+    # TODO: Don't load these columns from UniProt
+    merged_df.ensembl_a = np.nan
+    merged_df.ensembl_b = np.nan
     return merged_df[column_order]
 
 
