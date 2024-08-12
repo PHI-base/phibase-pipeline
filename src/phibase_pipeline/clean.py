@@ -33,43 +33,24 @@ def load_tissue_replacements(path):
 
 
 def fix_curation_dates(curation_dates):
-    def get_fixed_numeric_dates(dates):
-        # Convert Excel numeric dates
-        has_numeric_date = curation_dates.str.match('^\d+$', na=False)
-        numeric_dates = curation_dates.loc[has_numeric_date].astype(int)
-        converted_dates = pd.to_datetime(numeric_dates, unit='D', origin='1899-12-30')
-        return converted_dates
-
-    def get_fixed_month_day_dates(dates):
-        # Convert month-day dates to day-month dates first
-        month_day_pattern = re.compile(r'^([A-Z][a-z]{2})-(\d+)$')
-        has_month_day_date = dates.str.match(month_day_pattern, na=False)
-        month_day_dates = dates.loc[has_month_day_date]
-        fixed_dates = month_day_dates.str.replace(month_day_pattern, r'\2-\1', regex=True)
-        return fixed_dates
-
-    def get_fixed_day_month_dates(dates, numeric_dates):
-        day_month_pattern = re.compile(r'^\d+-[A-Z][a-z]{2}$')
-        has_day_month_dates = dates.str.match(day_month_pattern, na=False)
-        # Forward-fill years from numeric dates (assumes dates are sorted)
-        day_month_date_years = (
-            numeric_dates.dt.year.astype(str)
-            .reindex_like(dates)
-            .fillna(method='ffill')
-            .loc[has_day_month_dates]
-        )
-        day_month_dates = dates.loc[has_day_month_dates]
-        day_month_year_dates = day_month_dates.str.cat(day_month_date_years, sep='-')
-        fixed_dates = pd.to_datetime(day_month_year_dates, format='%d-%b-%Y')
-        return fixed_dates
-
-    curation_dates = curation_dates.copy()
-    numeric_dates = get_fixed_numeric_dates(curation_dates)
-    curation_dates.update(numeric_dates)
-    curation_dates.update(get_fixed_month_day_dates(curation_dates))
-    curation_dates.update(get_fixed_day_month_dates(curation_dates, numeric_dates))
-    curation_dates = pd.to_datetime(curation_dates)
-    return curation_dates
+    # First we need to fix inconsistent month-year and year-month dates
+    # with two-digit years, else these will fail to parse.
+    month_year_pattern = r'^([A-Z][a-z]{2})-(\d{2})$'
+    year_month_pattern = r'^(\d{2})-([A-Z][a-z]{2})$'
+    fixed_dates = (
+        curation_dates.ffill()  # Use previous date in case of blank rows
+        .astype(str)
+        .str.strip()
+        .str.replace(month_year_pattern, r'\1-20\2', regex=True)
+        .str.replace(year_month_pattern, r'\2-20\1', regex=True)
+    )
+    has_serial_date = curation_dates.astype(str).str.match('^\d+$', na=False)
+    serial_dates = curation_dates.loc[has_serial_date].astype(int)
+    fixed_dates.loc[has_serial_date] = pd.to_datetime(
+        serial_dates, unit='D', origin='1899-12-30'
+    )
+    converted_dates = pd.to_datetime(fixed_dates, format='mixed', dayfirst=True)
+    return converted_dates
 
 
 def clean_phibase_csv(path):
