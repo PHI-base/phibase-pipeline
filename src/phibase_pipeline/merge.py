@@ -1,3 +1,25 @@
+def get_recurated_sessions(phibase_export, canto_export):
+    phibase_pmid_sessions, canto_pmid_sessions = (
+        {
+            session['metadata']['curation_pub_id']: session
+            for session in export['curation_sessions'].values()
+        }
+        for export in (phibase_export, canto_export)
+    )
+    recurated_pmids = set.intersection(
+        set(phibase_pmid_sessions.keys()),
+        set(canto_pmid_sessions.keys()),
+    )
+    recurated_sessions = {
+        pmid: {
+            'phibase': phibase_pmid_sessions[pmid],
+            'canto': canto_pmid_sessions[pmid],
+        }
+        for pmid in recurated_pmids
+    }
+    return recurated_sessions
+
+
 def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
 
     def get_feature_number(feature_id):
