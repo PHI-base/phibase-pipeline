@@ -85,6 +85,9 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
             case _:
                 raise ValueError(f'unsupported feature type: {feature_type}')
 
+    if feature_type not in canto_session:
+        return {}
+
     exports = (phibase_session, canto_session)
     features = tuple(e[feature_type] for e in exports)
     next_feature_num = 1 + max(map(get_max_feature_number, features))
