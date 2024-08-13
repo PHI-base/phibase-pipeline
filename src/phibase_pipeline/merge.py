@@ -108,3 +108,25 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
             next_feature_num += 1
 
     return rekeyed_features
+
+
+def merge_recurated_sessions(recurated_sessions):
+    merged_sessions = {}
+    for pmid, session_dict in recurated_sessions.items():
+        phibase_session, canto_session = session_dict['phibase'], session_dict['canto']
+        if 'genes' not in canto_session:
+            continue  # session is not approved or not valid
+        merged_session = phibase_session.copy()
+        for feature_type in ('genes', 'organisms'):
+            merged_session[feature_type].update(canto_session[feature_type])
+        for feature_type in ('alleles', 'genotypes', 'metagenotypes'):
+            rekeyed_features = rekey_duplicate_feature_ids(
+                feature_type, phibase_session, canto_session
+            )
+            merged_session[feature_type].update(rekeyed_features)
+        merged_session['annotations'].extend(canto_session['annotations'])
+        merged_session['metadata'] = canto_session['metadata']
+        merged_session['metadata']['session_genes_count'] = len(merged_session['genes'])
+        merged_sessions[pmid] = merged_session
+
+    return merged_sessions
