@@ -5,16 +5,22 @@ def update_session_ids(recurated_sessions):
 
     def rename_session_ids(old_session_id, new_session_id, session):
         # TODO: Do this replacement properly
+        if not session:
+            return {}
         return json.loads(
             json.dumps(session).replace(old_session_id, new_session_id)
         )
 
     renamed_sessions = {}
+    old_session_id = None
+    new_session_id = None
     for pmid, session_dict in recurated_sessions.items():
         phibase_session = session_dict['phibase']
-        old_session_id = phibase_session['metadata']['canto_session']
+        if phibase_session:
+            old_session_id = phibase_session['metadata']['canto_session']
         canto_session = session_dict['canto']
-        new_session_id = canto_session['metadata']['canto_session']
+        if phibase_session:
+            new_session_id = canto_session['metadata']['canto_session']
         renamed_sessions[pmid] = {
             'phibase': rename_session_ids(
                 old_session_id, new_session_id, phibase_session
