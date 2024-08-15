@@ -329,8 +329,51 @@ def test_get_recurated_sessions():
                     'synonyms': [],
                 },
             },
-            id='alleles'
-        )
+            id='alleles',
+        ),
+        pytest.param(
+            # feature_type
+            'genotypes',
+            # phibase_session
+            {
+                'genotypes': {
+                    '0000000001abcdef-genotype-1': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                    '0000000001abcdef-genotype-2': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                }
+            },
+            # canto_session
+            {
+                'genotypes': {
+                    '0000000001abcdef-genotype-1': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                    '0000000001abcdef-genotype-2': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-2'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                }
+            },
+            # expected
+            {
+                '0000000001abcdef-genotype-3': {
+                    'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-2'}]],
+                    'organism_strain': 'PH-1',
+                    'organism_taxonid': 5518,
+                },
+            },
+            id='genotypes',
+        ),
     ],
 )
 def test_rekey_duplicate_feature_ids(
