@@ -2,6 +2,7 @@ import pytest
 
 from phibase_pipeline.merge import (
     get_recurated_sessions,
+    rekey_duplicate_feature_ids,
     update_session_ids,
 )
 
@@ -225,4 +226,115 @@ def test_get_recurated_sessions():
         ('PMID:2', '0000000003abcdef', '0000000004abcdef'),
     )
     actual = get_recurated_sessions(phibase_export, canto_export)
+    assert expected == actual
+
+
+@pytest.mark.parametrize(
+    'feature_type, phibase_session, canto_session, expected',
+    [
+        pytest.param(
+            # feature_type
+            'alleles',
+            # phibase_session
+            {
+                'alleles': {
+                    'I1RYS3:0000000001abcdef-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RYS3',
+                        'name': 'ScOrtholog_MET22delta',
+                        'primary_identifier': 'I1RYS3:0000000001abcdef-1',
+                        'synonyms': [],
+                    },
+                    'I1RYS3:0000000001abcdef-2': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RYS3',
+                        'name': 'ScOrtholog_MET22delta2',
+                        'primary_identifier': 'I1RYS3:0000000001abcdef-2',
+                        'synonyms': [],
+                    },
+                    'I1RWQ1:0000000001abcdef-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RWQ1',
+                        'name': 'ScOrtholog_INP53delta',
+                        'primary_identifier': 'I1RWQ1:0000000001abcdef-1',
+                        'synonyms': [],
+                    },
+                }
+            },
+            # canto_session
+            {
+                'alleles': {
+                    # duplicate allele with unique name: use this name
+                    'I1RYS3:0000000001abcdef-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RYS3',
+                        'name': 'FG09532.1delta',
+                        'primary_identifier': 'I1RYS3:0000000001abcdef-1',
+                        'synonyms': [],
+                    },
+                    # unique allele with duplicate ID: renumber to 3
+                    'I1RYS3:0000000001abcdef-2': {
+                        'allele_type': 'wild_type',
+                        'gene': 'Fusarium graminearum I1RYS3',
+                        'name': 'FG09532.1+',
+                        'primary_identifier': 'I1RYS3:0000000001abcdef-2',
+                        'synonyms': [],
+                    },
+                    # unique allele with duplicate ID: renumber to 3
+                    'I1RWQ1:0000000001abcdef-1': {
+                        'allele_type': 'wild_type',
+                        'gene': 'Fusarium graminearum I1RWQ1',
+                        'name': 'FG09532.1+',
+                        'primary_identifier': 'I1RWQ1:0000000001abcdef-1',
+                        'synonyms': [],
+                    },
+                    # unique allele with unique ID: do nothing
+                    'I1RWQ1:0000000001abcdef-2': {
+                        'allele_type': 'amino_acid_substitution',
+                        'gene': 'Fusarium graminearum I1RWQ1',
+                        'name': 'FG09532.1AA',
+                        'primary_identifier': 'I1RWQ1:0000000001abcdef-2',
+                        'synonyms': [],
+                    },
+                }
+            },
+            # expected
+            {
+                'I1RYS3:0000000001abcdef-1': {
+                    'allele_type': 'deletion',
+                    'gene': 'Fusarium graminearum I1RYS3',
+                    'name': 'FG09532.1delta',
+                    'primary_identifier': 'I1RYS3:0000000001abcdef-1',
+                    'synonyms': [],
+                },
+                'I1RYS3:0000000001abcdef-3': {
+                        'allele_type': 'wild_type',
+                        'gene': 'Fusarium graminearum I1RYS3',
+                        'name': 'FG09532.1+',
+                        'primary_identifier': 'I1RYS3:0000000001abcdef-3',
+                        'synonyms': [],
+                },
+                'I1RWQ1:0000000001abcdef-2': {
+                    'allele_type': 'amino_acid_substitution',
+                    'gene': 'Fusarium graminearum I1RWQ1',
+                    'name': 'FG09532.1AA',
+                    'primary_identifier': 'I1RWQ1:0000000001abcdef-2',
+                    'synonyms': [],
+                },
+                'I1RWQ1:0000000001abcdef-4': {
+                    'allele_type': 'wild_type',
+                    'gene': 'Fusarium graminearum I1RWQ1',
+                    'name': 'FG09532.1+',
+                    'primary_identifier': 'I1RWQ1:0000000001abcdef-4',
+                    'synonyms': [],
+                },
+            },
+            id='alleles'
+        )
+    ],
+)
+def test_rekey_duplicate_feature_ids(
+    feature_type, phibase_session, canto_session, expected
+):
+    actual = rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session)
     assert expected == actual
