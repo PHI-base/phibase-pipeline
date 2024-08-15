@@ -374,6 +374,49 @@ def test_get_recurated_sessions():
             },
             id='genotypes',
         ),
+        pytest.param(
+            # feature_type
+            'metagenotypes',
+            # phibase_session
+            {
+                'metagenotypes': {
+                    '0000000001abcdef-metagenotype-1': {
+                        'pathogen_genotype': '0000000001abcdef-genotype-1',
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    '0000000001abcdef-metagenotype-2': {
+                        'pathogen_genotype': '0000000001abcdef-genotype-2',
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                }
+            },
+            # canto_session
+            {
+                'metagenotypes': {
+                    '0000000001abcdef-metagenotype-1': {
+                        'pathogen_genotype': '0000000001abcdef-genotype-3',
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    '0000000001abcdef-metagenotype-2': {
+                        'pathogen_genotype': '0000000001abcdef-genotype-2',
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                }
+            },
+            # expected
+            {
+                '0000000001abcdef-metagenotype-3': {
+                    'pathogen_genotype': '0000000001abcdef-genotype-3',
+                    'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
+                    'type': 'pathogen-host',
+                },
+            },
+            id='metagenotypes',
+        ),
     ],
 )
 def test_rekey_duplicate_feature_ids(
