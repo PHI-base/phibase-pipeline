@@ -65,9 +65,12 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
         )
 
     def get_matching_feature_ids(features_a, features_b):
-        return set.intersection(
-            set(features_a.keys()),
-            set(features_b.keys())
+        ids_a = features_a.keys()
+        ids_b = list(features_b.keys())
+        # maintain original order to ensure consistent rekeying later
+        return sorted(
+            set(ids_a).intersection(ids_b),
+            key=lambda k: ids_b.index(k)
         )
 
     def features_are_unique(feature_type, feature_a, feature_b):
