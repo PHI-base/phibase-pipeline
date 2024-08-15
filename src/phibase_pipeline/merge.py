@@ -104,7 +104,9 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
     features_a = phibase_session[feature_type]
     features_b = canto_session[feature_type]
     matching_ids = get_matching_feature_ids(features_a, features_b)
-    rekeyed_features = features_b.copy()
+    rekeyed_features = (
+        features_b.copy() if feature_type == 'alleles' else {}
+    )
     for feature_id in matching_ids:
         if 'wild-type' in feature_id:
             continue
@@ -114,9 +116,12 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
             feature_no_num = feature_id[:feature_id.rindex('-')]
             new_feature_id = f'{feature_no_num}-{next_feature_num}'
             if feature_type == 'alleles':
-                feature_b['primary_identifier'] = new_feature_id
-            rekeyed_features[new_feature_id] = feature_b
-            del rekeyed_features[feature_id]
+                new_feature = feature_b.copy()
+                new_feature['primary_identifier'] = new_feature_id
+                rekeyed_features[new_feature_id] = new_feature
+                del rekeyed_features[feature_id]
+            else:
+                rekeyed_features[new_feature_id] = feature_b
             next_feature_num += 1
 
     return rekeyed_features
