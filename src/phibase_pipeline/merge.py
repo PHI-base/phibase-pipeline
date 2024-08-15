@@ -132,7 +132,9 @@ def merge_recurated_sessions(recurated_sessions):
     for pmid, session_dict in recurated_sessions.items():
         phibase_session, canto_session = session_dict['phibase'], session_dict['canto']
         if 'genes' not in canto_session:
-            continue  # session is not approved or not valid
+            # Canto session is not approved or not valid
+            merged_sessions[pmid] = phibase_session
+            continue
         merged_session = phibase_session.copy()
         for feature_type in ('genes', 'organisms'):
             merged_session[feature_type].update(canto_session[feature_type])
