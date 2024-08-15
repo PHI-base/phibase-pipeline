@@ -74,7 +74,8 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
         match feature_type:
             case 'alleles':
                 return (
-                    feature_a['gene'] != feature_b['gene']
+                    feature_a['allele_type'] != feature_b['allele_type']
+                    or feature_a['gene'] != feature_b['gene']
                     or feature_a['primary_identifier'] != feature_b['primary_identifier']
                 )
             case 'genotypes':
