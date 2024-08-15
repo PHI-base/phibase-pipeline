@@ -1,6 +1,7 @@
 import pytest
 
 from phibase_pipeline.merge import (
+    get_recurated_sessions,
     update_session_ids,
 )
 
@@ -205,4 +206,23 @@ def session_dict_with_ids(*session_dict_data):
 )
 def test_update_session_ids(sessions, expected):
     actual = update_session_ids(sessions)
+    assert expected == actual
+
+
+def test_get_recurated_sessions():
+    phibase_export = export_with_ids(
+        ('PMID:1', '0000000001abcdef'),
+        ('PMID:2', '0000000003abcdef'),
+        ('PMID:3', '0000000005abcdef'),
+    )
+    canto_export = export_with_ids(
+        ('PMID:1', '0000000002abcdef'),
+        ('PMID:2', '0000000004abcdef'),
+        ('PMID:4', '0000000006abcdef'),
+    )
+    expected = session_dict_with_ids(
+        ('PMID:1', '0000000001abcdef', '0000000002abcdef'),
+        ('PMID:2', '0000000003abcdef', '0000000004abcdef'),
+    )
+    actual = get_recurated_sessions(phibase_export, canto_export)
     assert expected == actual
