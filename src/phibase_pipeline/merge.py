@@ -113,6 +113,8 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
         if features_are_unique(feature_type, feature_a, feature_b):
             feature_no_num = feature_id[:feature_id.rindex('-')]
             new_feature_id = f'{feature_no_num}-{next_feature_num}'
+            if feature_type == 'alleles':
+                feature_b['primary_identifier'] = new_feature_id
             rekeyed_features[new_feature_id] = feature_b
             del rekeyed_features[feature_id]
             next_feature_num += 1
