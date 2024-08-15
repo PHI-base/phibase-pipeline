@@ -280,7 +280,7 @@ def test_get_recurated_sessions():
                         'primary_identifier': 'I1RYS3:0000000001abcdef-2',
                         'synonyms': [],
                     },
-                    # unique allele with duplicate ID: renumber to 3
+                    # unique allele with duplicate ID: renumber to 4
                     'I1RWQ1:0000000001abcdef-1': {
                         'allele_type': 'wild_type',
                         'gene': 'Fusarium graminearum I1RWQ1',
