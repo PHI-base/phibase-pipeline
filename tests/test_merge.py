@@ -390,7 +390,7 @@ def test_get_recurated_sessions():
                         'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
                         'type': 'pathogen-host',
                     },
-                }
+                },
             },
             # canto_session
             {
