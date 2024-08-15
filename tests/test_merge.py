@@ -308,11 +308,11 @@ def test_get_recurated_sessions():
                     'synonyms': [],
                 },
                 'I1RYS3:0000000001abcdef-3': {
-                        'allele_type': 'wild_type',
-                        'gene': 'Fusarium graminearum I1RYS3',
-                        'name': 'FG09532.1+',
-                        'primary_identifier': 'I1RYS3:0000000001abcdef-3',
-                        'synonyms': [],
+                    'allele_type': 'wild_type',
+                    'gene': 'Fusarium graminearum I1RYS3',
+                    'name': 'FG09532.1+',
+                    'primary_identifier': 'I1RYS3:0000000001abcdef-3',
+                    'synonyms': [],
                 },
                 'I1RWQ1:0000000001abcdef-2': {
                     'allele_type': 'amino_acid_substitution',
