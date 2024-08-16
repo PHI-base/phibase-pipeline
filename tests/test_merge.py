@@ -432,25 +432,25 @@ def test_merge_recurated_sessions():
         'PMID:1': {
             'phibase': {
                 'alleles': {
-                    'I1RYS3:0000000001abcdef-1': {
+                    'I1RYS3:0000000002abcdef-1': {
                         'allele_type': 'deletion',
                         'gene': 'Fusarium graminearum I1RYS3',
                         'name': 'ScOrtholog_MET22delta',
-                        'primary_identifier': 'I1RYS3:0000000001abcdef-1',
+                        'primary_identifier': 'I1RYS3:0000000002abcdef-1',
                         'synonyms': [],
                     },
-                    'I1RYS3:0000000001abcdef-2': {
+                    'I1RYS3:0000000002abcdef-2': {
                         'allele_type': 'deletion',
                         'gene': 'Fusarium graminearum I1RYS3',
                         'name': 'ScOrtholog_MET22delta2',
-                        'primary_identifier': 'I1RYS3:0000000001abcdef-2',
+                        'primary_identifier': 'I1RYS3:0000000002abcdef-2',
                         'synonyms': [],
                     },
-                    'I1RWQ1:0000000001abcdef-1': {
+                    'I1RWQ1:0000000002abcdef-1': {
                         'allele_type': 'deletion',
                         'gene': 'Fusarium graminearum I1RWQ1',
                         'name': 'ScOrtholog_INP53delta',
-                        'primary_identifier': 'I1RWQ1:0000000001abcdef-1',
+                        'primary_identifier': 'I1RWQ1:0000000002abcdef-1',
                         'synonyms': [],
                     },
                 },
@@ -466,13 +466,13 @@ def test_merge_recurated_sessions():
                     },
                 },
                 'genotypes': {
-                    '0000000001abcdef-genotype-1': {
-                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-1'}]],
+                    '0000000002abcdef-genotype-1': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000002abcdef-1'}]],
                         'organism_strain': 'PH-1',
                         'organism_taxonid': 5518,
                     },
-                    '0000000001abcdef-genotype-2': {
-                        'loci': [[{'id': 'A0A098DXK5:0000000001abcdef-1'}]],
+                    '0000000002abcdef-genotype-2': {
+                        'loci': [[{'id': 'A0A098DXK5:0000000002abcdef-1'}]],
                         'organism_strain': 'PH-1',
                         'organism_taxonid': 5518,
                     },
@@ -484,7 +484,7 @@ def test_merge_recurated_sessions():
                     'annotation_status_datestamp': '2024-01-01 00:00:00',
                     'approval_in_progress_timestamp': '2024-01-01 00:00:00',
                     'approved_timestamp': '2024-01-01 00:00:00',
-                    'canto_session': '0000000001abcdef',
+                    'canto_session': '0000000002abcdef',
                     'curation_accepted_date': '2024-01-01 00:00:00',
                     'curation_in_progress_timestamp': '2024-01-01 00:00:00',
                     'curation_pub_id': 'PMID:1',
@@ -503,13 +503,13 @@ def test_merge_recurated_sessions():
                     'unknown_conditions_count': '0',
                 },
                 'metagenotypes': {
-                    '0000000001abcdef-metagenotype-1': {
-                        'pathogen_genotype': '0000000001abcdef-genotype-1',
+                    '0000000002abcdef-metagenotype-1': {
+                        'pathogen_genotype': '0000000002abcdef-genotype-1',
                         'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
                         'type': 'pathogen-host',
                     },
-                    '0000000001abcdef-metagenotype-2': {
-                        'pathogen_genotype': '0000000001abcdef-genotype-2',
+                    '0000000002abcdef-metagenotype-2': {
+                        'pathogen_genotype': '0000000002abcdef-genotype-2',
                         'host_genotype': 'Triticum-aestivum-wild-type-genotype-Unknown-strain',
                         'type': 'pathogen-host',
                     },

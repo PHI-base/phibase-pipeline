@@ -128,6 +128,7 @@ def rekey_duplicate_feature_ids(feature_type, phibase_session, canto_session):
 
 
 def merge_recurated_sessions(recurated_sessions):
+    recurated_sessions = update_session_ids(recurated_sessions)
     merged_sessions = {}
     for pmid, session_dict in recurated_sessions.items():
         phibase_session, canto_session = session_dict['phibase'], session_dict['canto']
