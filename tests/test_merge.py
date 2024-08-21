@@ -1,11 +1,16 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from phibase_pipeline.merge import (
     get_recurated_sessions,
+    merge_exports,
     merge_recurated_sessions,
     rekey_duplicate_feature_ids,
     update_session_ids,
 )
+from phibase_pipeline.migrate import load_json
 
 
 def empty_session_dict():
@@ -782,4 +787,13 @@ def test_merge_recurated_sessions():
         'PMID:2': {},
     }
     actual = merge_recurated_sessions(recurated_sessions)
+    assert expected == actual
+
+
+def test_merge_exports():
+    TEST_DATA_DIR = Path(__file__).parent / 'data' / 'curation_merging'
+    phibase_export = load_json(TEST_DATA_DIR / 'phibase_export.json')
+    canto_export = load_json(TEST_DATA_DIR / 'canto_export.json')
+    expected = load_json(TEST_DATA_DIR / 'merged_export.json')
+    actual = merge_exports(phibase_export, canto_export)
     assert expected == actual

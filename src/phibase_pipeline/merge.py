@@ -150,3 +150,29 @@ def merge_recurated_sessions(recurated_sessions):
         merged_sessions[pmid] = merged_session
 
     return merged_sessions
+
+
+def merge_exports(phibase_export, canto_export):
+    phibase_sessions = phibase_export['curation_sessions']
+    canto_sessions = canto_export['curation_sessions']
+    # There should be no collisions between session IDs
+    assert not set(phibase_sessions).intersection(canto_sessions)
+
+    recurated_sessions = get_recurated_sessions(phibase_export, canto_export)
+    recurated_pmids = set(recurated_sessions.keys())
+    # Exclude recurated sessions since they'll be merged back in later
+    merged_sessions = {
+        session_id: session
+        for session_id, session in {**phibase_sessions, **canto_sessions}.items()
+        if session['metadata']['curation_pub_id'] not in recurated_pmids
+    }
+    # Need to rekey the sessions to use session ID instead of PMID
+    merged_recurated_sessions = {
+        session['metadata']['canto_session']: session
+        for session in merge_recurated_sessions(recurated_sessions).values()
+    }
+    merged_export = {
+        'curation_sessions': {**merged_sessions, **merged_recurated_sessions},
+        'schema_version': 1,
+    }
+    return merged_export
