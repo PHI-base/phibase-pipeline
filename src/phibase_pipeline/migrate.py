@@ -1119,9 +1119,10 @@ def make_phibase_json(phibase_path, approved_pmids):
     return phibase_json
 
 
-def make_combined_export(phibase_path, phicanto_path):
+def make_combined_export(phibase_path, phicanto_path, approved_pmids=None):
     phicanto_json = load_json(phicanto_path)
-    approved_pmids = get_approved_pmids(phicanto_json)
+    if approved_pmids is None:
+        approved_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phibase_path, approved_pmids)
     postprocess_phibase_json(phibase_json)
     combined_export = phibase_json
