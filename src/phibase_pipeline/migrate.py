@@ -65,6 +65,7 @@ def load_phenotype_column_mapping(path):
     df = pd.read_csv(path, na_values=['?'], dtype='str')
     for column in df.columns:
         df[column] = df[column].str.strip()
+    df.value_2 = df.value_2.replace({'TRUE': True, 'FALSE': False})
     has_primary_id = df.primary_id.notna()
     has_extension = df.extension_range.notna() & df.extension_relation.notna()
     return df[has_primary_id | has_extension]
@@ -792,8 +793,6 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
                 col for col in mapping_columns if gdf[col].isna().all()
             ]
             columns_to_rename = mapping_columns.difference(columns_to_ignore)
-            for col in mapping_values:
-                gdf[col] = gdf[col].replace({'TRUE': True, 'FALSE': False})
             renames = {
                 value_column: gdf[column].iloc[0]
                 for column, value_column in zip(columns_to_rename, mapping_values)

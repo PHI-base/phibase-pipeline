@@ -120,9 +120,22 @@ def test_load_phenotype_column_mapping():
             'column_1': 'in_vitro_growth',
             'value_1': 'increased',
             'column_2': 'is_filamentous',
-            'value_2': 'FALSE',
+            'value_2': False,
             'primary_id': 'PHIPO:0000975',
             'primary_label': 'increased unicellular population growth',
+            'eco_id': np.nan,
+            'eco_label': np.nan,
+            'feature': 'pathogen_genotype',
+            'extension_relation': np.nan,
+            'extension_range': np.nan,
+        },
+        {
+            'column_1': 'in_vitro_growth',
+            'value_1': 'increased',
+            'column_2': 'is_filamentous',
+            'value_2': True,
+            'primary_id': 'PHIPO:0001234',
+            'primary_label': 'increased hyphal growth',
             'eco_id': np.nan,
             'eco_label': np.nan,
             'feature': 'pathogen_genotype',
@@ -143,7 +156,7 @@ def test_load_phenotype_column_mapping():
             'extension_range': 'PHIPO:0000207',
         },
     ]
-    expected = pd.DataFrame(data, index=[0, 2], dtype='str')
+    expected = pd.DataFrame(data, index=[0, 2, 3], dtype='object')
     actual = load_phenotype_column_mapping(DATA_DIR / 'phenotype_mapping.csv')
     pd.testing.assert_frame_equal(actual, expected)
 

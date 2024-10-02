@@ -1,4 +1,5 @@
 column_1,value_1,column_2,value_2,primary_id,primary_label,eco_id,eco_label,feature,extension_relation,extension_range
- in_vitro_growth,increased,is_filamentous,FALSE,PHIPO:0000975,  increased unicellular population growth,,,pathogen_genotype,,
- in_vitro_growth,increased,is_filamentous,FALSE,,increased unicellular population growth,,,pathogen_genotype,,
+in_vitro_growth,increased,is_filamentous,FALSE,PHIPO:0000975,  increased unicellular population growth,,,pathogen_genotype,,
+in_vitro_growth,increased,is_filamentous,FALSE,,increased unicellular population growth,,,pathogen_genotype,,
+in_vitro_growth,increased,is_filamentous,  TRUE,PHIPO:0001234,increased hyphal growth,,,pathogen_genotype,,
 mutant_phenotype,enhanced antagonism,,,,,,,metagenotype,infective_ability,PHIPO:0000207
