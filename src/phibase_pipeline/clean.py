@@ -93,9 +93,15 @@ def clean_phibase_csv(path):
         .replace(r'^\s+|\s+$', '', regex=True)
         .replace('', np.nan)
         .replace('no data found', np.nan)
-        .replace(ligatures, regex=True)
         .replace(column_replacements)
     )
+    # This replacement raises a ValueError if either of the aa_sequence or
+    # nt_sequence columns are empty (no idea why), so we need an extra check.
+    for col in phi_df.columns:
+        if phi_df[col].isna().all():
+            continue
+        phi_df[col] = phi_df[col].replace(ligatures, regex=True)
+
     phi_df.curator_organization = (
         phi_df.curator_organization
         .replace(['Rres', 'rres', 'RRES'], 'RRes')
