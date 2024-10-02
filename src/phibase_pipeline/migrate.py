@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from phibase_pipeline.clean import clean_phibase_csv
+from phibase_pipeline.merge import merge_exports
 from phibase_pipeline.postprocess import (
     postprocess_combined_json,
     postprocess_phibase_json
@@ -1125,8 +1126,7 @@ def make_combined_export(phibase_path, phicanto_path, approved_pmids=None):
         approved_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phibase_path, approved_pmids)
     postprocess_phibase_json(phibase_json)
-    combined_export = phibase_json
-    combined_export['curation_sessions'].update(phicanto_json['curation_sessions'])
+    combined_export = merge_exports(phibase_json, phicanto_json)
     add_organism_roles(combined_export)
     postprocess_combined_json(combined_export)
     return combined_export
