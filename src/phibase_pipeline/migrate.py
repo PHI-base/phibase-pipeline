@@ -277,7 +277,7 @@ def add_genotype_ids(df):
             # The genotype IDs for multi-locus genotypes need to start after the
             # end of the ID range for single locus genotypes.
             session_genotype_counts = (
-                df.groupby('session_id').pathogen_genotype_n.agg(max).to_dict()
+                df.groupby('session_id').pathogen_genotype_n.max().to_dict()
             )
             # Initialize the genotype ID offset based on the first row
             i_offset = session_genotype_counts[df.iloc[0].session_id]
