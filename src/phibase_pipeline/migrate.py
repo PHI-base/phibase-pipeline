@@ -21,6 +21,8 @@ from phibase_pipeline.postprocess import (
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 
 
+pd.set_option('future.no_silent_downcasting', True)
+
 DATA_DIR = Path(__file__).parent / 'data'
 
 
