@@ -146,7 +146,10 @@ def merge_recurated_sessions(recurated_sessions):
             merged_session[feature_type].update(rekeyed_features)
         merged_session['annotations'].extend(canto_session['annotations'])
         merged_session['metadata'] = canto_session['metadata']
-        merged_session['metadata']['session_genes_count'] = len(merged_session['genes'])
+        # Session gene count is string type in the original JSON export
+        merged_session['metadata']['session_genes_count'] = (
+            str(len(merged_session['genes']))
+        )
         merged_sessions[pmid] = merged_session
 
     return merged_sessions

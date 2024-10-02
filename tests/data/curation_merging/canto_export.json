@@ -76,7 +76,7 @@
                 "reactivated_timestamp": "2024-01-02 00:00:00",
                 "session_created_timestamp": "2024-01-02 00:00:00",
                 "session_first_submitted_timestamp": "2024-01-02 00:00:00",
-                "session_genes_count": 2,
+                "session_genes_count": "2",
                 "session_reactivated_timestamp": "2024-01-02 00:00:00",
                 "session_term_suggestions_count": "0",
                 "session_unknown_conditions_count": "0",

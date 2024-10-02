@@ -3968,7 +3968,7 @@ def test_make_combined_export():
                     'needs_approval_timestamp': '2024-01-31 11:51:09',
                     'session_created_timestamp': '2023-11-02 23:41:39',
                     'session_first_submitted_timestamp': '2024-01-31 11:51:09',
-                    'session_genes_count': '1',
+                    'session_genes_count': '2',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
                     'term_suggestion_count': '0',
