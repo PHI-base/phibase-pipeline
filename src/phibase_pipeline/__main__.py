@@ -11,13 +11,13 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     'phibase',
-    metavar='CSV',
+    metavar='PHIBASE_CSV',
     type=str,
     help='the path to the PHI-base 5 CSV export file',
 )
 parser.add_argument(
     'phicanto',
-    metavar='JSON',
+    metavar='CANTO_JSON',
     type=str,
     help='the path to the PHI-Canto JSON export file',
 )
