@@ -24,7 +24,6 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
             expr_str = f' [{expression}]' if expression else ''
             allele_id = locus_allele['id']
             allele = alleles[allele_id]
-            # Note the deliberate leading space!
             description = allele.get('description')
             desc_str = f'({description})' if description else ''
             allele_type = allele['allele_type'].replace('_', ' ')
