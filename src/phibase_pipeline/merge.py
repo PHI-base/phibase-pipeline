@@ -169,7 +169,7 @@ def merge_exports(phibase_export, canto_export):
         for session_id, session in {**phibase_sessions, **canto_sessions}.items()
         if session['metadata']['curation_pub_id'] not in recurated_pmids
     }
-    # Need to rekey the sessions to use session ID instead of PMID
+    # Canto format expects sessions to be keyed by session ID (not PMID)
     merged_recurated_sessions = {
         session['metadata']['canto_session']: session
         for session in merge_recurated_sessions(recurated_sessions).values()
