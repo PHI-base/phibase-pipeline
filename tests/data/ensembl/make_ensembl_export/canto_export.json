@@ -1,0 +1,1724 @@
+{
+   "curation_sessions" : {
+      "0603f5b854b64f55" : {
+         "alleles" : {
+            "A0A384J5Y1:0603f5b854b64f55-1" : {
+               "allele_type": "wild_type",
+               "gene": "Botrytis cinerea A0A384J5Y1",
+               "name": "Bos1+",
+               "primary_identifier": "A0A384J5Y1:0603f5b854b64f55-1",
+               "synonyms" : []
+            },
+            "A0A384J5Y1:0603f5b854b64f55-11" : {
+               "allele_type": "amino_acid_mutation",
+               "description": "G415D",
+               "gene": "Botrytis cinerea A0A384J5Y1",
+               "name": "Bos1",
+               "primary_identifier": "A0A384J5Y1:0603f5b854b64f55-11",
+               "synonyms" : []
+            },
+            "A0A384J5Y1:0603f5b854b64f55-12" : {
+               "allele_type": "amino_acid_insertion_and_mutation",
+               "description": "18.3 (55bp) duplication 835 + 838stop",
+               "gene": "Botrytis cinerea A0A384J5Y1",
+               "name": "Bos1",
+               "primary_identifier": "A0A384J5Y1:0603f5b854b64f55-12",
+               "synonyms" : []
+            },
+            "A0A384J5Y1:0603f5b854b64f55-8" : {
+               "allele_type": "nonsense_mutation",
+               "description": "Q846stop",
+               "gene": "Botrytis cinerea A0A384J5Y1",
+               "name": "Bos1",
+               "primary_identifier": "A0A384J5Y1:0603f5b854b64f55-8",
+               "synonyms" : []
+            },
+            "A0A384J5Y1:0603f5b854b64f55-9" : {
+               "allele_type": "amino_acid_mutation",
+               "description": "E253D",
+               "gene": "Botrytis cinerea A0A384J5Y1",
+               "name": "Bos1",
+               "primary_identifier": "A0A384J5Y1:0603f5b854b64f55-9",
+               "synonyms" : []
+            }
+         },
+         "annotations" : [
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005147"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "high",
+                     "rangeType": "Ontology",
+                     "rangeValue": "FYPO_EXT:0000001",
+                     "relation": "has_severity"
+                  },
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Q846stop; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-5",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Four mutant lines of Botrytis cinerea with high levels of resistance to fludioxonil were obtained in the laboratory by selection on fungicide-amended media. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000592",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005147"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "high",
+                     "rangeType": "Ontology",
+                     "rangeValue": "FYPO_EXT:0000001",
+                     "relation": "has_severity"
+                  },
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "E253D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Four mutant lines of Botrytis cinerea with high levels of resistance to fludioxonil were obtained in the laboratory by selection on fungicide-amended media. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000592",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005147"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "high",
+                     "rangeType": "Ontology",
+                     "rangeValue": "FYPO_EXT:0000001",
+                     "relation": "has_severity"
+                  },
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Frameshift indel 835, 838stop Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-7",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Four mutant lines of Botrytis cinerea with high levels of resistance to fludioxonil were obtained in the laboratory by selection on fungicide-amended media. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000592",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005147"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "high",
+                     "rangeType": "Ontology",
+                     "rangeValue": "FYPO_EXT:0000001",
+                     "relation": "has_severity"
+                  },
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "G415D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-8",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Four mutant lines of Botrytis cinerea with high levels of resistance to fludioxonil were obtained in the laboratory by selection on fungicide-amended media. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000592",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005310"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Q846stop; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-5",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide procymidone. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0001332",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005310"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "E253D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide procymidone. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0001332",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005310"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Frameshift indel 835, 838stop Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-7",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide procymidone. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0001332",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005310"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "G415D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-8",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide procymidone. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0001332",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005041"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Q846stop; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-5",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide iprodione. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000389",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005041"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "E253D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide iprodione. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000389",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005041"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "Frameshift indel 835, 838stop Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-7",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide iprodione. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000389",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005041"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Cell growth assay",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "",
+                     "rangeType": "Text",
+                     "rangeValue": "G415D; Bos1 (OS-1); BOTRCI",
+                     "relation": "alteration_in_archetype"
+                  }
+               ],
+               "figure": "Table 3",
+               "genotype": "0603f5b854b64f55-genotype-8",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Fludioxonil-resistant mutant lines of Botrytis cinerea displayed cross-resistance with the fungicide iprodione. Resistance to fungicides were assessed on amended PDA plates.",
+               "term": "PHIPO:0000389",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000005",
+                  "PECO:0000102",
+                  "PECO:0005228"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Asexual sporulation assay",
+               "extension" : [],
+               "figure": "Table 4",
+               "genotype": "0603f5b854b64f55-genotype-5",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Sporulation of laboratory-generated resistant isolates of B. cinerea decreased by approximately 87.6 to 100% when compared with sporulation of parental strains.",
+               "term": "PHIPO:0000052",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000005",
+                  "PECO:0000102",
+                  "PECO:0005228"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Asexual sporulation assay",
+               "extension" : [],
+               "figure": "Table 4",
+               "genotype": "0603f5b854b64f55-genotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Sporulation of laboratory-generated resistant isolates of B. cinerea decreased by approximately 87.6 to 100% when compared with sporulation of parental strains.",
+               "term": "PHIPO:0000052",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000005",
+                  "PECO:0000102",
+                  "PECO:0005228"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Asexual sporulation assay",
+               "extension" : [],
+               "figure": "Table 4",
+               "genotype": "0603f5b854b64f55-genotype-7",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Sporulation of laboratory-generated resistant isolates of B. cinerea decreased by approximately 87.6 to 100% when compared with sporulation of parental strains.",
+               "term": "PHIPO:0000052",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0000005",
+                  "PECO:0000102",
+                  "PECO:0005228"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Asexual sporulation assay",
+               "extension" : [],
+               "figure": "Table 4",
+               "genotype": "0603f5b854b64f55-genotype-8",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Sporulation of laboratory-generated resistant isolates of B. cinerea decreased by approximately 87.6 to 100% when compared with sporulation of parental strains.",
+               "term": "PHIPO:0000052",
+               "type": "pathogen_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-1",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000480",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-3",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000480",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-5",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000480",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-7",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000480",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  },
+                  {
+                     "rangeDisplayName": "Bos1+[WT level] Botrytis cinerea (Nj5-10) / wild type Fragaria ananassa (Unknown strain)",
+                     "rangeType": "Metagenotype",
+                     "rangeValue": "0603f5b854b64f55-metagenotype-1",
+                     "relation": "compared_to_control"
+                  },
+                  {
+                     "rangeDisplayName": "reduced virulence",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0000015",
+                     "relation": "infective_ability"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-2",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "All fludioxonil-resistant isolates were virulent on strawberry leaves; however, they caused significantly smaller lesions compared with the parental sensitive strains. Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000985",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  },
+                  {
+                     "rangeDisplayName": "reduced virulence",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0000015",
+                     "relation": "infective_ability"
+                  },
+                  {
+                     "rangeDisplayName": "Bos1+[WT level] Botrytis cinerea (Bt3-4) / wild type Fragaria ananassa (Unknown strain)",
+                     "rangeType": "Metagenotype",
+                     "rangeValue": "0603f5b854b64f55-metagenotype-3",
+                     "relation": "compared_to_control"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-4",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "All fludioxonil-resistant isolates were virulent on strawberry leaves; however, they caused significantly smaller lesions compared with the parental sensitive strains. Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000985",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  },
+                  {
+                     "rangeDisplayName": "reduced virulence",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0000015",
+                     "relation": "infective_ability"
+                  },
+                  {
+                     "rangeDisplayName": "Bos1+[WT level] Botrytis cinerea (Bt6-4) / wild type Fragaria ananassa (Unknown strain)",
+                     "rangeType": "Metagenotype",
+                     "rangeValue": "0603f5b854b64f55-metagenotype-5",
+                     "relation": "compared_to_control"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "All fludioxonil-resistant isolates were virulent on strawberry leaves; however, they caused significantly smaller lesions compared with the parental sensitive strains. Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000985",
+               "type": "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked": "no",
+               "conditions" : [
+                  "PECO:0005242",
+                  "PECO:0005247"
+               ],
+               "creation_date": "2023-07-19",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code": "Macroscopic observation (quantitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName": "leaf",
+                     "rangeType": "Ontology",
+                     "rangeValue": "BTO:0000713",
+                     "relation": "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName": "disease present",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0001200",
+                     "relation": "interaction_outcome"
+                  },
+                  {
+                     "rangeDisplayName": "reduced virulence",
+                     "rangeType": "Ontology",
+                     "rangeValue": "PHIPO:0000015",
+                     "relation": "infective_ability"
+                  },
+                  {
+                     "rangeDisplayName": "Bos1+[WT level] Botrytis cinerea (Yc-6) / wild type Fragaria ananassa (Unknown strain)",
+                     "rangeType": "Metagenotype",
+                     "rangeValue": "0603f5b854b64f55-metagenotype-7",
+                     "relation": "compared_to_control"
+                  }
+               ],
+               "figure": "Table 4",
+               "metagenotype": "0603f5b854b64f55-metagenotype-6",
+               "publication": "PMID:30686204",
+               "status": "new",
+               "submitter_comment": "All fludioxonil-resistant isolates were virulent on strawberry leaves; however, they caused significantly smaller lesions compared with the parental sensitive strains. Mycelial plugs of B. cinerea were placed on the adaxial side of strawberry leaves that had been previously wounded with a sterilized needle. After 5 days, the lesion diameter on each inoculated leaf was measured.",
+               "term": "PHIPO:0000985",
+               "type": "pathogen_host_interaction_phenotype"
+            }
+         ],
+         "genes" : {
+            "Botrytis cinerea A0A384J5Y1" : {
+               "organism": "Botrytis cinerea",
+               "uniquename": "A0A384J5Y1"
+            }
+         },
+         "genotypes" : {
+            "0603f5b854b64f55-genotype-1" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Wild type product level",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-1"
+                     }
+                  ]
+               ],
+               "organism_strain": "Nj5-10",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-2" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Wild type product level",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-1"
+                     }
+                  ]
+               ],
+               "organism_strain": "Bt3-4",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-3" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Wild type product level",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-1"
+                     }
+                  ]
+               ],
+               "organism_strain": "Bt6-4",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-4" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Wild type product level",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-1"
+                     }
+                  ]
+               ],
+               "organism_strain": "Yc-6",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-5" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Not assayed",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-8"
+                     }
+                  ]
+               ],
+               "organism_strain": "Nj5-10",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-6" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Not assayed",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-9"
+                     }
+                  ]
+               ],
+               "organism_strain": "Bt3-4",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-7" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Not assayed",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-12"
+                     }
+                  ]
+               ],
+               "organism_strain": "Bt6-4",
+               "organism_taxonid" : 40559
+            },
+            "0603f5b854b64f55-genotype-8" : {
+               "loci" : [
+                  [
+                     {
+                        "expression": "Not assayed",
+                        "id": "A0A384J5Y1:0603f5b854b64f55-11"
+                     }
+                  ]
+               ],
+               "organism_strain": "Yc-6",
+               "organism_taxonid" : 40559
+            },
+            "Fragaria-ananassa-wild-type-genotype-Unknown-strain" : {
+               "loci" : [],
+               "organism_strain": "Unknown strain",
+               "organism_taxonid" : 3747
+            }
+         },
+         "metadata" : {
+            "accepted_timestamp": "2023-07-19 08:54:20",
+            "annotation_mode": "advanced",
+            "annotation_status": "APPROVED",
+            "annotation_status_datestamp": "2024-05-15 12:34:10",
+            "approval_in_progress_timestamp": "2024-05-15 12:34:07",
+            "approved_timestamp": "2024-05-15 12:34:10",
+            "canto_session": "0603f5b854b64f55",
+            "curation_accepted_date": "2023-07-19 08:54:19",
+            "curation_in_progress_timestamp": "2024-05-15 12:32:19",
+            "curation_pub_id": "PMID:30686204",
+            "curator_role": "community",
+            "first_approved_timestamp": "2024-05-15 10:09:13",
+            "has_community_curation" : true,
+            "needs_approval_timestamp": "2024-05-15 12:34:04",
+            "reactivated_timestamp": "2024-05-15 12:32:19",
+            "session_created_timestamp": "2023-07-19 08:54:09",
+            "session_first_submitted_timestamp": "2023-12-04 15:20:06",
+            "session_genes_count": "1",
+            "session_reactivated_timestamp": "2024-05-15 12:32:19",
+            "session_term_suggestions_count": "0",
+            "session_unknown_conditions_count": "0",
+            "term_suggestion_count": "0",
+            "unknown_conditions_count": "0"
+         },
+         "metagenotypes" : {
+            "0603f5b854b64f55-metagenotype-1" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-1",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-2" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-5",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-3" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-2",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-4" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-6",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-5" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-3",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-6" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-7",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-7" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-4",
+               "type": "pathogen-host"
+            },
+            "0603f5b854b64f55-metagenotype-8" : {
+               "host_genotype": "Fragaria-ananassa-wild-type-genotype-Unknown-strain",
+               "pathogen_genotype": "0603f5b854b64f55-genotype-8",
+               "type": "pathogen-host"
+            }
+         },
+         "organisms" : {
+            "3747" : {
+               "full_name": "Fragaria ananassa"
+            },
+            "40559" : {
+               "full_name": "Botrytis cinerea"
+            }
+         },
+         "publications" : {
+            "PMID:30686204" : {}
+         }
+      },
+    "2d2e1c30cceb7aab" : {
+         "alleles" : {
+            "I1RAE5:2d2e1c30cceb7aab-1" : {
+               "allele_type" : "deletion",
+               "gene" : "Fusarium graminearum I1RAE5",
+               "name" : "FG00472.1delta",
+               "primary_identifier" : "I1RAE5:2d2e1c30cceb7aab-1",
+               "synonyms" : []
+            },
+            "I1RAE5:2d2e1c30cceb7aab-2" : {
+               "allele_type" : "wild_type",
+               "gene" : "Fusarium graminearum I1RAE5",
+               "name" : "FgSch9+",
+               "primary_identifier" : "I1RAE5:2d2e1c30cceb7aab-2",
+               "synonyms" : []
+            },
+            "P0C431:2d2e1c30cceb7aab-1" : {
+               "allele_type" : "deletion",
+               "gene" : "Fusarium graminearum P0C431",
+               "name" : "HOG1delta",
+               "primary_identifier" : "P0C431:2d2e1c30cceb7aab-1",
+               "synonyms" : []
+            }
+         },
+         "annotations" : [
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0000005",
+                  "PECO:0005245"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 1A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "The mutant FgSch9Δ showed reduced aerial hyphae on potato dextrose agar (PDA), complete medium (CM) and minimum medium (MM) compared to the wild type PH-1.",
+               "term" : "PHIPO:0001212",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000103"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Microscopy",
+               "extension" : [],
+               "figure" : "Figure 2A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "A high percentage of FgSch9Δ conidia showed significantly delayed germination, failing to germinate after 3 or even 6 h of incubation in 2% sucrose. The mutant needed 9 h of incubation for complete germination whereas the wild type germinated after 3 h.",
+               "term" : "PHIPO:0001019",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000103"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Microscopy",
+               "extension" : [],
+               "figure" : "Figure 2B",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "The average length of germinated conidial germ tube of the FgSch9Δ mutant was decreased dramatically than that of the wild-type PH-1 after 3 h, 6 h and 9 h of incubation in 2% sucrose.",
+               "term" : "PHIPO:0000941",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0005241",
+                  "PECO:0005322"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Macroscopic observation (qualitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName" : "spikelet",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "BTO:0002119",
+                     "relation" : "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName" : "disease present",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "PHIPO:0001200",
+                     "relation" : "interaction_outcome"
+                  }
+               ],
+               "figure" : "Figure 3A",
+               "metagenotype" : "2d2e1c30cceb7aab-metagenotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "Wheat heads were point-inoculated with conidial suspension of the wild-type PH-1 and mutant lines. Infected wheat heads were photographed 15 days after inoculation. Infection with wild-type PH-1 strain caused severe and well-dispersed scab symptoms on wheat heads.",
+               "term" : "PHIPO:0000480",
+               "type" : "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0005241",
+                  "PECO:0005322"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Macroscopic observation (qualitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName" : "spikelet",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "BTO:0002119",
+                     "relation" : "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName" : "disease present",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "PHIPO:0001200",
+                     "relation" : "interaction_outcome"
+                  },
+                  {
+                     "rangeDisplayName" : "FgSch9+[WT level] Fusarium graminearum (PH-1) / wild type Triticum aestivum (cv. Zimai 22)",
+                     "rangeType" : "Metagenotype",
+                     "rangeValue" : "2d2e1c30cceb7aab-metagenotype-2",
+                     "relation" : "compared_to_control"
+                  },
+                  {
+                     "rangeDisplayName" : "reduced virulence",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "PHIPO:0000015",
+                     "relation" : "infective_ability"
+                  }
+               ],
+               "figure" : "Figure 3A",
+               "metagenotype" : "2d2e1c30cceb7aab-metagenotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "Wheat heads were point-inoculated with conidial suspension of the wild-type PH-1 and FgSch9Δ mutant strains. Infected wheat heads were photographed 15 days after inoculation. Scab symptoms generated by ΔFgSch9 were restricted to the inoculated spikelets and those in the immediate vicinity, in comparison to widespread symptoms caused by the wild type strain, indicating FgSch9 is required for full virulence of F. graminearum.",
+               "term" : "PHIPO:0000985",
+               "type" : "pathogen_host_interaction_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000166"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgSch9 revealed significantly increased sensitivity to osmotic stress generated by 0.5 or 1.0 M NaCl compared to the wild type strain PH-1. Comparisons were made on PDA amended without or with 0.2 M, 0.5 M, 1 M, 1.2 M NaCl. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001306",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000166"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgHog1 showed significantly increased sensitivity to osmotic stress.",
+               "term" : "PHIPO:0001306",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000166"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ Hog1Δ double mutant showed significantly increased sensitivity to osmotic stress, even more severe than that of the single FgSch9Δ and Hog1Δ mutants.",
+               "term" : "PHIPO:0001306",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005147"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.",
+               "term" : "PHIPO:0000592",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005147"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "HOG1Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.",
+               "term" : "PHIPO:0000592",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005147"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5A",
+               "genotype" : "2d2e1c30cceb7aab-genotype-5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ Hog1Δ double mutant showed significantly increased resistance to the fungicide fludioxonil.",
+               "term" : "PHIPO:0000592",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005092"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgSch9 exhibited increased sensitivity to oxidative stress generated by hydrogen peroxide. Sensitivity of F. graminearum strains to oxidative stress was tested on PDA amended without or with 0.02% (w/v) H2O2. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001398",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005092"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "HOG1Δ exhibited increased sensitivity to oxidative stress generated by hydrogen peroxide. Sensitivity of F. graminearum strains to oxidative stress was tested on PDA amended without or with 0.02% (w/v) H2O2. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001398",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005092"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ HOG1Δ double mutant exhibited increased sensitivity to oxidative stress generated by hydrogen peroxide. Sensitivity of F. graminearum strains to oxidative stress was tested on PDA amended without or with 0.02% (w/v) H2O2. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001398",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005254"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgSch9 exhibited increased sensitivity to the cell wall-damaging agent congo red. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005254"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "HOG1Δ exhibited increased sensitivity to the cell wall-damaging agent congo red. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0005254"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ HOG1Δ exhibited increased sensitivity to the cell wall-damaging agent congo red. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000167"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgSch9 exhibited increased sensitivity to the cell wall-damaging agent SDS. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000167"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "HOG1Δ exhibited increased sensitivity to the cell wall-damaging agent SDS. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0005245",
+                  "PECO:0000167"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 5C",
+               "genotype" : "2d2e1c30cceb7aab-genotype-5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "FgSch9Δ HOG1Δ exhibited increased sensitivity to the cell wall-damaging agent SDS. Sensitivity of F. graminearum strains was tested on PDA amended without or with 0.02% (w/v) congo red. Mycelial growth inhibition was examined after each strain was incubated for 3 days on PDA.",
+               "term" : "PHIPO:0001397",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "checked" : "no",
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0000005",
+                  "PECO:0005226",
+                  "PECO:0000242"
+               ],
+               "creation_date" : "2023-06-30",
+               "curator" : {
+                  "community_curated" : true
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 7",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "ΔFgSch9 showed increased sensitivity to rapamycin. Serial dilutions of conidia suspensions of F. graminearum strains were spotted onto MM or MM containing 0.25 μg ml−1 rapamycin. Colony growth was inspected after 2 days of incubation at 25°C.",
+               "term" : "PHIPO:0000873",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "conditions" : [
+                  "PECO:0000102",
+                  "PECO:0000005",
+                  "PECO:0005245"
+               ],
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "evidence_code" : "Cell growth assay",
+               "extension" : [],
+               "figure" : "Figure 1B",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "Microscopic examination revealed that the mutant hyphae generally branched at a narrower angle than the wild-type progenitor and the complemented strain (Fig. 1B), suggesting FgSch9 plays a role in vegetative reproduction.",
+               "term" : "PHIPO:0001427",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "conditions" : [
+                  "PECO:0000103",
+                  "PECO:0005246"
+               ],
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "evidence_code" : "Microscopy",
+               "extension" : [],
+               "figure" : "Text p2662",
+               "genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "After 4 days of incubation in a shaker, ΔFgSch9 produced a similar number of conidia as the wild-type PH-1 (data not shown).",
+               "term" : "PHIPO:0000059",
+               "type" : "pathogen_phenotype"
+            },
+            {
+               "conditions" : [],
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "evidence_code" : "IDA",
+               "extension" : [],
+               "figure" : "Figure 2C",
+               "gene" : "Fusarium graminearum I1RAE5",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "As indicated in Fig. 2C, FgSch9-GFP was localized mainly in the cytoplasm of both conidia and hyphae.",
+               "term" : "GO:0005737",
+               "type" : "cellular_component"
+            },
+            {
+               "conditions" : [
+                  "PECO:0005241",
+                  "PECO:0005253"
+               ],
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "evidence_code" : "Macroscopic observation (qualitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName" : "kernel",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "BTO:0000668",
+                     "relation" : "infects_tissue"
+                  }
+               ],
+               "figure" : "Figure 3B",
+               "metagenotype" : "2d2e1c30cceb7aab-metagenotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "After 20 days of incubation on sterilized wheat kernels, ΔFgSch9 produced significantly lower levels of DON than the wild-type and complemented strains (Fig. 3B).",
+               "term" : "PHIPO:0000233",
+               "type" : "pathogen_host_interaction_phenotype"
+            },
+            {
+               "conditions" : [
+                  "PECO:0005241",
+                  "PECO:0005253"
+               ],
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "evidence_code" : "Macroscopic observation (qualitative observation)",
+               "extension" : [
+                  {
+                     "rangeDisplayName" : "kernel",
+                     "rangeType" : "Ontology",
+                     "rangeValue" : "BTO:0000668",
+                     "relation" : "infects_tissue"
+                  },
+                  {
+                     "rangeDisplayName" : "FgSch9+[WT level] Fusarium graminearum (PH-1) / wild type Triticum aestivum (cv. Zimai 22)",
+                     "rangeType" : "Metagenotype",
+                     "rangeValue" : "2d2e1c30cceb7aab-metagenotype-2",
+                     "relation" : "compared_to_control"
+                  }
+               ],
+               "figure" : "Figure 3B",
+               "metagenotype" : "2d2e1c30cceb7aab-metagenotype-1",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "After 20 days of incubation on sterilized wheat kernels, ΔFgSch9 produced significantly lower levels of DON than the wild-type and complemented strains (Fig. 3B).",
+               "term" : "PHIPO:0000219",
+               "type" : "pathogen_host_interaction_phenotype"
+            },
+            {
+               "creation_date" : "2024-02-28",
+               "curator" : {
+                  "community_curated" : false
+               },
+               "extension" : [],
+               "figure" : "Figure 3A",
+               "metagenotype" : "2d2e1c30cceb7aab-metagenotype-2",
+               "publication" : "PMID:24903410",
+               "status" : "new",
+               "submitter_comment" : "",
+               "term" : "PHIDO:0000163",
+               "type" : "disease_name"
+            }
+         ],
+         "genes" : {
+            "Fusarium graminearum I1RAE5" : {
+               "organism" : "Fusarium graminearum",
+               "uniquename" : "I1RAE5"
+            },
+            "Fusarium graminearum P0C431" : {
+               "organism" : "Fusarium graminearum",
+               "uniquename" : "P0C431"
+            }
+         },
+         "genotypes" : {
+            "2d2e1c30cceb7aab-genotype-1" : {
+               "loci" : [
+                  [
+                     {
+                        "id" : "I1RAE5:2d2e1c30cceb7aab-1"
+                     }
+                  ]
+               ],
+               "organism_strain" : "PH-1",
+               "organism_taxonid" : 5518
+            },
+            "2d2e1c30cceb7aab-genotype-2" : {
+               "loci" : [
+                  [
+                     {
+                        "id" : "P0C431:2d2e1c30cceb7aab-1"
+                     }
+                  ]
+               ],
+               "organism_strain" : "PH-1",
+               "organism_taxonid" : 5518
+            },
+            "2d2e1c30cceb7aab-genotype-4" : {
+               "loci" : [
+                  [
+                     {
+                        "expression" : "Wild type product level",
+                        "id" : "I1RAE5:2d2e1c30cceb7aab-2"
+                     }
+                  ]
+               ],
+               "organism_strain" : "PH-1",
+               "organism_taxonid" : 5518
+            },
+            "2d2e1c30cceb7aab-genotype-5" : {
+               "loci" : [
+                  [
+                     {
+                        "id" : "I1RAE5:2d2e1c30cceb7aab-1"
+                     }
+                  ],
+                  [
+                     {
+                        "id" : "P0C431:2d2e1c30cceb7aab-1"
+                     }
+                  ]
+               ],
+               "organism_strain" : "PH-1",
+               "organism_taxonid" : 5518
+            },
+            "Triticum-aestivum-wild-type-genotype-cv.-Zimai-22" : {
+               "loci" : [],
+               "organism_strain" : "cv. Zimai 22",
+               "organism_taxonid" : 4565
+            }
+         },
+         "metadata" : {
+            "accepted_timestamp" : "2023-06-30 14:37:38",
+            "annotation_mode" : "advanced",
+            "annotation_status" : "APPROVED",
+            "annotation_status_datestamp" : "2024-03-05 12:04:59",
+            "approval_in_progress_timestamp" : "2024-03-05 12:04:57",
+            "approved_timestamp" : "2024-03-05 12:04:59",
+            "canto_session" : "2d2e1c30cceb7aab",
+            "curation_accepted_date" : "2023-06-30 14:37:38",
+            "curation_in_progress_timestamp" : "2024-03-05 12:04:28",
+            "curation_pub_id" : "PMID:24903410",
+            "curator_role" : "community",
+            "first_approved_timestamp" : "2024-03-05 12:01:36",
+            "has_community_curation" : true,
+            "needs_approval_timestamp" : "2024-03-05 12:04:53",
+            "reactivated_timestamp" : "2024-03-05 12:04:28",
+            "session_created_timestamp" : "2023-06-30 14:37:30",
+            "session_first_submitted_timestamp" : "2024-02-28 14:03:17",
+            "session_genes_count" : "2",
+            "session_reactivated_timestamp" : "2024-03-05 12:04:28",
+            "session_term_suggestions_count" : "0",
+            "session_unknown_conditions_count" : "0",
+            "term_suggestion_count" : "0",
+            "unknown_conditions_count" : "0"
+         },
+         "metagenotypes" : {
+            "2d2e1c30cceb7aab-metagenotype-1" : {
+               "host_genotype" : "Triticum-aestivum-wild-type-genotype-cv.-Zimai-22",
+               "pathogen_genotype" : "2d2e1c30cceb7aab-genotype-1",
+               "type" : "pathogen-host"
+            },
+            "2d2e1c30cceb7aab-metagenotype-2" : {
+               "host_genotype" : "Triticum-aestivum-wild-type-genotype-cv.-Zimai-22",
+               "pathogen_genotype" : "2d2e1c30cceb7aab-genotype-4",
+               "type" : "pathogen-host"
+            }
+         },
+         "organisms" : {
+            "4565" : {
+               "full_name" : "Triticum aestivum"
+            },
+            "5518" : {
+               "full_name" : "Fusarium graminearum"
+            }
+         },
+         "publications" : {
+            "PMID:24903410" : {}
+         }
+      }
+   },
+   "schema_version" : 1
+}

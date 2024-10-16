@@ -343,3 +343,7 @@ def make_ensembl_canto_export(export_path, uniprot_data_path, out_path):
     # Add empty columns for compatibility with Ensembl's pipeline
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
     combined_df.to_csv(out_path, index=False)
+
+
+def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
+    raise NotImplementedError()
