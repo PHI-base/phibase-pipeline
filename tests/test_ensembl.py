@@ -19,6 +19,7 @@ from phibase_pipeline.ensembl import (
     get_uniprot_columns,
     make_ensembl_canto_export,
     make_ensembl_exports,
+    merge_amr_uniprot_data,
     read_phig_uniprot_mapping,
     read_phipo_chebi_mapping,
     uniprot_data_to_mapping,
@@ -741,4 +742,57 @@ def test_get_amr_records():
         }
     ]
     actual = get_amr_records(canto_export, phig_mapping, chebi_mapping)
+    assert actual == expected
+
+
+def test_merge_amr_uniprot_data():
+    record = {
+        'phig_id': 'PHIG:4721',
+        'interactor_A_molecular_id': 'A0A384J5Y1',
+        'ensembl_a': None,
+        'taxid_species_a': 40559,
+        'organism_a': 'Botrytis cinerea',
+        'taxid_strain_a': None,
+        'strain_a': 'Nj5-10',
+        'uniprot_matches_a': None,
+        'modification_a': 'Bos1(Q846stop) (nonsense mutation) [Not assayed]',
+        'interactor_B_molecular_id': 'CHEBI:81763',
+        'ensembl_b': None,
+        'taxid_species_b': None,
+        'organism_b': 'fludioxonil',
+        'taxid_strain_b': None,
+        'strain_b': None,
+        'uniprot_matches_b': None,
+        'modification_b': None,
+        'phenotype': 'PHIPO:0000592',
+        'disease': None,
+        'host_tissue': None,
+        'evidence_code': 'Cell growth assay',
+        'interaction_type': 'antimicrobial_interaction',
+        'pmid': 30686204,
+        'high_level_terms': None,
+        'interactor_A_sequence': None,
+        'interactor_B_sequence': None,
+        'buffer_col': None,
+    }
+    # Test that UniProtKB IDs not in uniprot_mapping are skipped
+    unmatched_uniprot_record = record.copy()
+    unmatched_uniprot_record['interactor_A_molecular_id'] = 'L2FD62'
+
+    amr_records = [record, unmatched_uniprot_record]
+    uniprot_mapping = {
+        'A0A384J5Y1': {
+            'ensembl': 'Bcin01g06260.3; Bcin01g06260.5; Bcin01g06260.6',
+            'taxid_species': 40559,
+            'taxid_strain': 332648,
+            'uniprot_matches': 'strain',
+        },
+    }
+    expected_record = amr_records[0].copy()
+    expected_record['ensembl_a'] = 'Bcin01g06260.3; Bcin01g06260.5; Bcin01g06260.6'
+    expected_record['taxid_species_a'] = 40559
+    expected_record['taxid_strain_a'] = 332648
+    expected_record['uniprot_matches_a'] = 'strain'
+    expected = [expected_record]
+    actual = merge_amr_uniprot_data(amr_records, uniprot_mapping)
     assert actual == expected

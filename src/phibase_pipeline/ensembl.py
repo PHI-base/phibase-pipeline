@@ -433,5 +433,19 @@ def get_amr_records(canto_export, phig_mapping, chebi_mapping):
     return records
 
 
+def merge_amr_uniprot_data(amr_records, uniprot_mapping):
+    merged = []
+    for record in amr_records:
+        uniprot_id = record['interactor_A_molecular_id']
+        uniprot_data = uniprot_mapping.get(uniprot_id)
+        if uniprot_data is None:
+            continue  # Maybe this should be an error
+        uniprot_data_suffixed = {k + '_a': v for k, v in uniprot_data.items()}
+        merged_record = record.copy()
+        merged_record.update(uniprot_data_suffixed)
+        merged.append(merged_record)
+    return merged
+
+
 def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
     raise NotImplementedError()
