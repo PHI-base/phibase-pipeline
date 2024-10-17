@@ -16,6 +16,7 @@ from phibase_pipeline.ensembl import (
     get_uniprot_columns,
     make_ensembl_canto_export,
     make_ensembl_exports,
+    read_phig_uniprot_mapping,
 )
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
@@ -491,4 +492,15 @@ def test_make_ensembl_exports():
         )
     }
     actual = make_ensembl_exports(phi_df, canto_export, uniprot_data)
+    assert actual == expected
+
+
+def test_read_phig_uniprot_mapping():
+    path = TEST_DATA_DIR / 'phig_uniprot_mapping.csv'
+    expected = {
+        'A0A059ZHI3': 'PHIG:3546',
+        'A0A059ZQI8': 'PHIG:1040',
+        'A0A059ZR97': 'PHIG:3696',
+    }
+    actual = read_phig_uniprot_mapping(path)
     assert actual == expected

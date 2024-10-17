@@ -7,6 +7,12 @@ import pandas as pd
 pd.set_option('future.no_silent_downcasting', True)
 
 
+def read_phig_uniprot_mapping(path):
+    return (
+        pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
+    )
+
+
 def get_genotype_data(session, genotype_id, suffix='_a'):
     genotype = session['genotypes'][genotype_id]
     if len(genotype['loci']) > 1:
