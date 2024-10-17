@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
@@ -18,6 +19,7 @@ from phibase_pipeline.ensembl import (
     make_ensembl_exports,
     read_phig_uniprot_mapping,
     read_phipo_chebi_mapping,
+    uniprot_data_to_mapping,
 )
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
@@ -514,5 +516,69 @@ def test_read_phipo_chebi_mapping():
         'PHIPO:0000647': {'id': 'CHEBI:39214', 'label': 'abamectin'},
         'PHIPO:0000534': {'id': 'CHEBI:27666', 'label': 'actinomycin D'},
         'PHIPO:0000591': {'id': 'CHEBI:53661', 'label': 'alexidine'},
+    }
+    assert actual == expected
+
+
+def test_uniprot_data_to_mapping():
+    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
+    actual = uniprot_data_to_mapping(uniprot_data)
+    expected = {
+        'A0A0L0V3D9': {
+            'ensembl': np.nan,
+            'taxid_species': 27350,
+            'taxid_strain': 1165861,
+            'uniprot_matches': 'strain',
+        },
+        'A0A0L0W290': {
+            'ensembl': np.nan,
+            'taxid_species': 27350,
+            'taxid_strain': 1165861,
+            'uniprot_matches': 'strain',
+        },
+        'Q7X9A6': {
+            'ensembl': (
+                'TraesARI2D03G01168670.1; '
+                'TraesCAD_scaffold_092989_01G000200.1; '
+                'TraesCLE_scaffold_085676_01G000200.1; '
+                'TraesCS2D02G214700.1; '
+                'TraesCS2D03G0451200.1; '
+                'TraesJAG2D03G01159270.1; '
+                'TraesJUL2D03G01159000.1; '
+                'TraesKAR2D01G0132480.1; '
+                'TraesLAC2B03G00896920.1; '
+                'TraesLAC2D03G01104360.1; '
+                'TraesLDM2D03G01153380.1; '
+                'TraesMAC2D03G01151020.1; '
+                'TraesNOR2D03G01168840.1; '
+                'TraesPAR_scaffold_090294_01G000200.1; '
+                'TraesRN2D0100482800.1; '
+                'TraesROB_scaffold_090335_01G000200.1; '
+                'TraesSTA2D03G01141500.1; '
+                'TraesSYM2D03G01167240.1; '
+                'TraesWEE_scaffold_091601_01G000200.1'
+            ),
+            'taxid_species': 4565,
+            'taxid_strain': None,
+            'uniprot_matches': 'species',
+        },
+        'A0A507D1H9': {
+            'ensembl': np.nan,
+            'taxid_species': 286115,
+            'taxid_strain': None,
+            'uniprot_matches': 'species',
+        },
+        'G4MXR2': {
+            'ensembl': 'MGG_08054T0',
+            'taxid_species': 318829,
+            'taxid_strain': 242507,
+            'uniprot_matches': 'strain',
+        },
+        'Q5NBT9': {
+            'ensembl': 'Os01t0254100-01',
+            'taxid_species': 4530,
+            'taxid_strain': 39947,
+            'uniprot_matches': 'strain',
+        },
     }
     assert actual == expected

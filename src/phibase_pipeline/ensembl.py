@@ -24,6 +24,12 @@ def read_phipo_chebi_mapping(path):
     )
 
 
+def uniprot_data_to_mapping(uniprot_data: pd.DataFrame) -> dict:
+    uniprot_df = get_uniprot_columns(uniprot_data)
+    uniprot_mapping = uniprot_df.set_index('uniprot').to_dict(orient='index')
+    return uniprot_mapping
+
+
 def get_genotype_data(session, genotype_id, suffix='_a'):
     genotype = session['genotypes'][genotype_id]
     if len(genotype['loci']) > 1:
