@@ -18,20 +18,20 @@ from phibase_pipeline.ensembl import (
     make_ensembl_exports,
 )
 
-
-TEST_DATA_DIR = Path(__file__).parent / 'data' / 'ensembl'
+TEST_DATA_DIR = Path(__file__).parent / 'data'
+ENSEMBL_DATA_DIR = TEST_DATA_DIR / 'ensembl'
 
 
 @pytest.fixture
 def phicanto_export():
-    path = TEST_DATA_DIR / 'phicanto_export.json'
+    path = ENSEMBL_DATA_DIR / 'phicanto_export.json'
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
 
 @pytest.fixture
 def effector_export():
-    path = TEST_DATA_DIR / 'phicanto_export_effector.json'
+    path = ENSEMBL_DATA_DIR / 'phicanto_export_effector.json'
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
@@ -75,7 +75,7 @@ def test_get_metagenotype_data(phicanto_export):
 
 
 def test_get_canto_columns(phicanto_export):
-    expected = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
+    expected = pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
     effector_ids = set(['A0A507D1H9'])
     actual = get_canto_columns(phicanto_export, effector_ids)
     assert_frame_equal(expected, actual)
@@ -83,22 +83,22 @@ def test_get_canto_columns(phicanto_export):
 
 def test_get_uniprot_columns():
     expected = pd.read_csv(
-        TEST_DATA_DIR / 'get_uniprot_columns_expected.csv',
+        ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv',
         dtype={
             'taxid_species': 'Int64',
             'taxid_strain': 'Int64',
         },
     )
-    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'uniprot_test_data.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
     actual = get_uniprot_columns(uniprot_data)
     assert_frame_equal(expected, actual)
 
 
 def test_combine_canto_uniprot_data():
-    canto_data = pd.read_csv(TEST_DATA_DIR / 'get_canto_columns_expected.csv')
-    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'get_uniprot_columns_expected.csv')
+    canto_data = pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv')
     expected = pd.read_csv(
-        TEST_DATA_DIR / 'combine_canto_uniprot_data_expected.csv',
+        ENSEMBL_DATA_DIR / 'combine_canto_uniprot_data_expected.csv',
         dtype={
             'phibase_id': 'object',
             'ensembl_a': 'object',
@@ -332,7 +332,7 @@ def test_get_effector_gene_ids(effector_export):
 
 
 def test_get_physical_interaction_data():
-    session_path = TEST_DATA_DIR / 'physical_interaction_session.json'
+    session_path = ENSEMBL_DATA_DIR / 'physical_interaction_session.json'
     with open(session_path, encoding='utf-8') as f:
         session = json.load(f)
     expected = {
@@ -354,16 +354,16 @@ def test_get_physical_interaction_data():
 
 
 def test_make_ensembl_canto_export():
-    expected = pd.read_csv(TEST_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
-    with open(TEST_DATA_DIR / 'phicanto_export.json', encoding='utf-8') as f:
+    expected = pd.read_csv(ENSEMBL_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
+    with open(ENSEMBL_DATA_DIR / 'phicanto_export.json', encoding='utf-8') as f:
         export = json.load(f)
-    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'uniprot_test_data.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
     actual = make_ensembl_canto_export(export, uniprot_data)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
 def test_make_ensembl_exports():
-    test_data = TEST_DATA_DIR / 'make_ensembl_export'
+    test_data = ENSEMBL_DATA_DIR / 'make_ensembl_export'
     phi_df = pd.read_csv(test_data / 'phi_df.csv')
     canto_export = {
         '2d2e1c30cceb7aab': {
