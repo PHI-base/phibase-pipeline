@@ -8,6 +8,7 @@ from pandas.testing import assert_frame_equal
 
 from phibase_pipeline.ensembl import (
     combine_canto_uniprot_data,
+    get_amr_records,
     get_canto_columns,
     get_effector_gene_ids,
     get_genotype_data,
@@ -505,6 +506,7 @@ def test_read_phig_uniprot_mapping():
         'A0A059ZHI3': 'PHIG:3546',
         'A0A059ZQI8': 'PHIG:1040',
         'A0A059ZR97': 'PHIG:3696',
+        'I1RAE5': 'PHIG:11',
     }
     actual = read_phig_uniprot_mapping(path)
     assert actual == expected
@@ -517,6 +519,7 @@ def test_read_phipo_chebi_mapping():
         'PHIPO:0000647': {'id': 'CHEBI:39214', 'label': 'abamectin'},
         'PHIPO:0000534': {'id': 'CHEBI:27666', 'label': 'actinomycin D'},
         'PHIPO:0000591': {'id': 'CHEBI:53661', 'label': 'alexidine'},
+        'PHIPO:0000592': {'id': 'CHEBI:81763', 'label': 'fludioxonil'},
     }
     assert actual == expected
 
@@ -626,4 +629,116 @@ def test_uniprot_data_to_mapping():
 )
 def test_get_tissue_id_str(annotation, expected):
     actual = get_tissue_id_str(annotation)
+    assert actual == expected
+
+
+def test_get_amr_records():
+    canto_export = {
+        'curation_sessions': {
+            '2d2e1c30cceb7aab': {
+                'alleles': {
+                    'I1RAE5:2d2e1c30cceb7aab-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RAE5',
+                        'name': 'FG00472.1delta',
+                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
+                    {
+                        'checked': 'no',
+                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
+                        'creation_date': '2023-06-30',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Cell growth assay',
+                        'extension': [],
+                        'figure': 'Figure 5A',
+                        'genotype': '2d2e1c30cceb7aab-genotype-1',
+                        'publication': 'PMID:24903410',
+                        'status': 'new',
+                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
+                        'term': 'PHIPO:0000592',
+                        'type': 'pathogen_phenotype',
+                    }
+                ],
+                'genes': {
+                    'Fusarium graminearum I1RAE5': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'I1RAE5',
+                    }
+                },
+                'genotypes': {
+                    '2d2e1c30cceb7aab-genotype-1': {
+                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    }
+                },
+                'metadata': {
+                    'accepted_timestamp': '2023-06-30 14:37:38',
+                    'annotation_mode': 'advanced',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2024-03-05 12:04:59',
+                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
+                    'approved_timestamp': '2024-03-05 12:04:59',
+                    'canto_session': '2d2e1c30cceb7aab',
+                    'curation_accepted_date': '2023-06-30 14:37:38',
+                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
+                    'curation_pub_id': 'PMID:24903410',
+                    'curator_role': 'community',
+                    'first_approved_timestamp': '2024-03-05 12:01:36',
+                    'has_community_curation': True,
+                    'needs_approval_timestamp': '2024-03-05 12:04:53',
+                    'reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_created_timestamp': '2023-06-30 14:37:30',
+                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
+                    'session_genes_count': '1',
+                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {},
+                'organisms': {'5518': {'full_name': 'Fusarium graminearum'}},
+                'publications': {'PMID:24903410': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+    phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
+    chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
+    expected = [
+        {
+            'phig_id': 'PHIG:11',
+            'interactor_A_molecular_id': 'I1RAE5',
+            'ensembl_a': None,
+            'taxid_species_a': 5518,
+            'organism_a': 'Fusarium graminearum',
+            'taxid_strain_a': None,
+            'strain_a': 'PH-1',
+            'uniprot_matches_a': None,
+            'modification_a': 'FG00472.1delta (deletion)',
+            'interactor_B_molecular_id': 'CHEBI:81763',
+            'ensembl_b': None,
+            'taxid_species_b': None,
+            'organism_b': 'fludioxonil',
+            'taxid_strain_b': None,
+            'strain_b': None,
+            'uniprot_matches_b': None,
+            'modification_b': None,
+            'phenotype': 'PHIPO:0000592',
+            'disease': None,
+            'host_tissue': None,
+            'evidence_code': 'Cell growth assay',
+            'interaction_type': 'antimicrobial_interaction',
+            'pmid': 24903410,
+            'high_level_terms': None,
+            'interactor_A_sequence': None,
+            'interactor_B_sequence': None,
+            'buffer_col': None,
+        }
+    ]
+    actual = get_amr_records(canto_export, phig_mapping, chebi_mapping)
     assert actual == expected

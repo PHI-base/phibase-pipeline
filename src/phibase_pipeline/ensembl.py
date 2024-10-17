@@ -367,5 +367,71 @@ def make_ensembl_canto_export(
     return combined_df
 
 
+def get_amr_records(canto_export, phig_mapping, chebi_mapping):
+    curation_sessions = canto_export['curation_sessions']
+    effector_ids = get_effector_gene_ids(canto_export)
+    records = []
+    for session in curation_sessions.values():
+        for annotation in session.get('annotations', []):
+            chebi_term = chebi_mapping.get(annotation.get('term'))
+            if not chebi_term:
+                continue  # Can't include data without a chemical ID
+
+            genotype_id = annotation.get('genotype')
+            if not genotype_id:
+                continue  # Assuming chemical annotations are only on genotypes
+
+            genotype = session['genotypes'][genotype_id]
+            if len(genotype['loci']) > 1:
+                continue  # Multi-allele genotypes are not yet supported by Ensembl
+
+            genotype_data = get_genotype_data(session, genotype_id)
+            uniprot_id = genotype_data['uniprot_a']
+            phig_id = phig_mapping.get(uniprot_id)
+            if not phig_id:
+                continue  # Can't include data without a cross-reference to PHI-base
+
+            high_level_terms = get_high_level_terms(annotation)
+            if uniprot_id in effector_ids:
+                high_level_terms.append('Effector')
+            high_level_terms_str = (
+                '; '.join(high_level_terms) if high_level_terms else None
+            )
+
+            annotation_type = annotation['type'].replace('pathogen_phenotype', 'antimicrobial_interaction')
+            pmid_number = lambda pmid: int(pmid.replace('PMID:', ''))
+            row = {
+                'phig_id': phig_id,
+                'interactor_A_molecular_id': uniprot_id,
+                'ensembl_a': None,  # leave empty
+                'taxid_species_a': genotype_data['taxid_a'],
+                'organism_a': genotype_data['organism_a'],
+                'taxid_strain_a': None,  # leave empty
+                'strain_a': genotype_data['strain_a'],
+                'uniprot_matches_a': None,  # leave empty
+                'modification_a': genotype_data['modification_a'],
+                'interactor_B_molecular_id': chebi_term['id'],
+                'ensembl_b': None,  # leave empty
+                'taxid_species_b': None,  # leave empty
+                'organism_b': chebi_term['label'],
+                'taxid_strain_b': None,  # leave empty
+                'strain_b': None,  # leave empty
+                'uniprot_matches_b': None,  # leave empty
+                'modification_b': None,  # can't modify ChEBI molecules
+                'phenotype': annotation['term'],
+                'disease': None,  # disease not applicable
+                'host_tissue': get_tissue_id_str(annotation),
+                'evidence_code': annotation['evidence_code'],
+                'interaction_type': annotation_type,
+                'pmid': pmid_number(annotation['publication']),
+                'high_level_terms': high_level_terms_str,
+                'interactor_A_sequence': None,
+                'interactor_B_sequence': None,
+                'buffer_col': None,
+            }
+            records.append(row)
+    return records
+
+
 def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
     raise NotImplementedError()
