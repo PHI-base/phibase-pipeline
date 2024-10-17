@@ -107,17 +107,17 @@ def get_metagenotype_data(session, metagenotype_id):
     return {**pathogen_columns, **host_columns}
 
 
+def get_tissue_ids(annotation):
+    tissue_ids = [
+        ext['rangeValue']
+        for ext in annotation.get('extension', [])
+        if ext['relation'] == 'infects_tissue'
+    ]
+    tissue_id_str = '; '.join(tissue_ids)
+    return tissue_id_str or None
+
+
 def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFrame:
-
-    def get_tissue_ids(annotation):
-        tissue_ids = [
-            ext['rangeValue']
-            for ext in annotation.get('extension', [])
-            if ext['relation'] == 'infects_tissue'
-        ]
-        tissue_id_str = '; '.join(tissue_ids)
-        return tissue_id_str or None
-
     column_order = [
         'uniprot_a',
         'taxid_a',

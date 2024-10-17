@@ -14,6 +14,7 @@ from phibase_pipeline.ensembl import (
     get_high_level_terms,
     get_metagenotype_data,
     get_physical_interaction_data,
+    get_tissue_ids,
     get_uniprot_columns,
     make_ensembl_canto_export,
     make_ensembl_exports,
@@ -581,4 +582,48 @@ def test_uniprot_data_to_mapping():
             'uniprot_matches': 'strain',
         },
     }
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    'annotation,expected',
+    (
+        pytest.param({}, None, id='none'),
+        pytest.param(
+            {
+                'extension': [
+                    {
+                        'rangeValue': 'BTO:0000001',
+                        'relation': 'infects_tissue',
+                    }
+                ]
+            },
+            'BTO:0000001',
+            id='single',
+        ),
+        # Also test that only infects_tissue relations are included
+        pytest.param(
+            {
+                'extension': [
+                    {
+                        'rangeValue': 'BTO:0000001',
+                        'relation': 'infects_tissue',
+                    },
+                    {
+                        'rangeValue': 'BTO:0000002',
+                        'relation': 'infects_tissue',
+                    },
+                    {
+                        'rangeValue': 'FOO:0000001',
+                        'relation': 'other_relation',
+                    },
+                ]
+            },
+            'BTO:0000001; BTO:0000002',
+            id='multi',
+        ),
+    )
+)
+def test_get_tissue_ids(annotation, expected):
+    actual = get_tissue_ids(annotation)
     assert actual == expected
