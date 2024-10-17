@@ -353,13 +353,12 @@ def test_get_physical_interaction_data():
     assert expected == actual
 
 
-def test_make_ensembl_canto_export(tmpdir):
+def test_make_ensembl_canto_export():
     expected = pd.read_csv(TEST_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
-    export_path = TEST_DATA_DIR / 'phicanto_export.json'
-    uniprot_data_path = TEST_DATA_DIR / 'uniprot_test_data.csv'
-    out_path = tmpdir / 'ensembl_canto_export.csv'
-    make_ensembl_canto_export(export_path, uniprot_data_path, out_path)
-    actual = pd.read_csv(out_path)
+    with open(TEST_DATA_DIR / 'phicanto_export.json', encoding='utf-8') as f:
+        export = json.load(f)
+    uniprot_data = pd.read_csv(TEST_DATA_DIR / 'uniprot_test_data.csv')
+    actual = make_ensembl_canto_export(export, uniprot_data)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 

@@ -332,17 +332,16 @@ def get_effector_gene_ids(canto_export):
     return uniprot_ids
 
 
-def make_ensembl_canto_export(export_path, uniprot_data_path, out_path):
-    with open(export_path, encoding='utf-8') as export_file:
-        canto_export = json.load(export_file)
-    uniprot_data_df = pd.read_csv(uniprot_data_path)
-    uniprot_df = get_uniprot_columns(uniprot_data_df)
+def make_ensembl_canto_export(
+    canto_export: dict, uniprot_data: pd.DataFrame
+) -> pd.DataFrame:
+    uniprot_df = get_uniprot_columns(uniprot_data)
     effector_ids = get_effector_gene_ids(canto_export)
     canto_df = get_canto_columns(canto_export, effector_ids)
     combined_df = combine_canto_uniprot_data(canto_df, uniprot_df)
     # Add empty columns for compatibility with Ensembl's pipeline
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
-    combined_df.to_csv(out_path, index=False)
+    return combined_df
 
 
 def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
