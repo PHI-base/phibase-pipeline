@@ -17,6 +17,7 @@ from phibase_pipeline.ensembl import (
     make_ensembl_canto_export,
     make_ensembl_exports,
     read_phig_uniprot_mapping,
+    read_phipo_chebi_mapping,
 )
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
@@ -503,4 +504,15 @@ def test_read_phig_uniprot_mapping():
         'A0A059ZR97': 'PHIG:3696',
     }
     actual = read_phig_uniprot_mapping(path)
+    assert actual == expected
+
+
+def test_read_phipo_chebi_mapping():
+    path = ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv'
+    actual = read_phipo_chebi_mapping(path)
+    expected = {
+        'PHIPO:0000647': {'id': 'CHEBI:39214', 'label': 'abamectin'},
+        'PHIPO:0000534': {'id': 'CHEBI:27666', 'label': 'actinomycin D'},
+        'PHIPO:0000591': {'id': 'CHEBI:53661', 'label': 'alexidine'},
+    }
     assert actual == expected

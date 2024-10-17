@@ -13,6 +13,17 @@ def read_phig_uniprot_mapping(path):
     )
 
 
+def read_phipo_chebi_mapping(path):
+    return (
+        pd.read_csv(path, index_col='phipo_id')
+        .rename(columns={
+            'chebi_id': 'id',
+            'chebi_label': 'label',
+        })
+        .to_dict(orient='index')
+    )
+
+
 def get_genotype_data(session, genotype_id, suffix='_a'):
     genotype = session['genotypes'][genotype_id]
     if len(genotype['loci']) > 1:
