@@ -14,7 +14,7 @@ from phibase_pipeline.ensembl import (
     get_high_level_terms,
     get_metagenotype_data,
     get_physical_interaction_data,
-    get_tissue_ids,
+    get_tissue_id_str,
     get_uniprot_columns,
     make_ensembl_canto_export,
     make_ensembl_exports,
@@ -624,6 +624,6 @@ def test_uniprot_data_to_mapping():
         ),
     )
 )
-def test_get_tissue_ids(annotation, expected):
-    actual = get_tissue_ids(annotation)
+def test_get_tissue_id_str(annotation, expected):
+    actual = get_tissue_id_str(annotation)
     assert actual == expected

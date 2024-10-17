@@ -107,7 +107,7 @@ def get_metagenotype_data(session, metagenotype_id):
     return {**pathogen_columns, **host_columns}
 
 
-def get_tissue_ids(annotation):
+def get_tissue_id_str(annotation):
     tissue_ids = [
         ext['rangeValue']
         for ext in annotation.get('extension', [])
@@ -157,7 +157,7 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
                 term_id = annotation['term']
                 phenotype = None if is_disease else term_id
                 disease = term_id if is_disease else None
-                tissue_ids = get_tissue_ids(annotation)
+                tissue_ids = get_tissue_id_str(annotation)
                 high_level_terms = get_high_level_terms(annotation)
                 has_effector_gene = (
                     data['uniprot_a'] in effector_ids
