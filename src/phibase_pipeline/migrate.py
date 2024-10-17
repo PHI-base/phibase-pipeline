@@ -415,7 +415,7 @@ def add_disease_term_ids(mapping, df):
     return df
 
 
-def get_tissue_ids(tissue_mapping, phi_df):
+def get_tissue_id_series(tissue_mapping, phi_df):
     lookup = tissue_mapping.to_dict()
     sep = '; '
     tissue_ids = (
@@ -1108,7 +1108,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     phi_df = add_filamentous_classifier_column(in_vitro_growth_classifier, phi_df)
     phi_df = add_disease_term_ids(disease_mapping, phi_df)
     phi_df['phi_ids'] = get_phi_id_column(phi_df)
-    phi_df['tissue_id'] = get_tissue_ids(bto_mapping, phi_df)
+    phi_df['tissue_id'] = get_tissue_id_series(bto_mapping, phi_df)
     phi_df['wt_metagenotype_id'] = get_wt_metagenotype_ids(all_feature_mapping, phi_df)
     phenotype_lookup = make_phenotype_mapping(
         phenotype_mapping_df, phipo_mapping, phi_df

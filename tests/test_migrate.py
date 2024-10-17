@@ -33,7 +33,7 @@ from phibase_pipeline.migrate import (
     get_curation_date_df,
     get_disease_annotations,
     get_phi_id_column,
-    get_tissue_ids,
+    get_tissue_id_series,
     get_wt_metagenotype_ids,
     load_bto_id_mapping,
     load_disease_column_mapping,
@@ -1372,7 +1372,7 @@ def test_add_disease_term_ids():
     pd.testing.assert_frame_equal(actual, expected)
 
 
-def test_get_tissue_ids():
+def test_get_tissue_id_series():
     df = pd.DataFrame(
         [
             ['culture condition:-induced cell'],
@@ -1394,7 +1394,7 @@ def test_get_tissue_ids():
         name='tissue',
     )
     tissue_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
-    actual = get_tissue_ids(tissue_mapping, df)
+    actual = get_tissue_id_series(tissue_mapping, df)
     pd.testing.assert_series_equal(actual, expected)
 
 
