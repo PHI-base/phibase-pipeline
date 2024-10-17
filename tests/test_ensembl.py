@@ -17,6 +17,7 @@ from phibase_pipeline.ensembl import (
     get_physical_interaction_data,
     get_tissue_id_str,
     get_uniprot_columns,
+    make_ensembl_amr_export,
     make_ensembl_canto_export,
     make_ensembl_exports,
     merge_amr_uniprot_data,
@@ -796,3 +797,126 @@ def test_merge_amr_uniprot_data():
     expected = [expected_record]
     actual = merge_amr_uniprot_data(amr_records, uniprot_mapping)
     assert actual == expected
+
+
+def test_make_ensembl_amr_export():
+    canto_export = {
+        'curation_sessions': {
+            '2d2e1c30cceb7aab': {
+                'alleles': {
+                    'I1RAE5:2d2e1c30cceb7aab-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RAE5',
+                        'name': 'FG00472.1delta',
+                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
+                    {
+                        'checked': 'no',
+                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
+                        'creation_date': '2023-06-30',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Cell growth assay',
+                        'extension': [],
+                        'figure': 'Figure 5A',
+                        'genotype': '2d2e1c30cceb7aab-genotype-1',
+                        'publication': 'PMID:24903410',
+                        'status': 'new',
+                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
+                        'term': 'PHIPO:0000592',
+                        'type': 'pathogen_phenotype',
+                    }
+                ],
+                'genes': {
+                    'Fusarium graminearum I1RAE5': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'I1RAE5',
+                    }
+                },
+                'genotypes': {
+                    '2d2e1c30cceb7aab-genotype-1': {
+                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    }
+                },
+                'metadata': {
+                    'accepted_timestamp': '2023-06-30 14:37:38',
+                    'annotation_mode': 'advanced',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2024-03-05 12:04:59',
+                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
+                    'approved_timestamp': '2024-03-05 12:04:59',
+                    'canto_session': '2d2e1c30cceb7aab',
+                    'curation_accepted_date': '2023-06-30 14:37:38',
+                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
+                    'curation_pub_id': 'PMID:24903410',
+                    'curator_role': 'community',
+                    'first_approved_timestamp': '2024-03-05 12:01:36',
+                    'has_community_curation': True,
+                    'needs_approval_timestamp': '2024-03-05 12:04:53',
+                    'reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_created_timestamp': '2023-06-30 14:37:30',
+                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
+                    'session_genes_count': '1',
+                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {},
+                'organisms': {'5518': {'full_name': 'Fusarium graminearum'}},
+                'publications': {'PMID:24903410': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+    chebi_mapping = {'PHIPO:0000592': {'id': 'CHEBI:81763', 'label': 'fludioxonil'}}
+    phig_mapping = {'I1RAE5': 'PHIG:11'}
+    uniprot_mapping = {
+        'I1RAE5': {
+            'ensembl': 'CEF72408',
+            'taxid_species': 5518,
+            'taxid_strain': 229533,
+            'uniprot_matches': 'strain',
+        }
+    }
+    expected = pd.DataFrame(
+        {
+            'phig_id': 'PHIG:11',
+            'interactor_A_molecular_id': 'I1RAE5',
+            'ensembl_a': 'CEF72408',
+            'taxid_species_a': 5518,
+            'organism_a': 'Fusarium graminearum',
+            'taxid_strain_a': pd.Series(229533, dtype='Int64'),
+            'strain_a': 'PH-1',
+            'uniprot_matches_a': 'strain',
+            'modification_a': 'FG00472.1delta (deletion)',
+            'interactor_B_molecular_id': 'CHEBI:81763',
+            'ensembl_b': None,
+            'taxid_species_b': None,
+            'organism_b': 'fludioxonil',
+            'taxid_strain_b': None,
+            'strain_b': None,
+            'uniprot_matches_b': None,
+            'modification_b': None,
+            'phenotype': 'PHIPO:0000592',
+            'disease': None,
+            'host_tissue': None,
+            'evidence_code': 'Cell growth assay',
+            'interaction_type': 'antimicrobial_interaction',
+            'pmid': 24903410,
+            'high_level_terms': None,
+            'interactor_A_sequence': None,
+            'interactor_B_sequence': None,
+            'buffer_col': None,
+        },
+        index=[0],
+    )
+    actual = make_ensembl_amr_export(
+        canto_export, chebi_mapping, phig_mapping, uniprot_mapping
+    )
+    assert_frame_equal(actual, expected)

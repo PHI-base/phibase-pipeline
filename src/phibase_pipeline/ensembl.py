@@ -447,5 +447,24 @@ def merge_amr_uniprot_data(amr_records, uniprot_mapping):
     return merged
 
 
+def make_ensembl_amr_export(
+    canto_export: dict,
+    chebi_mapping: dict,
+    phig_mapping: dict,
+    uniprot_mapping: dict,
+) -> pd.DataFrame:
+    amr_records = get_amr_records(canto_export, phig_mapping, chebi_mapping)
+    merged_records = merge_amr_uniprot_data(amr_records, uniprot_mapping)
+    phig_numbers = lambda series: series.str.slice(len('PHIG:')).astype(int)
+    amr_df = (
+        pd.DataFrame.from_records(merged_records)
+        .drop_duplicates()
+        .sort_values('phig_id', key=phig_numbers)
+    )
+    # Use Int64 to avoid rendering numbers as floating point
+    amr_df['taxid_strain_a'] = amr_df['taxid_strain_a'].astype('Int64')
+    return amr_df
+
+
 def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
     raise NotImplementedError()
