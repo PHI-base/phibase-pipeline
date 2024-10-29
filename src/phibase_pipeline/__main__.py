@@ -13,7 +13,7 @@ parser.add_argument(
     'phibase',
     metavar='PHIBASE_CSV',
     type=str,
-    help='the path to the PHI-base 5 CSV export file',
+    help='the path to the PHI-base 4 CSV export file',
 )
 parser.add_argument(
     'phicanto',
