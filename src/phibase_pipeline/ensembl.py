@@ -251,7 +251,7 @@ def get_uniprot_columns(uniprot_data):
     return df[columns]
 
 
-def combine_canto_uniprot_data(canto_df, uniprot_df):
+def add_uniprot_columns(canto_df, uniprot_df):
     column_order = [
         'phibase_id',
         'uniprot_a',
@@ -298,7 +298,9 @@ def combine_canto_uniprot_data(canto_df, uniprot_df):
     merged_df.taxid_species_b = merged_df.taxid_species_b.mask(
         merged_df.uniprot_b.isna(), merged_df.taxid_b
     )
-    merged_df['phibase_id'] = pd.Series(dtype='object')
+    # Canto doesn't export PHI-base 4 IDs but we need the column for ordering.
+    if 'phibase_id' not in canto_df.columns:
+        merged_df['phibase_id'] = pd.Series(dtype=object)
     merged_df.taxid_strain_a = merged_df.taxid_strain_a.astype('Int64')
     merged_df.taxid_strain_b = merged_df.taxid_strain_b.astype('Int64')
     # TODO: Fix this in the get_uniprot_columns
@@ -361,7 +363,7 @@ def make_ensembl_canto_export(
     uniprot_df = get_uniprot_columns(uniprot_data)
     effector_ids = get_effector_gene_ids(canto_export)
     canto_df = get_canto_columns(canto_export, effector_ids)
-    combined_df = combine_canto_uniprot_data(canto_df, uniprot_df)
+    combined_df = add_uniprot_columns(canto_df, uniprot_df)
     # Add empty columns for compatibility with Ensembl's pipeline
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
     return combined_df
