@@ -943,6 +943,9 @@ def test_make_ensembl_amr_export():
         index=[0],
     )
     actual = make_ensembl_amr_export(
-        canto_export, chebi_mapping, phig_mapping, uniprot_mapping
+        canto_export,
+        chebi_mapping=chebi_mapping,
+        phig_mapping=phig_mapping,
+        uniprot_mapping=uniprot_mapping,
     )
     assert_frame_equal(actual, expected)
