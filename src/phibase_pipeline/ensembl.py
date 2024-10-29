@@ -449,6 +449,7 @@ def merge_amr_uniprot_data(amr_records, uniprot_mapping):
 
 def make_ensembl_amr_export(
     canto_export: dict,
+    *,
     chebi_mapping: dict,
     phig_mapping: dict,
     uniprot_mapping: dict,
