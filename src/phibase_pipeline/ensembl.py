@@ -467,5 +467,25 @@ def make_ensembl_amr_export(
     return amr_df
 
 
-def make_ensembl_exports(phi_df, canto_export, uniprot_data) -> dict[str, pd.DataFrame]:
-    raise NotImplementedError()
+def make_ensembl_exports(
+    phi_df: pd.DataFrame,
+    canto_export: dict,
+    *,
+    uniprot_data: pd.DataFrame,
+    phig_mapping: dict,
+    chebi_mapping: dict,
+) -> dict[str, pd.DataFrame]:
+    uniprot_mapping = uniprot_data_to_mapping(uniprot_data)
+    phibase4_export = pd.DataFrame()
+    phibase5_export = make_ensembl_canto_export(canto_export, uniprot_data)
+    amr_export = make_ensembl_amr_export(
+        canto_export,
+        phig_mapping=phig_mapping,
+        uniprot_mapping=uniprot_mapping,
+        chebi_mapping=chebi_mapping,
+    )
+    return {
+        'phibase4': phibase4_export,
+        'phibase5': phibase5_export,
+        'amr': amr_export,
+    }

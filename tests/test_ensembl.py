@@ -507,6 +507,9 @@ def test_make_ensembl_exports():
         'schema_version': 1,
     }
     uniprot_data = pd.read_csv(test_data / 'uniprot_data.tsv', sep='\t')
+    phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
+    chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
+
     expected = {
         k: pd.read_csv(test_data / filename)
         for k, filename in (
@@ -515,7 +518,13 @@ def test_make_ensembl_exports():
             ('amr', 'amr_expected.csv'),
         )
     }
-    actual = make_ensembl_exports(phi_df, canto_export, uniprot_data)
+    actual = make_ensembl_exports(
+        phi_df,
+        canto_export,
+        uniprot_data=uniprot_data,
+        phig_mapping=phig_mapping,
+        chebi_mapping=chebi_mapping,
+    )
     assert actual == expected
 
 
