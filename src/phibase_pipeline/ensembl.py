@@ -369,6 +369,7 @@ def make_ensembl_canto_export(
     combined_df = add_uniprot_columns(canto_df, uniprot_df)
     # Add empty columns for compatibility with Ensembl's pipeline
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
+    combined_df = combined_df.rename(columns={'phibase_id': 'phig_id'})
     return combined_df
 
 
