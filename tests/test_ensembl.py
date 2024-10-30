@@ -513,6 +513,18 @@ def test_make_ensembl_exports():
     phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
 
+    in_vitro_growth_classifier = migrate.load_in_vitro_growth_classifier(
+        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
+    )
+    phenotype_mapping = migrate.load_phenotype_column_mapping(
+        TEST_DATA_DIR / 'phenotype_mapping.csv'
+    )
+    disease_mapping = migrate.load_disease_column_mapping(
+        phido_path=TEST_DATA_DIR / 'phido.csv',
+        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
+    )
+    tissue_mapping = migrate.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
+
     expected = {
         k: pd.read_csv(test_data / filename)
         for k, filename in (
@@ -527,8 +539,15 @@ def test_make_ensembl_exports():
         uniprot_data=uniprot_data,
         phig_mapping=phig_mapping,
         chebi_mapping=chebi_mapping,
+        in_vitro_growth_classifier=in_vitro_growth_classifier,
+        phenotype_mapping=phenotype_mapping,
+        disease_mapping=disease_mapping,
+        tissue_mapping=tissue_mapping,
     )
-    assert actual == expected
+    assert actual.keys() == expected.keys()
+    assert_frame_equal(actual['phibase4'], expected['phibase4'], check_dtype=False)
+    assert_frame_equal(actual['phibase5'], expected['phibase5'], check_dtype=False)
+    assert_frame_equal(actual['amr'], expected['amr'], check_dtype=False)
 
 
 def test_make_ensembl_phibase_export():

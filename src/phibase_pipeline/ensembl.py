@@ -618,14 +618,28 @@ def make_ensembl_exports(
     uniprot_data: pd.DataFrame,
     phig_mapping: dict,
     chebi_mapping: dict,
+    phenotype_mapping,
+    disease_mapping,
+    tissue_mapping,
+    in_vitro_growth_classifier,
 ) -> dict[str, pd.DataFrame]:
-    uniprot_mapping = uniprot_data_to_mapping(uniprot_data)
-    phibase4_export = pd.DataFrame()
-    phibase5_export = make_ensembl_canto_export(canto_export, uniprot_data)
+    phibase4_export = make_ensembl_phibase_export(
+        phi_df,
+        uniprot_data=uniprot_data,
+        phenotype_mapping=phenotype_mapping,
+        disease_mapping=disease_mapping,
+        tissue_mapping=tissue_mapping,
+        in_vitro_growth_classifier=in_vitro_growth_classifier,
+    )
+    phibase5_export = make_ensembl_canto_export(
+        canto_export,
+        uniprot_data,
+        phig_mapping,
+    )
     amr_export = make_ensembl_amr_export(
         canto_export,
         phig_mapping=phig_mapping,
-        uniprot_mapping=uniprot_mapping,
+        uniprot_mapping=uniprot_data_to_mapping(uniprot_data),
         chebi_mapping=chebi_mapping,
     )
     return {
