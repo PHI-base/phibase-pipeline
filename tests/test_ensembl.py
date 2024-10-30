@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal
 
+from phibase_pipeline import migrate
 from phibase_pipeline.ensembl import (
     add_uniprot_columns,
     get_amr_records,
@@ -20,6 +21,7 @@ from phibase_pipeline.ensembl import (
     make_ensembl_amr_export,
     make_ensembl_canto_export,
     make_ensembl_exports,
+    make_ensembl_phibase_export,
     merge_amr_uniprot_data,
     read_phig_uniprot_mapping,
     read_phipo_chebi_mapping,
@@ -526,6 +528,35 @@ def test_make_ensembl_exports():
         chebi_mapping=chebi_mapping,
     )
     assert actual == expected
+
+
+def test_make_ensembl_phibase_export():
+    test_data = ENSEMBL_DATA_DIR / 'make_ensembl_export'
+    phi_df = pd.read_csv(test_data / 'phi_df.csv')
+    uniprot_data = pd.read_csv(test_data / 'uniprot_data.tsv', sep='\t')
+    expected = pd.read_csv(test_data / 'phibase4_expected.csv')
+
+    in_vitro_growth_classifier = migrate.load_in_vitro_growth_classifier(
+        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
+    )
+    phenotype_mapping = migrate.load_phenotype_column_mapping(
+        TEST_DATA_DIR / 'phenotype_mapping.csv'
+    )
+    disease_mapping = migrate.load_disease_column_mapping(
+        phido_path=TEST_DATA_DIR / 'phido.csv',
+        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
+    )
+    tissue_mapping = migrate.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
+
+    actual = make_ensembl_phibase_export(
+        phi_df,
+        uniprot_data=uniprot_data,
+        phenotype_mapping=phenotype_mapping,
+        disease_mapping=disease_mapping,
+        tissue_mapping=tissue_mapping,
+        in_vitro_growth_classifier=in_vitro_growth_classifier,
+    )
+    assert_frame_equal(actual, expected, check_dtype=False)
 
 
 def test_read_phig_uniprot_mapping():

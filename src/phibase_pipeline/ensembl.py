@@ -1,8 +1,11 @@
+import itertools
 import json
 
 import numpy as np
 import pandas as pd
 
+import phibase_pipeline.clean as clean
+import phibase_pipeline.migrate as migrate
 
 pd.set_option('future.no_silent_downcasting', True)
 
@@ -467,6 +470,140 @@ def make_ensembl_amr_export(
     # Use Int64 to avoid rendering numbers as floating point
     amr_df['taxid_strain_a'] = amr_df['taxid_strain_a'].astype('Int64')
     return amr_df
+
+
+def make_ensembl_phibase_export(
+    phi_df: pd.DataFrame,
+    *,
+    uniprot_data: pd.DataFrame,
+    phenotype_mapping,
+    disease_mapping,
+    tissue_mapping,
+    in_vitro_growth_classifier,
+) -> pd.DataFrame:
+
+    def get_phenotype_column(phi_df, phenotype_mapping):
+        """
+        Map all phenotype strings to ontology term IDs in each phenotype
+        column in phi_df, then concatenate the IDs into one string per row.
+        """
+        phenotype_columns = list(phenotype_mapping.column_1.unique())
+        df = phi_df[phenotype_columns].dropna(axis=1).copy()
+        # Add this column back in since it's needed for mapping
+        df['is_filamentous'] = phi_df.is_filamentous
+        selector = pd.MultiIndex.from_tuples(
+            tuple(df.transpose()[0].to_dict().items())
+        )
+        phenotype_mapping = phenotype_mapping.set_index(['column_1', 'value_1'])
+        # Use intersection to drop indexes that will cause a KeyError
+        selector = phenotype_mapping.index.intersection(selector)
+        phenotype_mapping = (
+            phenotype_mapping.loc[selector].reset_index(drop=False)
+        )
+        columns = [
+            'column_1',
+            'value_1',
+            'column_2',
+            'value_2',
+            'primary_id',
+            'extension_range',
+        ]
+        column_map = (
+            phenotype_mapping[columns]
+            .replace(np.nan, None)
+            .to_dict(orient='records')
+        )
+
+        single_map = [d for d in column_map if d['column_2'] is None]
+        single_value_map = {
+            k: {
+                v['value_1']:  v['primary_id'] if k != 'mutant_phenotype' else v['extension_range']
+                for v in g
+            }
+            for k, g in itertools.groupby(single_map, key=lambda d: d['column_1'])
+        }
+        multi_map = [d for d in column_map if d['column_2'] is not None]
+
+        # We don't need the extension_range handling here because no
+        # multi-criteria mapping uses that field (yet).
+        grouping_order = ('column_1', 'column_2', 'value_2')
+        sorter = lambda d: [d[k] for k in grouping_order]
+        g0 = sorted(multi_map, key=sorter)
+        multi_value_map = {
+            k1: {k2: {k3: {d['value_1']: d['primary_id'] for d in g3}}}
+            for k1, g1 in itertools.groupby(g0, lambda d: d['column_1'])
+            for k2, g2 in itertools.groupby(g1, lambda d: d['column_2'])
+            for k3, g3 in itertools.groupby(g2, lambda d: d['value_2'])
+        }
+
+        for column, mapping in single_value_map.items():
+            df[column] = df[column].map(mapping)
+
+        for column_1, level_1 in multi_value_map.items():
+            for column_2, replace_2 in level_1.items():
+                for predicate, replacements in replace_2.items():
+                    index = df[column_2] == predicate
+                    replaced = df.loc[index, column_1].map(replacements)
+                    df.loc[index, column_1] = replaced
+
+        phenotypes = (
+            df[phenotype_columns[0]]
+            .astype(object)
+            .str.cat(df[phenotype_columns[1:]], na_rep='', sep=';')
+            .str.strip(';')
+            .str.replace(';+', '; ', regex=True)
+        )
+        return phenotypes
+
+    column_renames = {
+        'PHI_MolConn_ID': 'phibase_id',
+        'Protein ID': 'uniprot_a',
+        'Pathogen ID': 'taxid_a',
+        'Pathogen species': 'organism_a',
+        'Pathogen strain': 'strain_a',
+        'Exp. Technique-stable': 'modification_a',
+        'Host ID': 'taxid_b',
+        'Host species': 'organism_b',
+        'Host strain': 'strain_b',
+        'Disease': 'disease',
+        'Tissue': 'host_tissue',
+        'PMID': 'pmid',
+        'Mutant Phenotype': 'high_level_terms',
+    }
+    columns = list(column_renames)
+    export_df = phi_df[columns].rename(columns=column_renames)
+    export_df['interaction_type'] = 'interspecies interaction'
+
+    # TODO: Implement uniprot_b, modification_b and evidence_code
+    for col in ['phenotype', 'uniprot_b', 'modification_b', 'evidence_code']:
+        export_df[col] = pd.Series(dtype='object')
+
+    # TODO: Guard against an empty merge column causing an error
+
+    uniprot_df = get_uniprot_columns(uniprot_data)
+    export_df = add_uniprot_columns(export_df, uniprot_df)
+    renames = dict(zip(phi_df.columns, clean.get_normalized_column_names(phi_df)))
+    phi_df = phi_df.rename(columns=renames)
+    phi_df = migrate.add_filamentous_classifier_column(
+        in_vitro_growth_classifier, phi_df
+    )
+    export_df['phenotype'] = get_phenotype_column(phi_df, phenotype_mapping)
+
+    # TODO: Change add_disease_term_ids to return a series
+    export_df = migrate.add_disease_term_ids(disease_mapping, export_df)
+    export_df.disease = export_df.disease_id
+    export_df = export_df.drop('disease_id', axis=1)
+
+    export_df.host_tissue = migrate.get_tissue_id_series(
+        tissue_mapping, export_df.rename(columns={'host_tissue': 'tissue'})
+    )
+    # TODO: Unify this with existing code in clean.py
+    common_name_pattern = r'\s*\(.+$'
+    export_df.organism_b = export_df.organism_b.str.replace(
+        common_name_pattern, '', regex=True
+    )
+    export_df.high_level_terms = export_df.high_level_terms.str.capitalize()
+    return export_df
 
 
 def make_ensembl_exports(
