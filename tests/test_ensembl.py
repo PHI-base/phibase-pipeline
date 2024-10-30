@@ -368,7 +368,8 @@ def test_make_ensembl_canto_export():
     with open(ENSEMBL_DATA_DIR / 'phicanto_export.json', encoding='utf-8') as f:
         export = json.load(f)
     uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
-    actual = make_ensembl_canto_export(export, uniprot_data)
+    phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
+    actual = make_ensembl_canto_export(export, uniprot_data, phig_mapping)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
@@ -566,6 +567,7 @@ def test_read_phig_uniprot_mapping():
         'A0A059ZQI8': 'PHIG:1040',
         'A0A059ZR97': 'PHIG:3696',
         'I1RAE5': 'PHIG:11',
+        'G4MXR2': 'PHIG:294',
     }
     actual = read_phig_uniprot_mapping(path)
     assert actual == expected

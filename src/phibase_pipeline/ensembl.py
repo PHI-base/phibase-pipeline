@@ -361,7 +361,7 @@ def get_effector_gene_ids(canto_export):
 
 
 def make_ensembl_canto_export(
-    canto_export: dict, uniprot_data: pd.DataFrame
+    canto_export: dict, uniprot_data: pd.DataFrame, phig_mapping: dict
 ) -> pd.DataFrame:
     uniprot_df = get_uniprot_columns(uniprot_data)
     effector_ids = get_effector_gene_ids(canto_export)
@@ -370,6 +370,10 @@ def make_ensembl_canto_export(
     # Add empty columns for compatibility with Ensembl's pipeline
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
     combined_df = combined_df.rename(columns={'phibase_id': 'phig_id'})
+    # TODO: Move this to get_canto_columns
+    combined_df.phig_id = [
+        phig_mapping.get(x, np.nan) for x in combined_df.uniprot_a.values
+    ]
     return combined_df
 
 
