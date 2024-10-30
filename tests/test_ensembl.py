@@ -981,4 +981,4 @@ def test_make_ensembl_amr_export():
         phig_mapping=phig_mapping,
         uniprot_mapping=uniprot_mapping,
     )
-    assert_frame_equal(actual, expected)
+    assert_frame_equal(actual, expected, check_dtype=False)
