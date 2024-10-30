@@ -474,7 +474,7 @@ def make_ensembl_amr_export(
     )
     # Use Int64 to avoid rendering numbers as floating point
     amr_df['taxid_strain_a'] = amr_df['taxid_strain_a'].astype('Int64')
-    return amr_df
+    return amr_df.fillna(np.nan)
 
 
 def make_ensembl_phibase_export(
