@@ -3,3 +3,8 @@ in_vitro_growth,increased,is_filamentous,FALSE,PHIPO:0000975,  increased unicell
 in_vitro_growth,increased,is_filamentous,FALSE,,increased unicellular population growth,,,pathogen_genotype,,
 in_vitro_growth,increased,is_filamentous,  TRUE,PHIPO:0001234,increased hyphal growth,,,pathogen_genotype,,
 mutant_phenotype,enhanced antagonism,,,,,,,metagenotype,infective_ability,PHIPO:0000207
+spore_germination,wild type,,,PHIPO:0000956,normal asexual spore germination frequency,,,pathogen_genotype,,
+in_vitro_growth,reduced,is_filamentous,TRUE,PHIPO:0001212,decreased hyphal growth,,,pathogen_genotype,,
+vegetative_spores,increased,,,PHIPO:0000051,increased number of asexual spores,,,pathogen_genotype,,
+essential_gene,no,,,?,viable population,,,pathogen_genotype,,
+mutant_phenotype,reduced virulence,,,N/A,,,,metagenotype,infective_ability,PHIPO:0000015
