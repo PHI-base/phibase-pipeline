@@ -64,14 +64,16 @@ def load_exp_tech_mapping(path):
     return df[valid_rows].reset_index()
 
 
-def load_phenotype_column_mapping(path):
+def load_phenotype_column_mapping(path, exclude_unmapped=True):
     df = pd.read_csv(path, na_values=['?'], dtype='str')
     for column in df.columns:
         df[column] = df[column].str.strip()
     df.value_2 = df.value_2.replace({'TRUE': True, 'FALSE': False})
-    has_primary_id = df.primary_id.notna()
-    has_extension = df.extension_range.notna() & df.extension_relation.notna()
-    return df[has_primary_id | has_extension]
+    if exclude_unmapped:
+        has_primary_id = df.primary_id.notna()
+        has_extension = df.extension_range.notna() & df.extension_relation.notna()
+        df = df[has_primary_id | has_extension]
+    return df
 
 
 def load_disease_column_mapping(phido_path, extra_path):
