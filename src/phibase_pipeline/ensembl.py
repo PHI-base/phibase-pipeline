@@ -560,20 +560,24 @@ def make_ensembl_phibase_export(
         )
         return phenotypes
 
+
+    phi_df = phi_df.copy()
+    phi_df.columns = clean.get_normalized_column_names(phi_df)
+
     column_renames = {
-        'PHI_MolConn_ID': 'phibase_id',
-        'Protein ID': 'uniprot_a',
-        'Pathogen ID': 'taxid_a',
-        'Pathogen species': 'organism_a',
-        'Pathogen strain': 'strain_a',
-        'Exp. Technique-stable': 'modification_a',
-        'Host ID': 'taxid_b',
-        'Host species': 'organism_b',
-        'Host strain': 'strain_b',
-        'Disease': 'disease',
-        'Tissue': 'host_tissue',
-        'PMID': 'pmid',
-        'Mutant Phenotype': 'high_level_terms',
+        'phi_molconn_id': 'phibase_id',
+        'protein_id': 'uniprot_a',
+        'pathogen_id': 'taxid_a',
+        'pathogen_species': 'organism_a',
+        'pathogen_strain': 'strain_a',
+        'exp_technique_stable': 'modification_a',
+        'host_id': 'taxid_b',
+        'host_species': 'organism_b',
+        'host_strain': 'strain_b',
+        'disease': 'disease',
+        'tissue': 'host_tissue',
+        'pmid': 'pmid',
+        'mutant_phenotype': 'high_level_terms',
     }
     columns = list(column_renames)
     export_df = phi_df[columns].rename(columns=column_renames)
@@ -587,8 +591,6 @@ def make_ensembl_phibase_export(
 
     uniprot_df = get_uniprot_columns(uniprot_data)
     export_df = add_uniprot_columns(export_df, uniprot_df)
-    renames = dict(zip(phi_df.columns, clean.get_normalized_column_names(phi_df)))
-    phi_df = phi_df.rename(columns=renames)
     phi_df = migrate.add_filamentous_classifier_column(
         in_vitro_growth_classifier, phi_df
     )
