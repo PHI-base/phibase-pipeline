@@ -1,5 +1,6 @@
 import itertools
 import json
+import re
 
 import numpy as np
 import pandas as pd
@@ -485,6 +486,7 @@ def make_ensembl_phibase_export(
     disease_mapping,
     tissue_mapping,
     in_vitro_growth_classifier,
+    exp_tech_mapping: pd.DataFrame,
 ) -> pd.DataFrame:
 
     def get_phenotype_column(phi_df, phenotype_mapping):
@@ -560,9 +562,30 @@ def make_ensembl_phibase_export(
         )
         return phenotypes
 
+    def map_experimental_techniques(phi_df, exp_tech_df):
+        """Split stable experimental techniques into allele types and evidence columns."""
+        exp_tech_df = exp_tech_df.set_index('exp_technique_stable')[
+            ['pathogen_allele_type', 'host_allele_type', 'evidence_code']
+        ]
+        phi_df.exp_technique_stable = (
+            phi_df.exp_technique_stable.str.lower().str.replace('\xa0', ' ')
+        )
+        phi_df = phi_df.merge(
+            exp_tech_df,
+            left_on='exp_technique_stable',
+            right_index=True,
+            how='left',
+        )
+        # TODO: Add transient expression experimental evidence?
+        return phi_df
 
     phi_df = phi_df.copy()
     phi_df.columns = clean.get_normalized_column_names(phi_df)
+
+    phi_df['host_uniprot'] = phi_df.host_target_id.str.extract(
+        r'uniprot: (.+?);', flags=re.I, expand=False
+    )
+    phi_df = map_experimental_techniques(phi_df, exp_tech_mapping)
 
     column_renames = {
         'phi_molconn_id': 'phibase_id',
@@ -570,24 +593,26 @@ def make_ensembl_phibase_export(
         'pathogen_id': 'taxid_a',
         'pathogen_species': 'organism_a',
         'pathogen_strain': 'strain_a',
-        'exp_technique_stable': 'modification_a',
+        'pathogen_allele_type': 'modification_a',
+        'host_uniprot': 'uniprot_b',
         'host_id': 'taxid_b',
         'host_species': 'organism_b',
         'host_strain': 'strain_b',
+        'host_allele_type': 'modification_b',
         'disease': 'disease',
         'tissue': 'host_tissue',
+        'evidence_code': 'evidence_code',
         'pmid': 'pmid',
         'mutant_phenotype': 'high_level_terms',
     }
     columns = list(column_renames)
     export_df = phi_df[columns].rename(columns=column_renames)
+
+    # Don't need to classify other interaction types from PHI-base 4 yet
     export_df['interaction_type'] = 'interspecies interaction'
 
-    # TODO: Implement uniprot_b, modification_b and evidence_code
-    for col in ['phenotype', 'uniprot_b', 'modification_b', 'evidence_code']:
-        export_df[col] = pd.Series(dtype='object')
-
-    # TODO: Guard against an empty merge column causing an error
+    # Guard against an empty merge column causing an error
+    export_df['phenotype'] = pd.Series(dtype='object')
 
     uniprot_df = get_uniprot_columns(uniprot_data)
     export_df = add_uniprot_columns(export_df, uniprot_df)
@@ -624,6 +649,7 @@ def make_ensembl_exports(
     disease_mapping,
     tissue_mapping,
     in_vitro_growth_classifier,
+    exp_tech_mapping: pd.DataFrame,
 ) -> dict[str, pd.DataFrame]:
     phibase4_export = make_ensembl_phibase_export(
         phi_df,
@@ -632,6 +658,7 @@ def make_ensembl_exports(
         disease_mapping=disease_mapping,
         tissue_mapping=tissue_mapping,
         in_vitro_growth_classifier=in_vitro_growth_classifier,
+        exp_tech_mapping=exp_tech_mapping,
     )
     phibase5_export = make_ensembl_canto_export(
         canto_export,

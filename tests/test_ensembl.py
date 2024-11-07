@@ -524,6 +524,7 @@ def test_make_ensembl_exports():
         extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
     )
     tissue_mapping = migrate.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
+    exp_tech_mapping = pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
 
     expected = {
         k: pd.read_csv(test_data / filename)
@@ -543,6 +544,7 @@ def test_make_ensembl_exports():
         phenotype_mapping=phenotype_mapping,
         disease_mapping=disease_mapping,
         tissue_mapping=tissue_mapping,
+        exp_tech_mapping=exp_tech_mapping,
     )
     assert actual.keys() == expected.keys()
     assert_frame_equal(actual['phibase4'], expected['phibase4'], check_dtype=False)
@@ -567,6 +569,7 @@ def test_make_ensembl_phibase_export():
         extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
     )
     tissue_mapping = migrate.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
+    exp_tech_mapping = pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
 
     actual = make_ensembl_phibase_export(
         phi_df,
@@ -575,6 +578,7 @@ def test_make_ensembl_phibase_export():
         disease_mapping=disease_mapping,
         tissue_mapping=tissue_mapping,
         in_vitro_growth_classifier=in_vitro_growth_classifier,
+        exp_tech_mapping=exp_tech_mapping,
     )
     assert_frame_equal(actual, expected, check_dtype=False)
 
