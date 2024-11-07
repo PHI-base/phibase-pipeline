@@ -1,11 +1,19 @@
+from __future__ import annotations
+
+import importlib.resources
 import itertools
 import re
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pandas as pd
 
 import phibase_pipeline.clean as clean
 import phibase_pipeline.migrate as migrate
+
+if TYPE_CHECKING:
+    from os import PathLike
+
 
 pd.set_option('future.no_silent_downcasting', True)
 
@@ -675,3 +683,45 @@ def make_ensembl_exports(
         'phibase5': phibase5_export,
         'amr': amr_export,
     }
+
+
+def write_ensembl_exports(
+    phi_df: pd.DataFrame, canto_export: dict, dir_path: PathLike
+) -> None:
+    DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
+    kwargs = {
+        'uniprot_data': pd.read_csv(
+            DATA_DIR / 'uniprot_data.tsv', sep='\t',
+        ),
+        'phig_mapping': read_phig_uniprot_mapping(
+            DATA_DIR / 'phig_uniprot_mapping.csv',
+        ),
+        'chebi_mapping': read_phipo_chebi_mapping(
+            DATA_DIR / 'phipo_chebi_mapping.csv',
+        ),
+        'in_vitro_growth_classifier': migrate.load_in_vitro_growth_classifier(
+            DATA_DIR / 'in_vitro_growth_mapping.csv',
+        ),
+        'phenotype_mapping': migrate.load_phenotype_column_mapping(
+            DATA_DIR / 'phenotype_mapping.csv',
+        ),
+        'disease_mapping': migrate.load_disease_column_mapping(
+            phido_path=DATA_DIR / 'phido.csv',
+            extra_path=DATA_DIR / 'disease_mapping.csv',
+        ),
+        'tissue_mapping': migrate.load_bto_id_mapping(
+            DATA_DIR / 'bto.csv',
+        ),
+        'exp_tech_mapping': pd.read_csv(
+            DATA_DIR / 'phibase4_exp_tech_mapping.csv',
+        ),
+    }
+    exports = make_ensembl_exports(phi_df, canto_export, **kwargs)
+    export_filenames = {
+        'phibase4': 'phibase4_interactions_export.csv',
+        'phibase5': 'phibase5_interactions_export.csv',
+        'amr': 'phibase_amr_export.csv',
+    }
+    for k, filename in export_filenames.items():
+        df = exports[k]
+        df.to_csv(dir_path / filename, index=False)
