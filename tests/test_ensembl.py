@@ -46,6 +46,222 @@ def effector_export():
         return json.load(f)
 
 
+@pytest.fixture
+def canto_export():
+    return {
+        'curation_sessions': {
+            '2d2e1c30cceb7aab': {
+                'alleles': {
+                    'I1RAE5:2d2e1c30cceb7aab-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RAE5',
+                        'name': 'FG00472.1delta',
+                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
+                    {
+                        'checked': 'no',
+                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
+                        'creation_date': '2023-06-30',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Cell growth assay',
+                        'extension': [],
+                        'figure': 'Figure 5A',
+                        'genotype': '2d2e1c30cceb7aab-genotype-1',
+                        'publication': 'PMID:24903410',
+                        'status': 'new',
+                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
+                        'term': 'PHIPO:0000592',
+                        'type': 'pathogen_phenotype',
+                    }
+                ],
+                'genes': {
+                    'Fusarium graminearum I1RAE5': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'I1RAE5',
+                    }
+                },
+                'genotypes': {
+                    '2d2e1c30cceb7aab-genotype-1': {
+                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    }
+                },
+                'metadata': {
+                    'accepted_timestamp': '2023-06-30 14:37:38',
+                    'annotation_mode': 'advanced',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2024-03-05 12:04:59',
+                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
+                    'approved_timestamp': '2024-03-05 12:04:59',
+                    'canto_session': '2d2e1c30cceb7aab',
+                    'curation_accepted_date': '2023-06-30 14:37:38',
+                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
+                    'curation_pub_id': 'PMID:24903410',
+                    'curator_role': 'community',
+                    'first_approved_timestamp': '2024-03-05 12:01:36',
+                    'has_community_curation': True,
+                    'needs_approval_timestamp': '2024-03-05 12:04:53',
+                    'reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_created_timestamp': '2023-06-30 14:37:30',
+                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
+                    'session_genes_count': '1',
+                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {},
+                'organisms': {'5518': {'full_name': 'Fusarium graminearum'}},
+                'publications': {'PMID:24903410': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+
+
+@pytest.fixture
+def canto_export2():
+    """Altered version of canto_export fixture used by test_make_ensembl_exports."""
+    return {
+        'curation_sessions': {
+            '2d2e1c30cceb7aab': {
+                'alleles': {
+                    'I1RAE5:2d2e1c30cceb7aab-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Fusarium graminearum I1RAE5',
+                        'name': 'FG00472.1delta',
+                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
+                    {
+                        'checked': 'no',
+                        'conditions': ['PECO:0005241', 'PECO:0005322'],
+                        'creation_date': '2023-06-30',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Macroscopic observation (qualitative observation)',
+                        'extension': [
+                            {
+                                'rangeDisplayName': 'spikelet',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'BTO:0002119',
+                                'relation': 'infects_tissue',
+                            },
+                            {
+                                'rangeDisplayName': 'disease present',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'PHIPO:0001200',
+                                'relation': 'interaction_outcome',
+                            },
+                            {
+                                'rangeDisplayName': 'FgSch9+[WT level] Fusarium graminearum (PH-1) / wild type Triticum aestivum (cv. Zimai 22)',
+                                'rangeType': 'Metagenotype',
+                                'rangeValue': '2d2e1c30cceb7aab-metagenotype-2',
+                                'relation': 'compared_to_control',
+                            },
+                            {
+                                'rangeDisplayName': 'reduced virulence',
+                                'rangeType': 'Ontology',
+                                'rangeValue': 'PHIPO:0000015',
+                                'relation': 'infective_ability',
+                            },
+                        ],
+                        'figure': 'Figure 3A',
+                        'metagenotype': '2d2e1c30cceb7aab-metagenotype-1',
+                        'publication': 'PMID:24903410',
+                        'status': 'new',
+                        'submitter_comment': 'Wheat heads were point-inoculated with conidial suspension of the wild-type PH-1 and FgSch9Δ mutant strains. Infected wheat heads were photographed 15 days after inoculation. Scab symptoms generated by ΔFgSch9 were restricted to the inoculated spikelets and those in the immediate vicinity, in comparison to widespread symptoms caused by the wild type strain, indicating FgSch9 is required for full virulence of F. graminearum.',
+                        'term': 'PHIPO:0000985',
+                        'type': 'pathogen_host_interaction_phenotype',
+                    },
+                    {
+                        'checked': 'no',
+                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
+                        'creation_date': '2023-06-30',
+                        'curator': {'community_curated': True},
+                        'evidence_code': 'Cell growth assay',
+                        'extension': [],
+                        'figure': 'Figure 5A',
+                        'genotype': '2d2e1c30cceb7aab-genotype-1',
+                        'publication': 'PMID:24903410',
+                        'status': 'new',
+                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
+                        'term': 'PHIPO:0000592',
+                        'type': 'pathogen_phenotype',
+                    },
+                ],
+                'genes': {
+                    'Fusarium graminearum I1RAE5': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'I1RAE5',
+                    }
+                },
+                'genotypes': {
+                    '2d2e1c30cceb7aab-genotype-1': {
+                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
+                        'organism_strain': 'PH-1',
+                        'organism_taxonid': 5518,
+                    },
+                    'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22': {
+                        'loci': [],
+                        'organism_strain': 'cv. Zimai 22',
+                        'organism_taxonid': 4565,
+                    },
+                },
+                'metadata': {
+                    'accepted_timestamp': '2023-06-30 14:37:38',
+                    'annotation_mode': 'advanced',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2024-03-05 12:04:59',
+                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
+                    'approved_timestamp': '2024-03-05 12:04:59',
+                    'canto_session': '2d2e1c30cceb7aab',
+                    'curation_accepted_date': '2023-06-30 14:37:38',
+                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
+                    'curation_pub_id': 'PMID:24903410',
+                    'curator_role': 'community',
+                    'first_approved_timestamp': '2024-03-05 12:01:36',
+                    'has_community_curation': True,
+                    'needs_approval_timestamp': '2024-03-05 12:04:53',
+                    'reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_created_timestamp': '2023-06-30 14:37:30',
+                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
+                    'session_genes_count': '1',
+                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {
+                    '2d2e1c30cceb7aab-metagenotype-1': {
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22',
+                        'pathogen_genotype': '2d2e1c30cceb7aab-genotype-1',
+                        'type': 'pathogen-host',
+                    },
+                    '2d2e1c30cceb7aab-metagenotype-2': {
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22',
+                        'pathogen_genotype': '2d2e1c30cceb7aab-genotype-4',
+                        'type': 'pathogen-host',
+                    },
+                },
+                'organisms': {
+                    '5518': {'full_name': 'Fusarium graminearum'},
+                    '4565': {'full_name': 'Triticum aestivum'},
+                },
+                'publications': {'PMID:24903410': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+
+
 def test_get_genotype_data(phicanto_export):
     session = phicanto_export['curation_sessions']['cc6cf06675cc6e13']
     genotype_id = 'cc6cf06675cc6e13-genotype-1'
@@ -373,142 +589,9 @@ def test_make_ensembl_canto_export():
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
-def test_make_ensembl_exports():
+def test_make_ensembl_exports(canto_export2):
     test_data = ENSEMBL_DATA_DIR / 'make_ensembl_export'
     phi_df = pd.read_csv(test_data / 'phi_df.csv')
-    canto_export = {
-        'curation_sessions': {
-            '2d2e1c30cceb7aab': {
-                'alleles': {
-                    'I1RAE5:2d2e1c30cceb7aab-1': {
-                        'allele_type': 'deletion',
-                        'gene': 'Fusarium graminearum I1RAE5',
-                        'name': 'FG00472.1delta',
-                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
-                        'synonyms': [],
-                    }
-                },
-                'annotations': [
-                    {
-                        'checked': 'no',
-                        'conditions': ['PECO:0005241', 'PECO:0005322'],
-                        'creation_date': '2023-06-30',
-                        'curator': {'community_curated': True},
-                        'evidence_code': 'Macroscopic observation (qualitative observation)',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'spikelet',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0002119',
-                                'relation': 'infects_tissue',
-                            },
-                            {
-                                'rangeDisplayName': 'disease present',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'PHIPO:0001200',
-                                'relation': 'interaction_outcome',
-                            },
-                            {
-                                'rangeDisplayName': 'FgSch9+[WT level] Fusarium graminearum (PH-1) / wild type Triticum aestivum (cv. Zimai 22)',
-                                'rangeType': 'Metagenotype',
-                                'rangeValue': '2d2e1c30cceb7aab-metagenotype-2',
-                                'relation': 'compared_to_control',
-                            },
-                            {
-                                'rangeDisplayName': 'reduced virulence',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'PHIPO:0000015',
-                                'relation': 'infective_ability',
-                            },
-                        ],
-                        'figure': 'Figure 3A',
-                        'metagenotype': '2d2e1c30cceb7aab-metagenotype-1',
-                        'publication': 'PMID:24903410',
-                        'status': 'new',
-                        'submitter_comment': 'Wheat heads were point-inoculated with conidial suspension of the wild-type PH-1 and FgSch9Δ mutant strains. Infected wheat heads were photographed 15 days after inoculation. Scab symptoms generated by ΔFgSch9 were restricted to the inoculated spikelets and those in the immediate vicinity, in comparison to widespread symptoms caused by the wild type strain, indicating FgSch9 is required for full virulence of F. graminearum.',
-                        'term': 'PHIPO:0000985',
-                        'type': 'pathogen_host_interaction_phenotype',
-                    },
-                    {
-                        'checked': 'no',
-                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
-                        'creation_date': '2023-06-30',
-                        'curator': {'community_curated': True},
-                        'evidence_code': 'Cell growth assay',
-                        'extension': [],
-                        'figure': 'Figure 5A',
-                        'genotype': '2d2e1c30cceb7aab-genotype-1',
-                        'publication': 'PMID:24903410',
-                        'status': 'new',
-                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
-                        'term': 'PHIPO:0000592',
-                        'type': 'pathogen_phenotype',
-                    },
-                ],
-                'genes': {
-                    'Fusarium graminearum I1RAE5': {
-                        'organism': 'Fusarium graminearum',
-                        'uniquename': 'I1RAE5',
-                    }
-                },
-                'genotypes': {
-                    '2d2e1c30cceb7aab-genotype-1': {
-                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
-                        'organism_strain': 'PH-1',
-                        'organism_taxonid': 5518,
-                    },
-                    'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22': {
-                        'loci': [],
-                        'organism_strain': 'cv. Zimai 22',
-                        'organism_taxonid': 4565,
-                    },
-                },
-                'metadata': {
-                    'accepted_timestamp': '2023-06-30 14:37:38',
-                    'annotation_mode': 'advanced',
-                    'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2024-03-05 12:04:59',
-                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
-                    'approved_timestamp': '2024-03-05 12:04:59',
-                    'canto_session': '2d2e1c30cceb7aab',
-                    'curation_accepted_date': '2023-06-30 14:37:38',
-                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
-                    'curation_pub_id': 'PMID:24903410',
-                    'curator_role': 'community',
-                    'first_approved_timestamp': '2024-03-05 12:01:36',
-                    'has_community_curation': True,
-                    'needs_approval_timestamp': '2024-03-05 12:04:53',
-                    'reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_created_timestamp': '2023-06-30 14:37:30',
-                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
-                    'session_genes_count': '1',
-                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_term_suggestions_count': '0',
-                    'session_unknown_conditions_count': '0',
-                    'term_suggestion_count': '0',
-                    'unknown_conditions_count': '0',
-                },
-                'metagenotypes': {
-                    '2d2e1c30cceb7aab-metagenotype-1': {
-                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22',
-                        'pathogen_genotype': '2d2e1c30cceb7aab-genotype-1',
-                        'type': 'pathogen-host',
-                    },
-                    '2d2e1c30cceb7aab-metagenotype-2': {
-                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-cv.-Zimai-22',
-                        'pathogen_genotype': '2d2e1c30cceb7aab-genotype-4',
-                        'type': 'pathogen-host',
-                    },
-                },
-                'organisms': {
-                    '5518': {'full_name': 'Fusarium graminearum'},
-                    '4565': {'full_name': 'Triticum aestivum'},
-                },
-                'publications': {'PMID:24903410': {}},
-            }
-        },
-        'schema_version': 1,
-    }
     uniprot_data = pd.read_csv(test_data / 'uniprot_data.tsv', sep='\t')
     phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
@@ -536,7 +619,7 @@ def test_make_ensembl_exports():
     }
     actual = make_ensembl_exports(
         phi_df,
-        canto_export,
+        canto_export2,
         uniprot_data=uniprot_data,
         phig_mapping=phig_mapping,
         chebi_mapping=chebi_mapping,
@@ -716,81 +799,7 @@ def test_get_tissue_id_str(annotation, expected):
     assert actual == expected
 
 
-def test_get_amr_records():
-    canto_export = {
-        'curation_sessions': {
-            '2d2e1c30cceb7aab': {
-                'alleles': {
-                    'I1RAE5:2d2e1c30cceb7aab-1': {
-                        'allele_type': 'deletion',
-                        'gene': 'Fusarium graminearum I1RAE5',
-                        'name': 'FG00472.1delta',
-                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
-                        'synonyms': [],
-                    }
-                },
-                'annotations': [
-                    {
-                        'checked': 'no',
-                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
-                        'creation_date': '2023-06-30',
-                        'curator': {'community_curated': True},
-                        'evidence_code': 'Cell growth assay',
-                        'extension': [],
-                        'figure': 'Figure 5A',
-                        'genotype': '2d2e1c30cceb7aab-genotype-1',
-                        'publication': 'PMID:24903410',
-                        'status': 'new',
-                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
-                        'term': 'PHIPO:0000592',
-                        'type': 'pathogen_phenotype',
-                    }
-                ],
-                'genes': {
-                    'Fusarium graminearum I1RAE5': {
-                        'organism': 'Fusarium graminearum',
-                        'uniquename': 'I1RAE5',
-                    }
-                },
-                'genotypes': {
-                    '2d2e1c30cceb7aab-genotype-1': {
-                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
-                        'organism_strain': 'PH-1',
-                        'organism_taxonid': 5518,
-                    }
-                },
-                'metadata': {
-                    'accepted_timestamp': '2023-06-30 14:37:38',
-                    'annotation_mode': 'advanced',
-                    'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2024-03-05 12:04:59',
-                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
-                    'approved_timestamp': '2024-03-05 12:04:59',
-                    'canto_session': '2d2e1c30cceb7aab',
-                    'curation_accepted_date': '2023-06-30 14:37:38',
-                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
-                    'curation_pub_id': 'PMID:24903410',
-                    'curator_role': 'community',
-                    'first_approved_timestamp': '2024-03-05 12:01:36',
-                    'has_community_curation': True,
-                    'needs_approval_timestamp': '2024-03-05 12:04:53',
-                    'reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_created_timestamp': '2023-06-30 14:37:30',
-                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
-                    'session_genes_count': '1',
-                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_term_suggestions_count': '0',
-                    'session_unknown_conditions_count': '0',
-                    'term_suggestion_count': '0',
-                    'unknown_conditions_count': '0',
-                },
-                'metagenotypes': {},
-                'organisms': {'5518': {'full_name': 'Fusarium graminearum'}},
-                'publications': {'PMID:24903410': {}},
-            }
-        },
-        'schema_version': 1,
-    }
+def test_get_amr_records(canto_export):
     phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
     expected = [
@@ -881,81 +890,7 @@ def test_merge_amr_uniprot_data():
     assert actual == expected
 
 
-def test_make_ensembl_amr_export():
-    canto_export = {
-        'curation_sessions': {
-            '2d2e1c30cceb7aab': {
-                'alleles': {
-                    'I1RAE5:2d2e1c30cceb7aab-1': {
-                        'allele_type': 'deletion',
-                        'gene': 'Fusarium graminearum I1RAE5',
-                        'name': 'FG00472.1delta',
-                        'primary_identifier': 'I1RAE5:2d2e1c30cceb7aab-1',
-                        'synonyms': [],
-                    }
-                },
-                'annotations': [
-                    {
-                        'checked': 'no',
-                        'conditions': ['PECO:0000102', 'PECO:0005245', 'PECO:0005147'],
-                        'creation_date': '2023-06-30',
-                        'curator': {'community_curated': True},
-                        'evidence_code': 'Cell growth assay',
-                        'extension': [],
-                        'figure': 'Figure 5A',
-                        'genotype': '2d2e1c30cceb7aab-genotype-1',
-                        'publication': 'PMID:24903410',
-                        'status': 'new',
-                        'submitter_comment': 'FgSch9Δ revealed increased resistance to the phenylpyrrole fungicide, fludioxonil, which targets the HOG pathway.',
-                        'term': 'PHIPO:0000592',
-                        'type': 'pathogen_phenotype',
-                    }
-                ],
-                'genes': {
-                    'Fusarium graminearum I1RAE5': {
-                        'organism': 'Fusarium graminearum',
-                        'uniquename': 'I1RAE5',
-                    }
-                },
-                'genotypes': {
-                    '2d2e1c30cceb7aab-genotype-1': {
-                        'loci': [[{'id': 'I1RAE5:2d2e1c30cceb7aab-1'}]],
-                        'organism_strain': 'PH-1',
-                        'organism_taxonid': 5518,
-                    }
-                },
-                'metadata': {
-                    'accepted_timestamp': '2023-06-30 14:37:38',
-                    'annotation_mode': 'advanced',
-                    'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2024-03-05 12:04:59',
-                    'approval_in_progress_timestamp': '2024-03-05 12:04:57',
-                    'approved_timestamp': '2024-03-05 12:04:59',
-                    'canto_session': '2d2e1c30cceb7aab',
-                    'curation_accepted_date': '2023-06-30 14:37:38',
-                    'curation_in_progress_timestamp': '2024-03-05 12:04:28',
-                    'curation_pub_id': 'PMID:24903410',
-                    'curator_role': 'community',
-                    'first_approved_timestamp': '2024-03-05 12:01:36',
-                    'has_community_curation': True,
-                    'needs_approval_timestamp': '2024-03-05 12:04:53',
-                    'reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_created_timestamp': '2023-06-30 14:37:30',
-                    'session_first_submitted_timestamp': '2024-02-28 14:03:17',
-                    'session_genes_count': '1',
-                    'session_reactivated_timestamp': '2024-03-05 12:04:28',
-                    'session_term_suggestions_count': '0',
-                    'session_unknown_conditions_count': '0',
-                    'term_suggestion_count': '0',
-                    'unknown_conditions_count': '0',
-                },
-                'metagenotypes': {},
-                'organisms': {'5518': {'full_name': 'Fusarium graminearum'}},
-                'publications': {'PMID:24903410': {}},
-            }
-        },
-        'schema_version': 1,
-    }
+def test_make_ensembl_amr_export(canto_export2):
     chebi_mapping = {'PHIPO:0000592': {'id': 'CHEBI:81763', 'label': 'fludioxonil'}}
     phig_mapping = {'I1RAE5': 'PHIG:11'}
     uniprot_mapping = {
@@ -999,7 +934,7 @@ def test_make_ensembl_amr_export():
         index=[0],
     )
     actual = make_ensembl_amr_export(
-        canto_export,
+        canto_export2,
         chebi_mapping=chebi_mapping,
         phig_mapping=phig_mapping,
         uniprot_mapping=uniprot_mapping,
