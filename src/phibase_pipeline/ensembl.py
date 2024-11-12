@@ -688,8 +688,8 @@ def make_ensembl_exports(
 def write_ensembl_exports(
     phi_df: pd.DataFrame,
     canto_export: dict,
-    dir_path: PathLike,
     uniprot_data: pd.DataFrame,
+    dir_path: PathLike,
 ) -> None:
     DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
     kwargs = {
