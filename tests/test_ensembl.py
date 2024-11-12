@@ -30,6 +30,7 @@ from phibase_pipeline.ensembl import (
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
 ENSEMBL_DATA_DIR = TEST_DATA_DIR / 'ensembl'
+ENSEMBL_EXPORT_DIR = ENSEMBL_DATA_DIR / 'make_ensembl_export'
 
 
 @pytest.fixture
@@ -590,9 +591,8 @@ def test_make_ensembl_canto_export():
 
 
 def test_make_ensembl_exports(canto_export2):
-    test_data = ENSEMBL_DATA_DIR / 'make_ensembl_export'
-    phi_df = pd.read_csv(test_data / 'phi_df.csv')
-    uniprot_data = pd.read_csv(test_data / 'uniprot_data.tsv', sep='\t')
+    phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
     phig_mapping = read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
 
@@ -610,7 +610,7 @@ def test_make_ensembl_exports(canto_export2):
     exp_tech_mapping = pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
 
     expected = {
-        k: pd.read_csv(test_data / filename)
+        k: pd.read_csv(ENSEMBL_EXPORT_DIR / filename)
         for k, filename in (
             ('phibase4', 'phibase4_expected.csv'),
             ('phibase5', 'phibase5_expected.csv'),
@@ -636,10 +636,9 @@ def test_make_ensembl_exports(canto_export2):
 
 
 def test_make_ensembl_phibase_export():
-    test_data = ENSEMBL_DATA_DIR / 'make_ensembl_export'
-    phi_df = pd.read_csv(test_data / 'phi_df.csv')
-    uniprot_data = pd.read_csv(test_data / 'uniprot_data.tsv', sep='\t')
-    expected = pd.read_csv(test_data / 'phibase4_expected.csv')
+    phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
+    expected = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
 
     in_vitro_growth_classifier = migrate.load_in_vitro_growth_classifier(
         TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
