@@ -560,10 +560,11 @@ def make_ensembl_phibase_export(
                     replaced = df.loc[index, column_1].map(replacements)
                     df.loc[index, column_1] = replaced
 
+        columns_to_join = phenotype_mapping.column_1.sort_values().unique()
         phenotypes = (
-            df[phenotype_columns[0]]
+            df[columns_to_join[0]]
             .astype(object)
-            .str.cat(df[phenotype_columns[1:]], na_rep='', sep=';')
+            .str.cat(df[columns_to_join[1:]], na_rep='', sep=';')
             .str.strip(';')
             .str.replace(';+', '; ', regex=True)
         )
