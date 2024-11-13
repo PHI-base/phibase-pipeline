@@ -26,6 +26,7 @@ from phibase_pipeline.ensembl import (
     read_phig_uniprot_mapping,
     read_phipo_chebi_mapping,
     uniprot_data_to_mapping,
+    write_ensembl_exports,
 )
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
@@ -939,3 +940,31 @@ def test_make_ensembl_amr_export(canto_export2):
         uniprot_mapping=uniprot_mapping,
     )
     assert_frame_equal(actual, expected, check_dtype=False)
+
+
+def test_write_ensembl_exports(canto_export2, tmpdir):
+    phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+    uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
+    write_ensembl_exports(
+        phi_df,
+        canto_export2,
+        uniprot_data,
+        dir_path=tmpdir,
+    )
+    actual_expected_map = (
+        (
+            tmpdir / 'phibase4_interactions_export.csv',
+            ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv',
+        ),
+        (
+            tmpdir / 'phibase5_interactions_export.csv',
+            ENSEMBL_EXPORT_DIR / 'phibase5_expected.csv',
+        ),
+        (
+            tmpdir / 'phibase_amr_export.csv',
+            ENSEMBL_EXPORT_DIR / 'amr_expected.csv',
+        ),
+    )
+    for actual_path, expected_path in actual_expected_map:
+        actual, expected = (pd.read_csv(path) for path in (actual_path, expected_path))
+        assert_frame_equal(actual, expected)
