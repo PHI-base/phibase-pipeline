@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
-# coding: utf-8
+# SPDX-FileCopyrightText: 2023-present James Seager <james.seager@rothamsted.ac.uk>
+#
+# SPDX-License-Identifier: MIT
 
 import hashlib
 import itertools
