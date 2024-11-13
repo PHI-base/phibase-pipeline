@@ -687,12 +687,15 @@ def make_ensembl_exports(
 
 
 def write_ensembl_exports(
-    phi_df: pd.DataFrame,
-    canto_export: dict,
-    uniprot_data: pd.DataFrame,
+    phibase_path: PathLike,
+    canto_export_path: PathLike,
+    uniprot_data_path: PathLike,
     dir_path: PathLike,
 ) -> None:
     DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
+    phi_df = pd.read_csv(phibase_path)
+    canto_export = migrate.load_json(canto_export_path)
+    uniprot_data = pd.read_csv(uniprot_data_path, sep='\t')
     kwargs = {
         'uniprot_data': uniprot_data,
         'phig_mapping': read_phig_uniprot_mapping(
