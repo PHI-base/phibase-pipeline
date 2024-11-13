@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.resources
 import itertools
+from pathlib import Path
 import re
 from typing import TYPE_CHECKING
 
@@ -696,6 +697,7 @@ def write_ensembl_exports(
     phi_df = pd.read_csv(phibase_path)
     canto_export = migrate.load_json(canto_export_path)
     uniprot_data = pd.read_csv(uniprot_data_path, sep='\t')
+    dir_path = Path(dir_path)
     kwargs = {
         'uniprot_data': uniprot_data,
         'phig_mapping': read_phig_uniprot_mapping(
