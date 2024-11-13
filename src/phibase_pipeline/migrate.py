@@ -3,8 +3,6 @@
 
 import hashlib
 import itertools
-import json
-import os
 import re
 from collections import defaultdict
 from datetime import timedelta
@@ -13,6 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from phibase_pipeline import loaders
 from phibase_pipeline.clean import clean_phibase_csv
 from phibase_pipeline.merge import merge_exports
 from phibase_pipeline.postprocess import (
@@ -25,83 +24,6 @@ from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 pd.set_option('future.no_silent_downcasting', True)
 
 DATA_DIR = Path(__file__).parent / 'data'
-
-
-def load_bto_id_mapping(path):
-    renames = {
-        'LABEL': 'term_label',
-        'ID': 'term_id',
-    }
-    return pd.read_csv(path).rename(columns=renames).set_index('term_label')['term_id']
-
-
-def load_phipo_mapping(path):
-    return pd.read_csv(path).set_index('ID')['LABEL'].to_dict()
-
-
-def load_json(path):
-    with open(path, encoding='utf8') as json_file:
-        return json.load(json_file)
-
-
-def load_exp_tech_mapping(path):
-    def join_rows(column):
-        if column.size == 1:
-            return column
-        if column.isna().all():
-            return np.nan
-        else:
-            return ' | '.join(column.dropna().unique())
-
-    unique_columns = ['exp_technique_stable', 'gene_protein_modification']
-    df = (
-        pd.read_csv(path)
-        .groupby(unique_columns, dropna=False, sort=False)
-        .agg(join_rows)
-    )
-    valid_rows = (df != '?').all(axis=1)
-    assert ~df.index.duplicated().any()
-    return df[valid_rows].reset_index()
-
-
-def load_phenotype_column_mapping(path, exclude_unmapped=True):
-    df = pd.read_csv(path, na_values=['?'], dtype='str')
-    for column in df.columns:
-        df[column] = df[column].str.strip()
-    df.value_2 = df.value_2.replace({'TRUE': True, 'FALSE': False})
-    if exclude_unmapped:
-        has_primary_id = df.primary_id.notna()
-        has_extension = df.extension_range.notna() & df.extension_relation.notna()
-        df = df[has_primary_id | has_extension]
-    return df
-
-
-def load_disease_column_mapping(phido_path, extra_path):
-    term_id_pattern = re.compile(r'^(?:obo:)?PHIDO_(\d{7})$')
-    renames = {
-        'ID': 'term_id',
-        'LABEL': 'term_label',
-    }
-    phido_df = pd.read_csv(phido_path).rename(columns=renames)
-    phido_df = phido_df[phido_df.term_id.str.match(term_id_pattern)]
-    obo_term_ids = phido_df.term_id.str.replace(term_id_pattern, r'PHIDO:\1', regex=True)
-    phido_df.term_id = obo_term_ids
-    phido_df.term_label = phido_df.term_label.str.lower()
-    extra_df = pd.read_csv(extra_path)
-    combined_df = pd.concat([phido_df[['term_label', 'term_id']], extra_df])
-    mapping = combined_df.set_index('term_label')['term_id'].to_dict()
-    return mapping
-
-
-def load_in_vitro_growth_classifier(path):
-    df = pd.read_csv(path)
-    df.is_filamentous = df.is_filamentous.str.lower()
-    classifier_column = (
-        df.set_index('ncbi_taxid').is_filamentous
-        .loc[lambda x: x.isin(('yes', 'no'))]
-        .map({'yes': True, 'no': False})
-    )
-    return classifier_column
 
 
 def split_compound_rows(df, column, sep='; '):
@@ -1060,19 +982,19 @@ def get_phi_id_column(phi_df):
 
 
 def make_phibase_json(phibase_path, approved_pmids):
-    phenotype_mapping_df = load_phenotype_column_mapping(
+    phenotype_mapping_df = loaders.load_phenotype_column_mapping(
         DATA_DIR / 'phenotype_mapping.csv'
     )
-    in_vitro_growth_classifier = load_in_vitro_growth_classifier(
+    in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier(
         DATA_DIR / 'in_vitro_growth_mapping.csv'
     )
-    disease_mapping = load_disease_column_mapping(
+    disease_mapping = loaders.load_disease_column_mapping(
         phido_path=DATA_DIR / 'phido.csv',
         extra_path=DATA_DIR / 'disease_mapping.csv',
     )
-    exp_tech_df = load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
-    bto_mapping = load_bto_id_mapping(DATA_DIR / 'bto.csv')
-    phipo_mapping = load_phipo_mapping(DATA_DIR / 'phipo.csv')
+    exp_tech_df = loaders.load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
+    bto_mapping = loaders.load_bto_id_mapping(DATA_DIR / 'bto.csv')
+    phipo_mapping = loaders.load_phipo_mapping(DATA_DIR / 'phipo.csv')
 
     phi_df = clean_phibase_csv(phibase_path)
 
@@ -1123,7 +1045,7 @@ def make_phibase_json(phibase_path, approved_pmids):
 
 
 def make_combined_export(phibase_path, phicanto_path, approved_pmids=None):
-    phicanto_json = load_json(phicanto_path)
+    phicanto_json = loaders.load_json(phicanto_path)
     if approved_pmids is None:
         approved_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phibase_path, approved_pmids)

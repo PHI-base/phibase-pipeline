@@ -1,24 +1,10 @@
 from pathlib import Path
 import re
 
-import numpy as np
-import pandas as pd
+from phibase_pipeline import loaders
 
 
 DATA_DIR = Path(__file__).parent / 'data'
-
-
-def load_chemical_data(path):
-    df = pd.read_csv(path)
-    for col in df.columns:
-        df[col] = df[col].str.strip()
-    mapping = (
-        df.dropna(subset='phipo_id')
-        .set_index('phipo_id')
-        .replace({np.nan: None})
-        .to_dict(orient='index')
-    )
-    return mapping
 
 
 def allele_ids_of_genotype(genotype):
@@ -312,7 +298,7 @@ def postprocess_phibase_json(export):
 
 
 def postprocess_combined_json(export):
-    chemical_data = load_chemical_data(DATA_DIR / 'chemical_data.csv')
+    chemical_data = loaders.load_chemical_data(DATA_DIR / 'chemical_data.csv')
     remove_unapproved_sessions(export)
     remove_curator_orcids(export)
     merge_duplicate_alleles(export['curation_sessions'])

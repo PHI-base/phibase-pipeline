@@ -11,29 +11,13 @@ import pandas as pd
 
 import phibase_pipeline.clean as clean
 import phibase_pipeline.migrate as migrate
+import phibase_pipeline.loaders as loaders
 
 if TYPE_CHECKING:
     from os import PathLike
 
 
 pd.set_option('future.no_silent_downcasting', True)
-
-
-def read_phig_uniprot_mapping(path):
-    return (
-        pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
-    )
-
-
-def read_phipo_chebi_mapping(path):
-    return (
-        pd.read_csv(path, index_col='phipo_id')
-        .rename(columns={
-            'chebi_id': 'id',
-            'chebi_label': 'label',
-        })
-        .to_dict(orient='index')
-    )
 
 
 def uniprot_data_to_mapping(uniprot_data: pd.DataFrame) -> dict:
@@ -695,28 +679,28 @@ def write_ensembl_exports(
 ) -> None:
     DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
     phi_df = pd.read_csv(phibase_path)
-    canto_export = migrate.load_json(canto_export_path)
+    canto_export = loaders.load_json(canto_export_path)
     uniprot_data = pd.read_csv(uniprot_data_path, sep='\t')
     dir_path = Path(dir_path)
     kwargs = {
         'uniprot_data': uniprot_data,
-        'phig_mapping': read_phig_uniprot_mapping(
+        'phig_mapping': loaders.read_phig_uniprot_mapping(
             DATA_DIR / 'phig_uniprot_mapping.csv',
         ),
-        'chebi_mapping': read_phipo_chebi_mapping(
+        'chebi_mapping': loaders.read_phipo_chebi_mapping(
             DATA_DIR / 'phipo_chebi_mapping.csv',
         ),
-        'in_vitro_growth_classifier': migrate.load_in_vitro_growth_classifier(
+        'in_vitro_growth_classifier': loaders.load_in_vitro_growth_classifier(
             DATA_DIR / 'in_vitro_growth_mapping.csv',
         ),
-        'phenotype_mapping': migrate.load_phenotype_column_mapping(
+        'phenotype_mapping': loaders.load_phenotype_column_mapping(
             DATA_DIR / 'phenotype_mapping.csv',
         ),
-        'disease_mapping': migrate.load_disease_column_mapping(
+        'disease_mapping': loaders.load_disease_column_mapping(
             phido_path=DATA_DIR / 'phido.csv',
             extra_path=DATA_DIR / 'disease_mapping.csv',
         ),
-        'tissue_mapping': migrate.load_bto_id_mapping(
+        'tissue_mapping': loaders.load_bto_id_mapping(
             DATA_DIR / 'bto.csv',
         ),
         'exp_tech_mapping': pd.read_csv(

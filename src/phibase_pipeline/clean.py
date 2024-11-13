@@ -6,6 +6,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from phibase_pipeline import loaders
+
 
 DATA_DIR = Path(__file__).parent / 'data'
 
@@ -26,10 +28,6 @@ def get_normalized_column_names(phi_df):
         .str.replace('invitro', 'in_vitro')
     )
     return column_names
-
-
-def load_tissue_replacements(path):
-    return pd.read_csv(path, index_col='value')['rename'].dropna().to_dict()
 
 
 def fix_curation_dates(curation_dates):
@@ -78,7 +76,7 @@ def clean_phibase_csv(path):
             'pubmed': 'PubMed',
         },
     }
-    tissue_replacements = load_tissue_replacements(DATA_DIR / 'bto_renames.csv')
+    tissue_replacements = loaders.load_tissue_replacements(DATA_DIR / 'bto_renames.csv')
     column_replacements['tissue'] = tissue_replacements
     ligatures = {
         '\N{LATIN SMALL LIGATURE FF}': 'ff',
@@ -189,15 +187,6 @@ def clean_phibase_csv(path):
     return phi_df
 
 
-def load_phibase_cleaned(path):
-    dtypes = (
-        pd.read_csv(DATA_DIR / 'cleaned_dtypes.csv', index_col='column')
-        .squeeze('columns')
-        .to_dict()
-    )
-    return pd.read_csv(path, dtype=dtypes)
-
-
 def load_or_create_cleaned_csv(base_path, cleaned_path, force=False):
     """Load cleaned CSV if it exists, otherwise create it."""
     if force or not os.path.exists(cleaned_path):
@@ -209,5 +198,5 @@ def load_or_create_cleaned_csv(base_path, cleaned_path, force=False):
             quoting=csv.QUOTE_NONNUMERIC,
         )
     else:
-        phi_df = load_phibase_cleaned(cleaned_path)
+        phi_df = loaders.load_phibase_cleaned(cleaned_path)
     return phi_df
