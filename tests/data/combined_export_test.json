@@ -147,7 +147,7 @@
                "metagenotype": "baeff7a059e5f6c4-metagenotype-1",
                "publication": "PMID:31076860",
                "status": "new",
-               "submitter_comment": "Note: cannot curate control, as C. beticola without RsLysM. When RsLysM was heterologously expressed in Cercospora beticola, necroticlesion size and fungal colonization ability were increased, indicating a role in virulence",
+               "submitter_comment": "Note: cannot curate control, as C. beticola without RsLysM. When RsLysM was heterologously expressed in Cercospora beticola, necrotic lesion size and fungal colonization ability were increased, indicating a role in virulence",
                "term": "PHIPO:0000480",
                "type": "pathogen_host_interaction_phenotype"
             },
@@ -255,7 +255,7 @@
                "metagenotype": "baeff7a059e5f6c4-metagenotype-2",
                "publication": "PMID:31076860",
                "status": "new",
-               "submitter_comment": "NOTE: cannot curate control without pathogen gene. To investigate whether the RsLysM efector also prevents plant chitin-triggered immunity, N. benthamiana leaves were treated with 10 \u03bcM chitin oligomers (GlcNAc)6, which led to reactive oxygen species (ROS) burst (Fig. 3c). Addition of 10 \u03bcM RsLysM pure protein led to a significant reduction of ROS (Fig. 3c), suggesting that RsLysM displays similar non-recognition function as seen in other pathosystems.Certain LysM effectors are able to protect fungal hyphae from chitinolytic activity(Marshall et al. 2011; Kombrink et al. 2017)",
+               "submitter_comment": "NOTE: cannot curate control without pathogen gene. To investigate whether the RsLysM effector also prevents plant chitin-triggered immunity, N. benthamiana leaves were treated with 10 \u03bcM chitin oligomers (GlcNAc)6, which led to reactive oxygen species (ROS) burst (Fig. 3c). Addition of 10 \u03bcM RsLysM pure protein led to a significant reduction of ROS (Fig. 3c), suggesting that RsLysM displays similar non-recognition function as seen in other pathosystems.Certain LysM effectors are able to protect fungal hyphae from chitinolytic activity(Marshall et al. 2011; Kombrink et al. 2017)",
                "term": "PHIPO:0001192",
                "type": "pathogen_host_interaction_phenotype"
             },
