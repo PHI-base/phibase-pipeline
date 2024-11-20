@@ -156,6 +156,47 @@ def uniprot_data_ensembl():
     return pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
 
 
+@pytest.fixture
+def phig_uniprot_mapping():
+    return loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
+
+
+@pytest.fixture
+def chebi_mapping():
+    return loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
+
+
+@pytest.fixture
+def in_vitro_growth_classifier():
+    return loaders.load_in_vitro_growth_classifier(
+        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
+    )
+
+@pytest.fixture
+def phenotype_mapping():
+    return loaders.load_phenotype_column_mapping(
+        TEST_DATA_DIR / 'phenotype_mapping.csv'
+    )
+
+
+@pytest.fixture
+def disease_mapping():
+    return loaders.load_disease_column_mapping(
+        phido_path=TEST_DATA_DIR / 'phido.csv',
+        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
+    )
+
+
+@pytest.fixture
+def tissue_mapping():
+    return loaders.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
+
+
+@pytest.fixture
+def exp_tech_mapping():
+    return pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
+
+
 def test_get_genotype_data(canto_export):
     session = canto_export['curation_sessions']['cc6cf06675cc6e13']
     genotype_id = 'cc6cf06675cc6e13-genotype-1'
@@ -470,30 +511,24 @@ def test_get_physical_interaction_data():
     assert expected == actual
 
 
-def test_make_ensembl_canto_export(canto_export, uniprot_data):
+def test_make_ensembl_canto_export(canto_export, uniprot_data, phig_uniprot_mapping):
     expected = pd.read_csv(ENSEMBL_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
-    phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
-    actual = make_ensembl_canto_export(canto_export, uniprot_data, phig_mapping)
+    actual = make_ensembl_canto_export(canto_export, uniprot_data, phig_uniprot_mapping)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
-def test_make_ensembl_exports(phi_df, canto_export3, uniprot_data_ensembl):
-    phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
-    chebi_mapping = loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
-
-    in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier(
-        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
-    )
-    phenotype_mapping = loaders.load_phenotype_column_mapping(
-        TEST_DATA_DIR / 'phenotype_mapping.csv'
-    )
-    disease_mapping = loaders.load_disease_column_mapping(
-        phido_path=TEST_DATA_DIR / 'phido.csv',
-        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
-    )
-    tissue_mapping = loaders.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
-    exp_tech_mapping = pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
-
+def test_make_ensembl_exports(
+    phi_df,
+    canto_export3,
+    uniprot_data_ensembl,
+    phig_uniprot_mapping,
+    chebi_mapping,
+    in_vitro_growth_classifier,
+    phenotype_mapping,
+    disease_mapping,
+    tissue_mapping,
+    exp_tech_mapping,
+):
     expected = {
         k: pd.read_csv(ENSEMBL_EXPORT_DIR / filename)
         for k, filename in (
@@ -506,7 +541,7 @@ def test_make_ensembl_exports(phi_df, canto_export3, uniprot_data_ensembl):
         phi_df,
         canto_export3,
         uniprot_data=uniprot_data_ensembl,
-        phig_mapping=phig_mapping,
+        phig_mapping=phig_uniprot_mapping,
         chebi_mapping=chebi_mapping,
         in_vitro_growth_classifier=in_vitro_growth_classifier,
         phenotype_mapping=phenotype_mapping,
@@ -520,22 +555,16 @@ def test_make_ensembl_exports(phi_df, canto_export3, uniprot_data_ensembl):
     assert_frame_equal(actual['amr'], expected['amr'], check_dtype=False)
 
 
-def test_make_ensembl_phibase_export(phi_df, uniprot_data_ensembl):
+def test_make_ensembl_phibase_export(
+    phi_df,
+    uniprot_data_ensembl,
+    in_vitro_growth_classifier,
+    phenotype_mapping,
+    disease_mapping,
+    tissue_mapping,
+    exp_tech_mapping,
+):
     expected = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
-
-    in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier(
-        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
-    )
-    phenotype_mapping = loaders.load_phenotype_column_mapping(
-        TEST_DATA_DIR / 'phenotype_mapping.csv'
-    )
-    disease_mapping = loaders.load_disease_column_mapping(
-        phido_path=TEST_DATA_DIR / 'phido.csv',
-        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
-    )
-    tissue_mapping = loaders.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
-    exp_tech_mapping = pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
-
     actual = make_ensembl_phibase_export(
         phi_df,
         uniprot_data=uniprot_data_ensembl,
@@ -655,9 +684,7 @@ def test_get_tissue_id_str(annotation, expected):
     assert actual == expected
 
 
-def test_get_amr_records(canto_export2):
-    phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
-    chebi_mapping = loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
+def test_get_amr_records(canto_export2, phig_uniprot_mapping, chebi_mapping):
     expected = [
         {
             'phig_id': 'PHIG:11',
@@ -689,7 +716,7 @@ def test_get_amr_records(canto_export2):
             'buffer_col': None,
         }
     ]
-    actual = get_amr_records(canto_export2, phig_mapping, chebi_mapping)
+    actual = get_amr_records(canto_export2, phig_uniprot_mapping, chebi_mapping)
     assert actual == expected
 
 
