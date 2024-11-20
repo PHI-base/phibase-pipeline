@@ -37,6 +37,11 @@ ENSEMBL_EXPORT_DIR = ENSEMBL_DATA_DIR / 'make_ensembl_export'
 
 
 @pytest.fixture
+def phi_df():
+    return pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+
+
+@pytest.fixture
 def canto_export():
     path = ENSEMBL_DATA_DIR / 'phicanto_export.json'
     with open(path, encoding='utf-8') as f:
@@ -456,18 +461,15 @@ def test_get_physical_interaction_data():
     assert expected == actual
 
 
-def test_make_ensembl_canto_export():
+def test_make_ensembl_canto_export(canto_export):
     expected = pd.read_csv(ENSEMBL_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
-    with open(ENSEMBL_DATA_DIR / 'phicanto_export.json', encoding='utf-8') as f:
-        export = json.load(f)
     uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
-    actual = make_ensembl_canto_export(export, uniprot_data, phig_mapping)
+    actual = make_ensembl_canto_export(canto_export, uniprot_data, phig_mapping)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
-def test_make_ensembl_exports(canto_export3):
-    phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+def test_make_ensembl_exports(phi_df, canto_export3):
     uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
@@ -511,8 +513,7 @@ def test_make_ensembl_exports(canto_export3):
     assert_frame_equal(actual['amr'], expected['amr'], check_dtype=False)
 
 
-def test_make_ensembl_phibase_export():
-    phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
+def test_make_ensembl_phibase_export(phi_df):
     uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
     expected = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
 
