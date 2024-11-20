@@ -12,7 +12,7 @@ from phibase_pipeline import ensembl, migrate, validate
 
 def parse_args(args):
     parser = argparse.ArgumentParser(
-        prog='phibase-pipeline',
+        prog='phibase_pipeline',
         description='Pipeline for version 5 of the PHI-base database.',
     )
     subparsers = parser.add_subparsers(dest='target', required=True)
