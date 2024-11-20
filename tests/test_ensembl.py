@@ -136,6 +136,11 @@ def canto_export3():
         return json.load(f)
 
 
+@pytest.fixture
+def canto_dataframe():
+    return pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
+
+
 def test_get_genotype_data(canto_export):
     session = canto_export['curation_sessions']['cc6cf06675cc6e13']
     genotype_id = 'cc6cf06675cc6e13-genotype-1'
@@ -174,11 +179,10 @@ def test_get_metagenotype_data(canto_export):
     assert expected == actual
 
 
-def test_get_canto_columns(canto_export):
-    expected = pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
+def test_get_canto_columns(canto_export, canto_dataframe):
     effector_ids = set(['A0A507D1H9'])
     actual = get_canto_columns(canto_export, effector_ids)
-    assert_frame_equal(expected, actual)
+    assert_frame_equal(canto_dataframe, actual)
 
 
 def test_get_uniprot_columns():
@@ -194,8 +198,7 @@ def test_get_uniprot_columns():
     assert_frame_equal(expected, actual)
 
 
-def test_add_uniprot_columns():
-    canto_data = pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
+def test_add_uniprot_columns(canto_dataframe):
     uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv')
     expected = pd.read_csv(
         ENSEMBL_DATA_DIR / 'add_uniprot_columns_expected.csv',
@@ -207,7 +210,7 @@ def test_add_uniprot_columns():
             'high_level_terms': 'object',
         },
     )
-    actual = add_uniprot_columns(canto_data, uniprot_data)
+    actual = add_uniprot_columns(canto_dataframe, uniprot_data)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
