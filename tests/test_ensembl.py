@@ -146,6 +146,16 @@ def canto_dataframe():
     return pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
 
 
+@pytest.fixture
+def uniprot_data():
+    return pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
+
+
+@pytest.fixture
+def uniprot_data_ensembl():
+    return pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
+
+
 def test_get_genotype_data(canto_export):
     session = canto_export['curation_sessions']['cc6cf06675cc6e13']
     genotype_id = 'cc6cf06675cc6e13-genotype-1'
@@ -190,7 +200,7 @@ def test_get_canto_columns(canto_export, canto_dataframe):
     assert_frame_equal(canto_dataframe, actual)
 
 
-def test_get_uniprot_columns():
+def test_get_uniprot_columns(uniprot_data):
     expected = pd.read_csv(
         ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv',
         dtype={
@@ -198,7 +208,6 @@ def test_get_uniprot_columns():
             'taxid_strain': 'Int64',
         },
     )
-    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
     actual = get_uniprot_columns(uniprot_data)
     assert_frame_equal(expected, actual)
 
@@ -461,16 +470,14 @@ def test_get_physical_interaction_data():
     assert expected == actual
 
 
-def test_make_ensembl_canto_export(canto_export):
+def test_make_ensembl_canto_export(canto_export, uniprot_data):
     expected = pd.read_csv(ENSEMBL_DATA_DIR / 'make_ensembl_canto_export_expected.csv')
-    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     actual = make_ensembl_canto_export(canto_export, uniprot_data, phig_mapping)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
-def test_make_ensembl_exports(phi_df, canto_export3):
-    uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
+def test_make_ensembl_exports(phi_df, canto_export3, uniprot_data_ensembl):
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
 
@@ -498,7 +505,7 @@ def test_make_ensembl_exports(phi_df, canto_export3):
     actual = make_ensembl_exports(
         phi_df,
         canto_export3,
-        uniprot_data=uniprot_data,
+        uniprot_data=uniprot_data_ensembl,
         phig_mapping=phig_mapping,
         chebi_mapping=chebi_mapping,
         in_vitro_growth_classifier=in_vitro_growth_classifier,
@@ -513,8 +520,7 @@ def test_make_ensembl_exports(phi_df, canto_export3):
     assert_frame_equal(actual['amr'], expected['amr'], check_dtype=False)
 
 
-def test_make_ensembl_phibase_export(phi_df):
-    uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
+def test_make_ensembl_phibase_export(phi_df, uniprot_data_ensembl):
     expected = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
 
     in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier(
@@ -532,7 +538,7 @@ def test_make_ensembl_phibase_export(phi_df):
 
     actual = make_ensembl_phibase_export(
         phi_df,
-        uniprot_data=uniprot_data,
+        uniprot_data=uniprot_data_ensembl,
         phenotype_mapping=phenotype_mapping,
         disease_mapping=disease_mapping,
         tissue_mapping=tissue_mapping,
@@ -542,8 +548,7 @@ def test_make_ensembl_phibase_export(phi_df):
     assert_frame_equal(actual, expected, check_dtype=False)
 
 
-def test_uniprot_data_to_mapping():
-    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'uniprot_test_data.csv')
+def test_uniprot_data_to_mapping(uniprot_data):
     actual = uniprot_data_to_mapping(uniprot_data)
     expected = {
         'A0A0L0V3D9': {
