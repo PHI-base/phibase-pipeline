@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "phibase-pipeline"
 dynamic = ["version"]
-description = ''
+description = 'Data cleaning and release pipeline for PHI-base version 5'
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
@@ -29,9 +29,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/unknown/phibase-pipeline#readme"
-Issues = "https://github.com/unknown/phibase-pipeline/issues"
-Source = "https://github.com/unknown/phibase-pipeline"
+Documentation = "https://github.com/PHI-base/phibase-pipeline#readme"
+Issues = "https://github.com/PHI-base/phibase-pipeline/issues"
+Source = "https://github.com/PHI-base/phibase-pipeline"
 
 [tool.hatch.version]
 path = "src/phibase_pipeline/__about__.py"
