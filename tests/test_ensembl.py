@@ -37,21 +37,22 @@ ENSEMBL_EXPORT_DIR = ENSEMBL_DATA_DIR / 'make_ensembl_export'
 
 
 @pytest.fixture
-def phicanto_export():
+def canto_export():
     path = ENSEMBL_DATA_DIR / 'phicanto_export.json'
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
 
 @pytest.fixture
-def effector_export():
+def canto_export_effector():
     path = ENSEMBL_DATA_DIR / 'phicanto_export_effector.json'
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
 
 @pytest.fixture
-def canto_export():
+def canto_export2():
+    """Simplified Canto export used for Ensembl export tests."""
     return {
         'curation_sessions': {
             '2d2e1c30cceb7aab': {
@@ -129,14 +130,14 @@ def canto_export():
 
 
 @pytest.fixture
-def canto_export2():
+def canto_export3():
     """Altered version of canto_export fixture used by test_make_ensembl_exports."""
-    with open(ENSEMBL_EXPORT_DIR / 'canto_export2.json', encoding='utf-8') as f:
+    with open(ENSEMBL_EXPORT_DIR / 'canto_export3.json', encoding='utf-8') as f:
         return json.load(f)
 
 
-def test_get_genotype_data(phicanto_export):
-    session = phicanto_export['curation_sessions']['cc6cf06675cc6e13']
+def test_get_genotype_data(canto_export):
+    session = canto_export['curation_sessions']['cc6cf06675cc6e13']
     genotype_id = 'cc6cf06675cc6e13-genotype-1'
     suffix = '_a'
     expected = {
@@ -152,8 +153,8 @@ def test_get_genotype_data(phicanto_export):
     assert expected == actual
 
 
-def test_get_metagenotype_data(phicanto_export):
-    session = phicanto_export['curation_sessions']['cc6cf06675cc6e13']
+def test_get_metagenotype_data(canto_export):
+    session = canto_export['curation_sessions']['cc6cf06675cc6e13']
     metagenotype_id = 'cc6cf06675cc6e13-metagenotype-1'
     expected = {
         'uniprot_a': 'A0A0L0V3D9',
@@ -173,10 +174,10 @@ def test_get_metagenotype_data(phicanto_export):
     assert expected == actual
 
 
-def test_get_canto_columns(phicanto_export):
+def test_get_canto_columns(canto_export):
     expected = pd.read_csv(ENSEMBL_DATA_DIR / 'get_canto_columns_expected.csv')
     effector_ids = set(['A0A507D1H9'])
-    actual = get_canto_columns(phicanto_export, effector_ids)
+    actual = get_canto_columns(canto_export, effector_ids)
     assert_frame_equal(expected, actual)
 
 
@@ -424,9 +425,9 @@ def test_get_high_level_terms(annotation, expected):
     assert expected == actual
 
 
-def test_get_effector_gene_ids(effector_export):
+def test_get_effector_gene_ids(canto_export_effector):
     expected = set(('A0A507D1H9', 'A0A2K9YVY7', 'M4B6G6'))
-    actual = get_effector_gene_ids(effector_export)
+    actual = get_effector_gene_ids(canto_export_effector)
     assert expected == actual
 
 
@@ -462,7 +463,7 @@ def test_make_ensembl_canto_export():
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
-def test_make_ensembl_exports(canto_export2):
+def test_make_ensembl_exports(canto_export3):
     phi_df = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phi_df.csv')
     uniprot_data = pd.read_csv(ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv', sep='\t')
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
@@ -491,7 +492,7 @@ def test_make_ensembl_exports(canto_export2):
     }
     actual = make_ensembl_exports(
         phi_df,
-        canto_export2,
+        canto_export3,
         uniprot_data=uniprot_data,
         phig_mapping=phig_mapping,
         chebi_mapping=chebi_mapping,
@@ -645,7 +646,7 @@ def test_get_tissue_id_str(annotation, expected):
     assert actual == expected
 
 
-def test_get_amr_records(canto_export):
+def test_get_amr_records(canto_export2):
     phig_mapping = loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
     chebi_mapping = loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
     expected = [
@@ -679,7 +680,7 @@ def test_get_amr_records(canto_export):
             'buffer_col': None,
         }
     ]
-    actual = get_amr_records(canto_export, phig_mapping, chebi_mapping)
+    actual = get_amr_records(canto_export2, phig_mapping, chebi_mapping)
     assert actual == expected
 
 
@@ -736,7 +737,7 @@ def test_merge_amr_uniprot_data():
     assert actual == expected
 
 
-def test_make_ensembl_amr_export(canto_export2):
+def test_make_ensembl_amr_export(canto_export3):
     chebi_mapping = {'PHIPO:0000592': {'id': 'CHEBI:81763', 'label': 'fludioxonil'}}
     phig_mapping = {'I1RAE5': 'PHIG:11'}
     uniprot_mapping = {
@@ -780,7 +781,7 @@ def test_make_ensembl_amr_export(canto_export2):
         index=[0],
     )
     actual = make_ensembl_amr_export(
-        canto_export2,
+        canto_export3,
         chebi_mapping=chebi_mapping,
         phig_mapping=phig_mapping,
         uniprot_mapping=uniprot_mapping,
@@ -791,7 +792,7 @@ def test_make_ensembl_amr_export(canto_export2):
 def test_write_ensembl_exports(tmpdir):
     write_ensembl_exports(
         phibase_path=ENSEMBL_EXPORT_DIR / 'phi_df.csv',
-        canto_export_path=ENSEMBL_EXPORT_DIR / 'canto_export2.json',
+        canto_export_path=ENSEMBL_EXPORT_DIR / 'canto_export3.json',
         uniprot_data_path=ENSEMBL_EXPORT_DIR / 'uniprot_data.tsv',
         dir_path=tmpdir,
     )
