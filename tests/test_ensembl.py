@@ -182,11 +182,10 @@ def in_vitro_growth_classifier():
         TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
     )
 
+
 @pytest.fixture
 def phenotype_mapping():
-    return loaders.load_phenotype_column_mapping(
-        TEST_DATA_DIR / 'phenotype_mapping.csv'
-    )
+    return loaders.load_phenotype_column_mapping(TEST_DATA_DIR / 'phenotype_mapping.csv')
 
 
 @pytest.fixture
@@ -715,7 +714,7 @@ def test_uniprot_data_to_mapping(uniprot_data):
             'BTO:0000001; BTO:0000002',
             id='multi',
         ),
-    )
+    ),
 )
 def test_get_tissue_id_str(annotation, expected):
     actual = get_tissue_id_str(annotation)

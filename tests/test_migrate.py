@@ -50,7 +50,6 @@ from phibase_pipeline.migrate import (
 DATA_DIR = Path(__file__).parent / 'data'
 
 
-
 def test_split_compound_rows():
     df = pd.DataFrame(
         {

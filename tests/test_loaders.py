@@ -98,7 +98,9 @@ def test_load_in_vitro_growth_classifier():
         },
         name='is_filamentous',
     ).rename_axis('ncbi_taxid')
-    actual = loaders.load_in_vitro_growth_classifier(DATA_DIR / 'in_vitro_growth_mapping.csv')
+    actual = loaders.load_in_vitro_growth_classifier(
+        DATA_DIR / 'in_vitro_growth_mapping.csv'
+    )
     pd.testing.assert_series_equal(actual, expected)
 
 

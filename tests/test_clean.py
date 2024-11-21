@@ -55,7 +55,7 @@ from phibase_pipeline.clean import fix_curation_dates
                 dtype='datetime64[ns]',
             ),
             id='mixed_dates',
-        )
+        ),
     ],
 )
 def test_fix_curation_dates(dates, expected):
