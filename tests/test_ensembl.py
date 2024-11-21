@@ -630,6 +630,7 @@ def test_uniprot_data_to_mapping(uniprot_data):
             'uniprot_matches': 'strain',
         },
         'Q7X9A6': {
+            # Note that this is a single line of text, not a collection!
             'ensembl': (
                 'TraesARI2D03G01168670.1; '
                 'TraesCAD_scaffold_092989_01G000200.1; '
