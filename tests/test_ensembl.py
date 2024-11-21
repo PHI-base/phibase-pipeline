@@ -157,6 +157,16 @@ def uniprot_data_ensembl():
 
 
 @pytest.fixture
+def uniprot_xref_dataframe():
+    path = ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv'
+    dtypes = {
+        'taxid_species': 'Int64',
+        'taxid_strain': 'Int64',
+    }
+    return pd.read_csv(path, dtype=dtypes)
+
+
+@pytest.fixture
 def phig_uniprot_mapping():
     return loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
 
@@ -195,6 +205,39 @@ def tissue_mapping():
 @pytest.fixture
 def exp_tech_mapping():
     return pd.read_csv(ENSEMBL_DATA_DIR / 'phibase4_exp_tech_mapping.csv')
+
+
+@pytest.fixture
+def uniprot_data_mapping():
+    return {
+        'I1RAE5': {
+            'ensembl': 'CEF72408',
+            'taxid_species': 5518,
+            'taxid_strain': 229533,
+            'uniprot_matches': 'strain',
+        },
+        'A0A384J5Y1': {
+            'ensembl': 'Bcin01g06260.3; Bcin01g06260.5; Bcin01g06260.6',
+            'taxid_species': 40559,
+            'taxid_strain': 332648,
+            'uniprot_matches': 'strain',
+        },
+    }
+
+
+@pytest.fixture
+def ensembl_phibase4_export():
+    return pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
+
+
+@pytest.fixture
+def ensembl_phibase5_export():
+    return pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase5_expected.csv')
+
+
+@pytest.fixture
+def ensembl_amr_export():
+    return pd.read_csv(ENSEMBL_EXPORT_DIR / 'amr_expected.csv')
 
 
 def test_get_genotype_data(canto_export):
@@ -241,20 +284,13 @@ def test_get_canto_columns(canto_export, canto_dataframe):
     assert_frame_equal(canto_dataframe, actual)
 
 
-def test_get_uniprot_columns(uniprot_data):
-    expected = pd.read_csv(
-        ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv',
-        dtype={
-            'taxid_species': 'Int64',
-            'taxid_strain': 'Int64',
-        },
-    )
+def test_get_uniprot_columns(uniprot_data, uniprot_xref_dataframe):
+    expected = uniprot_xref_dataframe
     actual = get_uniprot_columns(uniprot_data)
     assert_frame_equal(expected, actual)
 
 
-def test_add_uniprot_columns(canto_dataframe):
-    uniprot_data = pd.read_csv(ENSEMBL_DATA_DIR / 'get_uniprot_columns_expected.csv')
+def test_add_uniprot_columns(canto_dataframe, uniprot_xref_dataframe):
     expected = pd.read_csv(
         ENSEMBL_DATA_DIR / 'add_uniprot_columns_expected.csv',
         dtype={
@@ -265,7 +301,7 @@ def test_add_uniprot_columns(canto_dataframe):
             'high_level_terms': 'object',
         },
     )
-    actual = add_uniprot_columns(canto_dataframe, uniprot_data)
+    actual = add_uniprot_columns(canto_dataframe, uniprot_xref_dataframe)
     assert_frame_equal(expected, actual, check_dtype=False)
 
 
@@ -528,14 +564,14 @@ def test_make_ensembl_exports(
     disease_mapping,
     tissue_mapping,
     exp_tech_mapping,
+    ensembl_phibase4_export,
+    ensembl_phibase5_export,
+    ensembl_amr_export,
 ):
     expected = {
-        k: pd.read_csv(ENSEMBL_EXPORT_DIR / filename)
-        for k, filename in (
-            ('phibase4', 'phibase4_expected.csv'),
-            ('phibase5', 'phibase5_expected.csv'),
-            ('amr', 'amr_expected.csv'),
-        )
+        'phibase4': ensembl_phibase4_export,
+        'phibase5': ensembl_phibase5_export,
+        'amr': ensembl_amr_export,
     }
     actual = make_ensembl_exports(
         phi_df,
@@ -563,8 +599,9 @@ def test_make_ensembl_phibase_export(
     disease_mapping,
     tissue_mapping,
     exp_tech_mapping,
+    ensembl_phibase4_export,
 ):
-    expected = pd.read_csv(ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv')
+    expected = ensembl_phibase4_export
     actual = make_ensembl_phibase_export(
         phi_df,
         uniprot_data=uniprot_data_ensembl,
@@ -720,7 +757,7 @@ def test_get_amr_records(canto_export2, phig_uniprot_mapping, chebi_mapping):
     assert actual == expected
 
 
-def test_merge_amr_uniprot_data():
+def test_merge_amr_uniprot_data(uniprot_data_mapping):
     record = {
         'phig_id': 'PHIG:4721',
         'interactor_A_molecular_id': 'A0A384J5Y1',
@@ -755,77 +792,36 @@ def test_merge_amr_uniprot_data():
     unmatched_uniprot_record['interactor_A_molecular_id'] = 'L2FD62'
 
     amr_records = [record, unmatched_uniprot_record]
-    uniprot_mapping = {
-        'A0A384J5Y1': {
-            'ensembl': 'Bcin01g06260.3; Bcin01g06260.5; Bcin01g06260.6',
-            'taxid_species': 40559,
-            'taxid_strain': 332648,
-            'uniprot_matches': 'strain',
-        },
-    }
     expected_record = amr_records[0].copy()
     expected_record['ensembl_a'] = 'Bcin01g06260.3; Bcin01g06260.5; Bcin01g06260.6'
     expected_record['taxid_species_a'] = 40559
     expected_record['taxid_strain_a'] = 332648
     expected_record['uniprot_matches_a'] = 'strain'
     expected = [expected_record]
-    actual = merge_amr_uniprot_data(amr_records, uniprot_mapping)
+    actual = merge_amr_uniprot_data(amr_records, uniprot_data_mapping)
     assert actual == expected
 
 
-def test_make_ensembl_amr_export(canto_export3):
-    chebi_mapping = {'PHIPO:0000592': {'id': 'CHEBI:81763', 'label': 'fludioxonil'}}
-    phig_mapping = {'I1RAE5': 'PHIG:11'}
-    uniprot_mapping = {
-        'I1RAE5': {
-            'ensembl': 'CEF72408',
-            'taxid_species': 5518,
-            'taxid_strain': 229533,
-            'uniprot_matches': 'strain',
-        }
-    }
-    expected = pd.DataFrame(
-        {
-            'phig_id': 'PHIG:11',
-            'interactor_A_molecular_id': 'I1RAE5',
-            'ensembl_a': 'CEF72408',
-            'taxid_species_a': 5518,
-            'organism_a': 'Fusarium graminearum',
-            'taxid_strain_a': pd.Series(229533, dtype='Int64'),
-            'strain_a': 'PH-1',
-            'uniprot_matches_a': 'strain',
-            'modification_a': 'FG00472.1delta (deletion)',
-            'interactor_B_molecular_id': 'CHEBI:81763',
-            'ensembl_b': np.nan,
-            'taxid_species_b': np.nan,
-            'organism_b': 'fludioxonil',
-            'taxid_strain_b': np.nan,
-            'strain_b': np.nan,
-            'uniprot_matches_b': np.nan,
-            'modification_b': np.nan,
-            'phenotype': 'PHIPO:0000592',
-            'disease': np.nan,
-            'host_tissue': np.nan,
-            'evidence_code': 'Cell growth assay',
-            'interaction_type': 'antimicrobial_interaction',
-            'pmid': 24903410,
-            'high_level_terms': np.nan,
-            'interactor_A_sequence': np.nan,
-            'interactor_B_sequence': np.nan,
-            'buffer_col': np.nan,
-        },
-        index=[0],
-    )
+def test_make_ensembl_amr_export(
+    canto_export3,
+    chebi_mapping,
+    phig_uniprot_mapping,
+    uniprot_data_mapping,
+    ensembl_amr_export,
+):
+    expected = ensembl_amr_export
     actual = make_ensembl_amr_export(
         canto_export3,
         chebi_mapping=chebi_mapping,
-        phig_mapping=phig_mapping,
-        uniprot_mapping=uniprot_mapping,
+        phig_mapping=phig_uniprot_mapping,
+        uniprot_mapping=uniprot_data_mapping,
     )
     assert_frame_equal(actual, expected, check_dtype=False)
 
 
-def test_write_ensembl_exports(tmpdir):
+def test_write_ensembl_exports(
+    ensembl_phibase4_export, ensembl_phibase5_export, ensembl_amr_export, tmpdir
+):
     write_ensembl_exports(
         phibase_path=ENSEMBL_EXPORT_DIR / 'phi_df.csv',
         canto_export_path=ENSEMBL_EXPORT_DIR / 'canto_export3.json',
@@ -835,17 +831,17 @@ def test_write_ensembl_exports(tmpdir):
     actual_expected_map = (
         (
             tmpdir / 'phibase4_interactions_export.csv',
-            ENSEMBL_EXPORT_DIR / 'phibase4_expected.csv',
+            ensembl_phibase4_export,
         ),
         (
             tmpdir / 'phibase5_interactions_export.csv',
-            ENSEMBL_EXPORT_DIR / 'phibase5_expected.csv',
+            ensembl_phibase5_export,
         ),
         (
             tmpdir / 'phibase_amr_export.csv',
-            ENSEMBL_EXPORT_DIR / 'amr_expected.csv',
+            ensembl_amr_export,
         ),
     )
-    for actual_path, expected_path in actual_expected_map:
-        actual, expected = (pd.read_csv(path) for path in (actual_path, expected_path))
+    for path, expected in actual_expected_map:
+        actual = pd.read_csv(path)
         assert_frame_equal(actual, expected)
