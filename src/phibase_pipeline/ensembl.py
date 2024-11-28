@@ -50,9 +50,7 @@ def get_genotype_data(session, genotype_id, suffix='_a'):
             description = allele.get('description')
             desc_str = f'({description})' if description else ''
             allele_type = allele['allele_type'].replace('_', ' ')
-            allele_display_name = (
-                f"{allele['name']}{desc_str} ({allele_type}){expr_str}"
-            )
+            allele_display_name = f"{allele['name']}{desc_str} ({allele_type}){expr_str}"
             gene_id = allele['gene']
             gene = genes[gene_id]
             uniprot_id = gene['uniquename']
@@ -76,7 +74,8 @@ def get_physical_interaction_data(session, gene_id, interacting_gene_id):
         uniprot_id = gene['uniquename']
         organism_name = gene['organism']
         taxid = next(
-            taxid for taxid, organism in organisms.items()
+            taxid
+            for taxid, organism in organisms.items()
             if organism['full_name'] == organism_name
         )
         gene_data = {
@@ -94,14 +93,10 @@ def get_metagenotype_data(session, metagenotype_id):
     metagenotype = session['metagenotypes'][metagenotype_id]
     pathogen_genotype_id = metagenotype['pathogen_genotype']
     host_genotype_id = metagenotype['host_genotype']
-    pathogen_columns = get_genotype_data(
-        session, pathogen_genotype_id, suffix='_a'
-    )
+    pathogen_columns = get_genotype_data(session, pathogen_genotype_id, suffix='_a')
     if pathogen_columns is None:
         return None
-    host_columns = get_genotype_data(
-        session, host_genotype_id, suffix='_b'
-    )
+    host_columns = get_genotype_data(session, host_genotype_id, suffix='_b')
     if host_columns is None:
         return None
     return {**pathogen_columns, **host_columns}
@@ -160,8 +155,7 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
                 tissue_ids = get_tissue_id_str(annotation)
                 high_level_terms = get_high_level_terms(annotation)
                 has_effector_gene = (
-                    data['uniprot_a'] in effector_ids
-                    or data['uniprot_b'] in effector_ids
+                    data['uniprot_a'] in effector_ids or data['uniprot_b'] in effector_ids
                 )
                 if has_effector_gene:
                     high_level_terms.extend(['Effector'])
@@ -245,9 +239,7 @@ def get_uniprot_columns(uniprot_data):
     for value, cond in uniprot_match_values.items():
         df.loc[cond, 'uniprot_matches'] = value
     df['ensembl'] = get_ensembl_id_column(df)
-    columns = [
-        'uniprot', 'ensembl', 'taxid_species', 'taxid_strain', 'uniprot_matches'
-    ]
+    columns = ['uniprot', 'ensembl', 'taxid_species', 'taxid_strain', 'uniprot_matches']
     return df[columns]
 
 
@@ -405,7 +397,9 @@ def get_amr_records(canto_export, phig_mapping, chebi_mapping):
                 '; '.join(high_level_terms) if high_level_terms else None
             )
 
-            annotation_type = annotation['type'].replace('pathogen_phenotype', 'antimicrobial_interaction')
+            annotation_type = annotation['type'].replace(
+                'pathogen_phenotype', 'antimicrobial_interaction'
+            )
             pmid_number = lambda pmid: int(pmid.replace('PMID:', ''))
             row = {
                 'phig_id': phig_id,
@@ -494,15 +488,11 @@ def make_ensembl_phibase_export(
         df = phi_df[phenotype_columns].dropna(axis=1).copy()
         # Add this column back in since it's needed for mapping
         df['is_filamentous'] = phi_df.is_filamentous
-        selector = pd.MultiIndex.from_tuples(
-            tuple(df.transpose()[0].to_dict().items())
-        )
+        selector = pd.MultiIndex.from_tuples(tuple(df.transpose()[0].to_dict().items()))
         phenotype_mapping = phenotype_mapping.set_index(['column_1', 'value_1'])
         # Use intersection to drop indexes that will cause a KeyError
         selector = phenotype_mapping.index.intersection(selector)
-        phenotype_mapping = (
-            phenotype_mapping.loc[selector].reset_index(drop=False)
-        )
+        phenotype_mapping = phenotype_mapping.loc[selector].reset_index(drop=False)
         columns = [
             'column_1',
             'value_1',
@@ -512,15 +502,15 @@ def make_ensembl_phibase_export(
             'extension_range',
         ]
         column_map = (
-            phenotype_mapping[columns]
-            .replace(np.nan, None)
-            .to_dict(orient='records')
+            phenotype_mapping[columns].replace(np.nan, None).to_dict(orient='records')
         )
 
         single_map = [d for d in column_map if d['column_2'] is None]
         single_value_map = {
             k: {
-                v['value_1']:  v['primary_id'] if k != 'mutant_phenotype' else v['extension_range']
+                v['value_1']: (
+                    v['primary_id'] if k != 'mutant_phenotype' else v['extension_range']
+                )
                 for v in g
             }
             for k, g in itertools.groupby(single_map, key=lambda d: d['column_1'])
@@ -613,9 +603,7 @@ def make_ensembl_phibase_export(
 
     uniprot_df = get_uniprot_columns(uniprot_data)
     export_df = add_uniprot_columns(export_df, uniprot_df)
-    phi_df = migrate.add_filamentous_classifier_column(
-        in_vitro_growth_classifier, phi_df
-    )
+    phi_df = migrate.add_filamentous_classifier_column(in_vitro_growth_classifier, phi_df)
     export_df['phenotype'] = get_phenotype_column(phi_df, phenotype_mapping)
 
     # TODO: Change add_disease_term_ids to return a series

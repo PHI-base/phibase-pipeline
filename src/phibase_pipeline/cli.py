@@ -29,7 +29,7 @@ def parse_args(args):
             'metavar': 'CANTO_JSON',
             'type': str,
             'help': 'the path to the PHI-Canto JSON export file',
-        }
+        },
     }
     for subparser in (parser_zenodo, parser_ensembl):
         for arg_name, kwargs in shared_args.items():

@@ -13,18 +13,18 @@ DATA_DIR = Path(__file__).parent / 'data'
 
 
 def read_phig_uniprot_mapping(path):
-    return (
-        pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
-    )
+    return pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
 
 
 def read_phipo_chebi_mapping(path):
     return (
         pd.read_csv(path, index_col='phipo_id')
-        .rename(columns={
-            'chebi_id': 'id',
-            'chebi_label': 'label',
-        })
+        .rename(
+            columns={
+                'chebi_id': 'id',
+                'chebi_label': 'label',
+            }
+        )
         .to_dict(orient='index')
     )
 
@@ -33,8 +33,8 @@ def load_in_vitro_growth_classifier(path):
     df = pd.read_csv(path)
     df.is_filamentous = df.is_filamentous.str.lower()
     classifier_column = (
-        df.set_index('ncbi_taxid').is_filamentous
-        .loc[lambda x: x.isin(('yes', 'no'))]
+        df.set_index('ncbi_taxid')
+        .is_filamentous.loc[lambda x: x.isin(('yes', 'no'))]
         .map({'yes': True, 'no': False})
     )
     return classifier_column
@@ -97,9 +97,7 @@ def load_exp_tech_mapping(path):
 
     unique_columns = ['exp_technique_stable', 'gene_protein_modification']
     df = (
-        pd.read_csv(path)
-        .groupby(unique_columns, dropna=False, sort=False)
-        .agg(join_rows)
+        pd.read_csv(path).groupby(unique_columns, dropna=False, sort=False).agg(join_rows)
     )
     valid_rows = (df != '?').all(axis=1)
     assert ~df.index.duplicated().any()

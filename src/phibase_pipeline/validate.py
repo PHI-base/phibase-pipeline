@@ -153,8 +153,9 @@ def validate_referenced_organisms(genotypes, organisms):
         organism_id = str(genotype['organism_taxonid'])
         _validate(
             organism_id in organism_ids,
-            f"{genotype_id} organism ID not in session organisms: {organism_id}"
+            f"{genotype_id} organism ID not in session organisms: {organism_id}",
         )
+
 
 def validate_uniprot_ids(genes):
     uniprot_pattern = re.compile(
@@ -216,7 +217,7 @@ def validate_unique_metagenotypes(metagenotypes):
         )
         _validate(
             unique_id not in unique_metagenotypes,
-            f"{metagenotype_id} is duplicate of {unique_id}"
+            f"{metagenotype_id} is duplicate of {unique_id}",
         )
         unique_metagenotypes[unique_id] = metagenotype_id
 

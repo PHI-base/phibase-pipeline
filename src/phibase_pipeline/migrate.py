@@ -17,7 +17,7 @@ from phibase_pipeline.clean import clean_phibase_csv
 from phibase_pipeline.merge import merge_exports
 from phibase_pipeline.postprocess import (
     postprocess_combined_json,
-    postprocess_phibase_json
+    postprocess_phibase_json,
 )
 from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
 
@@ -127,8 +127,7 @@ def add_session_ids(df):
     """Generate fake curation session IDs for publications in PHI-base by
     truncating a SHA-256 hash of the PMID number to 16 characters."""
     df['session_id'] = (
-        df.pmid
-        .astype(str)
+        df.pmid.astype(str)
         .str.encode('ascii')
         .apply(lambda x: hashlib.sha256(x).hexdigest())
         .str.slice(stop=16)
@@ -193,10 +192,7 @@ def fill_multiple_mutation_ids(df):
 def add_genotype_ids(df):
     def add_ids(df, columns, indexer, append_ids=False):
         values = (
-            df.loc[indexer, columns]
-            .reset_index(drop=False)
-            .sort_values(columns)
-            .values
+            df.loc[indexer, columns].reset_index(drop=False).sort_values(columns).values
         )
         i_offset = 0
         if append_ids:
@@ -586,9 +582,7 @@ def add_mutant_genotype_objects(canto_json, phi_df):
         ]
         sort_order = ['session_id', 'pathogen_genotype_id', 'pathogen_allele_id']
         id_columns = ['pathogen_genotype_id', 'pathogen_allele_id']
-        return (
-            phi_df[columns].sort_values(sort_order).drop_duplicates(id_columns).values
-        )
+        return phi_df[columns].sort_values(sort_order).drop_duplicates(id_columns).values
 
     def make_first_genotype(row_values):
         _, taxon_id, strain, _, allele_id, expression = row_values[0]
@@ -717,9 +711,7 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
         columns_to_keep = columns.difference(columns_to_exclude, sort=False)
         dfg = phenotype_mapping_df.groupby('column_1')
         for column_name, gdf in dfg:
-            columns_to_ignore = [
-                col for col in mapping_columns if gdf[col].isna().all()
-            ]
+            columns_to_ignore = [col for col in mapping_columns if gdf[col].isna().all()]
             columns_to_rename = mapping_columns.difference(columns_to_ignore)
             renames = {
                 value_column: gdf[column].iloc[0]
@@ -753,9 +745,7 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
         for column_name, column_df in indexed_mapping.items():
             for row in column_df.itertuples():
                 index = row.Index
-                term = (
-                    row.primary_id if row.primary_id is not np.nan else 'PHIPO:0000001'
-                )
+                term = row.primary_id if row.primary_id is not np.nan else 'PHIPO:0000001'
                 data = {
                     'conditions': [],
                     'term': term,
@@ -785,9 +775,7 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
 
     mapping_dict = combine_column_mapping(
         phipo_mapping,
-        index_mapping_by_record_id(
-            split_mapping_by_column(phenotype_mapping_df), phi_df
-        ),
+        index_mapping_by_record_id(split_mapping_by_column(phenotype_mapping_df), phi_df),
     )
     return mapping_dict
 
@@ -948,9 +936,7 @@ def add_organism_roles(canto_json):
             organism['role'] = (
                 'pathogen'
                 if taxid in pathogen_taxids
-                else 'host'
-                if taxid in host_taxids
-                else 'unknown'
+                else 'host' if taxid in host_taxids else 'unknown'
             )
 
 
@@ -968,12 +954,11 @@ def add_pathogen_gene_names_to_alleles(canto_json, phi_df):
 def get_phi_id_column(phi_df):
     sep = '; '
     sort_by_id_num = lambda x: int(x.split(':')[1])
-    sort_uniques = lambda x: x if x is np.nan else sorted(
-        list(set(x)), key=sort_by_id_num
+    sort_uniques = lambda x: (
+        x if x is np.nan else sorted(list(set(x)), key=sort_by_id_num)
     )
     phi_ids = (
-        phi_df.phi_molconn_id
-        .str.cat(phi_df.multiple_mutation, sep)
+        phi_df.phi_molconn_id.str.cat(phi_df.multiple_mutation, sep)
         .mask(phi_df.multiple_mutation.isna(), phi_df.phi_molconn_id)
         .str.split(sep)
         .apply(sort_uniques)
@@ -1013,9 +998,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     phi_df = add_metagenotype_ids(phi_df)
 
     # Extract pathogen gene synonyms
-    phi_df['pathogen_gene_synonym'] = phi_df.gene.str.extract(
-        r'\((.+?)\)', expand=False
-    )
+    phi_df['pathogen_gene_synonym'] = phi_df.gene.str.extract(r'\((.+?)\)', expand=False)
     phi_df['gene'] = phi_df.gene.str.replace(r'\s*\(.+?\)', '', regex=True)
 
     phibase_json = get_canto_json_template(phi_df)
@@ -1035,9 +1018,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     phi_df['phi_ids'] = get_phi_id_column(phi_df)
     phi_df['tissue_id'] = get_tissue_id_series(bto_mapping, phi_df)
     phi_df['wt_metagenotype_id'] = get_wt_metagenotype_ids(all_feature_mapping, phi_df)
-    phenotype_lookup = make_phenotype_mapping(
-        phenotype_mapping_df, phipo_mapping, phi_df
-    )
+    phenotype_lookup = make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df)
     # Needed for converting allele names to wild type
     add_pathogen_gene_names_to_alleles(phibase_json, phi_df)
     add_wt_features(all_feature_mapping, phibase_json)
