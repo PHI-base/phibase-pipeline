@@ -3,8 +3,9 @@
 # SPDX-License-Identifier: MIT
 
 import json
-from pathlib import Path
 import re
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 

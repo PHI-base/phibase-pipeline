@@ -6,16 +6,15 @@ from __future__ import annotations
 
 import importlib.resources
 import itertools
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import numpy as np
 import pandas as pd
 
-import phibase_pipeline.clean as clean
-import phibase_pipeline.migrate as migrate
-import phibase_pipeline.loaders as loaders
+from phibase_pipeline import clean, loaders, migrate
+
 
 if TYPE_CHECKING:
     from os import PathLike

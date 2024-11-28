@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 from phibase_pipeline import loaders
 

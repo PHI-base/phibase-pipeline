@@ -12,14 +12,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from phibase_pipeline import loaders
-from phibase_pipeline.clean import clean_phibase_csv
-from phibase_pipeline.merge import merge_exports
-from phibase_pipeline.postprocess import (
-    postprocess_combined_json,
-    postprocess_phibase_json,
-)
-from phibase_pipeline.wild_type import get_all_feature_mappings, get_wt_features
+from phibase_pipeline import clean, loaders, merge, postprocess, wild_type
 
 
 pd.set_option('future.no_silent_downcasting', True)
@@ -867,7 +860,7 @@ def add_wt_features(all_feature_mapping, canto_json):
     curation_sessions = canto_json['curation_sessions']
     for session_id, feature_mapping in all_feature_mapping.items():
         session = curation_sessions[session_id]
-        wt_features = get_wt_features(feature_mapping, session)
+        wt_features = wild_type.get_wt_features(feature_mapping, session)
         for feature_key, features in wt_features.items():
             for feature_id, feature in features.items():
                 session[feature_key][feature_id] = feature
@@ -982,7 +975,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     bto_mapping = loaders.load_bto_id_mapping(DATA_DIR / 'bto.csv')
     phipo_mapping = loaders.load_phipo_mapping(DATA_DIR / 'phipo.csv')
 
-    phi_df = clean_phibase_csv(phibase_path)
+    phi_df = clean.clean_phibase_csv(phibase_path)
 
     phi_df = filter_phi_df(phi_df, approved_pmids)
     phi_df = add_session_ids(phi_df)
@@ -1012,7 +1005,7 @@ def make_phibase_json(phibase_path, approved_pmids):
     add_publication_objects(phibase_json, phi_df)
 
     # Prepare for adding annotations
-    all_feature_mapping = get_all_feature_mappings(phibase_json)
+    all_feature_mapping = wild_type.get_all_feature_mappings(phibase_json)
     phi_df = add_filamentous_classifier_column(in_vitro_growth_classifier, phi_df)
     phi_df = add_disease_term_ids(disease_mapping, phi_df)
     phi_df['phi_ids'] = get_phi_id_column(phi_df)
@@ -1031,8 +1024,8 @@ def make_combined_export(phibase_path, phicanto_path, approved_pmids=None):
     if approved_pmids is None:
         approved_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phibase_path, approved_pmids)
-    postprocess_phibase_json(phibase_json)
-    combined_export = merge_exports(phibase_json, phicanto_json)
+    postprocess.postprocess_phibase_json(phibase_json)
+    combined_export = merge.merge_exports(phibase_json, phicanto_json)
     add_organism_roles(combined_export)
-    postprocess_combined_json(combined_export)
+    postprocess.postprocess_combined_json(combined_export)
     return combined_export

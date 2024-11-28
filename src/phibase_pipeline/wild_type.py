@@ -3,9 +3,10 @@
 # SPDX-License-Identifier: MIT
 
 import copy
-import numpy as np
 import re
 from collections import defaultdict
+
+import numpy as np
 
 
 def is_genotype_wild_type(session, genotype):
