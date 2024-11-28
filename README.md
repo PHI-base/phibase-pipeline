@@ -130,7 +130,7 @@ columns’ field to set the following columns in the following order:
 Alternatively, use the following URL, replacing the `{id}` placeholder
 with the ID of your ID mapping job.
 
-https://rest.uniprot.org/idmapping/uniprotkb/results/stream/{id}?fields=accession%2Corganism_name%2Corganism_id%2Clineage_ids%2Cxref_ensembl%2Cxref_ensemblbacteria%2Cxref_ensemblfungi%2Cxref_ensemblmetazoa%2Cxref_ensemblplants%2Cxref_ensemblprotists&format=tsv
+`https://rest.uniprot.org/idmapping/uniprotkb/results/stream/{id}?fields=accession%2Corganism_name%2Corganism_id%2Clineage_ids%2Cxref_ensembl%2Cxref_ensemblbacteria%2Cxref_ensemblfungi%2Cxref_ensemblmetazoa%2Cxref_ensemblplants%2Cxref_ensemblprotists&format=tsv`
 
 Note that the `stream` endpoint returns chunks of 500 at a time, and
 requires pagination. See [here](https://www.uniprot.org/help/pagination)
