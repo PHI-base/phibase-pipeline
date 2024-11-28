@@ -1,10 +1,10 @@
 # PHI-base pipeline
 
-Python package and command-line application for cleaning releasing version 5 of the Pathogen-Host Interactions Database (PHI-base). Supported release formats include:
+Python package and command-line application for cleaning and releasing version 5 of the Pathogen-Host Interactions Database (PHI-base). Supported release formats include:
 
 * a JSON file format that combines data from version 4 and version 5 of PHI-base, and
 
-* several tabular export formats that are intended for loading by the Ensembl Genomes databases.
+* several tabular export formats that are intended for loading by the Ensembl databases.
 
 ## Installation
 
