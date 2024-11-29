@@ -2,13 +2,18 @@
 
 Python package and command-line application for cleaning and releasing
 version 5 of the Pathogen-Host Interactions Database (PHI-base).
-Supported release formats include:
+Currently supported release formats include:
 
 -   a JSON file format that combines data from version 4 and version 5
     of PHI-base, and
 
 -   several tabular export formats that are intended for loading by the
     Ensembl databases.
+
+> ⚠️ Note that this package is a work in progress. Features still to be
+> added include a tabular release format that contains all data from
+> version 4 and version 5 of PHI-base, and support for querying
+> UniProtKB as part of the release process.
 
 ## Installation
 
