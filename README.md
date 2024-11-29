@@ -1,11 +1,11 @@
 # PHI-base pipeline
 
 Python package and command-line application for cleaning and releasing
-version 5 of the Pathogen-Host Interactions Database (PHI-base).
-Currently supported release formats include:
+data from version 5 of the Pathogen-Host Interactions Database
+(PHI-base). Currently supported release formats include:
 
--   a JSON file format that combines data from version 4 and version 5
-    of PHI-base, and
+-   a JSON format that combines data from version 4 and version 5 of
+    PHI-base, and
 
 -   several tabular export formats that are intended for loading by the
     Ensembl databases.
@@ -72,16 +72,17 @@ Explanation of arguments:
 
 -   `PHIBASE_CSV`: the path to an export of data from PHI-base version
     4, stored in a CSV file. These files can be downloaded from the
-    PHI-base/data repository.
+    [PHI-base/data](https://github.com/PHI-base/data/tree/master/releases)
+    repository.
 
 -   `CANTO_JSON`: the path to an export of approved curation sessions
     from the PHI-Canto curation tool, stored in a JSON file.
 
 -   `UNIPROT_DATA`: the path to a file containing data about genes and
-    proteins, retrieved from the UniProt Knowledgebase (UniProtKB). This
+    proteins retrieved from the UniProt Knowledgebase (UniProtKB). This
     file is created by downloading the results of a query to the
     [UniProtKB ID mapping](https://www.uniprot.org/id-mapping) service
-    as TSV format.
+    as TSV format (see the **UniProt data file format** section).
 
 -   `DIR`: the destination directory for the CSV files created by the
     pipeline.
@@ -138,8 +139,8 @@ with the ID of your ID mapping job.
 `https://rest.uniprot.org/idmapping/uniprotkb/results/stream/{id}?fields=accession%2Corganism_name%2Corganism_id%2Clineage_ids%2Cxref_ensembl%2Cxref_ensemblbacteria%2Cxref_ensemblfungi%2Cxref_ensemblmetazoa%2Cxref_ensemblplants%2Cxref_ensemblprotists&format=tsv`
 
 Note that the `stream` endpoint returns chunks of 500 at a time, and
-requires pagination. See [here](https://www.uniprot.org/help/pagination)
-for more instructions.
+requires pagination if more than 500 results are expected. See
+[here](https://www.uniprot.org/help/pagination) for more instructions.
 
 ## License
 
