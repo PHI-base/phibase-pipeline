@@ -181,3 +181,85 @@ def run_id_mapping_job(ids):
         poll_seconds=30,
     )
     return results
+
+
+def get_uniprot_data_fields(uniprot_data):
+    all_gene_data = {}
+    all_results = uniprot_data['results']
+    for result in all_results:
+        gene_data = {
+            'uniprot_id': None,
+            'name': None,
+            'product': None,
+            'strain': None,
+            'dbref_gene_id': None,
+            'ensembl_sequence_id': None,
+            'ensembl_gene_id': None,
+        }
+        uniprot_id = result['from']
+        data = result['to']
+
+        # Primary UniProt ID (in case of merged accessions)
+        gene_data['uniprot_id'] = data['primaryAccession']
+
+        if data['entryType'] == 'Inactive':
+            # There's nothing more we can add for inactive accessions
+            all_gene_data[uniprot_id] = gene_data
+            continue
+
+        # Gene name
+        genes = data.get('genes')
+        if genes:
+            # TODO: Add all gene names (but should we join here or not?)
+            gene = genes[0]
+            if 'geneName' in gene:
+                gene_data['name'] = gene['geneName']['value']
+            elif 'orfNames' in gene:
+                # TODO: Add all ORF names (but should we join here or not?)
+                gene_data['name'] = gene['orfNames'][0]['value']
+
+        # Gene product
+        protein = data['proteinDescription']
+        for name_key in ('recommendedName', 'submittedName', 'submissionNames'):
+            protein_name_data = protein.get(name_key)
+            if protein_name_data:
+                if name_key == 'submissionNames':
+                    # TODO: Decide which submission name to use
+                    protein_name_data = protein_name_data[0]
+                gene_data['product'] = protein_name_data['fullName']['value']
+                break
+
+        # Strain
+        gene_data['strain'] = data['organism']['scientificName']
+
+        # Database reference gene ID
+        dbrefs = data['uniProtKBCrossReferences']
+        dbref_ids = [
+            dbref['id'] for dbref in dbrefs if dbref['database'] == 'GeneID'
+        ]
+        # TODO: Decide whether to display multiple gene IDs
+        gene_id = dbref_ids[0] if dbref_ids else None
+        gene_data['dbref_gene_id'] = gene_id
+
+        # Ensembl sequence ID
+        ensembl_refs = [dbref for dbref in dbrefs if dbref['database'].startswith('Ensembl')]
+        ensembl_protein_ids = [
+            prop['value']
+            for dbref in ensembl_refs
+            for prop in dbref['properties']
+            if prop['key'] == 'ProteinId'
+        ]
+        gene_data['ensembl_sequence_id'] = ensembl_protein_ids
+
+        # Ensembl gene ID
+        ensembl_gene_ids = [
+            prop['value']
+            for dbref in ensembl_refs
+            for prop in dbref['properties']
+            if prop['key'] == 'GeneId'
+        ]
+        gene_data['ensembl_gene_id'] = ensembl_gene_ids
+        all_gene_data[uniprot_id] = gene_data
+
+    return all_gene_data
+
