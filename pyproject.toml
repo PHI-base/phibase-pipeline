@@ -37,6 +37,7 @@ Source = "https://github.com/PHI-base/phibase-pipeline"
 path = "src/phibase_pipeline/__about__.py"
 
 [tool.hatch.envs.default]
+path = ".hatch/envs/default"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
