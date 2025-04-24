@@ -328,6 +328,19 @@ def add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping):
     return augmented_export
 
 
+def add_pubmed_data_to_sessions(export, pubmed_data):
+    augmented_export = copy.deepcopy(export)
+    for session in augmented_export['curation_sessions'].values():
+        publications = session['publications']
+        pmid = next(iter(publications.keys()))
+        publication_data = pubmed_data.get(pmid)
+        if publication_data is None:
+            print(f'session PMID not found in PubMed data: {pmid}')
+            continue
+        publications[pmid]['pubmed_data'] = publication_data
+    return augmented_export
+
+
 def postprocess_phibase_json(export):
     curation_sessions = export['curation_sessions']
     for session in curation_sessions.values():
