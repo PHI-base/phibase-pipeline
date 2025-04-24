@@ -278,3 +278,38 @@ def get_proteome_id_mapping(uniprot_data):
         proteome_id_mapping[original_id] = proteome_ids
     return proteome_id_mapping
 
+
+def query_proteome_ids(proteome_id_mapping, session):
+    proteome_ids = list(set(
+        pid
+        for pids in proteome_id_mapping.values()
+        for pid in pids
+    ))
+    # Chunk the proteome IDs so to not exceed the query limit
+    chunk_size = 500
+    id_chunks = []
+    for i in range(0, len(proteome_ids), chunk_size):
+        id_chunks.append(proteome_ids[i : i + chunk_size])
+
+    url = 'https://rest.uniprot.org/proteomes/search'
+    params = {
+        'format': 'json',
+        'size': '500',
+        'compressed': 'true',
+    }
+    request = requests.PreparedRequest()
+
+    all_results = []
+    for proteome_ids in id_chunks:
+        query = f"({'+OR+'.join(f'(upid:{pid})' for pid in proteome_ids)})"
+        params['query'] = query
+        request.prepare_url(url, params)
+        # UniProt seems to need the plus symbol to be unescaped?
+        batch_url = request.url.replace('%2B', '+')
+        results = get_id_mapping_results_search(session, batch_url)
+        all_results.append(results)
+
+    combined_results = {'results': []}
+    for results in all_results:
+        combined_results = combine_batches(combined_results, results, file_format=params['format'])
+    return combined_results
