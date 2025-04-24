@@ -304,6 +304,30 @@ def add_uniprot_data_to_genes(export, uniprot_gene_data):
     return augmented_export
 
 
+def add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping):
+    proteome_strain_mapping = {
+        proteome['id']: proteome.get('strain')
+        for proteome in proteome_results['results']
+    }
+    # Link to the strain of the first listed proteome only
+    uniprot_strain_mapping = {
+        uniprot_id: proteome_strain_mapping[proteome_ids[0]] if proteome_ids else None
+        for uniprot_id, proteome_ids in proteome_id_mapping.items()
+    }
+    augmented_export = copy.deepcopy(export)
+    for session in augmented_export['curation_sessions'].values():
+        genes = session.get('genes', {})
+        for gene in genes.values():
+            uniprot_id = gene['uniquename']
+            # Use False as the default value because None is already
+            # being used to indicate missing strain names
+            strain = uniprot_strain_mapping.get(uniprot_id, False)
+            if strain is False:
+                continue
+            gene['uniprot_data']['strain'] = strain
+    return augmented_export
+
+
 def postprocess_phibase_json(export):
     curation_sessions = export['curation_sessions']
     for session in curation_sessions.values():
