@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+import copy
 import re
 from pathlib import Path
 
@@ -287,6 +288,20 @@ def remove_unapproved_sessions(export):
         session = curation_sessions[session_id]
         if session['metadata']['annotation_status'] != 'APPROVED':
             del curation_sessions[session_id]
+
+
+def add_uniprot_data_to_genes(export, uniprot_gene_data):
+    augmented_export = copy.deepcopy(export)
+    for session in augmented_export['curation_sessions'].values():
+        genes = session.get('genes', {})
+        for gene in genes.values():
+            uniprot_id = gene['uniquename']
+            uniprot_data = uniprot_gene_data.get(uniprot_id)
+            if uniprot_data is None:
+                print(f'warning: {uniprot_id} not found in UniProt data')
+                continue
+            gene['uniprot_data'] = uniprot_data
+    return augmented_export
 
 
 def postprocess_phibase_json(export):
