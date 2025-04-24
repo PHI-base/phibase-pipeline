@@ -263,3 +263,18 @@ def get_uniprot_data_fields(uniprot_data):
 
     return all_gene_data
 
+
+def get_proteome_id_mapping(uniprot_data):
+    proteome_id_mapping = {}
+    for result in uniprot_data:
+        original_id = result['from']
+        data = result['to']
+        if data['entryType'] == 'Inactive':
+            continue
+        proteome_ids = [
+            xref['id'] for xref in data['uniProtKBCrossReferences']
+            if xref['database'] == 'Proteomes'
+        ]
+        proteome_id_mapping[original_id] = proteome_ids
+    return proteome_id_mapping
+
