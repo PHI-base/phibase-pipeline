@@ -1,0 +1,636 @@
+{
+    "results": [
+        {
+            "from": "Q00909",
+            "to": {
+                "entryType": "UniProtKB reviewed (Swiss-Prot)",
+                "primaryAccession": "Q00909",
+                "organism": {
+                    "scientificName": "Gibberella zeae (strain ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1)",
+                    "commonName": "Wheat head blight fungus",
+                    "synonyms": [
+                        "Fusarium graminearum"
+                    ],
+                    "taxonId": 229533,
+                    "lineage": [
+                        "Eukaryota",
+                        "Fungi",
+                        "Dikarya",
+                        "Ascomycota",
+                        "Pezizomycotina",
+                        "Sordariomycetes",
+                        "Hypocreomycetidae",
+                        "Hypocreales",
+                        "Nectriaceae",
+                        "Fusarium"
+                    ]
+                },
+                "proteinDescription": {
+                    "recommendedName": {
+                        "fullName": {
+                            "value": "Trichodiene synthase"
+                        },
+                        "ecNumbers": [
+                            {
+                                "value": "4.2.3.6"
+                            }
+                        ]
+                    },
+                    "alternativeNames": [
+                        {
+                            "fullName": {
+                                "value": "Sesquiterpene cyclase"
+                            },
+                            "shortNames": [
+                                {
+                                    "value": "TS"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "genes": [
+                    {
+                        "geneName": {
+                            "value": "TRI5"
+                        },
+                        "orfNames": [
+                            {
+                                "value": "FGRRES_03537"
+                            },
+                            {
+                                "value": "FGSG_03537"
+                            }
+                        ]
+                    }
+                ],
+                "uniProtKBCrossReferences": [
+                    {
+                        "database": "EMBL",
+                        "id": "U22464",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAB72033.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AF336366",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAK53586.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102567",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM48750.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102581",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM48862.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102584",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM48886.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102587",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM48910.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102599",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM49006.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102603",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM49038.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY102605",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAM49054.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AF359361",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAK33084.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "AY130290",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "AAN05032.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "DS231664",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "ESU09673.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "EMBL",
+                        "id": "HG970333",
+                        "properties": [
+                            {
+                                "key": "ProteinId",
+                                "value": "CEF78359.1"
+                            },
+                            {
+                                "key": "Status",
+                                "value": "-"
+                            },
+                            {
+                                "key": "MoleculeType",
+                                "value": "Genomic_DNA"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "RefSeq",
+                        "id": "XP_011322172.1",
+                        "properties": [
+                            {
+                                "key": "NucleotideSequenceId",
+                                "value": "XM_011323870.1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "AlphaFoldDB",
+                        "id": "Q00909",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "SMR",
+                        "id": "Q00909",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "STRING",
+                        "id": "229533.Q00909",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "GeneID",
+                        "id": "23550840",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "KEGG",
+                        "id": "fgr:FGSG_03537",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "VEuPathDB",
+                        "id": "FungiDB:FGRAMPH1_01G13111",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "eggNOG",
+                        "id": "ENOG502SQ3X",
+                        "properties": [
+                            {
+                                "key": "ToxonomicScope",
+                                "value": "Eukaryota"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "HOGENOM",
+                        "id": "CLU_733855_0_0_1",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "InParanoid",
+                        "id": "Q00909",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "OrthoDB",
+                        "id": "9685at110618",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "BRENDA",
+                        "id": "4.2.3.6",
+                        "properties": [
+                            {
+                                "key": "OrganismId",
+                                "value": "2428"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "UniPathway",
+                        "id": "UPA00267",
+                        "properties": [
+                            {
+                                "key": "RectionId",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "PHI-base",
+                        "id": "PHI:3518",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "PHI-base",
+                        "id": "PHI:4243",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "PHI-base",
+                        "id": "PHI:6797",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "PHI-base",
+                        "id": "PHI:8390",
+                        "properties": [
+                            {
+                                "key": "Description",
+                                "value": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "Proteomes",
+                        "id": "UP000070720",
+                        "properties": [
+                            {
+                                "key": "Component",
+                                "value": "Chromosome 2"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "GO",
+                        "id": "GO:0045482",
+                        "properties": [
+                            {
+                                "key": "GoTerm",
+                                "value": "F:trichodiene synthase activity"
+                            },
+                            {
+                                "key": "GoEvidenceType",
+                                "value": "IMP:PHI-base"
+                            }
+                        ],
+                        "evidences": [
+                            {
+                                "evidenceCode": "ECO:0000315",
+                                "source": "PubMed",
+                                "id": "18179606"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "GO",
+                        "id": "GO:0016106",
+                        "properties": [
+                            {
+                                "key": "GoTerm",
+                                "value": "P:sesquiterpenoid biosynthetic process"
+                            },
+                            {
+                                "key": "GoEvidenceType",
+                                "value": "IEA:InterPro"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "Gene3D",
+                        "id": "1.10.600.10",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Farnesyl Diphosphate Synthase"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "InterPro",
+                        "id": "IPR008949",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Isoprenoid_synthase_dom_sf"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "InterPro",
+                        "id": "IPR010458",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "TRI5_ascomyc"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "InterPro",
+                        "id": "IPR024652",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Trichodiene_synth"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "Pfam",
+                        "id": "PF06330",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "TRI5"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "PIRSF",
+                        "id": "PIRSF001388",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "TRI5"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "SFLD",
+                        "id": "SFLDS00005",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Isoprenoid_Synthase_Type_I"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "SFLD",
+                        "id": "SFLDG01021",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Trichodiene_Synthase_Like"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "database": "SUPFAM",
+                        "id": "SSF48576",
+                        "properties": [
+                            {
+                                "key": "EntryName",
+                                "value": "Terpenoid synthases"
+                            },
+                            {
+                                "key": "MatchStatus",
+                                "value": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "obsoleteCount": 0
+}
