@@ -336,6 +336,14 @@ def add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping):
     return augmented_export
 
 
+def get_all_pmids_in_export(export):
+    return set(
+        pmid.replace('PMID:', '')
+        for session in export['curation_sessions'].values()
+        for pmid in session['publications']
+    )
+
+
 def add_pubmed_data_to_sessions(export, pubmed_data):
     augmented_export = copy.deepcopy(export)
     for session in augmented_export['curation_sessions'].values():
