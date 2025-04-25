@@ -70,6 +70,7 @@ def test_get_uniprot_data_fields(path, expected):
     actual = get_uniprot_data_fields(test_data)
     assert actual == expected
 
+
 @pytest.mark.parametrize(
     'path,expected',
     (
@@ -88,7 +89,7 @@ def test_get_uniprot_data_fields(path, expected):
             {},
             id='inactive',
         ),
-    )
+    ),
 )
 def test_get_proteome_id_mapping(path, expected):
     test_data = load_json(path)
