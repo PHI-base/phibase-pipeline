@@ -290,6 +290,15 @@ def remove_unapproved_sessions(export):
             del curation_sessions[session_id]
 
 
+def get_all_uniprot_ids_in_export(export):
+    return set(
+        gene['uniquename']
+        for session in export['curation_sessions'].values()
+        if 'genes' in session
+        for gene in session['genes'].values()
+    )
+
+
 def add_uniprot_data_to_genes(export, uniprot_gene_data):
     augmented_export = copy.deepcopy(export)
     for session in augmented_export['curation_sessions'].values():
