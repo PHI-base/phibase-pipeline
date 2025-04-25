@@ -6,7 +6,7 @@ import copy
 import re
 from pathlib import Path
 
-from phibase_pipeline import loaders
+from phibase_pipeline import loaders, pubmed, uniprot
 
 
 DATA_DIR = Path(__file__).parent / 'data'
@@ -355,6 +355,25 @@ def add_pubmed_data_to_sessions(export, pubmed_data):
             continue
         publications[pmid]['pubmed_data'] = publication_data
     return augmented_export
+
+
+def add_cross_references(export):
+    session = uniprot.make_session()
+    # UniProt data
+    uniprot_ids = get_all_uniprot_ids_in_export(export)
+    id_mapping_results = uniprot.run_id_mapping_job(session, uniprot_ids)
+    uniprot_gene_data = uniprot.get_uniprot_data_fields(id_mapping_results)
+    export = add_uniprot_data_to_genes(export, uniprot_gene_data)
+    # Sequence strains
+    proteome_id_mapping = uniprot.get_proteome_id_mapping(id_mapping_results)
+    proteome_results = uniprot.query_proteome_ids(session, proteome_id_mapping)
+    export = add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping)
+    # Publication information
+    pmids = get_all_pmids_in_export(export)
+    pubmed_data = pubmed.get_publications_from_pubmed(pmids)
+    publication_fields = pubmed.get_all_publication_details(pubmed_data)
+    export = add_pubmed_data_to_sessions(export, publication_fields)
+    return export
 
 
 def postprocess_phibase_json(export):
