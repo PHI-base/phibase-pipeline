@@ -172,7 +172,7 @@ def retrieve_id_mapping(session, from_db, to_db, ids, poll_seconds=3):
     job_id = submit_id_mapping(from_db, to_db, ids)
     if check_id_mapping_results_ready(session, job_id, poll_seconds):
         link = get_id_mapping_results_link(session, job_id)
-        results = get_id_mapping_results_search(session, link, quiet=False)
+        results = get_id_mapping_results_search(session, link)
         return results
 
 
