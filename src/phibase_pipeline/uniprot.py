@@ -313,9 +313,3 @@ def query_proteome_ids(proteome_id_mapping, session):
     for results in all_results:
         combined_results = combine_batches(combined_results, results, file_format=params['format'])
     return combined_results
-
-
-def get_uniprot_data_for_genes(uniprot_ids):
-    uniprot_gene_data = run_id_mapping_job(uniprot_ids)
-    uniprot_data = get_uniprot_data_fields(uniprot_gene_data)
-    return uniprot_data
