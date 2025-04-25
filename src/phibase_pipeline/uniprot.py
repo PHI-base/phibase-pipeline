@@ -19,6 +19,13 @@ import requests
 from requests.adapters import HTTPAdapter, Retry
 
 
+def make_session():
+    retries = Retry(total=5, backoff_factor=0.25, status_forcelist=[500, 502, 503, 504])
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    return session
+
+
 def check_response(response):
     try:
         response.raise_for_status()
@@ -169,10 +176,7 @@ def retrieve_id_mapping(session, from_db, to_db, ids, poll_seconds=3):
         return results
 
 
-def run_id_mapping_job(ids):
-    retries = Retry(total=5, backoff_factor=0.25, status_forcelist=[500, 502, 503, 504])
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=retries))
+def run_id_mapping_job(session, ids):
     results = retrieve_id_mapping(
         session,
         from_db='UniProtKB_AC-ID',
@@ -279,7 +283,7 @@ def get_proteome_id_mapping(id_mapping_results):
     return proteome_id_mapping
 
 
-def query_proteome_ids(proteome_id_mapping, session):
+def query_proteome_ids(session, proteome_id_mapping):
     proteome_ids = list(set(
         pid
         for pids in proteome_id_mapping.values()
