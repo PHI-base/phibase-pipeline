@@ -183,9 +183,9 @@ def run_id_mapping_job(ids):
     return results
 
 
-def get_uniprot_data_fields(uniprot_data):
+def get_uniprot_data_fields(id_mapping_results):
     all_gene_data = {}
-    all_results = uniprot_data['results']
+    all_results = id_mapping_results['results']
     for result in all_results:
         gene_data = {
             'uniprot_id': None,
@@ -264,9 +264,9 @@ def get_uniprot_data_fields(uniprot_data):
     return all_gene_data
 
 
-def get_proteome_id_mapping(uniprot_data):
+def get_proteome_id_mapping(id_mapping_results):
     proteome_id_mapping = {}
-    for result in uniprot_data:
+    for result in id_mapping_results:
         original_id = result['from']
         data = result['to']
         if data['entryType'] == 'Inactive':
