@@ -270,7 +270,7 @@ def get_uniprot_data_fields(id_mapping_results):
 
 def get_proteome_id_mapping(id_mapping_results):
     proteome_id_mapping = {}
-    for result in id_mapping_results:
+    for result in id_mapping_results['results']:
         original_id = result['from']
         data = result['to']
         if data['entryType'] == 'Inactive':
