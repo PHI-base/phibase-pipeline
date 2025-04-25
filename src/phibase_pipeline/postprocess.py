@@ -6,7 +6,7 @@ import copy
 import re
 from pathlib import Path
 
-from phibase_pipeline import loaders
+from phibase_pipeline import loaders, uniprot
 
 
 DATA_DIR = Path(__file__).parent / 'data'
@@ -297,6 +297,13 @@ def get_all_uniprot_ids_in_export(export):
         if 'genes' in session
         for gene in session['genes'].values()
     )
+
+
+def get_uniprot_data_for_genes(export):
+    uniprot_ids = get_all_uniprot_ids_in_export(export)
+    uniprot_gene_data = uniprot.run_id_mapping_job(uniprot_ids)
+    uniprot_data = uniprot.get_uniprot_data_fields(uniprot_gene_data)
+    return uniprot_data
 
 
 def add_uniprot_data_to_genes(export, uniprot_gene_data):
