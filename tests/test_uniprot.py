@@ -7,7 +7,10 @@ from pathlib import Path
 import pytest
 
 from phibase_pipeline.loaders import load_json
-from phibase_pipeline.uniprot import get_uniprot_data_fields
+from phibase_pipeline.uniprot import (
+    get_proteome_id_mapping,
+    get_uniprot_data_fields,
+)
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
 UNIPROT_DATA_DIR = TEST_DATA_DIR / 'uniprot'
@@ -65,4 +68,29 @@ UNIPROT_DATA_DIR = TEST_DATA_DIR / 'uniprot'
 def test_get_uniprot_data_fields(path, expected):
     test_data = load_json(path)
     actual = get_uniprot_data_fields(test_data)
+    assert actual == expected
+
+@pytest.mark.parametrize(
+    'path,expected',
+    (
+        pytest.param(
+            UNIPROT_DATA_DIR / 'protein_result_P05067.json',
+            {'P05067': []},
+            id='P05067',
+        ),
+        pytest.param(
+            UNIPROT_DATA_DIR / 'protein_result_Q00909.json',
+            {'Q00909': ['UP000070720']},
+            id='Q00909',
+        ),
+        pytest.param(
+            UNIPROT_DATA_DIR / 'protein_result_inactive.json',
+            {},
+            id='inactive',
+        ),
+    )
+)
+def test_get_proteome_id_mapping(path, expected):
+    test_data = load_json(path)
+    actual = get_proteome_id_mapping(test_data)
     assert actual == expected

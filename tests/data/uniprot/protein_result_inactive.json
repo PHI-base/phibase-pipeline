@@ -1,0 +1,11 @@
+{
+    "results": [
+        {
+            "from": "ABC123",
+            "to": {
+                "entryType": "Inactive"
+            }
+        }
+    ],
+    "obsoleteCount": 0
+}
