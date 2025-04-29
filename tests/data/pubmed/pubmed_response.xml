@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st January 2025//EN" "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_250101.dtd">
+<PubmedArticleSet>
+    <PubmedArticle>
+        <MedlineCitation Status="MEDLINE" Owner="NLM" IndexingMethod="Manual">
+            <PMID Version="1">12345678</PMID>
+            <DateCompleted>
+                <Year>2007</Year>
+                <Month>09</Month>
+                <Day>21</Day>
+            </DateCompleted>
+            <DateRevised>
+                <Year>2022</Year>
+                <Month>03</Month>
+                <Day>09</Day>
+            </DateRevised>
+            <Article PubModel="Print">
+                <Journal>
+                    <ISSN IssnType="Electronic">1095-9203</ISSN>
+                    <JournalIssue CitedMedium="Internet">
+                        <Volume>317</Volume>
+                        <Issue>5843</Issue>
+                        <PubDate>
+                            <Year>2007</Year>
+                            <Month>Sep</Month>
+                            <Day>07</Day>
+                        </PubDate>
+                    </JournalIssue>
+                    <Title>Science (New York, N.Y.)</Title>
+                    <ISOAbbreviation>Science</ISOAbbreviation>
+                </Journal>
+                <ArticleTitle>This is an article title.</ArticleTitle>
+                <Pagination>
+                    <StartPage>1400</StartPage>
+                    <EndPage>1402</EndPage>
+                    <MedlinePgn>1400-2</MedlinePgn>
+                </Pagination>
+                <Abstract>
+                    <AbstractText>This is the article abstract.</AbstractText>
+                </Abstract>
+                <AuthorList CompleteYN="Y">
+                    <Author ValidYN="Y">
+                        <LastName>Carberry</LastName>
+                        <ForeName>Josiah</ForeName>
+                        <Initials>JC</Initials>
+                        <AffiliationInfo>
+                            <Affiliation>Brown University: Providence, RI, USA.</Affiliation>
+                        </AffiliationInfo>
+                    </Author>
+                    <Author ValidYN="Y">
+                        <LastName>Smith</LastName>
+                        <ForeName>Jane</ForeName>
+                        <Initials>JS</Initials>
+                    </Author>
+                </AuthorList>
+                <Language>eng</Language>
+                <DataBankList CompleteYN="Y">
+                    <DataBank>
+                        <DataBankName>GENBANK</DataBankName>
+                        <AccessionNumberList>
+                            <AccessionNumber>AACM00000000</AccessionNumber>
+                        </AccessionNumberList>
+                    </DataBank>
+                    <DataBank>
+                        <DataBankName>RefSeq</DataBankName>
+                        <AccessionNumberList>
+                            <AccessionNumber>XM_000001</AccessionNumber>
+                            <AccessionNumber>XM_000002</AccessionNumber>
+                            <AccessionNumber>XM_000003</AccessionNumber>
+                            <!-- remaining accession numbers removed -->
+                        </AccessionNumberList>
+                    </DataBank>
+                </DataBankList>
+                <GrantList CompleteYN="Y">
+                    <Grant>
+                        <GrantID>BBS/E/C/00000000</GrantID>
+                        <Acronym>BB_</Acronym>
+                        <Agency>Biotechnology and Biological Sciences Research Council</Agency>
+                        <Country>United Kingdom</Country>
+                    </Grant>
+                    <Grant>
+                        <GrantID>U54 H0000000</GrantID>
+                        <Acronym>HG</Acronym>
+                        <Agency>NHGRI NIH HHS</Agency>
+                        <Country>United States</Country>
+                    </Grant>
+                </GrantList>
+                <PublicationTypeList>
+                    <PublicationType UI="D016428">Journal Article</PublicationType>
+                    <PublicationType UI="D013485">Research Support, Non-U.S. Gov\'t</PublicationType>
+                    <PublicationType UI="D013486">Research Support, U.S. Gov\'t, Non-P.H.S.</PublicationType>
+                </PublicationTypeList>
+            </Article>
+            <MedlineJournalInfo>
+                <Country>United States</Country>
+                <MedlineTA>Science</MedlineTA>
+                <NlmUniqueID>0404511</NlmUniqueID>
+                <ISSNLinking>0036-8075</ISSNLinking>
+            </MedlineJournalInfo>
+            <ChemicalList>
+                <Chemical>
+                    <RegistryNumber>0</RegistryNumber>
+                    <NameOfSubstance UI="D004271">DNA, Fungal</NameOfSubstance>
+                </Chemical>
+            </ChemicalList>
+            <CitationSubset>IM</CitationSubset>
+            <MeshHeadingList>
+                <MeshHeading>
+                    <DescriptorName UI="D004271" MajorTopicYN="N">DNA, Fungal</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D019143" MajorTopicYN="N">Evolution, Molecular</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D005670" MajorTopicYN="N">Fusarium</DescriptorName>
+                    <QualifierName UI="Q000235" MajorTopicYN="Y">genetics</QualifierName>
+                    <QualifierName UI="Q000502" MajorTopicYN="N">physiology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D016681" MajorTopicYN="Y">Genome, Fungal</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D001467" MajorTopicYN="N">Hordeum</DescriptorName>
+                    <QualifierName UI="Q000382" MajorTopicYN="N">microbiology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D008969" MajorTopicYN="N">Molecular Sequence Data</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D010935" MajorTopicYN="N">Plant Diseases</DescriptorName>
+                    <QualifierName UI="Q000382" MajorTopicYN="N">microbiology</QualifierName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D017354" MajorTopicYN="N">Point Mutation</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D011110" MajorTopicYN="Y">Polymorphism, Genetic</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D020641" MajorTopicYN="N">Polymorphism, Single Nucleotide</DescriptorName>
+                </MeshHeading>
+                <MeshHeading>
+                    <DescriptorName UI="D017422" MajorTopicYN="N">Sequence Analysis, DNA</DescriptorName>
+                </MeshHeading>
+            </MeshHeadingList>
+        </MedlineCitation>
+        <PubmedData>
+            <History>
+                <PubMedPubDate PubStatus="pubmed">
+                    <Year>2007</Year>
+                    <Month>9</Month>
+                    <Day>8</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="medline">
+                    <Year>2007</Year>
+                    <Month>9</Month>
+                    <Day>22</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="entrez">
+                    <Year>2007</Year>
+                    <Month>9</Month>
+                    <Day>8</Day>
+                    <Hour>9</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+            </History>
+            <PublicationStatus>ppublish</PublicationStatus>
+            <ArticleIdList>
+                <ArticleId IdType="pubmed">17823352</ArticleId>
+                <ArticleId IdType="doi">10.1126/science.1143708</ArticleId>
+                <ArticleId IdType="pii">317/5843/1400</ArticleId>
+            </ArticleIdList>
+        </PubmedData>
+    </PubmedArticle>
+</PubmedArticleSet>
