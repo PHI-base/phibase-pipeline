@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import copy
+import json
 from pathlib import Path
 
 import pytest
@@ -10,6 +11,7 @@ import pytest
 from phibase_pipeline.postprocess import (
     add_chemical_extensions,
     add_delta_symbol,
+    add_proteome_ids_to_genes,
     add_pubmed_data_to_sessions,
     add_uniprot_data_to_genes,
     allele_ids_of_genotype,
@@ -28,6 +30,7 @@ from phibase_pipeline.postprocess import (
 )
 
 DATA_DIR = Path(__file__).parent / 'data'
+UNIPROT_DATA_DIR = DATA_DIR / 'uniprot'
 
 
 @pytest.fixture
@@ -100,6 +103,29 @@ def export_for_xrefs():
         },
         'schema_version': 1,
     }
+
+
+@pytest.fixture
+def export_with_uniprot_data(export_for_xrefs):
+    uniprot_gene_data = {
+        'Q00909': {
+            'uniprot_id': 'Q00909',
+            'name': 'TRI5',
+            'product': 'Trichodiene synthase',
+            'strain': 'Gibberella zeae (strain ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1)',
+            'dbref_gene_id': '23550840',
+            'ensembl_sequence_id': [],
+            'ensembl_gene_id': [],
+        }
+    }
+    return add_uniprot_data_to_genes(export_for_xrefs, uniprot_gene_data)
+
+
+@pytest.fixture
+def proteome_results():
+    path = UNIPROT_DATA_DIR / 'proteome_results_UP000070720.json'
+    with open(path, encoding='utf-8') as json_file:
+        return json.load(json_file)
 
 
 def assert_unchanged_after_mutation(func, *objects):
@@ -1104,4 +1130,41 @@ def test_add_pubmed_data_to_sessions(export_for_xrefs):
         'schema_version': 1,
     }
     actual = add_pubmed_data_to_sessions(export_for_xrefs, pubmed_data)
+    assert actual == expected
+
+
+def test_add_proteome_ids_to_genes(export_with_uniprot_data, proteome_results):
+    proteome_id_mapping = {'Q00909': ['UP000070720']}
+    expected = {
+        'curation_sessions': {
+            'cc6cf06675cc6e13': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'Q00909',
+                        'uniprot_data': {
+                            'dbref_gene_id': '23550840',
+                            'ensembl_gene_id': [],
+                            'ensembl_sequence_id': [],
+                            'name': 'TRI5',
+                            'product': 'Trichodiene synthase',
+                            'strain': 'PH-1',
+                            'uniprot_id': 'Q00909',
+                        },
+                    }
+                },
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {'PMID:12345678': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+    actual = add_proteome_ids_to_genes(
+        export_with_uniprot_data, proteome_results, proteome_id_mapping
+    )
     assert actual == expected
