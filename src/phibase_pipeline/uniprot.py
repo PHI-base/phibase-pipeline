@@ -54,7 +54,7 @@ def check_id_mapping_results_ready(session, job_id, poll_seconds=3):
         check_response(request)
         json_data = request.json()
         if 'jobStatus' in json_data:
-            if json_data['jobStatus'] == 'RUNNING':
+            if json_data['jobStatus'] in ('NEW', 'RUNNING'):
                 time.sleep(poll_seconds)
             else:
                 raise Exception(json_data['jobStatus'])
