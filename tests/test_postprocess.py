@@ -85,7 +85,7 @@ def chemical_data():
 def export_for_xrefs():
     return {
         'curation_sessions': {
-            'cc6cf06675cc6e13': {
+            '0123456789abcdef': {
                 'alleles': {},
                 'annotations': [],
                 'genes': {
@@ -1056,7 +1056,7 @@ def test_add_uniprot_data_to_genes(export_for_xrefs):
     }
     expected = {
         'curation_sessions': {
-            'cc6cf06675cc6e13': {
+            '0123456789abcdef': {
                 'alleles': {},
                 'annotations': [],
                 'genes': {
@@ -1100,7 +1100,7 @@ def test_add_pubmed_data_to_sessions(export_for_xrefs):
     }
     expected = {
         'curation_sessions': {
-            'cc6cf06675cc6e13': {
+            '0123456789abcdef': {
                 'alleles': {},
                 'annotations': [],
                 'genes': {
@@ -1137,7 +1137,7 @@ def test_add_proteome_strains_to_genes(export_with_uniprot_data, proteome_result
     proteome_id_mapping = {'Q00909': ['UP000070720']}
     expected = {
         'curation_sessions': {
-            'cc6cf06675cc6e13': {
+            '0123456789abcdef': {
                 'alleles': {},
                 'annotations': [],
                 'genes': {
