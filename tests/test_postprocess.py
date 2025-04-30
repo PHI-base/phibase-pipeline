@@ -10,6 +10,7 @@ import pytest
 from phibase_pipeline.postprocess import (
     add_chemical_extensions,
     add_delta_symbol,
+    add_pubmed_data_to_sessions,
     add_uniprot_data_to_genes,
     allele_ids_of_genotype,
     merge_phi_canto_curation,
@@ -94,7 +95,7 @@ def export_for_xrefs():
                 'metadata': {},
                 'metagenotypes': {},
                 'organisms': {},
-                'publications': {'PMID:1': {}},
+                'publications': {'PMID:12345678': {}},
             }
         },
         'schema_version': 1,
@@ -1044,17 +1045,63 @@ def test_add_uniprot_data_to_genes(export_for_xrefs):
                             'dbref_gene_id': '23550840',
                             'ensembl_sequence_id': [],
                             'ensembl_gene_id': [],
-                        }
+                        },
                     }
                 },
                 'genotypes': {},
                 'metadata': {},
                 'metagenotypes': {},
                 'organisms': {},
-                'publications': {'PMID:1': {}},
+                'publications': {'PMID:12345678': {}},
             }
         },
         'schema_version': 1,
     }
     actual = add_uniprot_data_to_genes(export_for_xrefs, uniprot_gene_data)
+    assert actual == expected
+
+
+def test_add_pubmed_data_to_sessions(export_for_xrefs):
+    pubmed_data = {
+        'PMID:12345678': {
+            'year': '2007',
+            'journal_abbr': 'Science',
+            'volume': '317',
+            'issue': '5843',
+            'pages': '1400-2',
+            'author': 'Carberry',
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            'cc6cf06675cc6e13': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'Q00909',
+                    }
+                },
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {
+                    'PMID:12345678': {
+                        'pubmed_data': {
+                            'year': '2007',
+                            'journal_abbr': 'Science',
+                            'volume': '317',
+                            'issue': '5843',
+                            'pages': '1400-2',
+                            'author': 'Carberry',
+                        }
+                    }
+                },
+            }
+        },
+        'schema_version': 1,
+    }
+    actual = add_pubmed_data_to_sessions(export_for_xrefs, pubmed_data)
     assert actual == expected
