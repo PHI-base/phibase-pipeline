@@ -44,7 +44,9 @@ def submit_id_mapping(from_db, to_db, ids):
     }
     request = requests.post(url, data)
     check_response(request)
-    return request.json()['jobId']
+    job_id = request.json()['jobId']
+    print(f'Job ID: {job_id}')
+    return job_id
 
 
 def check_id_mapping_results_ready(session, job_id, poll_seconds=3):
