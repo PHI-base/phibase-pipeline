@@ -7,7 +7,7 @@
 import argparse
 import json
 
-from phibase_pipeline import ensembl, migrate, validate
+from phibase_pipeline import ensembl, migrate, postprocess, validate
 
 
 def parse_args(args):
@@ -61,6 +61,7 @@ def run(args):
     args = parse_args(args)
     if args.target == 'zenodo':
         canto_json = migrate.make_combined_export(args.phibase, args.phicanto)
+        canto_json = postprocess.add_cross_references(canto_json)
         validate.validate_export(canto_json)
         with open(args.output, 'w+', encoding='utf8') as json_file:
             json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
