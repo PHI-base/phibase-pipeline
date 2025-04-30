@@ -10,6 +10,7 @@ import pytest
 from phibase_pipeline.postprocess import (
     add_chemical_extensions,
     add_delta_symbol,
+    add_uniprot_data_to_genes,
     allele_ids_of_genotype,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
@@ -73,6 +74,30 @@ def chemical_data():
             'cas': '303-81-1',
             'smiles': None,
         },
+    }
+
+
+@pytest.fixture
+def export_for_xrefs():
+    return {
+        'curation_sessions': {
+            'cc6cf06675cc6e13': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'Q00909',
+                    }
+                },
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {'PMID:1': {}},
+            }
+        },
+        'schema_version': 1,
     }
 
 
@@ -987,4 +1012,49 @@ def test_add_chemical_extensions(chemical_data):
     }
     actual = export
     add_chemical_extensions(actual, chemical_data)
+    assert actual == expected
+
+
+def test_add_uniprot_data_to_genes(export_for_xrefs):
+    uniprot_gene_data = {
+        'Q00909': {
+            'uniprot_id': 'Q00909',
+            'name': 'TRI5',
+            'product': 'Trichodiene synthase',
+            'strain': 'Gibberella zeae (strain ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1)',
+            'dbref_gene_id': '23550840',
+            'ensembl_sequence_id': [],
+            'ensembl_gene_id': [],
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            'cc6cf06675cc6e13': {
+                'alleles': {},
+                'annotations': [],
+                'genes': {
+                    'Fusarium graminearum Q00909': {
+                        'organism': 'Fusarium graminearum',
+                        'uniquename': 'Q00909',
+                        'uniprot_data': {
+                            'uniprot_id': 'Q00909',
+                            'name': 'TRI5',
+                            'product': 'Trichodiene synthase',
+                            'strain': 'Gibberella zeae (strain ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1)',
+                            'dbref_gene_id': '23550840',
+                            'ensembl_sequence_id': [],
+                            'ensembl_gene_id': [],
+                        }
+                    }
+                },
+                'genotypes': {},
+                'metadata': {},
+                'metagenotypes': {},
+                'organisms': {},
+                'publications': {'PMID:1': {}},
+            }
+        },
+        'schema_version': 1,
+    }
+    actual = add_uniprot_data_to_genes(export_for_xrefs, uniprot_gene_data)
     assert actual == expected
