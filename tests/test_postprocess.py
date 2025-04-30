@@ -15,6 +15,7 @@ from phibase_pipeline.postprocess import (
     add_pubmed_data_to_sessions,
     add_uniprot_data_to_genes,
     allele_ids_of_genotype,
+    get_all_uniprot_ids_in_export,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
     remove_allele_gene_names,
@@ -1167,4 +1168,16 @@ def test_add_proteome_strains_to_genes(export_with_uniprot_data, proteome_result
     actual = add_proteome_strains_to_genes(
         export_with_uniprot_data, proteome_results, proteome_id_mapping
     )
+    assert actual == expected
+
+
+def test_get_all_uniprot_ids_in_export(export_for_xrefs):
+    expected = {'Q00909', 'Q4QGX0'}
+    export_for_xrefs = copy.deepcopy(export_for_xrefs)
+    genes = export_for_xrefs['curation_sessions']['0123456789abcdef']['genes']
+    genes['Leishmania major Q4QGX0'] = {
+        'organism': 'Leishmania major',
+        'uniquename': 'Q4QGX0',
+    }
+    actual = get_all_uniprot_ids_in_export(export_for_xrefs)
     assert actual == expected
