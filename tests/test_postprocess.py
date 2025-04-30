@@ -11,7 +11,7 @@ import pytest
 from phibase_pipeline.postprocess import (
     add_chemical_extensions,
     add_delta_symbol,
-    add_proteome_ids_to_genes,
+    add_proteome_strains_to_genes,
     add_pubmed_data_to_sessions,
     add_uniprot_data_to_genes,
     allele_ids_of_genotype,
@@ -1133,7 +1133,7 @@ def test_add_pubmed_data_to_sessions(export_for_xrefs):
     assert actual == expected
 
 
-def test_add_proteome_ids_to_genes(export_with_uniprot_data, proteome_results):
+def test_add_proteome_strains_to_genes(export_with_uniprot_data, proteome_results):
     proteome_id_mapping = {'Q00909': ['UP000070720']}
     expected = {
         'curation_sessions': {
@@ -1164,7 +1164,7 @@ def test_add_proteome_ids_to_genes(export_with_uniprot_data, proteome_results):
         },
         'schema_version': 1,
     }
-    actual = add_proteome_ids_to_genes(
+    actual = add_proteome_strains_to_genes(
         export_with_uniprot_data, proteome_results, proteome_id_mapping
     )
     assert actual == expected

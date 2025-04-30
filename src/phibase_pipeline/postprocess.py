@@ -312,7 +312,7 @@ def add_uniprot_data_to_genes(export, uniprot_gene_data):
     return augmented_export
 
 
-def add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping):
+def add_proteome_strains_to_genes(export, proteome_results, proteome_id_mapping):
     proteome_strain_mapping = {
         proteome['id']: proteome.get('strain')
         for proteome in proteome_results['results']
@@ -367,7 +367,7 @@ def add_cross_references(export):
     # Sequence strains
     proteome_id_mapping = uniprot.get_proteome_id_mapping(id_mapping_results)
     proteome_results = uniprot.query_proteome_ids(session, proteome_id_mapping)
-    export = add_proteome_ids_to_genes(export, proteome_results, proteome_id_mapping)
+    export = add_proteome_strains_to_genes(export, proteome_results, proteome_id_mapping)
     # Publication information
     pmids = get_all_pmids_in_export(export)
     pubmed_data = pubmed.get_publications_from_pubmed(pmids)
