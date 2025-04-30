@@ -15,6 +15,7 @@ from phibase_pipeline.postprocess import (
     add_pubmed_data_to_sessions,
     add_uniprot_data_to_genes,
     allele_ids_of_genotype,
+    get_all_pmids_in_export,
     get_all_uniprot_ids_in_export,
     merge_phi_canto_curation,
     merge_duplicate_alleles,
@@ -1180,4 +1181,13 @@ def test_get_all_uniprot_ids_in_export(export_for_xrefs):
         'uniquename': 'Q4QGX0',
     }
     actual = get_all_uniprot_ids_in_export(export_for_xrefs)
+    assert actual == expected
+
+
+def test_get_all_pmids_in_export(export_for_xrefs):
+    expected = {'12345678', '1'}
+    export_for_xrefs = copy.deepcopy(export_for_xrefs)
+    publications = export_for_xrefs['curation_sessions']['0123456789abcdef']['publications']
+    publications['PMID:1'] = {}
+    actual = get_all_pmids_in_export(export_for_xrefs)
     assert actual == expected
