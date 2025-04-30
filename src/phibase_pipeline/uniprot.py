@@ -103,7 +103,7 @@ def decode_results(response, file_format, compressed):
 def get_batch(session, batch_response, file_format, compressed):
 
     def get_next_link(headers):
-        re_next_link = re.compile(r"<(.+)>; rel='next'")
+        re_next_link = re.compile(r'<(.+)>; rel="next"')
         if 'Link' in headers:
             match = re_next_link.match(headers['Link'])
             if match:
