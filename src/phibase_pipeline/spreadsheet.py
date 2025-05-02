@@ -22,7 +22,7 @@ def add_high_level_terms(export):
                 gene_id = allele['gene']
                 gene = session['genes'][gene_id]
                 uniprot_id = gene['uniquename']
-                if uniprot_id in effector_uniprots:
+                if uniprot_id in effector_uniprot_ids:
                     return True
         return False
 
@@ -39,7 +39,7 @@ def add_high_level_terms(export):
         "PHIPO:0000015": "Reduced virulence",
         "PHIPO:0000004": "Unaffected pathogenicity",
     }
-    effector_uniprots = set()
+    effector_uniprot_ids = set()
 
     for session in export['curation_sessions'].values():
         annotations = session.get('annotations', [])
@@ -54,7 +54,7 @@ def add_high_level_terms(export):
                 if high_level_term == 'Effector':
                     gene = session['genes'][annotation['gene']]
                     uniprot_id = gene['uniquename']
-                    effector_uniprots.add(uniprot_id)
+                    effector_uniprot_ids.add(uniprot_id)
                 high_level_terms.add(high_level_term)
             extensions = annotation.get('extension')
             if extensions:
@@ -486,8 +486,8 @@ def get_metagenotype_uniprot_column(export, metagenotype_ids):
     pathogen_rows = []
     host_rows = []
     for mid in metagenotype_ids.values:
-        pathogen_uniprots = []
-        host_uniprots = []
+        pathogen_uniprot_ids = []
+        host_uniprot_ids = []
         session_id, feature_type, *_ = mid.split('-')
         if feature_type != 'metagenotype':
             raise ValueError(f'invalid feature ID: {mid}')
@@ -497,13 +497,13 @@ def get_metagenotype_uniprot_column(export, metagenotype_ids):
         for _, gene, role in genes:
             uniprot_id = gene['uniquename']
             if role == 'pathogen':
-                pathogen_uniprots.append(uniprot_id)
+                pathogen_uniprot_ids.append(uniprot_id)
             elif role == 'host':
-                host_uniprots.append(uniprot_id)
+                host_uniprot_ids.append(uniprot_id)
             else:
                 raise ValueError(f'invalid role: {gene}')
-        pathogen_rows.append('; '.join(pathogen_uniprots))
-        host_rows.append('; '.join(host_uniprots))
+        pathogen_rows.append('; '.join(pathogen_uniprot_ids))
+        host_rows.append('; '.join(host_uniprot_ids))
     index = metagenotype_ids.index
     return (
         pd.Series(pathogen_rows, index, name='pathogen_uniprot'),
