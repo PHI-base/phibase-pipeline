@@ -203,18 +203,18 @@ def get_uniprot_data_fields(id_mapping_results):
             'ensembl_gene_id': None,
         }
         uniprot_id = result['from']
-        data = result['to']
+        uniprot_result = result['to']
 
         # Primary UniProt ID (in case of merged accessions)
-        gene_data['uniprot_id'] = data['primaryAccession']
+        gene_data['uniprot_id'] = uniprot_result['primaryAccession']
 
-        if data['entryType'] == 'Inactive':
+        if uniprot_result['entryType'] == 'Inactive':
             # There's nothing more we can add for inactive accessions
             all_gene_data[uniprot_id] = gene_data
             continue
 
         # Gene name
-        genes = data.get('genes')
+        genes = uniprot_result.get('genes')
         if genes:
             # TODO: Add all gene names (but should we join here or not?)
             gene = genes[0]
@@ -225,7 +225,7 @@ def get_uniprot_data_fields(id_mapping_results):
                 gene_data['name'] = gene['orfNames'][0]['value']
 
         # Gene product
-        protein = data['proteinDescription']
+        protein = uniprot_result['proteinDescription']
         for name_key in ('recommendedName', 'submittedName', 'submissionNames'):
             protein_name_data = protein.get(name_key)
             if protein_name_data:
@@ -236,10 +236,10 @@ def get_uniprot_data_fields(id_mapping_results):
                 break
 
         # Strain
-        gene_data['strain'] = data['organism']['scientificName']
+        gene_data['strain'] = uniprot_result['organism']['scientificName']
 
         # Database reference gene ID
-        dbrefs = data['uniProtKBCrossReferences']
+        dbrefs = uniprot_result['uniProtKBCrossReferences']
         dbref_ids = [
             dbref['id'] for dbref in dbrefs if dbref['database'] == 'GeneID'
         ]
