@@ -172,17 +172,17 @@ def get_annotation_extensions(annotation):
     return extension_text or None
 
 
-def get_experimental_conditions(annotation):
+def get_experimental_conditions(annotation, term_label_mapping):
     conditions = annotation.get('conditions')
     if not conditions:
         return None
     condition_text = '; '.join(
-        f'{get_term_label(term_id)} ({term_id})' for term_id in conditions
+        f'{term_label_mapping[term_id]} ({term_id})' for term_id in conditions
     )
     return condition_text
 
 
-def get_ontology_annotation_tables(export):
+def get_ontology_annotation_tables(export, term_label_mapping):
     annotation_types = defaultdict(list)
     for session in export['curation_sessions'].values():
         for annotation in session['annotations']:
@@ -190,7 +190,7 @@ def get_ontology_annotation_tables(export):
             if annotation_type == 'physical_interaction':
                 continue  # Handle these annotations separately
             extensions = get_annotation_extensions(annotation)
-            conditions = get_experimental_conditions(annotation)
+            conditions = get_experimental_conditions(annotation, term_label_mapping)
             feature_key = next(
                 k for k in ('gene', 'genotype', 'metagenotype') if k in annotation
             )
@@ -198,7 +198,7 @@ def get_ontology_annotation_tables(export):
             annotation_types[annotation_type].append(
                 {
                     'term_id': term_id,
-                    'term_label': get_term_label(term_id),
+                    'term_label': term_label_mapping[term_id],
                     feature_key: annotation[feature_key],
                     'annotation_extensions': extensions,
                     'evidence': annotation.get('evidence_code'),
@@ -462,10 +462,6 @@ def add_display_names(dfs, display_name_lookup):
                 break
 
 
-def get_term_label_lookups():
-    raise NotImplementedError()
-
-
 def get_genotype_uniprot_column(export, genotype_ids):
     curation_sessions = export['curation_sessions']
     rows = []
@@ -564,13 +560,20 @@ def add_phig_ids(export, phig_lookup):
             gene['phig_id'] = phig_lookup[uniprot_id]
 
 
-def make_spreadsheet(output_path, export, gene_data, phig_mapping, display_name_lookup):
+def make_spreadsheet(
+    output_path,
+    export,
+    gene_data,
+    phig_mapping,
+    display_name_lookup,
+    term_label_mapping,
+):
     export = replace_merged_accessions(export, gene_data)
     add_high_level_terms(export)
     add_phig_ids(export, phig_mapping)
     dfs = {
         'entry_summary': get_entry_summary_table(export),
-        **get_ontology_annotation_tables(export),
+        **get_ontology_annotation_tables(export, term_label_mapping),
         'physical_interaction': get_physical_interaction_table(export),
         'publication': get_publication_table(export),
         'strain': get_strain_table(export),
@@ -614,11 +617,3 @@ def make_spreadsheet(output_path, export, gene_data, phig_mapping, display_name_
         for sheet_name in column_order:
             df = dfs[sheet_name]
             df.to_excel(writer, sheet_name, index=False)
-
-
-def _get_term_label(lookups, term_id):
-    prefix = term_id.split(':')[0]
-    return lookups[prefix][term_id]
-
-
-get_term_label = functools.partial(_get_term_label, get_term_label_lookups())
