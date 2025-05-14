@@ -331,7 +331,6 @@ def get_interactions_table(export):
         genes = session.get('genes')
         if not genes:
             continue
-        # Pathogen-host interactions
         genotypes = session['genotypes']
         metagenotypes = session.get('metagenotypes', {})
         organisms = session['organisms']
