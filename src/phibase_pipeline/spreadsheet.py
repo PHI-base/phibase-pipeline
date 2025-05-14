@@ -218,7 +218,9 @@ def get_physical_interaction_table(export):
     records = []
     for session in export['curation_sessions'].values():
         annotations = [
-            a for a in session['annotations'] if a['type'] == 'physical_interaction'
+            annotation
+            for annotation in session['annotations']
+            if annotation['type'] == 'physical_interaction'
         ]
         for annotation in annotations:
             records.append(
