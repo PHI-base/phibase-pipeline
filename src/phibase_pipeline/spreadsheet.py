@@ -559,8 +559,7 @@ def add_phig_ids(export, phig_lookup):
             gene['phig_id'] = phig_lookup[uniprot_id]
 
 
-def make_spreadsheet(
-    output_path,
+def make_spreadsheet_dataframes(
     export,
     gene_data,
     phig_mapping,
@@ -612,7 +611,11 @@ def make_spreadsheet(
         'interaction',
         'publication',
     ]
+    spreadsheet_dfs = {k: dfs[k] for k in sheet_order}
+    return spreadsheet_dfs
+
+
+def make_spreadsheet_file(spreadsheet_dfs, output_path):
     with pd.ExcelWriter(output_path) as writer:
-        for sheet_name in sheet_order:
-            df = dfs[sheet_name]
+        for sheet_name, df in spreadsheet_dfs.items():
             df.to_excel(writer, sheet_name, index=False)
