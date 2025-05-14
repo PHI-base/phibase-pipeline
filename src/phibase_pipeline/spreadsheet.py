@@ -582,7 +582,7 @@ def make_spreadsheet(
     add_display_names(dfs, display_name_lookup)
     for k, df in dfs.items():
         dfs[k] = add_feature_uniprot_columns(export, df)
-    column_renames = {
+    sheet_renames = {
         'biological_process': 'go_biological_process',
         'cellular_component': 'go_cellular_component',
         'disease_name': 'disease',
@@ -592,9 +592,9 @@ def make_spreadsheet(
         'wt_rna_expression': 'wild_type_rna_level',
         'wt_protein_expression': 'wild_type_protein_level',
     }
-    for old_name, new_name in column_renames.items():
+    for old_name, new_name in sheet_renames.items():
         dfs[new_name] = dfs.pop(old_name)
-    column_order = [
+    sheet_order = [
         'entry_summary',
         'phi_phenotype',
         'gene_for_gene_phenotype',
@@ -613,6 +613,6 @@ def make_spreadsheet(
         'publication',
     ]
     with pd.ExcelWriter(output_path) as writer:
-        for sheet_name in column_order:
+        for sheet_name in sheet_order:
             df = dfs[sheet_name]
             df.to_excel(writer, sheet_name, index=False)
