@@ -187,7 +187,7 @@ def get_ontology_annotation_tables(export, term_label_mapping):
         for annotation in session['annotations']:
             annotation_type = annotation['type']
             if annotation_type == 'physical_interaction':
-                continue  # Handle these annotations separately
+                continue  # Will be handled by the get_physical_interaction_table function
             extensions = get_annotation_extensions(annotation)
             conditions = get_experimental_conditions(annotation, term_label_mapping)
             feature_key = next(
