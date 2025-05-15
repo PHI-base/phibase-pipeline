@@ -176,7 +176,8 @@ def get_experimental_conditions(annotation, term_label_mapping):
     if not conditions:
         return None
     condition_text = '; '.join(
-        f'{term_label_mapping[term_id]} ({term_id})' for term_id in conditions
+        f'{term_label_mapping.get(term_id, "NO_LABEL")} ({term_id})'
+        for term_id in conditions
     )
     return condition_text
 
