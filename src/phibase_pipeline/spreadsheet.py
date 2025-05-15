@@ -557,7 +557,7 @@ def add_phig_ids(export, phig_lookup):
     for session in export['curation_sessions'].values():
         for gene in session.get('genes', {}).values():
             uniprot_id = gene['uniquename']
-            gene['phig_id'] = phig_lookup[uniprot_id]
+            gene['phig_id'] = phig_lookup.get(uniprot_id)
 
 
 def make_spreadsheet_dataframes(
