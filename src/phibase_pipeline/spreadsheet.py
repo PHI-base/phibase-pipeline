@@ -564,7 +564,6 @@ def make_spreadsheet_dataframes(
     export,
     gene_data,
     phig_mapping,
-    display_name_lookup,
     term_label_mapping,
 ):
     export = replace_merged_accessions(export, gene_data)
