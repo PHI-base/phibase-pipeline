@@ -619,4 +619,4 @@ def make_spreadsheet_dataframes(
 def make_spreadsheet_file(spreadsheet_dfs, output_path):
     with pd.ExcelWriter(output_path) as writer:
         for sheet_name, df in spreadsheet_dfs.items():
-            df.to_excel(writer, sheet_name, index=False)
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
