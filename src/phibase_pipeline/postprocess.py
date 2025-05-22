@@ -298,6 +298,7 @@ def get_all_uniprot_ids_in_export(export):
         for gene in session['genes'].values()
     )
 
+
 def add_uniprot_data_to_genes(export, uniprot_gene_data):
     augmented_export = copy.deepcopy(export)
     for session in augmented_export['curation_sessions'].values():
@@ -314,8 +315,7 @@ def add_uniprot_data_to_genes(export, uniprot_gene_data):
 
 def add_proteome_strains_to_genes(export, proteome_results, proteome_id_mapping):
     proteome_strain_mapping = {
-        proteome['id']: proteome.get('strain')
-        for proteome in proteome_results['results']
+        proteome['id']: proteome.get('strain') for proteome in proteome_results['results']
     }
     # Link to the strain of the first listed proteome only
     uniprot_strain_mapping = {
