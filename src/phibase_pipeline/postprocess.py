@@ -376,6 +376,37 @@ def add_cross_references(export):
     return export
 
 
+def truncate_phi4_ids(export):
+    """Truncate lists of PHI-base 4 IDs that are too long to be loaded into
+    the database used by the PHI-base 5 upload tool."""
+
+    def yield_annotations_with_phi4_ids(export):
+        for session in export['curation_sessions'].values():
+            for annotation in session.get('annotations', []):
+                phi4_ids = annotation.get('phi4_id', [])
+                if phi4_ids:
+                    yield annotation
+
+    def take_until_string_length(iterable, length, sep_length=0):
+        running_length = 0
+        for item in iterable:
+            running_length += len(item)
+            if running_length > length:
+                break
+            # Add separator to the count after the length check, because
+            # the concatenated list of IDs doesn't end with a separator.
+            running_length += sep_length
+            yield item
+
+    sep = '|'  # separator used by data upload tool
+    length_limit = 255  # length limit in database
+    sep_length = len(sep)
+    for annotation in yield_annotations_with_phi4_ids(export):
+        phi4_ids = annotation['phi4_id']
+        truncated_ids = list(take_until_string_length(phi4_ids, length_limit, sep_length))
+        annotation['phi4_id'] = truncated_ids
+
+
 def postprocess_phibase_json(export):
     curation_sessions = export['curation_sessions']
     for session in curation_sessions.values():

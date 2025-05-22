@@ -29,6 +29,7 @@ from phibase_pipeline.postprocess import (
     remove_orphaned_genes,
     remove_orphaned_organisms,
     remove_unapproved_sessions,
+    truncate_phi4_ids,
 )
 
 DATA_DIR = Path(__file__).parent / 'data'
@@ -1190,4 +1191,42 @@ def test_get_all_pmids_in_export(export_for_xrefs):
     publications = export_for_xrefs['curation_sessions']['0123456789abcdef']['publications']
     publications['PMID:1'] = {}
     actual = get_all_pmids_in_export(export_for_xrefs)
+    assert actual == expected
+
+
+def test_truncate_phi4_ids():
+    phi4_ids_below_limit = ['PHI:1', 'PHI:2']
+    phi4_ids_above_limit = [f'PHI:{n}' for n in range(1, 50)]
+    phi4_ids_truncated = [f'PHI:{n}' for n in range(1, 38)]
+    phi4_ids_at_limit = ['PHI:100' for n in range(1, 33)]  # length = 255
+    export = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    # annotations with no PHI-base 4 IDs should be unchanged
+                    {},
+                    # lists below the truncation limit should be unchanged
+                    {'phi4_id': phi4_ids_below_limit},
+                    # lists above the truncation limit should be truncated
+                    {'phi4_id': phi4_ids_above_limit},
+                    # lists exactly at the truncation limit should NOT be truncated
+                    {'phi4_id': phi4_ids_at_limit},
+                ]
+            }
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {},
+                    {'phi4_id': ['PHI:1', 'PHI:2']},
+                    {'phi4_id': phi4_ids_truncated},
+                    {'phi4_id': phi4_ids_at_limit},
+                ]
+            }
+        }
+    }
+    truncate_phi4_ids(export)
+    actual = export
     assert actual == expected
