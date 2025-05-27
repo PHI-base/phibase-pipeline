@@ -16,6 +16,7 @@ def parse_args(args):
     )
     subparsers = parser.add_subparsers(dest='target', required=True)
     parser_zenodo = subparsers.add_parser('zenodo')
+    parser_phibase5 = subparsers.add_parser('phibase5')
     parser_ensembl = subparsers.add_parser('ensembl')
 
     shared_args = {
@@ -30,16 +31,17 @@ def parse_args(args):
             'help': 'the path to the PHI-Canto JSON export file',
         },
     }
-    for subparser in (parser_zenodo, parser_ensembl):
+    for subparser in (parser_zenodo, parser_phibase5, parser_ensembl):
         for arg_name, kwargs in shared_args.items():
             subparser.add_argument(arg_name, **kwargs)
 
-    parser_zenodo.add_argument(
-        'output',
-        metavar='OUTFILE',
-        type=str,
-        help='the path to write the combined JSON export file',
-    )
+    for subparser in (parser_zenodo, parser_phibase5):
+        subparser.add_argument(
+            'output',
+            metavar='OUTFILE',
+            type=str,
+            help='the path to write the combined JSON export file',
+        )
 
     parser_ensembl.add_argument(
         'uniprot_data',
@@ -61,6 +63,8 @@ def run(args):
     match args.target:
         case 'zenodo':
             release.release_to_zenodo(args)
+        case 'phibase5':
+            release.release_to_phibase5(args)
         case 'ensembl':
             release.release_to_ensembl(args)
         case _:
