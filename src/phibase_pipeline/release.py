@@ -28,7 +28,7 @@ def release_to_phibase5(args):
     canto_json = migrate.make_combined_export(args.phibase, args.phicanto)
     canto_json = postprocess.add_cross_references(canto_json)
     postprocess.truncate_phi4_ids(canto_json)
-    validate.validate_export(canto_json)
+    validate.validate_export(canto_json, validate_id_length=True)
     write_json_export(args.output)
 
 

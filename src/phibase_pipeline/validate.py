@@ -222,7 +222,18 @@ def validate_unique_metagenotypes(metagenotypes):
         unique_metagenotypes[unique_id] = metagenotype_id
 
 
-def validate_export(json_export):
+def validate_phi4_ids_length(annotations):
+    for annotation in annotations:
+        phi4_ids = annotation.get('phi4_ids', [])
+        if phi4_ids:
+            phi4_ids_length = len('|'.join(phi4_ids))
+            _validate(
+                phi4_ids_length > 255,
+                f"PHI-base 4 IDs are too long: {phi4_ids}"
+            )
+
+
+def validate_export(json_export, validate_id_length=False):
     curation_sessions = json_export['curation_sessions']
     for session_id, session in curation_sessions.items():
         # Skip sessions that were not valid for curation
@@ -264,6 +275,8 @@ def validate_export(json_export):
         # Annotation validation
         validate_disease_ids(annotations)
         validate_unique_annotations(annotations, session_id)
+        if validate_id_length:
+            validate_phi4_ids_length(annotations)
 
 
 validate_allele_session_ids = functools.partial(
