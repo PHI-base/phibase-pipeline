@@ -2,6 +2,10 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""
+Release the PHI-base 5 dataset for loading into the PHI-base 5 database,
+or for uploading to the Zenodo repository or Ensembl.
+"""
 
 import json
 
