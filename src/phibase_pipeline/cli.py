@@ -5,9 +5,8 @@
 """Command line interface for the phibase-pipeline package."""
 
 import argparse
-import json
 
-from phibase_pipeline import ensembl, migrate, postprocess, validate
+from phibase_pipeline import release
 
 
 def parse_args(args):
@@ -59,19 +58,11 @@ def parse_args(args):
 
 def run(args):
     args = parse_args(args)
-    if args.target == 'zenodo':
-        canto_json = migrate.make_combined_export(args.phibase, args.phicanto)
-        canto_json = postprocess.add_cross_references(canto_json)
-        validate.validate_export(canto_json)
-        with open(args.output, 'w+', encoding='utf8') as json_file:
-            json.dump(canto_json, json_file, indent=4, sort_keys=True, ensure_ascii=False)
-    elif args.target == 'ensembl':
-        ensembl.write_ensembl_exports(
-            phibase_path=args.phibase,
-            canto_export_path=args.phicanto,
-            uniprot_data_path=args.uniprot_data,
-            dir_path=args.out_dir,
-        )
-    else:
-        # argparse should prevent this from being reached
-        raise ValueError(f'unsupported target type: {args.target}')
+    match args.target:
+        case 'zenodo':
+            release.release_to_zenodo(args)
+        case 'ensembl':
+            release.release_to_ensembl(args)
+        case _:
+            # argparse should prevent this from being reached
+            raise ValueError(f'unsupported target type: {args.target}')
