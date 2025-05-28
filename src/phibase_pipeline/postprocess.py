@@ -420,7 +420,7 @@ def postprocess_phibase_json(export):
 
 
 def postprocess_combined_json(export):
-    chemical_data = loaders.load_chemical_data(DATA_DIR / 'chemical_data.csv')
+    chemical_data = loaders.load_chemical_data()
     remove_unapproved_sessions(export)
     remove_curator_orcids(export)
     merge_duplicate_alleles(export['curation_sessions'])

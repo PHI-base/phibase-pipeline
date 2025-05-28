@@ -675,25 +675,12 @@ def write_ensembl_exports(
     dir_path = Path(dir_path)
     kwargs = {
         'uniprot_data': uniprot_data,
-        'phig_mapping': loaders.read_phig_uniprot_mapping(
-            DATA_DIR / 'phig_uniprot_mapping.csv',
-        ),
-        'chebi_mapping': loaders.read_phipo_chebi_mapping(
-            DATA_DIR / 'phipo_chebi_mapping.csv',
-        ),
-        'in_vitro_growth_classifier': loaders.load_in_vitro_growth_classifier(
-            DATA_DIR / 'in_vitro_growth_mapping.csv',
-        ),
-        'phenotype_mapping': loaders.load_phenotype_column_mapping(
-            DATA_DIR / 'phenotype_mapping.csv',
-        ),
-        'disease_mapping': loaders.load_disease_column_mapping(
-            phido_path=DATA_DIR / 'phido.csv',
-            extra_path=DATA_DIR / 'disease_mapping.csv',
-        ),
-        'tissue_mapping': loaders.load_bto_id_mapping(
-            DATA_DIR / 'bto.csv',
-        ),
+        'phig_mapping': loaders.read_phig_uniprot_mapping(),
+        'chebi_mapping': loaders.read_phipo_chebi_mapping(),
+        'in_vitro_growth_classifier': loaders.load_in_vitro_growth_classifier(),
+        'phenotype_mapping': loaders.load_phenotype_column_mapping(),
+        'disease_mapping': loaders.load_disease_column_mapping(),
+        'tissue_mapping': loaders.load_bto_id_mapping(),
         'exp_tech_mapping': pd.read_csv(
             DATA_DIR / 'phibase4_exp_tech_mapping.csv',
         ),

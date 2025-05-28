@@ -961,19 +961,12 @@ def get_phi_id_column(phi_df):
 
 
 def make_phibase_json(phibase_path, approved_pmids):
-    phenotype_mapping_df = loaders.load_phenotype_column_mapping(
-        DATA_DIR / 'phenotype_mapping.csv'
-    )
-    in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier(
-        DATA_DIR / 'in_vitro_growth_mapping.csv'
-    )
-    disease_mapping = loaders.load_disease_column_mapping(
-        phido_path=DATA_DIR / 'phido.csv',
-        extra_path=DATA_DIR / 'disease_mapping.csv',
-    )
-    exp_tech_df = loaders.load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
-    bto_mapping = loaders.load_bto_id_mapping(DATA_DIR / 'bto.csv')
-    phipo_mapping = loaders.load_phipo_mapping(DATA_DIR / 'phipo.csv')
+    phenotype_mapping_df = loaders.load_phenotype_column_mapping()
+    in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier()
+    disease_mapping = loaders.load_disease_column_mapping()
+    exp_tech_df = loaders.load_exp_tech_mapping()
+    bto_mapping = loaders.load_bto_id_mapping()
+    phipo_mapping = loaders.load_phipo_mapping()
 
     phi_df = clean.clean_phibase_csv(phibase_path)
 

@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+import importlib.resources
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +10,7 @@ import pytest
 from phibase_pipeline import loaders
 
 import pandas as pd
+from pandas.testing import assert_frame_equal, assert_series_equal 
 
 
 TEST_DATA_DIR = Path(__file__).parent / 'data'
@@ -434,3 +436,34 @@ def test_load_chemical_data(chemical_data):
     actual = loaders.load_chemical_data(TEST_DATA_DIR / 'chemical_data.csv')
     expected = chemical_data
     assert actual == expected
+
+
+def test_all_default_paths():
+    DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
+    loaders_and_filenames = (
+        (loaders.load_bto_id_mapping, ('bto.csv',)),
+        (loaders.load_chemical_data, ('chemical_data.csv',)),
+        (loaders.load_disease_column_mapping, ('phido.csv', 'disease_mapping.csv')),
+        (loaders.load_exp_tech_mapping, ('allele_mapping.csv',)),
+        (loaders.load_in_vitro_growth_classifier, ('in_vitro_growth_mapping.csv',)),
+        (loaders.load_phenotype_column_mapping, ('phenotype_mapping.csv',)),
+        (loaders.load_phipo_mapping, ('phipo.csv',)),
+        (loaders.load_tissue_replacements, ('bto_renames.csv',)),
+        (loaders.read_phig_uniprot_mapping, ('phig_uniprot_mapping.csv',)),
+        (loaders.read_phipo_chebi_mapping, ('phipo_chebi_mapping.csv',)),
+    )
+    loaders_and_args = tuple(
+        (
+            (loader, tuple((DATA_DIR / filename for filename in filenames)))
+            for loader, filenames in loaders_and_filenames
+        )
+    )
+    for loader, args in loaders_and_args:
+        actual = loader()
+        expected = loader(*args)
+        if isinstance(expected, pd.Series):
+            assert_series_equal(actual, expected)
+        elif isinstance(expected, pd.DataFrame):
+            assert_frame_equal(actual, expected)
+        else:
+            assert actual == expected
