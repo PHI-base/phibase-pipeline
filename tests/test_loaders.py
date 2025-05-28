@@ -11,7 +11,6 @@ from phibase_pipeline import loaders
 import pandas as pd
 
 
-DATA_DIR = Path(__file__).parent / 'data'
 TEST_DATA_DIR = Path(__file__).parent / 'data'
 ENSEMBL_DATA_DIR = TEST_DATA_DIR / 'ensembl'
 
@@ -99,7 +98,7 @@ def test_load_in_vitro_growth_classifier():
         name='is_filamentous',
     ).rename_axis('ncbi_taxid')
     actual = loaders.load_in_vitro_growth_classifier(
-        DATA_DIR / 'in_vitro_growth_mapping.csv'
+        TEST_DATA_DIR / 'in_vitro_growth_mapping.csv'
     )
     pd.testing.assert_series_equal(actual, expected)
 
@@ -122,8 +121,8 @@ def test_load_disease_column_mapping():
         'blight': 'blight',
     }
     actual = loaders.load_disease_column_mapping(
-        phido_path=DATA_DIR / 'phido.csv',
-        extra_path=DATA_DIR / 'disease_mapping.csv',
+        phido_path=TEST_DATA_DIR / 'phido.csv',
+        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
     )
     assert actual == expected
 
@@ -362,7 +361,7 @@ def test_load_disease_column_mapping():
 )
 def test_load_phenotype_column_mapping(expected, exclude_unmapped):
     actual = loaders.load_phenotype_column_mapping(
-        DATA_DIR / 'phenotype_mapping.csv', exclude_unmapped
+        TEST_DATA_DIR / 'phenotype_mapping.csv', exclude_unmapped
     )
     pd.testing.assert_frame_equal(actual, expected)
 
@@ -375,7 +374,7 @@ def test_load_bto_id_mapping():
         'flower': 'BTO:0000469',
     }
     expected = pd.Series(data, name='term_id').rename_axis('term_label')
-    actual = loaders.load_bto_id_mapping(DATA_DIR / 'bto.csv')
+    actual = loaders.load_bto_id_mapping(TEST_DATA_DIR / 'bto.csv')
     pd.testing.assert_series_equal(actual, expected)
 
 
@@ -386,7 +385,7 @@ def test_load_phipo_mapping():
         'PHIPO:0000003': 'tissue phenotype',
         'PHIPO:0000004': 'unaffected pathogenicity',
     }
-    actual = loaders.load_phipo_mapping(DATA_DIR / 'phipo.csv')
+    actual = loaders.load_phipo_mapping(TEST_DATA_DIR / 'phipo.csv')
     assert actual == expected
 
 
@@ -427,11 +426,11 @@ def test_load_exp_tech_mapping():
         },
     ]
     expected = pd.DataFrame.from_records(data)
-    actual = loaders.load_exp_tech_mapping(DATA_DIR / 'allele_mapping.csv')
+    actual = loaders.load_exp_tech_mapping(TEST_DATA_DIR / 'allele_mapping.csv')
     pd.testing.assert_frame_equal(actual, expected)
 
 
 def test_load_chemical_data(chemical_data):
-    actual = loaders.load_chemical_data(DATA_DIR / 'chemical_data.csv')
+    actual = loaders.load_chemical_data(TEST_DATA_DIR / 'chemical_data.csv')
     expected = chemical_data
     assert actual == expected
