@@ -56,11 +56,11 @@ def add_high_level_terms(export):
         **phenotype_mapping,
     }
     extension_mapping = {
-        "PHIPO:0000207": "Loss of mutualism",
-        "PHIPO:0000014": "Increased virulence",
-        "PHIPO:0000010": "Loss of pathogenicity",
-        "PHIPO:0000015": "Reduced virulence",
-        "PHIPO:0000004": "Unaffected pathogenicity",
+        'PHIPO:0000207': 'Loss of mutualism',
+        'PHIPO:0000014': 'Increased virulence',
+        'PHIPO:0000010': 'Loss of pathogenicity',
+        'PHIPO:0000015': 'Reduced virulence',
+        'PHIPO:0000004': 'Unaffected pathogenicity',
     }
     effector_uniprot_ids = set()
 
