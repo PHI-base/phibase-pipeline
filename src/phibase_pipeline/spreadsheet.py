@@ -25,11 +25,35 @@ def add_high_level_terms(export):
                     return True
         return False
 
-    term_mapping = {
-        'GO:0140418': 'Effector',
+    effector_term_ids = {
+        'GO:0140418',
+        'GO:0140415',
+        'GO:0140404',
+        'GO:0140403',
+        'GO:0034055',
+        'GO:0080185',
+        'GO:0052034',
+        'GO:0140423',
+        'GO:0140502',
+        'GO:0140590',
+        'GO:0140403',
+        'GO:0034055',
+        'GO:0080185',
+        'GO:0052034',
+        'GO:0140423',
+        'GO:0141017',
+    }
+    effector_mapping = {
+        term_id: 'Effector' for term_id in effector_term_ids
+    }
+    phenotype_mapping = {
         'PHIPO:0000022': 'Resistance to chemical',
         'PHIPO:0000021': 'Sensitivity to chemical',
         'PHIPO:0000513': 'Lethal',
+    }
+    term_mapping = {
+        **effector_mapping,
+        **phenotype_mapping,
     }
     extension_mapping = {
         "PHIPO:0000207": "Loss of mutualism",
