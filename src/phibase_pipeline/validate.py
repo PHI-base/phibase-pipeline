@@ -7,6 +7,10 @@ import pprint
 import re
 from collections import defaultdict
 
+import jsonschema
+
+from phibase_pipeline import loaders
+
 
 def _validate(predicate, error_message):
     if not predicate:
@@ -234,6 +238,8 @@ def validate_phi4_ids_length(annotations):
 
 
 def validate_export(json_export, validate_id_length=False):
+    schema = loaders.load_phibase5_json_schema()
+    jsonschema.validate(json_export, schema)
     curation_sessions = json_export['curation_sessions']
     for session_id, session in curation_sessions.items():
         # Skip sessions that were not valid for curation
