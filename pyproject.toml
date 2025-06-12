@@ -27,6 +27,7 @@ classifiers = [
 dependencies = [
   "pandas==2.2.2",
   "requests==2.32.2",
+  "jsonschema==4.24.0",
 ]
 
 [project.urls]
