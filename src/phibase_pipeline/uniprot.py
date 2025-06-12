@@ -190,6 +190,18 @@ def run_id_mapping_job(session, ids):
 
 
 def get_uniprot_data_fields(id_mapping_results):
+
+    def get_strain_name(scientific_name):
+        # Get the first strain name from a UniProtKB organism name, if it exists
+        sep = ' / '
+        pattern = re.compile(r'\(strain (?P<strain_names>.+?)\)')
+        match = pattern.search(scientific_name)
+        if match is None:
+            return None
+        strain_name_str = match.group('strain_names')
+        strain_names = strain_name_str.split(sep)
+        return strain_names[0]
+
     all_gene_data = {}
     all_results = id_mapping_results['results']
     for result in all_results:
@@ -235,8 +247,9 @@ def get_uniprot_data_fields(id_mapping_results):
                 gene_data['product'] = protein_name_data['fullName']['value']
                 break
 
-        # Strain
-        gene_data['strain'] = uniprot_result['organism']['scientificName']
+        # Sequence strain
+        scientific_name = uniprot_result['organism']['scientificName']
+        gene_data['strain'] = get_strain_name(scientific_name)
 
         # Database reference gene ID
         dbrefs = uniprot_result['uniProtKBCrossReferences']

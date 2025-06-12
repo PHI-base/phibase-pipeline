@@ -26,7 +26,7 @@ UNIPROT_DATA_DIR = TEST_DATA_DIR / 'uniprot'
                     'uniprot_id': 'P05067',
                     'name': 'APP',
                     'product': 'Amyloid-beta precursor protein',
-                    'strain': 'Homo sapiens',
+                    'strain': None,
                     'dbref_gene_id': '351',
                     'ensembl_sequence_id': [
                         'ENSP00000284981.4',
@@ -55,7 +55,7 @@ UNIPROT_DATA_DIR = TEST_DATA_DIR / 'uniprot'
                     'uniprot_id': 'Q00909',
                     'name': 'TRI5',
                     'product': 'Trichodiene synthase',
-                    'strain': 'Gibberella zeae (strain ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1)',
+                    'strain': 'ATCC MYA-4620',
                     'dbref_gene_id': '23550840',
                     'ensembl_sequence_id': [],
                     'ensembl_gene_id': [],
