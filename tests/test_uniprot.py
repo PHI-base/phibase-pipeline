@@ -55,7 +55,7 @@ UNIPROT_DATA_DIR = TEST_DATA_DIR / 'uniprot'
                     'uniprot_id': 'Q00909',
                     'name': 'TRI5',
                     'product': 'Trichodiene synthase',
-                    'strain': 'ATCC MYA-4620',
+                    'strain': 'ATCC MYA-4620 / CBS 123657 / FGSC 9075 / NRRL 31084 / PH-1',
                     'dbref_gene_id': '23550840',
                     'ensembl_sequence_id': [],
                     'ensembl_gene_id': [],

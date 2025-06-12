@@ -199,8 +199,7 @@ def get_uniprot_data_fields(id_mapping_results):
         if match is None:
             return None
         strain_name_str = match.group('strain_names')
-        strain_names = strain_name_str.split(sep)
-        return strain_names[0]
+        return strain_name_str
 
     all_gene_data = {}
     all_results = id_mapping_results['results']
