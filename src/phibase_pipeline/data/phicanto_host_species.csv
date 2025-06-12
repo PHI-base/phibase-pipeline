@@ -22,6 +22,7 @@ ncbi_taxid,scientific_name,common_name
 6661,Artemia franciscana,brine shrimp
 85549,Artemia salina,
 39291,Athelia rolfsii,
+265785,Atractylodes macrocephala,
 4498,Avena sativa,oat
 38783,Avena strigosa,black oat
 28974,Averrhoa carambola,
@@ -65,6 +66,7 @@ ncbi_taxid,scientific_name,common_name
 55188,Citrus unshiu,satsuma mandarin
 164113,Citrus x microcarpa,calamondin
 229630,Citrus x tangelo,
+4460,Colocasia esculenta,
 269719,Cotinus coggygria,smokebush
 292731,Cotinus obovatus,
 2567903,Coturnix coromandelica,rain quail
@@ -90,6 +92,7 @@ ncbi_taxid,scientific_name,common_name
 7227,Drosophila melanogaster,fruit fly
 685034,Dysdercus peruvianus,
 6396,Eisenia fetida,common brandling worm
+4511,Eleusine coracana,
 94232,Epinephelus coioides,
 1074816,Epinephelus fuscoguttatus x Epinephelus lanceolatus,
 9796,Equus caballus,horse
@@ -119,6 +122,7 @@ ncbi_taxid,scientific_name,common_name
 3864,Lens culinaris,lentil
 4006,Linum usitatissimum,flax
 215539,Liriodendron chinense x Liriodendron tulipifera,
+151069,Litchi chinensis,
 7004,Locusta migratoria,migratory locust
 4521,Lolium multiflorum,Italian ryegrass
 4522,Lolium perenne,perennial ryegrass
@@ -152,6 +156,7 @@ ncbi_taxid,scientific_name,common_name
 9986,Oryctolagus cuniculus,rabbit
 4530,Oryza sativa,rice
 9940,Ovis aries,sheep
+4054,Panax ginseng,
 44586,Panax notoginseng,
 8255,Paralichthys olivaceus,Japanese flounder
 4031,Pelargonium hortorum,common geranium
@@ -179,6 +184,7 @@ ncbi_taxid,scientific_name,common_name
 3758,Prunus domestica,plum
 3755,Prunus dulcis,almond
 3760,Prunus persica,peach
+323851,Prunus persica var. nucipersica,
 22663,Punica granatum,pomegranate
 23211,Pyrus communis,pear
 3767,Pyrus pyrifolia,sha li
@@ -194,6 +200,7 @@ ncbi_taxid,scientific_name,common_name
 4547,Saccharum officinarum,sugarcane
 52904,Scophthalmus maximus,turbot
 4550,Secale cereale,rye
+4555,Setaria italica,
 7048,Sitophilus oryzae,rice weevil
 315333,Solanum albicans,
 4108,Solanum chacoense,chaco potato
