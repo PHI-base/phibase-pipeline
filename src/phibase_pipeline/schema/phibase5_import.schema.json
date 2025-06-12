@@ -7,8 +7,12 @@
       "title": "Nullable string",
       "description": "A text format that may have no value.",
       "anyOf": [
-        {"type": "string"},
-        {"type": "null"}
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
       ]
     },
     "stringInteger": {
@@ -57,8 +61,12 @@
       "title": "Nullable date-time",
       "description": "A date-time format that may have no value.",
       "anyOf": [
-        {"$ref": "#/definitions/dateTime"},
-        {"type": "null"}
+        {
+          "$ref": "#/definitions/dateTime"
+        },
+        {
+          "type": "null"
+        }
       ]
     },
     "sessionKey": {
@@ -84,8 +92,12 @@
       "title": "Genotype identifier",
       "description": "A unique identifier for a genotype. Wild-type genotypes (containing no alleles) have a different identifier format from mutant genotypes (which contain one or more alleles).",
       "oneOf": [
-        {"$ref": "#/definitions/mutantGenotypeId"},
-        {"$ref": "#/definitions/wildTypeGenotypeId"}
+        {
+          "$ref": "#/definitions/mutantGenotypeId"
+        },
+        {
+          "$ref": "#/definitions/wildTypeGenotypeId"
+        }
       ]
     },
     "mutantGenotypeId": {
@@ -347,7 +359,9 @@
                     "title": "Annotation status",
                     "description": "The status of the annotation.",
                     "type": "string",
-                    "enum": ["new"]
+                    "enum": [
+                      "new"
+                    ]
                   },
                   "submitter_comment": {
                     "title": "Submitter comment",
@@ -378,7 +392,9 @@
                           }
                         }
                       },
-                      {"type": "null"}
+                      {
+                        "type": "null"
+                      }
                     ]
                   },
                   "type": {
@@ -398,9 +414,21 @@
                   "type"
                 ],
                 "oneOf": [
-                  {"required": ["gene"]},
-                  {"required": ["genotype"]},
-                  {"required": ["metagenotype"]}
+                  {
+                    "required": [
+                      "gene"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "genotype"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "metagenotype"
+                    ]
+                  }
                 ]
               }
             },
@@ -613,7 +641,10 @@
                   "title": "Annotation mode",
                   "description": "Tracks the annotation mode of the curation session in Canto. For internal use only.",
                   "type": "string",
-                  "enum": ["standard", "advanced"]
+                  "enum": [
+                    "standard",
+                    "advanced"
+                  ]
                 },
                 "annotation_status": {
                   "title": "Annotation status",
