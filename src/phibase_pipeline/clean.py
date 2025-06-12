@@ -145,7 +145,7 @@ def clean_phibase_csv(path):
         if pd.api.types.is_string_dtype(column):
             phi_df[col] = column.str.lower()
 
-    phi_df.pathogen_id = phi_df.pathogen_id.astype('int64')
+    phi_df.pathogen_id = phi_df.pathogen_id.astype('UInt64')
 
     nan_integer_columns = ['pathogen_strain_id', 'host_id', 'pmid', 'year']
     for col in nan_integer_columns:
