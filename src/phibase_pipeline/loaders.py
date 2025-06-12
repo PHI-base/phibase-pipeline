@@ -11,6 +11,7 @@ import pandas as pd
 
 
 DATA_DIR = Path(__file__).parent / 'data'
+SCHEMA_DIR = Path(__file__).parent / 'schema'
 
 
 def read_phig_uniprot_mapping(path=None):
@@ -140,3 +141,7 @@ def load_phibase_cleaned(path):
         .to_dict()
     )
     return pd.read_csv(path, dtype=dtypes)
+
+
+def load_phibase5_json_schema():
+    return load_json(SCHEMA_DIR / 'phibase5_import.schema.json')
