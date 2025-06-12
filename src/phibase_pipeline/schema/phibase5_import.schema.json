@@ -464,12 +464,12 @@
                         "name": {
                           "title": "UniProtKB gene name",
                           "description": "The name of the gene as provided by UniProtKB.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "product": {
                           "title": "UniProtKB gene product name",
                           "description": "The name of the gene product as provided by UniProtKB.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "strain": {
                           "title": "UniProtKB strain name",
@@ -479,23 +479,37 @@
                         "dbref_gene_id": {
                           "title": "NCBI Gene identifier",
                           "description": "Gene identifier from the NCBI Gene database that is cross-referenced to this gene.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "ensembl_sequence_id": {
                           "title": "Ensembl sequence identifiers",
                           "description": "Collection of sequence identifiers from the Ensembl database that are cross-referenced to this gene.",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
                         },
                         "ensembl_gene_id": {
                           "title": "Ensembl gene identifiers",
                           "description": "Collection of gene identifiers from the Ensembl database that are cross-referenced to this gene.",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
                         }
                       }
                     }
@@ -865,17 +879,17 @@
                         "volume": {
                           "title": "Publication journal volume",
                           "description": "The volume of the journal that the publication was published in.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "issue": {
                           "title": "Publication journal issue",
                           "description": "The issue of the journal that the publication was published in.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "pages": {
                           "title": "Publication journal pages",
                           "description": "The page range in the journal that the publication was published in.",
-                          "type": "string"
+                          "$ref": "#/definitions/nullableString"
                         },
                         "author": {
                           "title": "Publication author",
