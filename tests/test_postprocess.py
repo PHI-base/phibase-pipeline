@@ -841,8 +841,9 @@ def test_add_delta_symbol():
     }
     # Delta is only replaced at the end of allele names to maintain parity
     # with Canto's behavior, but this might not be what we want.
+    delta = '\N{GREEK CAPITAL LETTER DELTA}'
     expected_names = {
-        'delta_end': 'ABC\N{GREEK CAPITAL LETTER DELTA}',
+        'delta_end': f'ABC{delta}',
         'delta_mid': 'ABCdeltaK',
         'delta_start': 'deltaABC',
     }
