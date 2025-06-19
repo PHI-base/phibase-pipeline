@@ -835,16 +835,16 @@ def test_add_delta_symbol():
         }
     }
     actual_names = {
-        'delta_start': 'ABCdelta',
+        'delta_end': 'ABCdelta',
         'delta_mid': 'ABCdeltaK',
-        'delta_end': 'deltaABC',
+        'delta_start': 'deltaABC',
     }
     # Delta is only replaced at the end of allele names to maintain parity
     # with Canto's behavior, but this might not be what we want.
     expected_names = {
-        'delta_start': 'ABC\N{GREEK CAPITAL LETTER DELTA}',
+        'delta_end': 'ABC\N{GREEK CAPITAL LETTER DELTA}',
         'delta_mid': 'ABCdeltaK',
-        'delta_end': 'deltaABC',
+        'delta_start': 'deltaABC',
     }
 
     actual = copy.deepcopy(template)
