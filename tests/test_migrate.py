@@ -2861,7 +2861,7 @@ def test_add_annotation_objects():
 
 def test_make_phibase_json():
     phibase_path = DATA_DIR / 'phibase_test.csv'
-    approved_pmids = [15894715]
+    superseded_pmids = [15894715]
     expected = {
         'curation_sessions': {
             'f86e79b5ed64a342': {
@@ -3379,7 +3379,7 @@ def test_make_phibase_json():
         },
         'schema_version': 1,
     }
-    actual = make_phibase_json(phibase_path, approved_pmids)
+    actual = make_phibase_json(phibase_path, superseded_pmids)
     assert actual == expected
 
 
@@ -4399,5 +4399,5 @@ def test_make_combined_export():
         },
         'schema_version': 1,
     }
-    actual = make_combined_export(phibase_path, phicanto_path, approved_pmids=[])
+    actual = make_combined_export(phibase_path, phicanto_path, superseded_pmids=[])
     assert actual == expected

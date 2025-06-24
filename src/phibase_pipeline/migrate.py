@@ -49,7 +49,7 @@ def get_approved_pmids(canto_export):
     )
 
 
-def filter_phi_df(phi_df, approved_pmids=None):
+def filter_phi_df(phi_df, superseded_pmids=None):
     def filter_columns(phi_df):
         columns_exclude = {
             'chr_location',
@@ -71,7 +71,7 @@ def filter_phi_df(phi_df, approved_pmids=None):
         columns_include = [c for c in phi_df.columns if c not in columns_exclude]
         return phi_df[columns_include]
 
-    def filter_rows(phi_df, approved_pmids):
+    def filter_rows(phi_df, superseded_pmids):
         # Regular expression for a valid UniProtKB accession number.
         uniprot_pattern = re.compile(
             r'^([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9](?:[A-Z][A-Z0-9]{2}[0-9]){1,2})$'
@@ -95,14 +95,14 @@ def filter_phi_df(phi_df, approved_pmids=None):
             & rows_with_valid_uniprot_id
             & rows_without_host_genus
         )
-        if approved_pmids:
-            # PHI-Canto curation supersedes curation in PHI-base 4, so exclude any
-            # rows with PMIDs that exist in the export of approved curation sessions.
-            rows_not_already_curated = ~phi_df.pmid.isin(approved_pmids)
+        if superseded_pmids:
+            # Exclude any publications where PHI-Canto curation supersedes
+            # what was previously curated in PHI-base 4.
+            rows_not_already_curated = ~phi_df.pmid.isin(superseded_pmids)
             rows_include = rows_include & rows_not_already_curated
         return phi_df.loc[rows_include]
 
-    return filter_columns(filter_rows(phi_df, approved_pmids))
+    return filter_columns(filter_rows(phi_df, superseded_pmids))
 
 
 def add_alleles_and_evidence(exp_tech_df, phi_df):
@@ -960,7 +960,7 @@ def get_phi_id_column(phi_df):
     return phi_ids
 
 
-def make_phibase_json(phibase_path, approved_pmids):
+def make_phibase_json(phibase_path, superseded_pmids):
     phenotype_mapping_df = loaders.load_phenotype_column_mapping()
     in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier()
     disease_mapping = loaders.load_disease_column_mapping()
@@ -970,7 +970,7 @@ def make_phibase_json(phibase_path, approved_pmids):
 
     phi_df = clean.clean_phibase_csv(phibase_path)
 
-    phi_df = filter_phi_df(phi_df, approved_pmids)
+    phi_df = filter_phi_df(phi_df, superseded_pmids)
     phi_df = add_session_ids(phi_df)
     phi_df = add_gene_ids(phi_df)
     phi_df = add_alleles_and_evidence(exp_tech_df, phi_df)
@@ -1012,11 +1012,11 @@ def make_phibase_json(phibase_path, approved_pmids):
     return phibase_json
 
 
-def make_combined_export(phibase_path, phicanto_path, approved_pmids=None):
+def make_combined_export(phibase_path, phicanto_path, superseded_pmids=None):
     phicanto_json = loaders.load_json(phicanto_path)
-    if approved_pmids is None:
-        approved_pmids = get_approved_pmids(phicanto_json)
-    phibase_json = make_phibase_json(phibase_path, approved_pmids)
+    if superseded_pmids is None:
+        superseded_pmids = get_approved_pmids(phicanto_json)
+    phibase_json = make_phibase_json(phibase_path, superseded_pmids)
     postprocess.postprocess_phibase_json(phibase_json)
     combined_export = merge.merge_exports(phibase_json, phicanto_json)
     add_organism_roles(combined_export)
