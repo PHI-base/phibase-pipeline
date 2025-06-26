@@ -180,6 +180,7 @@ def clean_phibase_csv(path):
     space_separator = re.compile(r'(?<=\d) (?=PHI:)')
     phi_df.multiple_mutation = (
         phi_df.multiple_mutation
+        .astype('object')
         .str.rstrip(';')
         .str.replace(separator_without_space, '; ', regex=True)
         .str.replace(space_separator, '; ', regex=True)
