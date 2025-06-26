@@ -178,13 +178,12 @@ def clean_phibase_csv(path):
     # Fix separators in multiple mutation column
     separator_without_space = re.compile(r';(?! )')
     space_separator = re.compile(r'(?<=\d) (?=PHI:)')
-    if pd.api.types.is_string_dtype(phi_df.multiple_mutation):
-        phi_df.multiple_mutation = (
-            phi_df.multiple_mutation
-            .str.rstrip(';')
-            .str.replace(separator_without_space, '; ', regex=True)
-            .str.replace(space_separator, '; ', regex=True)
-        )
+    phi_df.multiple_mutation = (
+        phi_df.multiple_mutation
+        .str.rstrip(';')
+        .str.replace(separator_without_space, '; ', regex=True)
+        .str.replace(space_separator, '; ', regex=True)
+    )
     # Fix separators in disease column
     phi_df.disease = phi_df.disease.str.replace(',', ';')
 
