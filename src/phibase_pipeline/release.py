@@ -9,7 +9,7 @@ or for uploading to the Zenodo repository or Ensembl.
 
 import json
 
-from phibase_pipeline import ensembl, migrate, postprocess, validate
+from phibase_pipeline import ensembl, loaders, migrate, postprocess, validate
 
 
 def write_json_export(path, canto_json):
@@ -18,14 +18,18 @@ def write_json_export(path, canto_json):
 
 
 def release_to_zenodo(args):
-    canto_json = migrate.make_combined_export(args.phibase, args.phicanto)
+    phi_df = loaders.load_phibase_csv(args.phibase)
+    phicanto_json = loaders.load_json(args.phicanto)
+    canto_json = migrate.make_combined_export(phi_df, phicanto_json)
     canto_json = postprocess.add_cross_references(canto_json)
     validate.validate_export(canto_json)
     write_json_export(args.output, canto_json)
 
 
 def release_to_phibase5(args):
-    canto_json = migrate.make_combined_export(args.phibase, args.phicanto)
+    phi_df = loaders.load_phibase_csv(args.phibase)
+    phicanto_json = loaders.load_json(args.phicanto)
+    canto_json = migrate.make_combined_export(phi_df, phicanto_json)
     canto_json = postprocess.add_cross_references(canto_json)
     postprocess.truncate_phi4_ids(canto_json)
     validate.validate_export(canto_json, validate_id_length=True)

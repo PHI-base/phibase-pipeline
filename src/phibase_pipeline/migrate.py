@@ -960,7 +960,7 @@ def get_phi_id_column(phi_df):
     return phi_ids
 
 
-def make_phibase_json(phibase_path, superseded_pmids):
+def make_phibase_json(phi_df, superseded_pmids):
     phenotype_mapping_df = loaders.load_phenotype_column_mapping()
     in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier()
     disease_mapping = loaders.load_disease_column_mapping()
@@ -968,7 +968,7 @@ def make_phibase_json(phibase_path, superseded_pmids):
     bto_mapping = loaders.load_bto_id_mapping()
     phipo_mapping = loaders.load_phipo_mapping()
 
-    phi_df = clean.clean_phibase_csv(phibase_path)
+    phi_df = clean.clean_phibase_csv(phi_df)
 
     phi_df = filter_phi_df(phi_df, superseded_pmids)
     phi_df = add_session_ids(phi_df)
@@ -1012,11 +1012,10 @@ def make_phibase_json(phibase_path, superseded_pmids):
     return phibase_json
 
 
-def make_combined_export(phibase_path, phicanto_path, superseded_pmids=None):
-    phicanto_json = loaders.load_json(phicanto_path)
+def make_combined_export(phi_df, phicanto_json, superseded_pmids=None):
     if superseded_pmids is None:
         superseded_pmids = get_approved_pmids(phicanto_json)
-    phibase_json = make_phibase_json(phibase_path, superseded_pmids)
+    phibase_json = make_phibase_json(phi_df, superseded_pmids)
     postprocess.postprocess_phibase_json(phibase_json)
     combined_export = merge.merge_exports(phibase_json, phicanto_json)
     add_organism_roles(combined_export)

@@ -3379,7 +3379,8 @@ def test_make_phibase_json():
         },
         'schema_version': 1,
     }
-    actual = make_phibase_json(phibase_path, superseded_pmids)
+    phi_df = loaders.load_phibase_csv(phibase_path)
+    actual = make_phibase_json(phi_df, superseded_pmids)
     assert actual == expected
 
 
@@ -4399,5 +4400,7 @@ def test_make_combined_export():
         },
         'schema_version': 1,
     }
-    actual = make_combined_export(phibase_path, phicanto_path, superseded_pmids=[])
+    phi_df = loaders.load_phibase_csv(phibase_path)
+    phicanto_json = loaders.load_json(phicanto_path)
+    actual = make_combined_export(phi_df, phicanto_json, superseded_pmids=[])
     assert actual == expected

@@ -145,3 +145,13 @@ def load_phibase_cleaned(path):
 
 def load_phibase5_json_schema():
     return load_json(SCHEMA_DIR / 'phibase5_import.schema.json')
+
+
+def load_phibase_csv(path):
+    return pd.read_csv(
+        path,
+        skipinitialspace=True,
+        skiprows=1,
+        na_values=['', 'no data found'],
+        dtype=str,
+    )

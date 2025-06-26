@@ -9,6 +9,7 @@ import pandas as pd
 import pytest
 from pandas.testing import assert_frame_equal, assert_series_equal
 
+from phibase_pipeline import loaders
 from phibase_pipeline.clean import clean_phibase_csv, fix_curation_dates
 
 
@@ -71,8 +72,9 @@ def test_fix_curation_dates(dates, expected):
 def test_clean_phibase_csv():
     csv_path = TEST_DATA_DIR / 'clean' / 'clean_phibase_csv.csv'
     expected_path = TEST_DATA_DIR / 'clean' / 'clean_phibase_csv_expected.csv'
+    phi_df = loaders.load_phibase_csv(csv_path)
+    actual = clean_phibase_csv(phi_df)
     expected = pd.read_csv(expected_path)
-    actual = clean_phibase_csv(csv_path)
     # Fix a comparison error where actual dates have times, but expected ones don't.
     expected['curation_date'] = pd.to_datetime(expected['curation_date']).dt.normalize()
     expected = expected.astype(

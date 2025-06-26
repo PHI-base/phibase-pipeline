@@ -55,14 +55,7 @@ def fix_curation_dates(curation_dates):
     return converted_dates
 
 
-def clean_phibase_csv(path):
-    phi_df = pd.read_csv(
-        path,
-        skipinitialspace=True,
-        skiprows=1,
-        na_values=['', 'no data found'],
-        dtype=str,
-    )
+def clean_phibase_csv(phi_df):
     phi_df.columns = get_normalized_column_names(phi_df)
     column_replacements = {
         'protein_id_source': {
