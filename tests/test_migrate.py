@@ -2867,7 +2867,7 @@ def test_make_phibase_json():
             'f86e79b5ed64a342': {
                 'alleles': {
                     'P26215:f86e79b5ed64a342-1': {
-                        'allele_type': 'disruption',
+                        'allele_type': 'unknown',
                         'gene': 'Bipolaris zeicola P26215',
                         'name': 'PGN1',
                         'primary_identifier': 'P26215:f86e79b5ed64a342-1',
@@ -3079,9 +3079,9 @@ def test_make_phibase_json():
             '2d4bcfa71ccca168': {
                 'alleles': {
                     'P22287:2d4bcfa71ccca168-1': {
-                        'allele_type': 'deletion',
+                        'allele_type': 'unknown',
                         'gene': 'Fulvia fulva P22287',
-                        'name': 'AVR9delta',
+                        'name': 'AVR9',
                         'primary_identifier': 'P22287:2d4bcfa71ccca168-1',
                         'synonyms': [],
                         'gene_name': 'AVR9',
@@ -3229,7 +3229,7 @@ def test_make_phibase_json():
             '7ce9018575492179': {
                 'alleles': {
                     'Q01886:7ce9018575492179-1': {
-                        'allele_type': 'disruption',
+                        'allele_type': 'unknown',
                         'gene': 'Bipolaris zeicola Q01886',
                         'name': 'HTS1',
                         'primary_identifier': 'Q01886:7ce9018575492179-1',
@@ -3392,7 +3392,7 @@ def test_make_combined_export():
             'f86e79b5ed64a342': {
                 'alleles': {
                     'P26215:f86e79b5ed64a342-1': {
-                        'allele_type': 'disruption',
+                        'allele_type': 'unknown',
                         'gene': 'Bipolaris zeicola P26215',
                         'name': 'PGN1',
                         'primary_identifier': 'P26215:f86e79b5ed64a342-1',
@@ -3602,9 +3602,9 @@ def test_make_combined_export():
             '2d4bcfa71ccca168': {
                 'alleles': {
                     'P22287:2d4bcfa71ccca168-1': {
-                        'allele_type': 'deletion',
+                        'allele_type': 'unknown',
                         'gene': 'Fulvia fulva P22287',
-                        'name': 'AVR9Δ',
+                        'name': 'AVR9',
                         'primary_identifier': 'P22287:2d4bcfa71ccca168-1',
                         'synonyms': [],
                     },
@@ -3750,7 +3750,7 @@ def test_make_combined_export():
             '144c8f8625c95e5e': {
                 'alleles': {
                     'Q4VKJ6:144c8f8625c95e5e-1': {
-                        'allele_type': 'other',
+                        'allele_type': 'unknown',
                         'gene': 'Hyaloperonospora arabidopsidis Q4VKJ6',
                         'name': 'ATR1',
                         'primary_identifier': 'Q4VKJ6:144c8f8625c95e5e-1',
@@ -3984,7 +3984,7 @@ def test_make_combined_export():
             'baeff7a059e5f6c4': {
                 'alleles': {
                     'M5C8P6:baeff7a059e5f6c4-1': {
-                        'allele_type': 'other',
+                        'allele_type': 'unknown',
                         'gene': 'Cercospora beticola M5C8P6',
                         'name': 'RsLysM',
                         'primary_identifier': 'M5C8P6:baeff7a059e5f6c4-1',
