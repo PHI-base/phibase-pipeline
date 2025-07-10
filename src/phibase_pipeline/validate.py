@@ -233,7 +233,7 @@ def validate_phi4_ids_length(annotations):
             phi4_ids_length = len('|'.join(phi4_ids))
             _validate(
                 phi4_ids_length > 255,
-                f"PHI-base 4 IDs are too long: {phi4_ids}"
+                f"PHI-base 4 IDs are too long: {phi4_ids}",
             )
 
 
