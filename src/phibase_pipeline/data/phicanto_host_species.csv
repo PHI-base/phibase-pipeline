@@ -7,6 +7,7 @@ ncbi_taxid,scientific_name,common_name
 7029,Acyrthosiphon pisum,pea aphid
 7084,Adalia bipunctata,two-spotted ladybird beetle
 7159,Aedes aegypti,yellow fever mosquito
+37682,Aegilops tauschii,
 108276,Aeschynomene virginica,
 5341,Agaricus bisporus,cultivated mushroom
 176616,Ageratina adenophora,
@@ -113,6 +114,7 @@ ncbi_taxid,scientific_name,common_name
 3981,Hevea brasiliensis,para rubber tree
 9606,Homo sapiens,human
 4513,Hordeum vulgare,barley
+3486,Humulus lupulus,
 336126,Hylocereus trigonus,strawberry-pear
 7998,Ictalurus punctatus,channel catfish
 6945,Ixodes scapularis,black-legged tick
@@ -145,6 +147,7 @@ ncbi_taxid,scientific_name,common_name
 89151,Musa paradisiaca,French plantain banana
 63479,Nerium oleander,common oleander
 4100,Nicotiana benthamiana,
+35889,Nicotiana glutinosa,
 4091,Nicotiana otophora,
 62141,Nicotiana paniculata,
 4096,Nicotiana sylvestris,wood tobacco
@@ -204,11 +207,14 @@ ncbi_taxid,scientific_name,common_name
 7048,Sitophilus oryzae,rice weevil
 315333,Solanum albicans,
 4108,Solanum chacoense,chaco potato
+62890,Solanum habrochaites,
 856898,Solanum huancabambense,
 4081,Solanum lycopersicum,tomato
 4111,Solanum melongena,eggplant
 73574,Solanum microdontum,
+28526,Solanum pennellii,
 4082,Solanum peruvianum,Peruvian tomato
+4084,Solanum pimpinellifolium,
 119830,Solanum torvum,turkey berry
 4113,Solanum tuberosum,potato
 28829,Solea senegalensis,Senegalese sole
