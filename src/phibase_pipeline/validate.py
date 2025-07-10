@@ -253,7 +253,11 @@ def validate_export(json_export, validate_id_length=False):
         genes = session['genes']
         alleles = session['alleles']
         genotypes = session['genotypes']
-        mutant_genotypes = {k: genotypes[k] for k in genotypes if 'wild-type' not in k}
+        mutant_genotypes = {
+            genotype_id: genotype
+            for genotype_id, genotype in genotypes.items()
+            if 'wild-type' not in genotype_id
+        }
         organisms = session['organisms']
         metagenotypes = session.get('metagenotypes', {})
 
