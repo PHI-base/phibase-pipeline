@@ -121,6 +121,7 @@ def test_load_disease_column_mapping():
         'anthracnose (cucumber)': 'PHIDO:0000013',
         'biocontrol: non pathogenic': np.nan,
         'blight': 'blight',
+        'bacterial wilt; bacterial canker': 'PHIDO:0000035; PHIDO:0000025'
     }
     actual = loaders.load_disease_column_mapping(
         phido_path=TEST_DATA_DIR / 'phido.csv',
