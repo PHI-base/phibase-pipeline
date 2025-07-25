@@ -1,9 +1,9 @@
 term_label,term_id
 airsacculitis,PHIDO:0000008
-bacterial canker,PHIDO:0000025
-anthracnose (cruciferae),PHIDO:0000013
-anthracnose (cucurbitaceae),PHIDO:0000013
-anthracnose (cucumber),PHIDO:0000013
+airsacculitis; bacterial canker,PHIDO:0000008; PHIDO:0000025
+anthracnose (Cruciferae),PHIDO:0000013
+anthracnose (cucurbitaceae); anthracnose (cucumber),PHIDO:0000013
 biocontrol: non pathogenic,
 blight,blight
 bacterial wilt; bacterial canker,PHIDO:0000035; PHIDO:0000025
+Fusarium head blight,PHIDO:0000162

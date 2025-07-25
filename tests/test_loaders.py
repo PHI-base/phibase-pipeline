@@ -107,25 +107,17 @@ def test_load_in_vitro_growth_classifier():
 
 def test_load_disease_column_mapping():
     expected = {
-        # From PHIDO
-        'american foulbrood': 'PHIDO:0000011',
-        'angular leaf spot': 'PHIDO:0000012',
-        'anthracnose': 'PHIDO:0000013',
-        'anthracnose leaf spot': 'PHIDO:0000014',
-        'fusarium head blight': 'PHIDO:0000163',
-        # From disease mapping
         'airsacculitis': 'PHIDO:0000008',
-        'bacterial canker': 'PHIDO:0000025',
-        'anthracnose (cruciferae)': 'PHIDO:0000013',
-        'anthracnose (cucurbitaceae)': 'PHIDO:0000013',
-        'anthracnose (cucumber)': 'PHIDO:0000013',
+        'airsacculitis; bacterial canker': 'PHIDO:0000008; PHIDO:0000025',
+        'anthracnose (Cruciferae)': 'PHIDO:0000013',
+        'anthracnose (cucurbitaceae); anthracnose (cucumber)': 'PHIDO:0000013',
         'biocontrol: non pathogenic': np.nan,
         'blight': 'blight',
-        'bacterial wilt; bacterial canker': 'PHIDO:0000035; PHIDO:0000025'
+        'bacterial wilt; bacterial canker': 'PHIDO:0000035; PHIDO:0000025',
+        'Fusarium head blight': 'PHIDO:0000162',
     }
     actual = loaders.load_disease_column_mapping(
-        phido_path=TEST_DATA_DIR / 'phido.csv',
-        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
+        TEST_DATA_DIR / 'disease_mapping.csv',
     )
     assert actual == expected
 
@@ -444,7 +436,7 @@ def test_all_default_paths():
     loaders_and_filenames = (
         (loaders.load_bto_id_mapping, ('bto.csv',)),
         (loaders.load_chemical_data, ('chemical_data.csv',)),
-        (loaders.load_disease_column_mapping, ('phido.csv', 'disease_mapping.csv')),
+        (loaders.load_disease_column_mapping, ('disease_mapping.csv',)),
         (loaders.load_exp_tech_mapping, ('allele_mapping.csv',)),
         (loaders.load_in_vitro_growth_classifier, ('in_vitro_growth_mapping.csv',)),
         (loaders.load_phenotype_column_mapping, ('phenotype_mapping.csv',)),

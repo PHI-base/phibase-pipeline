@@ -303,22 +303,23 @@ def add_disease_term_ids(mapping, df):
     label_to_id_map = {}
     diseases = df.disease
     unique_diseases = diseases.drop_duplicates().values
-    for disease in unique_diseases:
-        if disease is np.nan:
+    for term_label in unique_diseases:
+        if term_label is np.nan:
             continue
-        term_ids = set()
-        term_labels = disease.lower().replace(', ', '; ').split('; ')
-        for term_label in term_labels:
-            term_id = mapping.get(term_label)
-            if term_id is None or term_id is np.nan:
-                continue
+        valid_term_ids = set()
+        term_id_string = mapping.get(term_label)
+        if term_id_string is None or term_id_string is np.nan:
+            label_to_id_map[term_label] = np.nan
+            continue
+        term_ids = term_id_string.split('; ')
+        for term_id in term_ids:
             if term_id.startswith('PHIDO'):
-                term_ids.add(term_id)
-        term_ids = sorted(term_ids, key=lambda x: int(x.split(':')[1]))
-        id_string = (
-            '; '.join(t for t in term_ids if t is not np.nan) if term_ids else np.nan
+                valid_term_ids.add(term_id)
+        sorted_term_ids = sorted(valid_term_ids, key=lambda x: int(x.split(':')[1]))
+        sorted_term_id_string = (
+            '; '.join(t for t in sorted_term_ids if t is not np.nan) if sorted_term_ids else np.nan
         )
-        label_to_id_map[disease] = id_string
+        label_to_id_map[term_label] = sorted_term_id_string
 
     disease_ids = []
     for disease in diseases.values:

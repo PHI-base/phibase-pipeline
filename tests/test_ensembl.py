@@ -191,8 +191,7 @@ def phenotype_mapping():
 @pytest.fixture
 def disease_mapping():
     return loaders.load_disease_column_mapping(
-        phido_path=TEST_DATA_DIR / 'phido.csv',
-        extra_path=TEST_DATA_DIR / 'disease_mapping.csv',
+        TEST_DATA_DIR / 'disease_mapping.csv',
     )
 
 

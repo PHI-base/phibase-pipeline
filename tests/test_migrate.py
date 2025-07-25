@@ -1219,8 +1219,7 @@ def test_add_disease_term_ids():
         columns=['disease', 'disease_id'],
     )
     mapping = loaders.load_disease_column_mapping(
-        phido_path=DATA_DIR / 'phido.csv',
-        extra_path=DATA_DIR / 'disease_mapping.csv',
+        DATA_DIR / 'disease_mapping.csv',
     )
     actual = add_disease_term_ids(mapping, df)
     pd.testing.assert_frame_equal(actual, expected)

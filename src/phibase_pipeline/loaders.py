@@ -45,22 +45,10 @@ def load_in_vitro_growth_classifier(path=None):
     return classifier_column
 
 
-def load_disease_column_mapping(phido_path=None, extra_path=None):
-    phido_path = DATA_DIR / 'phido.csv' if phido_path is None else phido_path
-    extra_path = DATA_DIR / 'disease_mapping.csv' if extra_path is None else extra_path
-    term_id_pattern = re.compile(r'^(?:obo:)?PHIDO_(\d{7})$')
-    renames = {
-        'ID': 'term_id',
-        'LABEL': 'term_label',
-    }
-    phido_df = pd.read_csv(phido_path).rename(columns=renames)
-    phido_df = phido_df[phido_df.term_id.str.match(term_id_pattern)]
-    obo_term_ids = phido_df.term_id.str.replace(term_id_pattern, r'PHIDO:\1', regex=True)
-    phido_df.term_id = obo_term_ids
-    phido_df.term_label = phido_df.term_label.str.lower()
-    extra_df = pd.read_csv(extra_path)
-    combined_df = pd.concat([phido_df[['term_label', 'term_id']], extra_df])
-    mapping = combined_df.set_index('term_label')['term_id'].to_dict()
+def load_disease_column_mapping(path=None):
+    path = DATA_DIR / 'disease_mapping.csv' if path is None else path
+    df = pd.read_csv(path)
+    mapping = df.set_index('term_label')['term_id'].to_dict()
     return mapping
 
 
