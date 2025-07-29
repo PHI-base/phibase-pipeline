@@ -300,33 +300,7 @@ def add_filamentous_classifier_column(filamentous_classifier, df):
 
 
 def add_disease_term_ids(mapping, df):
-    label_to_id_map = {}
-    diseases = df.disease
-    unique_diseases = diseases.drop_duplicates().values
-    for term_label in unique_diseases:
-        if term_label is np.nan:
-            continue
-        valid_term_ids = set()
-        term_id_string = mapping.get(term_label)
-        if term_id_string is None or term_id_string is np.nan:
-            label_to_id_map[term_label] = np.nan
-            continue
-        term_ids = term_id_string.split('; ')
-        for term_id in term_ids:
-            if term_id.startswith('PHIDO'):
-                valid_term_ids.add(term_id)
-        sorted_term_ids = sorted(valid_term_ids, key=lambda x: int(x.split(':')[1]))
-        sorted_term_id_string = (
-            '; '.join(t for t in sorted_term_ids if t is not np.nan) if sorted_term_ids else np.nan
-        )
-        label_to_id_map[term_label] = sorted_term_id_string
-
-    disease_ids = []
-    for disease in diseases.values:
-        ids = label_to_id_map[disease] if disease is not np.nan else disease
-        disease_ids.append(ids)
-
-    df['disease_id'] = disease_ids
+    df['disease_id'] = df.disease.map(mapping)
     return df
 
 
