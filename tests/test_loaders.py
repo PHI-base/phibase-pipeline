@@ -444,6 +444,7 @@ def test_all_default_paths():
         (loaders.load_tissue_replacements, ('bto_renames.csv',)),
         (loaders.read_phig_uniprot_mapping, ('phig_uniprot_mapping.csv',)),
         (loaders.read_phipo_chebi_mapping, ('phipo_chebi_mapping.csv',)),
+        (loaders.load_obsolete_phido_mapping, ('obsolete_phido_mapping.csv',))
     )
     loaders_and_args = tuple(
         (
@@ -460,3 +461,14 @@ def test_all_default_paths():
             assert_frame_equal(actual, expected)
         else:
             assert actual == expected
+
+
+def test_load_obsolete_phido_mapping():
+    path = TEST_DATA_DIR / 'obsolete_phido_mapping.csv'
+    expected = {
+        'PHIDO:0000002': [],
+        'PHIDO:0000003': ['PHIDO:0000168'],
+        'PHIDO:0000014': ['PHIDO:0000013', 'PHIDO:0000211'],
+    }
+    actual = loaders.load_obsolete_phido_mapping(path)
+    assert actual == expected

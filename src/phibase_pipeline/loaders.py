@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+import itertools
 import json
 import re
 from pathlib import Path
@@ -143,3 +144,24 @@ def load_phibase_csv(path):
         na_values=['', 'no data found'],
         dtype=str,
     )
+
+
+def load_obsolete_phido_mapping(path=None):
+    path = DATA_DIR / 'obsolete_phido_mapping.csv' if path is None else path
+    column_renames = {
+        'term_id': 'term_id',
+        'replaced_by_id': 'replaced_by',
+        'consider_id': 'consider',
+    }
+    columns = list(column_renames)
+    df = pd.read_csv(path)[columns].rename(columns=column_renames)
+    df.replaced_by = df.replaced_by.mask(df.replaced_by.isna(), df.consider)
+    rows = df.itertuples(index=False)
+    term_groups = itertools.groupby(rows, key=lambda row: row.term_id)
+    mapping = {}
+    for obsolete_id, rows in term_groups:
+        replacement_ids = sorted(
+            list(set(row.replaced_by for row in rows if row.replaced_by is not np.nan))
+        )
+        mapping[obsolete_id] = replacement_ids
+    return mapping
