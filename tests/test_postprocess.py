@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+from phibase_pipeline import loaders
 from phibase_pipeline.postprocess import (
     add_chemical_extensions,
     add_delta_symbol,
@@ -29,6 +30,7 @@ from phibase_pipeline.postprocess import (
     remove_orphaned_genes,
     remove_orphaned_organisms,
     remove_unapproved_sessions,
+    replace_obsolete_phido_terms,
     truncate_phi4_ids,
 )
 
@@ -122,6 +124,64 @@ def export_with_uniprot_data(export_for_xrefs):
         }
     }
     return add_uniprot_data_to_genes(export_for_xrefs, uniprot_gene_data)
+
+
+@pytest.fixture
+def export_with_obsolete_phido_ids():
+    return {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000002',
+                        'type': 'disease_name',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000003',
+                        'type': 'disease_name',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000014',
+                        'type': 'disease_name',
+                    },
+                ],
+            }
+        },
+        'schema_version': 1,
+    }
 
 
 @pytest.fixture
@@ -1230,4 +1290,69 @@ def test_truncate_phi4_ids():
     }
     truncate_phi4_ids(export)
     actual = export
+    assert actual == expected
+
+
+def test_replace_obsolete_phido_terms(export_with_obsolete_phido_ids):
+    obsolete_phido_mapping = loaders.load_obsolete_phido_mapping(
+        DATA_DIR / 'obsolete_phido_mapping.csv'
+    )
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'annotations': [
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000168',
+                        'type': 'disease_name',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000013',
+                        'type': 'disease_name',
+                    },
+                    {
+                        'checked': 'yes',
+                        'conditions': [],
+                        'creation_date': '2019-10-01',
+                        'curator': {'community_curated': False},
+                        'evidence_code': '',
+                        'extension': [],
+                        'figure': '',
+                        'metagenotype': '0123456789abcdef-metagenotype-1',
+                        'phi4_id': [],
+                        'publication': 'PMID:123456789',
+                        'status': 'new',
+                        'term': 'PHIDO:0000211',
+                        'type': 'disease_name',
+                    },
+                ],
+            }
+        },
+        'schema_version': 1,
+    }
+    actual = export_with_obsolete_phido_ids
+    replace_obsolete_phido_terms(
+        export_with_obsolete_phido_ids, obsolete_phido_mapping
+    )
     assert actual == expected

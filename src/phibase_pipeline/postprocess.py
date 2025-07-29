@@ -407,6 +407,37 @@ def truncate_phi4_ids(export):
         annotation['phi4_id'] = truncated_ids
 
 
+def replace_obsolete_phido_terms(export, obsolete_phido_mapping):
+    for session in export['curation_sessions'].values():
+        annotations = session.get('annotations', [])
+        if not annotations:
+            continue
+        annotations_to_keep = []
+        for annotation in annotations:
+            if annotation['type'] != 'disease_name':
+                annotations_to_keep.append(annotation)
+                continue
+            term_id = annotation['term']
+            replacements = obsolete_phido_mapping.get(term_id)
+            if replacements is None:
+                # Do not assume unmapped terms are obsolete
+                annotations_to_keep.append(annotation)
+                continue
+            num_replacements = len(replacements)
+            if num_replacements == 0:
+                # Term is obsolete with no replacement: skip it
+                continue
+            if num_replacements == 1:
+                annotation['term'] = replacements[0]
+                annotations_to_keep.append(annotation)
+            elif num_replacements > 1:
+                for replacement_term in replacements:
+                    new_annotation = annotation.copy()
+                    new_annotation['term'] = replacement_term
+                    annotations_to_keep.append(new_annotation)
+        session['annotations'] = annotations_to_keep
+
+
 def postprocess_phibase_json(export):
     curation_sessions = export['curation_sessions']
     for session in curation_sessions.values():
@@ -421,10 +452,12 @@ def postprocess_phibase_json(export):
 
 def postprocess_combined_json(export):
     chemical_data = loaders.load_chemical_data()
+    obsolete_phido_mapping = loaders.load_obsolete_phido_mapping()
     remove_unapproved_sessions(export)
     remove_curator_orcids(export)
     merge_duplicate_alleles(export['curation_sessions'])
     add_chemical_extensions(export, chemical_data)
+    replace_obsolete_phido_terms(export, obsolete_phido_mapping)
     for session in export['curation_sessions'].values():
         remove_allele_gene_names(session)
         add_delta_symbol(session)
