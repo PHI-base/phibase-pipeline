@@ -567,6 +567,8 @@ def add_feature_uniprot_columns(export, df):
 
 
 def replace_merged_accessions(export, gene_data):
+    if not gene_data:
+        return export
     export_text = json.dumps(export)
     id_mapping = {
         old_id: new_id
