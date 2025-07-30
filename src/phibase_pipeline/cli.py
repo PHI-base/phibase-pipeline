@@ -19,7 +19,7 @@ def parse_args(args):
     parser_phibase5 = subparsers.add_parser('phibase5')
     parser_ensembl = subparsers.add_parser('ensembl')
 
-    shared_args = {
+    common_args = {
         'phibase': {
             'metavar': 'PHIBASE_CSV',
             'type': str,
@@ -31,8 +31,8 @@ def parse_args(args):
             'help': 'the path to the PHI-Canto JSON export file',
         },
     }
-    for subparser in (parser_zenodo, parser_phibase5, parser_ensembl):
-        for arg_name, kwargs in shared_args.items():
+    for subparser in subparsers.choices.values():
+        for arg_name, kwargs in common_args.items():
             subparser.add_argument(arg_name, **kwargs)
 
     for subparser in (parser_zenodo, parser_phibase5):
