@@ -35,13 +35,37 @@ def parse_args(args):
         for arg_name, kwargs in common_args.items():
             subparser.add_argument(arg_name, **kwargs)
 
-    for subparser in (parser_zenodo, parser_phibase5):
-        subparser.add_argument(
-            'output',
-            metavar='OUTFILE',
-            type=str,
-            help='the path to write the combined JSON export file',
-        )
+    parser_zenodo.add_argument(
+        'term_label_mapping_config',
+        metavar='MAPPING_CONFIG',
+        type=str,
+        help='JSON mapping of ontology prefixes to paths',
+    )
+    parser_zenodo.add_argument(
+        'phig_mapping',
+        metavar='PHIG_MAPPING',
+        type=str,
+        help='JSON mapping of UniProtKB IDs to PHI-base gene IDs',
+    )
+    parser_zenodo.add_argument(
+        'output_json',
+        metavar='JSON_OUTPUT',
+        type=str,
+        help='the path to write the combined JSON export file',
+    )
+    parser_zenodo.add_argument(
+        'output_xlsx',
+        metavar='SPREADSHEET_OUTPUT',
+        type=str,
+        help='the path to write the spreadsheet export format',
+    )
+    
+    parser_phibase5.add_argument(
+        'output',
+        metavar='OUTFILE',
+        type=str,
+        help='the path to write the combined JSON export file',
+    )
 
     parser_ensembl.add_argument(
         'uniprot_data',

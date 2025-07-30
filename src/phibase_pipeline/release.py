@@ -9,7 +9,7 @@ or for uploading to the Zenodo repository or Ensembl.
 
 import json
 
-from phibase_pipeline import ensembl, loaders, migrate, postprocess, validate
+from phibase_pipeline import ensembl, loaders, migrate, postprocess, robot, spreadsheet, validate
 
 
 def write_json_export(path, canto_json):
@@ -20,10 +20,24 @@ def write_json_export(path, canto_json):
 def release_to_zenodo(args):
     phi_df = loaders.load_phibase_csv(args.phibase)
     phicanto_json = loaders.load_json(args.phicanto)
+    # JSON export format
     canto_json = migrate.make_combined_export(phi_df, phicanto_json)
     canto_json = postprocess.add_cross_references(canto_json)
     validate.validate_export(canto_json)
-    write_json_export(args.output, canto_json)
+    write_json_export(args.output_json, canto_json)
+    # Spreadsheet export format
+    term_label_mapping_config = loaders.load_json(args.term_label_mapping_config)
+    term_label_mapping = robot.get_ontology_terms_and_labels(
+        term_label_mapping_config
+    )
+    spreadsheet.make_spreadsheet_from_export(
+        export=canto_json,
+        # TODO: Pass this argument from somewhere
+        gene_data=None,
+        phig_mapping=args.phig_mapping,
+        term_label_mapping=term_label_mapping,
+        output_path=args.output_xlsx,
+    )
 
 
 def release_to_phibase5(args):
