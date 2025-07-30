@@ -67,10 +67,10 @@ def add_high_level_terms(export):
     for session in export['curation_sessions'].values():
         annotations = session.get('annotations', [])
         for annotation in annotations:
+            annotation['high_level_terms'] = []
             high_level_terms = set()
             term = annotation.get('term')
             if not term:
-                annotation['high_level_terms'] = []
                 continue
             high_level_term = term_mapping.get(term)
             if high_level_term:
