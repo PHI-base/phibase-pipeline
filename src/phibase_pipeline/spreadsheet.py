@@ -644,3 +644,16 @@ def make_spreadsheet_file(spreadsheet_dfs, output_path):
     with pd.ExcelWriter(output_path) as writer:
         for sheet_name, df in spreadsheet_dfs.items():
             df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+
+def make_spreadsheet_from_export(
+    export,
+    gene_data,
+    phig_mapping,
+    term_label_mapping,
+    output_path,
+):
+    spreadsheet_dfs = make_spreadsheet_dataframes(
+        export, gene_data, phig_mapping, term_label_mapping
+    )
+    make_spreadsheet_file(spreadsheet_dfs, output_path)
