@@ -43,9 +43,7 @@ def add_high_level_terms(export):
         'GO:0140423',
         'GO:0141017',
     }
-    effector_mapping = {
-        term_id: 'Effector' for term_id in effector_term_ids
-    }
+    effector_mapping = {term_id: 'Effector' for term_id in effector_term_ids}
     phenotype_mapping = {
         'PHIPO:0000022': 'Resistance to chemical',
         'PHIPO:0000021': 'Sensitivity to chemical',
