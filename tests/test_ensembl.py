@@ -168,12 +168,12 @@ def uniprot_xref_dataframe():
 
 @pytest.fixture
 def phig_uniprot_mapping():
-    return loaders.read_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
+    return loaders.load_phig_uniprot_mapping(TEST_DATA_DIR / 'phig_uniprot_mapping.csv')
 
 
 @pytest.fixture
 def chebi_mapping():
-    return loaders.read_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
+    return loaders.load_phipo_chebi_mapping(ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv')
 
 
 @pytest.fixture

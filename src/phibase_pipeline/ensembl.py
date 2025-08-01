@@ -675,8 +675,8 @@ def write_ensembl_exports(
     dir_path = Path(dir_path)
     kwargs = {
         'uniprot_data': uniprot_data,
-        'phig_mapping': loaders.read_phig_uniprot_mapping(),
-        'chebi_mapping': loaders.read_phipo_chebi_mapping(),
+        'phig_mapping': loaders.load_phig_uniprot_mapping(),
+        'chebi_mapping': loaders.load_phipo_chebi_mapping(),
         'in_vitro_growth_classifier': loaders.load_in_vitro_growth_classifier(),
         'phenotype_mapping': loaders.load_phenotype_column_mapping(),
         'disease_mapping': loaders.load_disease_column_mapping(),

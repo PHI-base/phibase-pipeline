@@ -15,12 +15,12 @@ DATA_DIR = Path(__file__).parent / 'data'
 SCHEMA_DIR = Path(__file__).parent / 'schema'
 
 
-def read_phig_uniprot_mapping(path=None):
+def load_phig_uniprot_mapping(path=None):
     path = DATA_DIR / 'phig_uniprot_mapping.csv' if path is None else path
     return pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
 
 
-def read_phipo_chebi_mapping(path=None):
+def load_phipo_chebi_mapping(path=None):
     path = DATA_DIR / 'phipo_chebi_mapping.csv' if path is None else path
     return (
         pd.read_csv(path, index_col='phipo_id')

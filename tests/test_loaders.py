@@ -65,7 +65,7 @@ def chemical_data():
     }
 
 
-def test_read_phig_uniprot_mapping():
+def test_load_phig_uniprot_mapping():
     path = TEST_DATA_DIR / 'phig_uniprot_mapping.csv'
     expected = {
         'A0A059ZHI3': 'PHIG:3546',
@@ -74,13 +74,13 @@ def test_read_phig_uniprot_mapping():
         'I1RAE5': 'PHIG:11',
         'G4MXR2': 'PHIG:294',
     }
-    actual = loaders.read_phig_uniprot_mapping(path)
+    actual = loaders.load_phig_uniprot_mapping(path)
     assert actual == expected
 
 
-def test_read_phipo_chebi_mapping():
+def test_load_phipo_chebi_mapping():
     path = ENSEMBL_DATA_DIR / 'phipo_chebi_mapping.csv'
-    actual = loaders.read_phipo_chebi_mapping(path)
+    actual = loaders.load_phipo_chebi_mapping(path)
     expected = {
         'PHIPO:0000647': {'id': 'CHEBI:39214', 'label': 'abamectin'},
         'PHIPO:0000534': {'id': 'CHEBI:27666', 'label': 'actinomycin D'},
@@ -442,8 +442,8 @@ def test_all_default_paths():
         (loaders.load_phenotype_column_mapping, ('phenotype_mapping.csv',)),
         (loaders.load_phipo_mapping, ('phipo.csv',)),
         (loaders.load_tissue_replacements, ('bto_renames.csv',)),
-        (loaders.read_phig_uniprot_mapping, ('phig_uniprot_mapping.csv',)),
-        (loaders.read_phipo_chebi_mapping, ('phipo_chebi_mapping.csv',)),
+        (loaders.load_phig_uniprot_mapping, ('phig_uniprot_mapping.csv',)),
+        (loaders.load_phipo_chebi_mapping, ('phipo_chebi_mapping.csv',)),
         (loaders.load_obsolete_phido_mapping, ('obsolete_phido_mapping.csv',))
     )
     loaders_and_args = tuple(
