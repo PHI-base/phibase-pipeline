@@ -376,35 +376,73 @@ def add_cross_references(export):
     return export
 
 
-def truncate_phi4_ids(export):
-    """Truncate lists of PHI-base 4 IDs that are too long to be loaded into
-    the database used by the PHI-base 5 upload tool."""
+def truncate_long_values(export):
+    """Truncate list values that are too long to be loaded into the
+    database used by the PHI-base 5 upload tool."""
 
-    def yield_annotations_with_phi4_ids(export):
-        for session in export['curation_sessions'].values():
-            for annotation in session.get('annotations', []):
-                phi4_ids = annotation.get('phi4_id', [])
-                if phi4_ids:
-                    yield annotation
-
-    def take_until_string_length(iterable, length, sep_length=0):
+    def truncate_list(lst, length, sep_length=0):
+        # Assume ID lists shorter than this are always under
+        # the limit. This number can probably be higher.
+        if len(lst) < 2:
+            return lst
         running_length = 0
-        for item in iterable:
+        truncated_list = []
+        for item in lst:
             running_length += len(item)
             if running_length > length:
                 break
             # Add separator to the count after the length check, because
             # the concatenated list of IDs doesn't end with a separator.
             running_length += sep_length
-            yield item
+            truncated_list.append(item)
+        return truncated_list
 
-    sep = '|'  # separator used by data upload tool
-    length_limit = 255  # length limit in database
-    sep_length = len(sep)
-    for annotation in yield_annotations_with_phi4_ids(export):
-        phi4_ids = annotation['phi4_id']
-        truncated_ids = list(take_until_string_length(phi4_ids, length_limit, sep_length))
-        annotation['phi4_id'] = truncated_ids
+    def truncate_ensembl_ids(export, length_limit, sep_length):
+        keys = ('ensembl_gene_id', 'ensembl_sequence_id')
+        for session in export['curation_sessions'].values():
+            genes = session.get('genes', {}).values()
+            for gene in genes:
+                uniprot_data = gene['uniprot_data']
+                for key in keys:
+                    id_list = uniprot_data.get(key, [])
+                    truncated_ids = truncate_list(id_list, length_limit, sep_length)
+                    gene['uniprot_data'][key] = truncated_ids
+
+    def truncate_allele_descriptions(export, length_limit, sep_length):
+        description_sep = '; '
+        delta = '\N{GREEK CAPITAL LETTER DELTA}'
+        for session in export['curation_sessions'].values():
+            alleles = session.get('alleles', {}).values()
+            for allele in alleles:
+                description = allele.get('description', '')
+                # The data loading script escapes non latin-1 characters as
+                # HTML entities, so we need to account for this.
+                escaped_description = description.replace(delta, '&Delta;')
+                if len(escaped_description) <= length_limit:
+                    continue
+                description_list = escaped_description.split(description_sep)
+                truncated_description = description_sep.join(
+                    truncate_list(description_list, length_limit, sep_length)
+                )
+                # Append an ellipsis to indicate truncation.
+                final_description = truncated_description.replace('&Delta;', delta) + ' …'
+                allele['description'] = final_description
+
+    def truncate_phi4_ids(export, length_limit, sep_length):
+        for session in export['curation_sessions'].values():
+            for annotation in session.get('annotations', []):
+                phi4_ids = annotation.get('phi4_id')
+                if phi4_ids:
+                    annotation['phi4_id'] = truncate_list(
+                        phi4_ids, length_limit, sep_length
+                    )
+
+    LENGTH_LIMIT = 255  # length limit in database
+    SEP_LENGTH = len('|')  # separator used by data upload tool
+    args = (export, LENGTH_LIMIT, SEP_LENGTH)
+    truncate_ensembl_ids(*args)
+    truncate_allele_descriptions(*args)
+    truncate_phi4_ids(*args)
 
 
 def replace_obsolete_phido_terms(export, obsolete_phido_mapping):

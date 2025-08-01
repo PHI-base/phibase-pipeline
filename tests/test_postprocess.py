@@ -31,7 +31,7 @@ from phibase_pipeline.postprocess import (
     remove_orphaned_organisms,
     remove_unapproved_sessions,
     replace_obsolete_phido_terms,
-    truncate_phi4_ids,
+    truncate_long_values,
 )
 
 DATA_DIR = Path(__file__).parent / 'data'
@@ -1255,7 +1255,7 @@ def test_get_all_pmids_in_export(export_for_xrefs):
     assert actual == expected
 
 
-def test_truncate_phi4_ids():
+def test_truncate_long_values_phi4_id():
     phi4_ids_below_limit = ['PHI:1', 'PHI:2']
     phi4_ids_above_limit = [f'PHI:{n}' for n in range(1, 50)]
     phi4_ids_truncated = [f'PHI:{n}' for n in range(1, 38)]
@@ -1281,14 +1281,161 @@ def test_truncate_phi4_ids():
             '0123456789abcdef': {
                 'annotations': [
                     {},
-                    {'phi4_id': ['PHI:1', 'PHI:2']},
+                    {'phi4_id': phi4_ids_below_limit},
                     {'phi4_id': phi4_ids_truncated},
                     {'phi4_id': phi4_ids_at_limit},
                 ]
             }
         }
     }
-    truncate_phi4_ids(export)
+    truncate_long_values(export)
+    actual = export
+    assert actual == expected
+
+
+def test_truncate_long_values_description():
+    export = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'alleles': {
+                    '0123456789abcdef-allele-1': {
+                        "allele_type": "other",
+                        "description": "S151D (ΔMosom1/MoSOM1Δ151); S188D (ΔMosom1/MoSOM1Δ188); S512D (ΔMosom1/MoSOM1Δ512); S603D (ΔMosom1/MoSOM1Δ603); S629D (ΔMosom1/MoSOM1Δ629); S642D(ΔMosom1/MoSOM1Δ642); SOM1S228A-GFP; SOM1S227E-GFP; SOM1S228E-GFP; ΔMosom1/MoSOM1S227E (S7E -1)",
+                        "gene": "Magnaporthe oryzae G4MR98",
+                        "name": "Som1",
+                        "primary_identifier": "G4MR98:0123456789abcdef-1",
+                        "synonyms": [],
+                    }
+                }
+            }
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'alleles': {
+                    '0123456789abcdef-allele-1': {
+                        "allele_type": "other",
+                        "description": "S151D (ΔMosom1/MoSOM1Δ151); S188D (ΔMosom1/MoSOM1Δ188); S512D (ΔMosom1/MoSOM1Δ512); S603D (ΔMosom1/MoSOM1Δ603); S629D (ΔMosom1/MoSOM1Δ629); S642D(ΔMosom1/MoSOM1Δ642); SOM1S228A-GFP …",
+                        "gene": "Magnaporthe oryzae G4MR98",
+                        "name": "Som1",
+                        "primary_identifier": "G4MR98:0123456789abcdef-1",
+                        "synonyms": [],
+                    }
+                }
+            }
+        }
+    }
+    truncate_long_values(export)
+    actual = export
+    assert actual == expected
+
+
+def test_truncate_long_values_ensembl_ids():
+    export = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'genes': {
+                    "Triticum aestivum Q7X9A6": {
+                        "organism": "Triticum aestivum",
+                        "uniprot_data": {
+                            "dbref_gene_id": "543078",
+                            "ensembl_gene_id": [
+                                "TraesARI2D03G01168670",
+                                "TraesCAD_scaffold_092989_01G000200",
+                                "TraesCLE_scaffold_085676_01G000200",
+                                "TraesCS2D02G214700",
+                                "TraesCS2D03G0451200",
+                                "TraesJAG2D03G01159270",
+                                "TraesJUL2D03G01159000",
+                                "TraesKAR2D01G0132480",
+                                "TraesLAC2B03G00896920",
+                                "TraesLAC2D03G01104360",
+                                "TraesLDM2D03G01153380",
+                                "TraesMAC2D03G01151020",
+                                "TraesNOR2D03G01168840",
+                                "TraesPARA_EIv1.0_0673320",
+                                "TraesRN2D0100482800",
+                                "TraesROB_scaffold_090335_01G000200",
+                                "TraesSTA2D03G01141500",
+                                "TraesSYM2D03G01167240",
+                                "TraesWEE_scaffold_091601_01G000200",
+                            ],
+                            "ensembl_sequence_id": [
+                                "TraesARI2D03G01168670.1",
+                                "TraesCAD_scaffold_092989_01G000200.1",
+                                "TraesCLE_scaffold_085676_01G000200.1",
+                                "TraesCS2D02G214700.1",
+                                "TraesCS2D03G0451200.1.CDS",
+                                "TraesJAG2D03G01159270.1",
+                                "TraesJUL2D03G01159000.1",
+                                "cds.TraesKAR2D01G0132480.1",
+                                "TraesLAC2B03G00896920.1",
+                                "TraesLAC2D03G01104360.1",
+                                "TraesLDM2D03G01153380.1",
+                                "TraesMAC2D03G01151020.1",
+                                "TraesNOR2D03G01168840.1",
+                                "TraesPARA_EIv1.0_0673320.1.CDS",
+                                "TraesRN2D0100482800.1",
+                                "TraesROB_scaffold_090335_01G000200.1",
+                                "TraesSTA2D03G01141500.1",
+                                "TraesSYM2D03G01167240.1",
+                                "TraesWEE_scaffold_091601_01G000200.1",
+                            ],
+                            "name": "petC",
+                            "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                            "strain": "cv. Chinese Spring",
+                            "uniprot_id": "Q7X9A6",
+                        },
+                        "uniquename": "Q7X9A6",
+                    }
+                }
+            }
+        }
+    }
+    expected = {
+        'curation_sessions': {
+            '0123456789abcdef': {
+                'genes': {
+                    "Triticum aestivum Q7X9A6": {
+                        "organism": "Triticum aestivum",
+                        "uniprot_data": {
+                            "dbref_gene_id": "543078",
+                            "ensembl_gene_id": [
+                                "TraesARI2D03G01168670",
+                                "TraesCAD_scaffold_092989_01G000200",
+                                "TraesCLE_scaffold_085676_01G000200",
+                                "TraesCS2D02G214700",
+                                "TraesCS2D03G0451200",
+                                "TraesJAG2D03G01159270",
+                                "TraesJUL2D03G01159000",
+                                "TraesKAR2D01G0132480",
+                                "TraesLAC2B03G00896920",
+                                "TraesLAC2D03G01104360",
+                            ],
+                            "ensembl_sequence_id": [
+                                "TraesARI2D03G01168670.1",
+                                "TraesCAD_scaffold_092989_01G000200.1",
+                                "TraesCLE_scaffold_085676_01G000200.1",
+                                "TraesCS2D02G214700.1",
+                                "TraesCS2D03G0451200.1.CDS",
+                                "TraesJAG2D03G01159270.1",
+                                "TraesJUL2D03G01159000.1",
+                                "cds.TraesKAR2D01G0132480.1",
+                                "TraesLAC2B03G00896920.1",
+                            ],
+                            "name": "petC",
+                            "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                            "strain": "cv. Chinese Spring",
+                            "uniprot_id": "Q7X9A6",
+                        },
+                        "uniquename": "Q7X9A6",
+                    }
+                }
+            }
+        }
+    }
+    truncate_long_values(export)
     actual = export
     assert actual == expected
 
