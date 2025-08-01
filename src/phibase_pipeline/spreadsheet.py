@@ -592,8 +592,10 @@ def replace_merged_accessions(export, gene_data):
 def add_phig_ids(export, phig_lookup):
     for session in export['curation_sessions'].values():
         for gene in session.get('genes', {}).values():
-            uniprot_id = gene['uniquename']
-            gene['phig_id'] = phig_lookup.get(uniprot_id)
+            uniprot_id_old = gene['uniquename']
+            uniprot_id_new = gene['uniprot_data']['uniprot_id']
+            phig_id = phig_lookup.get(uniprot_id_new) or phig_lookup.get(uniprot_id_old)
+            gene['phig_id'] = phig_id
 
 
 def make_spreadsheet_dataframes(
