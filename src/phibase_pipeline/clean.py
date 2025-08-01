@@ -180,6 +180,8 @@ def clean_phibase_csv(phi_df):
     )
     # Fix separators in disease column
     phi_df.disease = phi_df.disease.str.replace(',', ';')
+    # Replace an invalid PubMed ID
+    phi_df.pmid = phi_df.pmid.replace(24056836, 23881098)
 
     return phi_df
 
