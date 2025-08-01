@@ -1249,7 +1249,8 @@ def test_get_all_uniprot_ids_in_export(export_for_xrefs):
 def test_get_all_pmids_in_export(export_for_xrefs):
     expected = {'12345678', '1'}
     export_for_xrefs = copy.deepcopy(export_for_xrefs)
-    publications = export_for_xrefs['curation_sessions']['0123456789abcdef']['publications']
+    test_session = export_for_xrefs['curation_sessions']['0123456789abcdef']
+    publications = test_session['publications']
     publications['PMID:1'] = {}
     actual = get_all_pmids_in_export(export_for_xrefs)
     assert actual == expected
@@ -1499,7 +1500,5 @@ def test_replace_obsolete_phido_terms(export_with_obsolete_phido_ids):
         'schema_version': 1,
     }
     actual = export_with_obsolete_phido_ids
-    replace_obsolete_phido_terms(
-        export_with_obsolete_phido_ids, obsolete_phido_mapping
-    )
+    replace_obsolete_phido_terms(export_with_obsolete_phido_ids, obsolete_phido_mapping)
     assert actual == expected
