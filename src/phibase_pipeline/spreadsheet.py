@@ -575,20 +575,6 @@ def add_feature_uniprot_columns(export, df):
     return df  # Return the DataFrame unmodified if no cases match
 
 
-def replace_merged_accessions(export, gene_data):
-    if not gene_data:
-        return export
-    export_text = json.dumps(export)
-    id_mapping = {
-        old_id: new_id
-        for old_id, gene in gene_data.items()
-        if old_id != (new_id := gene['uniprot_id'])
-    }
-    pattern = re.compile(f"({'|'.join(id_mapping.keys())})")
-    export_text = pattern.sub(lambda m: id_mapping[m.group(0)], export_text)
-    return json.loads(export_text)
-
-
 def add_phig_ids(export, phig_lookup):
     for session in export['curation_sessions'].values():
         for gene in session.get('genes', {}).values():
@@ -600,11 +586,9 @@ def add_phig_ids(export, phig_lookup):
 
 def make_spreadsheet_dataframes(
     export,
-    gene_data,
     phig_mapping,
     term_label_mapping,
 ):
-    export = replace_merged_accessions(export, gene_data)
     add_high_level_terms(export)
     add_phig_ids(export, phig_mapping)
     dfs = {
@@ -661,12 +645,11 @@ def make_spreadsheet_file(spreadsheet_dfs, output_path):
 
 def make_spreadsheet_from_export(
     export,
-    gene_data,
     phig_mapping,
     term_label_mapping,
     output_path,
 ):
     spreadsheet_dfs = make_spreadsheet_dataframes(
-        export, gene_data, phig_mapping, term_label_mapping
+        export, phig_mapping, term_label_mapping
     )
     make_spreadsheet_file(spreadsheet_dfs, output_path)

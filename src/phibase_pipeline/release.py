@@ -32,8 +32,6 @@ def release_to_zenodo(args):
     )
     spreadsheet.make_spreadsheet_from_export(
         export=canto_json,
-        # TODO: Pass this argument from somewhere
-        gene_data=None,
         phig_mapping=args.phig_mapping,
         term_label_mapping=term_label_mapping,
         output_path=args.output_xlsx,
