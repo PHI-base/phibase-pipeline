@@ -42,12 +42,6 @@ def parse_args(args):
         help='JSON mapping of ontology prefixes to paths',
     )
     parser_zenodo.add_argument(
-        'phig_mapping',
-        metavar='PHIG_MAPPING',
-        type=str,
-        help='JSON mapping of UniProtKB IDs to PHI-base gene IDs',
-    )
-    parser_zenodo.add_argument(
         'output_json',
         metavar='JSON_OUTPUT',
         type=str,
