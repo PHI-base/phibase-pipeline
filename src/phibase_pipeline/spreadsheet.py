@@ -150,19 +150,30 @@ def get_gene_high_level_terms(gene_id, session):
 
 
 def get_entry_summary_table(export):
+
+    def get_empty_uniprot_data(uniprot_id):
+        return {
+            'dbref_gene_id': None,
+            'ensembl_gene_id': None,
+            'ensembl_sequence_id': None,
+            'name': None,
+            'product': None,
+            'strain': None,
+            'uniprot_id': uniprot_id,
+        }
+
     maybe_join = lambda x: x if x is None else ('; '.join(x) or None)
     records = []
     for session in export['curation_sessions'].values():
-        genes = session.get('genes')
-        if not genes:
-            continue
+        genes = session.get('genes', {})
         for gene_id, gene in genes.items():
-            uniprot_id = gene['uniquename']
-            phig_id = gene['phig_id']
-            uniprot_data = gene.get('uniprot_data')
-            if not uniprot_data:
-                continue  # Assume accession is obsolete
+            uniprot_id_original = gene['uniquename']
+            uniprot_data = gene.get(
+                'uniprot_data', get_empty_uniprot_data(uniprot_id_original)
+            )
+            uniprot_id = uniprot_data['uniprot_id']
             gene_name = uniprot_data['name']
+            phig_id = gene['phig_id']
             high_level_terms = get_gene_high_level_terms(gene_id, session)
             records.append(
                 {
