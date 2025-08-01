@@ -304,7 +304,7 @@ def get_strain_table(export):
     for session in export['curation_sessions'].values():
         organisms = session['organisms']
         for gene_id, gene in session.get('genes', {}).items():
-            uniprot_id = gene['uniquename']
+            uniprot_id = gene['uniprot_data']['uniprot_id']
             taxid = get_taxid_of_gene(gene, organisms)
             organism = organisms[str(taxid)]
             species = organism['full_name']
@@ -371,7 +371,7 @@ def get_interactions_table(export):
         metagenotypes = session.get('metagenotypes', {})
         organisms = session['organisms']
         for gene_id_a, gene_a in genes.items():
-            uniprot_a = gene_a['uniquename']
+            uniprot_a = gene_a['uniprot_data']['uniprot_id']
             taxid_a = get_taxid_of_gene(gene_a, organisms)
             organism_a = organisms[str(taxid_a)]
             species_a = organism_a['full_name']
@@ -391,7 +391,7 @@ def get_interactions_table(export):
                     interacting_genes = [None]
                 for gene_id_b in interacting_genes:
                     gene_b = genes.get(gene_id_b)
-                    uniprot_b = gene_b['uniquename'] if gene_b else None
+                    uniprot_b = gene_b['uniprot_data']['uniprot_id'] if gene_b else None
                     interacting_records.append(
                         {
                             'taxid_a': taxid_a,
@@ -508,7 +508,7 @@ def get_genotype_uniprot_column(export, genotype_ids):
         session = curation_sessions[session_id]
         genotype = session['genotypes'][gid]
         genes = iter_genes_of_genotype(session, genotype)
-        row = '; '.join(gene['uniquename'] for _, gene in genes)
+        row = '; '.join(gene['uniprot_data']['uniprot_id'] for _, gene in genes)
         rows.append(row)
     return pd.Series(rows, index=genotype_ids.index, name='uniprot_id')
 
@@ -527,7 +527,7 @@ def get_metagenotype_uniprot_column(export, metagenotype_ids):
         metagenotype = session['metagenotypes'][mid]
         genes = iter_genes_of_metagenotype(session, metagenotype)
         for _, gene, role in genes:
-            uniprot_id = gene['uniquename']
+            uniprot_id = gene['uniprot_data']['uniprot_id']
             if role == 'pathogen':
                 pathogen_uniprot_ids.append(uniprot_id)
             elif role == 'host':
