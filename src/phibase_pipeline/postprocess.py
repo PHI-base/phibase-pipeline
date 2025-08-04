@@ -404,7 +404,9 @@ def truncate_long_values(export):
             for gene in genes:
                 uniprot_data = gene['uniprot_data']
                 for key in keys:
-                    id_list = uniprot_data.get(key, [])
+                    id_list = uniprot_data.get(key)
+                    if id_list is None:
+                        continue
                     truncated_ids = truncate_list(id_list, length_limit, sep_length)
                     gene['uniprot_data'][key] = truncated_ids
 
