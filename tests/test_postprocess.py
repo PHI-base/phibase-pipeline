@@ -1332,110 +1332,224 @@ def test_truncate_long_values_description():
     assert actual == expected
 
 
-def test_truncate_long_values_ensembl_ids():
-    export = {
-        'curation_sessions': {
-            '0123456789abcdef': {
-                'genes': {
-                    "Triticum aestivum Q7X9A6": {
-                        "organism": "Triticum aestivum",
-                        "uniprot_data": {
-                            "dbref_gene_id": "543078",
-                            "ensembl_gene_id": [
-                                "TraesARI2D03G01168670",
-                                "TraesCAD_scaffold_092989_01G000200",
-                                "TraesCLE_scaffold_085676_01G000200",
-                                "TraesCS2D02G214700",
-                                "TraesCS2D03G0451200",
-                                "TraesJAG2D03G01159270",
-                                "TraesJUL2D03G01159000",
-                                "TraesKAR2D01G0132480",
-                                "TraesLAC2B03G00896920",
-                                "TraesLAC2D03G01104360",
-                                "TraesLDM2D03G01153380",
-                                "TraesMAC2D03G01151020",
-                                "TraesNOR2D03G01168840",
-                                "TraesPARA_EIv1.0_0673320",
-                                "TraesRN2D0100482800",
-                                "TraesROB_scaffold_090335_01G000200",
-                                "TraesSTA2D03G01141500",
-                                "TraesSYM2D03G01167240",
-                                "TraesWEE_scaffold_091601_01G000200",
-                            ],
-                            "ensembl_sequence_id": [
-                                "TraesARI2D03G01168670.1",
-                                "TraesCAD_scaffold_092989_01G000200.1",
-                                "TraesCLE_scaffold_085676_01G000200.1",
-                                "TraesCS2D02G214700.1",
-                                "TraesCS2D03G0451200.1.CDS",
-                                "TraesJAG2D03G01159270.1",
-                                "TraesJUL2D03G01159000.1",
-                                "cds.TraesKAR2D01G0132480.1",
-                                "TraesLAC2B03G00896920.1",
-                                "TraesLAC2D03G01104360.1",
-                                "TraesLDM2D03G01153380.1",
-                                "TraesMAC2D03G01151020.1",
-                                "TraesNOR2D03G01168840.1",
-                                "TraesPARA_EIv1.0_0673320.1.CDS",
-                                "TraesRN2D0100482800.1",
-                                "TraesROB_scaffold_090335_01G000200.1",
-                                "TraesSTA2D03G01141500.1",
-                                "TraesSYM2D03G01167240.1",
-                                "TraesWEE_scaffold_091601_01G000200.1",
-                            ],
-                            "name": "petC",
-                            "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
-                            "strain": "cv. Chinese Spring",
-                            "uniprot_id": "Q7X9A6",
-                        },
-                        "uniquename": "Q7X9A6",
+@pytest.mark.parametrize(
+    'export,expected',
+    [
+        pytest.param(
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": [
+                                        "TraesARI2D03G01168670",
+                                        "TraesCAD_scaffold_092989_01G000200",
+                                        "TraesCLE_scaffold_085676_01G000200",
+                                        "TraesCS2D02G214700",
+                                        "TraesCS2D03G0451200",
+                                        "TraesJAG2D03G01159270",
+                                        "TraesJUL2D03G01159000",
+                                        "TraesKAR2D01G0132480",
+                                        "TraesLAC2B03G00896920",
+                                        "TraesLAC2D03G01104360",
+                                        "TraesLDM2D03G01153380",
+                                        "TraesMAC2D03G01151020",
+                                        "TraesNOR2D03G01168840",
+                                        "TraesPARA_EIv1.0_0673320",
+                                        "TraesRN2D0100482800",
+                                        "TraesROB_scaffold_090335_01G000200",
+                                        "TraesSTA2D03G01141500",
+                                        "TraesSYM2D03G01167240",
+                                        "TraesWEE_scaffold_091601_01G000200",
+                                    ],
+                                    "ensembl_sequence_id": [
+                                        "TraesARI2D03G01168670.1",
+                                        "TraesCAD_scaffold_092989_01G000200.1",
+                                        "TraesCLE_scaffold_085676_01G000200.1",
+                                        "TraesCS2D02G214700.1",
+                                        "TraesCS2D03G0451200.1.CDS",
+                                        "TraesJAG2D03G01159270.1",
+                                        "TraesJUL2D03G01159000.1",
+                                        "cds.TraesKAR2D01G0132480.1",
+                                        "TraesLAC2B03G00896920.1",
+                                        "TraesLAC2D03G01104360.1",
+                                        "TraesLDM2D03G01153380.1",
+                                        "TraesMAC2D03G01151020.1",
+                                        "TraesNOR2D03G01168840.1",
+                                        "TraesPARA_EIv1.0_0673320.1.CDS",
+                                        "TraesRN2D0100482800.1",
+                                        "TraesROB_scaffold_090335_01G000200.1",
+                                        "TraesSTA2D03G01141500.1",
+                                        "TraesSYM2D03G01167240.1",
+                                        "TraesWEE_scaffold_091601_01G000200.1",
+                                    ],
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
                     }
                 }
-            }
-        }
-    }
-    expected = {
-        'curation_sessions': {
-            '0123456789abcdef': {
-                'genes': {
-                    "Triticum aestivum Q7X9A6": {
-                        "organism": "Triticum aestivum",
-                        "uniprot_data": {
-                            "dbref_gene_id": "543078",
-                            "ensembl_gene_id": [
-                                "TraesARI2D03G01168670",
-                                "TraesCAD_scaffold_092989_01G000200",
-                                "TraesCLE_scaffold_085676_01G000200",
-                                "TraesCS2D02G214700",
-                                "TraesCS2D03G0451200",
-                                "TraesJAG2D03G01159270",
-                                "TraesJUL2D03G01159000",
-                                "TraesKAR2D01G0132480",
-                                "TraesLAC2B03G00896920",
-                                "TraesLAC2D03G01104360",
-                            ],
-                            "ensembl_sequence_id": [
-                                "TraesARI2D03G01168670.1",
-                                "TraesCAD_scaffold_092989_01G000200.1",
-                                "TraesCLE_scaffold_085676_01G000200.1",
-                                "TraesCS2D02G214700.1",
-                                "TraesCS2D03G0451200.1.CDS",
-                                "TraesJAG2D03G01159270.1",
-                                "TraesJUL2D03G01159000.1",
-                                "cds.TraesKAR2D01G0132480.1",
-                                "TraesLAC2B03G00896920.1",
-                            ],
-                            "name": "petC",
-                            "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
-                            "strain": "cv. Chinese Spring",
-                            "uniprot_id": "Q7X9A6",
-                        },
-                        "uniquename": "Q7X9A6",
+            },
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": [
+                                        "TraesARI2D03G01168670",
+                                        "TraesCAD_scaffold_092989_01G000200",
+                                        "TraesCLE_scaffold_085676_01G000200",
+                                        "TraesCS2D02G214700",
+                                        "TraesCS2D03G0451200",
+                                        "TraesJAG2D03G01159270",
+                                        "TraesJUL2D03G01159000",
+                                        "TraesKAR2D01G0132480",
+                                        "TraesLAC2B03G00896920",
+                                        "TraesLAC2D03G01104360",
+                                    ],
+                                    "ensembl_sequence_id": [
+                                        "TraesARI2D03G01168670.1",
+                                        "TraesCAD_scaffold_092989_01G000200.1",
+                                        "TraesCLE_scaffold_085676_01G000200.1",
+                                        "TraesCS2D02G214700.1",
+                                        "TraesCS2D03G0451200.1.CDS",
+                                        "TraesJAG2D03G01159270.1",
+                                        "TraesJUL2D03G01159000.1",
+                                        "cds.TraesKAR2D01G0132480.1",
+                                        "TraesLAC2B03G00896920.1",
+                                    ],
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
                     }
                 }
-            }
-        }
-    }
+            },
+            id='too_long',
+        ),
+        pytest.param(
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": [
+                                        "TraesARI2D03G01168670",
+                                        "TraesCAD_scaffold_092989_01G000200",
+                                        "TraesCLE_scaffold_085676_01G000200",
+                                    ],
+                                    "ensembl_sequence_id": [
+                                        "TraesARI2D03G01168670.1",
+                                        "TraesCAD_scaffold_092989_01G000200.1",
+                                        "TraesCLE_scaffold_085676_01G000200.1",
+                                    ],
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": [
+                                        "TraesARI2D03G01168670",
+                                        "TraesCAD_scaffold_092989_01G000200",
+                                        "TraesCLE_scaffold_085676_01G000200",
+                                    ],
+                                    "ensembl_sequence_id": [
+                                        "TraesARI2D03G01168670.1",
+                                        "TraesCAD_scaffold_092989_01G000200.1",
+                                        "TraesCLE_scaffold_085676_01G000200.1",
+                                    ],
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
+                    }
+                }
+            },
+            id='short',
+        ),
+        pytest.param(
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": None,
+                                    "ensembl_sequence_id": None,
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                'curation_sessions': {
+                    '0123456789abcdef': {
+                        'genes': {
+                            "Triticum aestivum Q7X9A6": {
+                                "organism": "Triticum aestivum",
+                                "uniprot_data": {
+                                    "dbref_gene_id": "543078",
+                                    "ensembl_gene_id": None,
+                                    "ensembl_sequence_id": None,
+                                    "name": "petC",
+                                    "product": "Cytochrome b6-f complex iron-sulfur subunit, chloroplastic",
+                                    "strain": "cv. Chinese Spring",
+                                    "uniprot_id": "Q7X9A6",
+                                },
+                                "uniquename": "Q7X9A6",
+                            }
+                        }
+                    }
+                }
+            },
+            id='none_lists',
+        ),
+    ],
+)
+def test_truncate_long_values_ensembl_ids(export, expected):
     truncate_long_values(export)
     actual = export
     assert actual == expected
