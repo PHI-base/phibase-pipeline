@@ -410,16 +410,17 @@ def get_interactions_table(export):
                         gene_b = session['genes'][annotation['gene']]
                     else:
                         continue
+                    uniprot_b = gene_b['uniprot_data']['uniprot_id']
                     taxid_b = get_taxid_of_gene(gene_b, organisms)
-                    species_a, uniprot_a = gene_id_a.rsplit(' ', maxsplit=1)
-                    species_b, uniprot_b = gene_id_b.rsplit(' ', maxsplit=1)
+                    organism_b = organisms[str(taxid_b)]
+                    species_b = organism_b['full_name']
                     interacting_records.append(
                         {
                             'taxid_a': taxid_a,
-                            'species_a': uniprot_a,
-                            'uniprot_a': gene_id_a,
+                            'species_a': species_a,
+                            'uniprot_a': uniprot_a,
                             'taxid_b': taxid_b,
-                            'species_b': gene_id_b,
+                            'species_b': species_b,
                             'uniprot_b': uniprot_b,
                         }
                     )
