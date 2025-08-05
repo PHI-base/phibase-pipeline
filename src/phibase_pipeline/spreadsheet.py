@@ -590,20 +590,64 @@ def make_spreadsheet_dataframes(
     phig_mapping,
     term_label_mapping,
 ):
+    def sort_dataframes(dfs, sort_info):
+        sorted_dfs = {}
+        for sheet_name, df in dfs.items():
+            sort_args = sort_info.get(sheet_name)
+            if sort_args is None:
+                continue
+            kwargs = {'by': sort_args['columns']}
+            key = sort_args.get('key')
+            if key is not None:
+                kwargs['key'] = key
+            sorted_dfs[sheet_name] = df.sort_values(**kwargs)
+        return sorted_dfs
+
     add_high_level_terms(export)
     add_phig_ids(export, phig_mapping)
+
+    ontology_annotation_tables = get_ontology_annotation_tables(
+        export, term_label_mapping
+    )
     dfs = {
         'entry_summary': get_entry_summary_table(export),
-        **get_ontology_annotation_tables(export, term_label_mapping),
+        **ontology_annotation_tables,
         'physical_interaction': get_physical_interaction_table(export),
         'publication': get_publication_table(export),
         'strain': get_strain_table(export),
         'interaction': get_interactions_table(export),
     }
+
     display_name_lookup = get_display_name_lookup(export)
     add_display_names(dfs, display_name_lookup)
     for k, df in dfs.items():
         dfs[k] = add_feature_uniprot_columns(export, df)
+
+    sort_info = {
+        'entry_summary': {
+            'columns': ['phig_id'],
+            'key': lambda series: pd.to_numeric(series.str.slice(5), errors='coerce'),
+        },
+        **{
+            sheet_name: {'columns': ['term_id']}
+            for sheet_name in ontology_annotation_tables
+        },
+        'physical_interaction': {
+            'columns': ['uniprot_a', 'uniprot_b'],
+        },
+        'publication': {
+            'columns': ['pmid'],
+            'key': lambda series: series.str.slice(5).astype(int),
+        },
+        'strain': {
+            'columns': ['species'],
+        },
+        'interaction': {
+            'columns': ['species_a', 'species_b'],
+        },
+    }
+    sorted_dfs = sort_dataframes(dfs, sort_info)
+
     sheet_renames = {
         'biological_process': 'go_biological_process',
         'cellular_component': 'go_cellular_component',
@@ -615,7 +659,8 @@ def make_spreadsheet_dataframes(
         'wt_protein_expression': 'wild_type_protein_level',
     }
     for old_name, new_name in sheet_renames.items():
-        dfs[new_name] = dfs.pop(old_name)
+        sorted_dfs[new_name] = sorted_dfs.pop(old_name)
+
     sheet_order = [
         'entry_summary',
         'phi_phenotype',
@@ -634,7 +679,7 @@ def make_spreadsheet_dataframes(
         'interaction',
         'publication',
     ]
-    spreadsheet_dfs = {k: dfs[k] for k in sheet_order}
+    spreadsheet_dfs = {k: sorted_dfs[k] for k in sheet_order}
     return spreadsheet_dfs
 
 
