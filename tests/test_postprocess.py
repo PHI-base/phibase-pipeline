@@ -1317,7 +1317,7 @@ def test_truncate_long_values_description():
                 'alleles': {
                     '0123456789abcdef-allele-1': {
                         "allele_type": "other",
-                        "description": "S151D (ΔMosom1/MoSOM1Δ151); S188D (ΔMosom1/MoSOM1Δ188); S512D (ΔMosom1/MoSOM1Δ512); S603D (ΔMosom1/MoSOM1Δ603); S629D (ΔMosom1/MoSOM1Δ629); S642D(ΔMosom1/MoSOM1Δ642); SOM1S228A-GFP …",
+                        "description": "S151D (ΔMosom1/MoSOM1Δ151); S188D (ΔMosom1/MoSOM1Δ188); S512D (ΔMosom1/MoSOM1Δ512); S603D (ΔMosom1/MoSOM1Δ603); S629D (ΔMosom1/MoSOM1Δ629); S642D(ΔMosom1/MoSOM1Δ642) ...",
                         "gene": "Magnaporthe oryzae G4MR98",
                         "name": "Som1",
                         "primary_identifier": "G4MR98:0123456789abcdef-1",
@@ -1329,6 +1329,8 @@ def test_truncate_long_values_description():
     }
     truncate_long_values(export)
     actual = export
+    description = lambda x: x['curation_sessions']['0123456789abcdef']['alleles']['0123456789abcdef-allele-1']['description']
+    assert description(actual) == description(expected)
     assert actual == expected
 
 

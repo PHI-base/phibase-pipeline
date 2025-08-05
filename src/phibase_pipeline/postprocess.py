@@ -412,6 +412,7 @@ def truncate_long_values(export):
 
     def truncate_allele_descriptions(export, length_limit, sep_length):
         description_sep = '; '
+        sep_length = len(description_sep)
         delta = '\N{GREEK CAPITAL LETTER DELTA}'
         for session in export['curation_sessions'].values():
             alleles = session.get('alleles', {}).values()
@@ -423,11 +424,16 @@ def truncate_long_values(export):
                 if len(escaped_description) <= length_limit:
                     continue
                 description_list = escaped_description.split(description_sep)
+                # Append an ellipsis to indicate truncation. Note we can't
+                # use a Unicode ellipsis since it's not in latin-1.
+                end_ellipsis = ' ...'
+                length_limit = length_limit - len(end_ellipsis)
                 truncated_description = description_sep.join(
                     truncate_list(description_list, length_limit, sep_length)
                 )
-                # Append an ellipsis to indicate truncation.
-                final_description = truncated_description.replace('&Delta;', delta) + ' …'
+                final_description = (
+                    truncated_description.replace('&Delta;', delta) + end_ellipsis
+                )
                 allele['description'] = final_description
 
     def truncate_phi4_ids(export, length_limit, sep_length):
