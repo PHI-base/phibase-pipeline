@@ -380,7 +380,7 @@ def truncate_long_values(export):
     """Truncate list values that are too long to be loaded into the
     database used by the PHI-base 5 upload tool."""
 
-    def truncate_list(lst, length, sep_length=0):
+    def truncate_list(lst, length, sep_length):
         # Assume ID lists shorter than this are always under
         # the limit. This number can probably be higher.
         if len(lst) < 2:
