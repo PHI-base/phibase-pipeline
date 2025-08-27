@@ -484,6 +484,18 @@ def replace_obsolete_phido_terms(export, obsolete_phido_mapping):
         session['annotations'] = annotations_to_keep
 
 
+def add_phig_ids(export, phig_mapping):
+    for session in export['curation_sessions'].values():
+        genes = session.get('genes', {}).values()
+        for gene in genes:
+            uniprot_id = gene['uniquename']
+            phig_id = phig_mapping.get(uniprot_id)
+            if phig_id is None:
+                uniprot_id = gene['uniprot_data']['uniprot_id']
+                phig_id = phig_mapping.get(uniprot_id)
+            gene['phig_id'] = phig_id
+
+
 def postprocess_phibase_json(export):
     curation_sessions = export['curation_sessions']
     for session in curation_sessions.values():
