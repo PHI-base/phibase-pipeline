@@ -24,8 +24,10 @@ pd.set_option('future.no_silent_downcasting', True)
 
 
 def uniprot_data_to_mapping(uniprot_data: pd.DataFrame) -> dict:
-    uniprot_df = get_uniprot_columns(uniprot_data)
-    uniprot_mapping = uniprot_df.set_index('uniprot').to_dict(orient='index')
+    uniprot_df = get_uniprot_columns(uniprot_data).set_index('uniprot')
+    # DataFrame index must be unique for orient='index'. 
+    uniprot_df = uniprot_df[~uniprot_df.index.duplicated()]
+    uniprot_mapping = uniprot_df.to_dict(orient='index')
     return uniprot_mapping
 
 
