@@ -693,6 +693,14 @@ def write_ensembl_exports(
         'phibase5': 'phibase5_interactions_export.csv',
         'amr': 'phibase_amr_export.csv',
     }
+    taxid_columns = [
+        'taxid_species_a',
+        'taxid_strain_a',
+        'taxid_species_b',
+        'taxid_strain_b',
+    ]
     for k, filename in export_filenames.items():
         df = exports[k]
+        for col in taxid_columns:
+            df[col] = df[col].astype('Int64')
         df.to_csv(dir_path / filename, index=False)
