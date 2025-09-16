@@ -669,7 +669,7 @@ def write_ensembl_exports(
     dir_path: PathLike,
 ) -> None:
     DATA_DIR = importlib.resources.files('phibase_pipeline') / 'data'
-    phi_df = pd.read_csv(phibase_path)
+    phi_df = pd.read_csv(phibase_path, low_memory=False)
     canto_export = loaders.load_json(canto_export_path)
     uniprot_data = pd.read_csv(uniprot_data_path, sep='\t')
     dir_path = Path(dir_path)
