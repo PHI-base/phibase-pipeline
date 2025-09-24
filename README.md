@@ -17,13 +17,9 @@ data from version 5 of the Pathogen-Host Interactions Database
 
 ## Installation
 
-Install the latest release from GitHub:
+Install the latest commit on the `main` branch:
 
-    python -m pip install 'phibase_pipeline@git+https://github.com/PHI-base/phibase-pipeline.git@0.1.0'
-
-Or install the latest commit on the `main` branch:
-
-    python -m pip install 'phibase_pipeline@git+https://github.com/PHI-base/phibase-pipeline.git@main'
+    python -m pip install phibase_pipeline@git+https://github.com/PHI-base/phibase-pipeline.git@main
 
 ## Usage
 
