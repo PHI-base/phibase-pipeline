@@ -250,7 +250,9 @@ def add_delta_symbol(session):
     pattern = re.compile(r'delta')
     DELTA = '\N{GREEK CAPITAL LETTER DELTA}'
     for allele in session.get('alleles', {}).values():
-        allele['name'] = pattern.sub(DELTA, allele['name'])
+        allele_name = allele.get('name')
+        if allele_name:
+            allele['name'] = pattern.sub(DELTA, allele_name)
 
 
 def add_chemical_extensions(export, chemical_data):

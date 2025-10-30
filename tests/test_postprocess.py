@@ -920,6 +920,24 @@ def test_add_delta_symbol():
         assert actual == expected
 
 
+def test_add_delta_symbol_no_name():
+    session = {
+        'alleles': {
+            'Q00000:0123456789abcef-1': {
+                'allele_type': 'wild_type',
+                'gene': 'Homo sapiens Q00000',
+                'gene_name': 'ABC',
+                'primary_identifier': "Q00000:0123456789abcef-1",
+                'synonyms': [],
+            }
+        }
+    }
+    expected = session.copy()
+    add_delta_symbol(session)
+    actual = session
+    assert actual == expected
+
+
 def test_remove_unapproved_sessions():
     actual = {
         'curation_sessions': {
