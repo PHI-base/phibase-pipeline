@@ -304,7 +304,7 @@ def query_proteome_ids(session, proteome_id_mapping):
         for pid in pids
     ))
     # Chunk the proteome IDs so to not exceed the query limit
-    chunk_size = 500
+    chunk_size = 100
     id_chunks = []
     for i in range(0, len(proteome_ids), chunk_size):
         id_chunks.append(proteome_ids[i : i + chunk_size])
@@ -312,7 +312,7 @@ def query_proteome_ids(session, proteome_id_mapping):
     url = 'https://rest.uniprot.org/proteomes/search'
     params = {
         'format': 'json',
-        'size': '500',
+        'size': str(chunk_size),
         'compressed': 'true',
     }
     request = requests.PreparedRequest()
