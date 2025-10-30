@@ -176,8 +176,8 @@ def validate_uniprot_ids(genes):
 def validate_unique_alleles(alleles):
     # Each allele in a session must be unique (duplicate allele objects are invalid).
     allele_keys = defaultdict(list)
-    required_keys = ['gene', 'name', 'allele_type']
-    optional_keys = ['description']
+    required_keys = ['gene', 'allele_type']
+    optional_keys = ['name', 'description']
     for allele_id, allele in alleles.items():
         key_parts = [allele[k] for k in required_keys]
         for k in optional_keys:
