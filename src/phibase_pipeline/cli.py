@@ -55,6 +55,12 @@ def parse_args(args):
     )
     
     parser_phibase5.add_argument(
+        '--job-id',
+        metavar='JOB_ID',
+        type=str,
+        help='the job ID for a previously run UniProt ID mapping job',
+    )
+    parser_phibase5.add_argument(
         'output',
         metavar='OUTFILE',
         type=str,

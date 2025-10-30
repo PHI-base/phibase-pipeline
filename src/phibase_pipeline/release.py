@@ -114,7 +114,7 @@ def release_to_phibase5(args):
     phi_df = loaders.load_phibase_csv(args.phibase)
     phicanto_json = loaders.load_json(args.phicanto)
     canto_json = migrate.make_combined_export(phi_df, phicanto_json)
-    canto_json = postprocess.add_cross_references(canto_json)
+    canto_json = postprocess.add_cross_references(canto_json, args.job_id)
     postprocess.truncate_long_values(canto_json)
     validate.validate_export(canto_json, validate_id_length=True)
     write_json_export(args.output, canto_json)

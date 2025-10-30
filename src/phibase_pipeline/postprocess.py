@@ -359,11 +359,11 @@ def add_pubmed_data_to_sessions(export, pubmed_data):
     return augmented_export
 
 
-def add_cross_references(export):
+def add_cross_references(export, job_id=None):
     session = uniprot.make_session()
     # UniProt data
     uniprot_ids = get_all_uniprot_ids_in_export(export)
-    id_mapping_results = uniprot.run_id_mapping_job(session, uniprot_ids)
+    id_mapping_results = uniprot.run_id_mapping_job(session, uniprot_ids, job_id=job_id)
     uniprot_gene_data = uniprot.get_uniprot_data_fields(id_mapping_results)
     export = add_uniprot_data_to_genes(export, uniprot_gene_data)
     # Sequence strains

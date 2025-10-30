@@ -170,20 +170,24 @@ def get_id_mapping_results_search(session, url):
     return results
 
 
-def retrieve_id_mapping(session, from_db, to_db, ids, poll_seconds=3):
-    job_id = submit_id_mapping(from_db, to_db, ids)
+def retrieve_id_mapping(session, from_db, to_db, ids, job_id=None, poll_seconds=3):
+    if job_id is None:
+        job_id = submit_id_mapping(from_db, to_db, ids)
+    else:
+        print(f'Reusing previous job ID: {job_id}')
     if check_id_mapping_results_ready(session, job_id, poll_seconds):
         link = get_id_mapping_results_link(session, job_id)
         results = get_id_mapping_results_search(session, link)
         return results
 
 
-def run_id_mapping_job(session, ids):
+def run_id_mapping_job(session, ids, job_id=None):
     results = retrieve_id_mapping(
         session,
         from_db='UniProtKB_AC-ID',
         to_db='UniProtKB',
         ids=ids,
+        job_id=job_id,
         poll_seconds=30,
     )
     return results
