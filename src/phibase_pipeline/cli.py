@@ -35,6 +35,13 @@ def parse_args(args):
         for arg_name, kwargs in common_args.items():
             subparser.add_argument(arg_name, **kwargs)
 
+    job_id_kwargs = {
+        'metavar': 'JOB_ID',
+        'type': str,
+        'help': 'the job ID for a previously run UniProt ID mapping job',
+    }
+
+    parser_zenodo.add_argument('--job-id', **job_id_kwargs)
     parser_zenodo.add_argument(
         'term_label_mapping_config',
         metavar='MAPPING_CONFIG',
@@ -54,12 +61,7 @@ def parse_args(args):
         help='the path to write the spreadsheet export format',
     )
     
-    parser_phibase5.add_argument(
-        '--job-id',
-        metavar='JOB_ID',
-        type=str,
-        help='the job ID for a previously run UniProt ID mapping job',
-    )
+    parser_phibase5.add_argument('--job-id', **job_id_kwargs)
     parser_phibase5.add_argument(
         'output',
         metavar='OUTFILE',
