@@ -85,14 +85,14 @@ def parse_args(args):
 
 
 def run(args):
-    args = parse_args(args)
-    match args.target:
+    parsed_args = parse_args(args)
+    match parsed_args.target:
         case 'zenodo':
-            release.release_to_zenodo(args)
+            release.release_to_zenodo(parsed_args)
         case 'phibase5':
-            release.release_to_phibase5(args)
+            release.release_to_phibase5(parsed_args)
         case 'ensembl':
-            release.release_to_ensembl(args)
+            release.release_to_ensembl(parsed_args)
         case _:
             # argparse should prevent this from being reached
-            raise ValueError(f'unsupported target type: {args.target}')
+            raise ValueError(f'unsupported target type: {parsed_args.target}')
