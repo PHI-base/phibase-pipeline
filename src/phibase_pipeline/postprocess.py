@@ -493,6 +493,8 @@ def add_phig_ids(export, phig_mapping):
             uniprot_id = gene['uniquename']
             phig_id = phig_mapping.get(uniprot_id)
             if phig_id is None:
+                # Try the UniProtKB ID from UniProt, in case the original
+                # accession has been merged.
                 uniprot_id = gene['uniprot_data']['uniprot_id']
                 phig_id = phig_mapping.get(uniprot_id)
             gene['phig_id'] = phig_id
