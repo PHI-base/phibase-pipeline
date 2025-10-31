@@ -59,8 +59,12 @@ def get_release_stats_table(export):
         'WT protein expression': 'wt_protein_expression',
     }
     annotation_counts = {
-        label: count_annotations(a_type) if type(a_type) == str else a_type
-        for label, a_type in annotation_types.items()
+        label: (
+            count_annotations(annotation_type)
+            if type(annotation_type) == str
+            else annotation_type
+        )
+        for label, annotation_type in annotation_types.items()
     }
     data_stats = {
         'Genes': count_features('genes'),
