@@ -11,7 +11,15 @@ import json
 
 import pandas as pd
 
-from phibase_pipeline import ensembl, loaders, migrate, postprocess, robot, spreadsheet, validate
+from phibase_pipeline import (
+    ensembl,
+    loaders,
+    migrate,
+    postprocess,
+    robot,
+    spreadsheet,
+    validate,
+)
 
 
 def get_release_stats_table(export):
@@ -28,20 +36,24 @@ def get_release_stats_table(export):
                     yield taxon_id
 
     def count_unique_annotations(annotation_type):
-        return len(set(
-            annotation['term']
-            for session in export['curation_sessions'].values()
-            for annotation in session['annotations']
-            if annotation['type'] == annotation_type
-        ))
+        return len(
+            set(
+                annotation['term']
+                for session in export['curation_sessions'].values()
+                for annotation in session['annotations']
+                if annotation['type'] == annotation_type
+            )
+        )
 
     def count_annotations(annotation_type):
-        return len(list(
-            annotation
-            for session in export['curation_sessions'].values()
-            for annotation in session['annotations']
-            if annotation['type'] == annotation_type
-        ))
+        return len(
+            list(
+                annotation
+                for session in export['curation_sessions'].values()
+                for annotation in session['annotations']
+                if annotation['type'] == annotation_type
+            )
+        )
 
     count_features = lambda k: len(set(iter_feature_keys(k)))
 
@@ -76,11 +88,7 @@ def get_release_stats_table(export):
         **annotation_counts,
     }
     stats_df = (
-        pd.DataFrame(
-            data_stats,
-            columns=list(data_stats.keys()),
-            index=['Count']
-        )
+        pd.DataFrame(data_stats, columns=list(data_stats.keys()), index=['Count'])
         .transpose()
         .rename_axis('Data type')
     )
@@ -102,9 +110,7 @@ def release_to_zenodo(args):
     write_json_export(args.output_json, canto_json)
     # Spreadsheet export format
     term_label_mapping_config = loaders.load_json(args.term_label_mapping_config)
-    term_label_mapping = robot.get_ontology_terms_and_labels(
-        term_label_mapping_config
-    )
+    term_label_mapping = robot.get_ontology_terms_and_labels(term_label_mapping_config)
     phig_mapping = loaders.load_phig_uniprot_mapping()
     spreadsheet.make_spreadsheet_from_export(
         export=canto_json,
