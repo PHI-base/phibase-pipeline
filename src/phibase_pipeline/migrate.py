@@ -935,6 +935,27 @@ def get_phi_id_column(phi_df):
     return phi_ids
 
 
+# TODO: Remove this once the rows are fixed in PHI-base v4.19
+def fix_triticum_genus_rows(phi_df):
+    triticum_pmids = [
+        22028654,
+        22216007,
+        31160822,
+        18433453,
+        16278459,
+        18926918,
+        21696466,
+        19520179,
+        22693618,
+    ]
+    index_to_replace = (
+        phi_df.pmid.isin(triticum_pmids)
+        & (phi_df.host_species == 'Triticum')
+    )
+    phi_df.loc[index_to_replace, 'host_species'] = 'Triticum aestivum'
+    phi_df.loc[index_to_replace, 'host_id'] = 4565
+
+
 def make_phibase_json(phi_df, superseded_pmids):
     phenotype_mapping_df = loaders.load_phenotype_column_mapping()
     in_vitro_growth_classifier = loaders.load_in_vitro_growth_classifier()
@@ -944,6 +965,8 @@ def make_phibase_json(phi_df, superseded_pmids):
     phipo_mapping = loaders.load_phipo_mapping()
 
     phi_df = clean.clean_phibase_csv(phi_df)
+
+    fix_triticum_genus_rows(phi_df)
 
     phi_df = filter_phi_df(phi_df, superseded_pmids)
     phi_df = add_session_ids(phi_df)
