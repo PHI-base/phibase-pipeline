@@ -103,15 +103,16 @@ def write_json_export(path, canto_json):
 def release_to_zenodo(args):
     phi_df = loaders.load_phibase_csv(args.phibase)
     phicanto_json = loaders.load_json(args.phicanto)
+    phig_mapping = loaders.load_phig_uniprot_mapping()
     # JSON export format
     canto_json = migrate.make_combined_export(phi_df, phicanto_json)
     canto_json = postprocess.add_cross_references(canto_json, args.job_id)
+    postprocess.add_phig_ids(canto_json, phig_mapping)
     validate.validate_export(canto_json)
     write_json_export(args.output_json, canto_json)
     # Spreadsheet export format
     term_label_mapping_config = loaders.load_json(args.term_label_mapping_config)
     term_label_mapping = robot.get_ontology_terms_and_labels(term_label_mapping_config)
-    phig_mapping = loaders.load_phig_uniprot_mapping()
     spreadsheet.make_spreadsheet_from_export(
         export=canto_json,
         phig_mapping=phig_mapping,
