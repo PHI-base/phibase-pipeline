@@ -35,18 +35,24 @@ def get_normalized_column_names(phi_df):
 
 
 def fix_curation_dates(curation_dates):
+    """ Convert curation date column to ISO 8601 format."""
+    def replacer(match):
+        month = match.group('month')
+        year = match.group('year')
+        return f'1 {month} 20{year}'
+
     # First we need to fix inconsistent month-year and year-month dates
     # with two-digit years, else these will fail to parse.
-    month_year_pattern = r'^([A-Z][a-z]{2})-(\d{2})$'
-    year_month_pattern = r'^(\d{2})-([A-Z][a-z]{2})$'
+    month_year_pattern = r'^(?P<month>[A-Z][a-z]{2,3})-(?P<year>\d{2})$'
+    year_month_pattern = r'^(?P<year>\d{2})-(?P<month>[A-Z][a-z]{2,3})$'
     fixed_dates = (
         curation_dates.ffill()  # Use previous date in case of blank rows
         .astype(str)
         .str.strip()
-        .str.replace(month_year_pattern, r'\1-20\2', regex=True)
-        .str.replace(year_month_pattern, r'\2-20\1', regex=True)
+        .str.replace(month_year_pattern, replacer, regex=True)
+        .str.replace(year_month_pattern, replacer, regex=True)
     )
-    has_serial_date = curation_dates.astype(str).str.match('^\d+$', na=False)
+    has_serial_date = curation_dates.astype(str).str.match(r'^\d+$', na=False)
     serial_dates = curation_dates.loc[has_serial_date].astype(int)
     fixed_dates.loc[has_serial_date] = pd.to_datetime(
         serial_dates, unit='D', origin='1899-12-30'
