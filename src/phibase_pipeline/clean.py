@@ -41,10 +41,25 @@ def fix_curation_dates(curation_dates):
         year = match.group('year')
         return f'1 {month} 20{year}'
 
+    month_pattern = (
+        r'(?P<month>Jan(?:uary)?'
+        r'|Feb(?:ruary)?'
+        r'|Mar(?:ch)?'
+        r'|Apr(?:il)?'
+        r'|May'
+        r'|June?'
+        r'|July?'
+        r'|Aug(?:ust)?'
+        r'|Sep(?:tember)?'
+        r'|Oct(?:ober)?'
+        r'|Nov(?:ember)?'
+        r'|Dec(?:ember)?)'
+    )
+    year_pattern = r'(?P<year>\d{2})'
     # First we need to fix inconsistent month-year and year-month dates
     # with two-digit years, else these will fail to parse.
-    month_year_pattern = r'^(?P<month>[A-Z][a-z]{2,3})-(?P<year>\d{2})$'
-    year_month_pattern = r'^(?P<year>\d{2})-(?P<month>[A-Z][a-z]{2,3})$'
+    month_year_pattern = f'^{month_pattern}-{year_pattern}$'
+    year_month_pattern = f'^{year_pattern}-{month_pattern}$'
     fixed_dates = (
         curation_dates.ffill()  # Use previous date in case of blank rows
         .astype(str)
