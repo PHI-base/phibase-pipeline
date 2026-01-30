@@ -39,6 +39,7 @@ ncbi_taxid,scientific_name,common_name
 520,Bordetella pertussis,
 139,Borrelia burgdorferi,Lyme disease spirochete
 140,Borrelia hermsii,
+55169,Botryosphaeria dothidea,
 40559,Botrytis cinerea,
 278938,Botrytis elliptica,
 4779,Bremia lactucae,lettuce downy mildew
@@ -94,6 +95,7 @@ ncbi_taxid,scientific_name,common_name
 1585795,Colletotrichum lentis,
 290576,Colletotrichum lindemuthianum,
 5465,Colletotrichum orbiculare,
+1209068,Colletotrichum tabaci,
 5466,Colletotrichum trifolii,
 1717,Corynebacterium diphtheriae,
 65058,Corynebacterium ulcerans,
@@ -106,6 +108,7 @@ ncbi_taxid,scientific_name,common_name
 5207,Cryptococcus neoformans,
 5503,Curvularia lunata,
 43,Cystobacter fuscus,
+578113,Cytospora mali,
 430498,Dactylellina haptotyla,
 204038,Dickeya dadantii,
 1778540,Dickeya fangzhongdai,
@@ -130,6 +133,8 @@ ncbi_taxid,scientific_name,common_name
 5127,Fusarium fujikuroi,
 5518,Fusarium graminearum,
 5507,Fusarium oxysporum,
+2502994,Fusarium oxysporum f. sp. cubense (strain race 4),
+1227346,Fusarium proliferatum (strain ET1),
 948311,Fusarium proliferatum,bulb rot disease fungus
 101028,Fusarium pseudograminearum,
 5128,Fusarium sambucinum,
@@ -252,6 +257,7 @@ ncbi_taxid,scientific_name,common_name
 112498,Ramularia collo-cygni,
 456999,Rhizoctonia solani,
 64495,Rhizopus oryzae,
+258594,Rhodopseudomonas palustris (strain ATCC BAA-98 / CGA009),
 914237,Rhynchosporium commune,
 34085,Riemerella anatipestifer,
 77044,Rosellinia necatrix,
