@@ -9,94 +9,7 @@ from collections import defaultdict
 
 import pandas as pd
 
-
-def add_high_level_terms(export):
-    """Add PHI-base 4 high-level terms as properties of annotation objects."""
-
-    def is_effector_genotype(genotype):
-        for locus in genotype['loci']:
-            for locus_allele in locus:
-                allele_id = locus_allele['id']
-                allele = session['alleles'][allele_id]
-                gene_id = allele['gene']
-                gene = session['genes'][gene_id]
-                uniprot_id = gene['uniquename']
-                if uniprot_id in effector_uniprot_ids:
-                    return True
-        return False
-
-    effector_term_ids = {
-        'GO:0140418',
-        'GO:0140415',
-        'GO:0140404',
-        'GO:0140403',
-        'GO:0034055',
-        'GO:0080185',
-        'GO:0052034',
-        'GO:0140423',
-        'GO:0140502',
-        'GO:0140590',
-        'GO:0140403',
-        'GO:0034055',
-        'GO:0080185',
-        'GO:0052034',
-        'GO:0140423',
-        'GO:0141017',
-    }
-    effector_mapping = {term_id: 'Effector' for term_id in effector_term_ids}
-    phenotype_mapping = {
-        'PHIPO:0000022': 'Resistance to chemical',
-        'PHIPO:0000021': 'Sensitivity to chemical',
-        'PHIPO:0000513': 'Lethal',
-    }
-    term_mapping = {
-        **effector_mapping,
-        **phenotype_mapping,
-    }
-    extension_mapping = {
-        'PHIPO:0000207': 'Loss of mutualism',
-        'PHIPO:0000014': 'Increased virulence',
-        'PHIPO:0000010': 'Loss of pathogenicity',
-        'PHIPO:0000015': 'Reduced virulence',
-        'PHIPO:0000004': 'Unaffected pathogenicity',
-    }
-    effector_uniprot_ids = set()
-
-    for session in export['curation_sessions'].values():
-        annotations = session.get('annotations', [])
-        for annotation in annotations:
-            annotation['high_level_terms'] = []
-            high_level_terms = set()
-            term = annotation.get('term')
-            if not term:
-                continue
-            high_level_term = term_mapping.get(term)
-            if high_level_term:
-                if high_level_term == 'Effector':
-                    gene = session['genes'][annotation['gene']]
-                    uniprot_id = gene['uniquename']
-                    effector_uniprot_ids.add(uniprot_id)
-                high_level_terms.add(high_level_term)
-            extensions = annotation.get('extension')
-            if extensions:
-                for extension in extensions:
-                    extension_term = extension['rangeValue']
-                    high_level_term = extension_mapping.get(extension_term)
-                    if high_level_term:
-                        high_level_terms.add(high_level_term)
-            # Add Effector terms for features containing effector genes
-            genotype = None
-            if 'genotype' in annotation:
-                genotype_id = annotation['genotype']
-                genotype = session['genotypes'][genotype_id]
-            elif 'metagenotype' in annotation:
-                metagenotype_id = annotation['metagenotype']
-                metagenotype = session['metagenotypes'][metagenotype_id]
-                pathogen_genotype_id = metagenotype['pathogen_genotype']
-                genotype = session['genotypes'][pathogen_genotype_id]
-            if genotype and is_effector_genotype(genotype):
-                high_level_terms.add('Effector')
-            annotation['high_level_terms'] = sorted(list(high_level_terms))
+from phibase_pipeline import postprocess
 
 
 def allele_has_gene(gene_id, allele):
@@ -614,7 +527,7 @@ def make_spreadsheet_dataframes(
             sorted_dfs[sheet_name] = df.sort_values(**kwargs)
         return sorted_dfs
 
-    add_high_level_terms(export)
+    postprocess.add_high_level_terms(export)
     add_phig_ids(export, phig_mapping)
 
     ontology_annotation_tables = get_ontology_annotation_tables(
