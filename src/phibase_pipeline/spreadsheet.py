@@ -498,15 +498,6 @@ def add_feature_uniprot_columns(export, df):
     return df  # Return the DataFrame unmodified if no cases match
 
 
-def add_phig_ids(export, phig_lookup):
-    for session in export['curation_sessions'].values():
-        for gene in session.get('genes', {}).values():
-            uniprot_id_old = gene['uniquename']
-            uniprot_id_new = gene['uniprot_data']['uniprot_id']
-            phig_id = phig_lookup.get(uniprot_id_new) or phig_lookup.get(uniprot_id_old)
-            gene['phig_id'] = phig_id
-
-
 def make_spreadsheet_dataframes(
     export,
     phig_mapping,
@@ -524,8 +515,6 @@ def make_spreadsheet_dataframes(
                 kwargs['key'] = key
             sorted_dfs[sheet_name] = df.sort_values(**kwargs)
         return sorted_dfs
-
-    add_phig_ids(export, phig_mapping)
 
     ontology_annotation_tables = get_ontology_annotation_tables(
         export, term_label_mapping
