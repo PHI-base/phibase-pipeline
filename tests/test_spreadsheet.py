@@ -23,12 +23,44 @@ def test_get_entry_summary_table():
                         'phig_id': 'PHIG:1',
                     }
                 },
+                'metagenotypes': {
+                    '0123456879abcdef-metagenotype-1': {
+                        'pathogen_genotype': '0123456879abcdef-genotype-1',
+                        'host_genotype': 'Triticum-aestivum-wild-type-genotype-cv.-Svevo',
+                        'type': 'pathogen-host',
+                    }
+                },
+                'alleles': {
+                    '0123456879abcdef-allele-1': {
+                        'gene': 'Candida albicans O59924',
+                    },
+                },
+                'genotypes': {
+                    '0123456879abcdef-genotype-1': {
+                        'loci': [
+                            [
+                                {
+                                    'id': '0123456879abcdef-allele-1',
+                                }
+                            ]
+                        ]
+                    },
+                    'Triticum-aestivum-wild-type-genotype-cv.-Svevo': {
+                        'loci': [],
+                    }
+                },
                 'annotations': [
                     {
                         'high_level_terms': ['Reduced virulence'],
                         'gene': 'Candida albicans O59924',
-                    }
-                ]
+                        'phi4_id': ['PHI:4'],
+                    },
+                    {
+                        'high_level_terms': ['Reduced virulence'],
+                        'metagenotype': '0123456879abcdef-metagenotype-1',
+                        'phi4_id': ['PHI:5'],
+                    },
+                ],
             }
         }
     }
@@ -36,6 +68,7 @@ def test_get_entry_summary_table():
         [
             {
                 'phig_id': 'PHIG:1',
+                'phi4_id': 'PHI:4; PHI:5',
                 'gene_name': 'SOD1',
                 'species': 'Candida albicans',
                 'uniprot_id': 'O59924',

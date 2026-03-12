@@ -147,6 +147,15 @@ def get_gene_high_level_terms(gene_id, session):
     )
 
 
+def get_phi4_ids_for_gene(gene_id, session):
+    return (
+        phi4_id
+        for annotation in session['annotations']
+        for phi4_id in annotation.get('phi4_id', [])
+        if annotation_has_gene(gene_id, annotation, session)
+    )
+
+
 def get_entry_summary_table(export):
 
     def get_empty_uniprot_data(uniprot_id):
@@ -172,10 +181,12 @@ def get_entry_summary_table(export):
             uniprot_id = uniprot_data['uniprot_id']
             gene_name = uniprot_data['name']
             phig_id = gene['phig_id']
+            phi4_ids = '; '.join(sorted(set(get_phi4_ids_for_gene(gene_id, session))))
             high_level_terms = get_gene_high_level_terms(gene_id, session)
             records.append(
                 {
                     'phig_id': phig_id,
+                    'phi4_id': phi4_ids,
                     'gene_name': gene_name,
                     'species': gene['organism'],
                     'uniprot_id': uniprot_id,
