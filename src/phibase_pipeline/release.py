@@ -108,6 +108,7 @@ def release_to_zenodo(args):
     canto_json = migrate.make_combined_export(phi_df, phicanto_json)
     canto_json = postprocess.add_cross_references(canto_json, args.job_id)
     postprocess.add_phig_ids(canto_json, phig_mapping)
+    postprocess.add_high_level_terms(canto_json)
     validate.validate_export(canto_json)
     write_json_export(args.output_json, canto_json)
     # Spreadsheet export format

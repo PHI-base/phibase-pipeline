@@ -9,8 +9,6 @@ from collections import defaultdict
 
 import pandas as pd
 
-from phibase_pipeline import postprocess
-
 
 def allele_has_gene(gene_id, allele):
     return allele['gene'] == gene_id
@@ -527,7 +525,6 @@ def make_spreadsheet_dataframes(
             sorted_dfs[sheet_name] = df.sort_values(**kwargs)
         return sorted_dfs
 
-    postprocess.add_high_level_terms(export)
     add_phig_ids(export, phig_mapping)
 
     ontology_annotation_tables = get_ontology_annotation_tables(
