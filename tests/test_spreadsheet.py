@@ -68,7 +68,6 @@ def test_get_entry_summary_table():
         [
             {
                 'phig_id': 'PHIG:1',
-                'phi4_id': 'PHI:4; PHI:5',
                 'gene_name': 'SOD1',
                 'species': 'Candida albicans',
                 'uniprot_id': 'O59924',
@@ -77,6 +76,7 @@ def test_get_entry_summary_table():
                 'ensembl_genomes': 'C4_02320C_A-T-p1',
                 'ncbi_genbank': '',
                 'high_level_term': 'Reduced virulence',
+                'phi4_id': 'PHI:4; PHI:5',
             }
         ]
     )

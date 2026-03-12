@@ -186,7 +186,6 @@ def get_entry_summary_table(export):
             records.append(
                 {
                     'phig_id': phig_id,
-                    'phi4_id': phi4_ids,
                     'gene_name': gene_name,
                     'species': gene['organism'],
                     'uniprot_id': uniprot_id,
@@ -195,6 +194,7 @@ def get_entry_summary_table(export):
                     'ensembl_genomes': maybe_join(uniprot_data['ensembl_sequence_id']),
                     'ncbi_genbank': uniprot_data['dbref_gene_id'],
                     'high_level_term': maybe_join(high_level_terms),
+                    'phi4_id': phi4_ids,
                 }
             )
     return pd.DataFrame.from_records(records)
