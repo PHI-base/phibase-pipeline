@@ -238,7 +238,7 @@ def add_genotype_ids(df):
         strains = df.loc[has_host_id, 'host_strain'].fillna('Unknown strain')
         df.loc[has_host_id, 'canto_host_genotype_id'] = (
             species + '-wild-type-genotype-' + strains
-        ).str.replace('\s+', '-', regex=True)
+        ).str.replace(r'\s+', '-', regex=True)
         return df
 
     single_locus_columns = [
