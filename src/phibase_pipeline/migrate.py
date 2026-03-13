@@ -150,8 +150,9 @@ def add_allele_ids(df):
     df = df.sort_values(columns)
     allele_ids = []
     i = 1
+    rows = df[columns].values
 
-    for current_row, next_row in itertools.pairwise(df[columns].values):
+    for current_row, next_row in itertools.pairwise(rows):
         session_id, protein_id, *props = current_row
         next_session_id, next_protein_id, *next_props = next_row
         allele_ids.append(f'{protein_id}:{session_id}-{i}')
@@ -161,7 +162,10 @@ def add_allele_ids(df):
             i += 1
 
     # Append the final row because iteration stops early.
-    allele_ids.append(f'{next_protein_id}:{next_session_id}-{i}')
+    last_row = rows[-1]
+    last_session_id = last_row[0]
+    last_protein_id = last_row[1]
+    allele_ids.append(f'{last_protein_id}:{last_session_id}-{i}')
     df['pathogen_allele_id'] = allele_ids
     df = df.sort_index()  # restore original sort order
     return df
@@ -188,6 +192,7 @@ def add_genotype_ids(df):
             df.loc[indexer, columns].reset_index(drop=False).sort_values(columns).values
         )
         i_offset = 0
+        session_genotype_counts = {}
         if append_ids:
             # The genotype IDs for multi-locus genotypes need to start after the
             # end of the ID range for single locus genotypes.
@@ -214,7 +219,9 @@ def add_genotype_ids(df):
                 i += 1
 
         # Append the final row because pairwise iteration stops early
-        indexes.append(next_index)
+        last_row = values[-1]
+        last_index = last_row[0]
+        indexes.append(last_index)
         genotype_nums.append(i)
 
         df.loc[indexes, 'pathogen_genotype_n'] = genotype_nums
@@ -585,8 +592,10 @@ def add_mutant_genotype_objects(canto_json, phi_df):
         genotype['loci'].append(locus)
 
     # Iteration misses the final genotype
-    session_id = current_row[0]
-    curation_sessions[session_id]['genotypes'][genotype_id] = genotype
+    last_row = values[-1]
+    session_id = last_row[0]
+    last_genotype_id = last_row[3]
+    curation_sessions[session_id]["genotypes"][last_genotype_id] = genotype
 
 
 def add_genotype_objects(canto_json, phi_df):
