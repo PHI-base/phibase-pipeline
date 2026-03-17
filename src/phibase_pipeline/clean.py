@@ -204,6 +204,7 @@ def clean_phibase_csv(phi_df):
         .str.rstrip(';')
         .str.replace(separator_without_space, '; ', regex=True)
         .str.replace(space_separator, '; ', regex=True)
+        .replace(r'(?i)no', np.nan, regex=True)
     )
     # Fix separators in disease column
     phi_df.disease = phi_df.disease.str.replace(',', ';')
