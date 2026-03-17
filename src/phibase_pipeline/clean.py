@@ -159,7 +159,12 @@ def clean_phibase_csv(phi_df):
         if pd.api.types.is_string_dtype(column):
             phi_df[col] = column.str.lower()
 
-    phi_df.pathogen_id = phi_df.pathogen_id.astype('UInt64')
+    # Fix pathogen species in NCBI Taxonomy ID column
+    invalid_index = phi_df.pathogen_id == 'Valsa pyri'
+    phi_df.loc[invalid_index, 'pathogen_id'] = 578113
+    phi_df.loc[invalid_index, 'pathogen_species'] = 'Cytospora mali'
+
+    phi_df.pathogen_id = pd.to_numeric(phi_df.pathogen_id).astype('UInt64')
 
     nan_integer_columns = ['pathogen_strain_id', 'host_id', 'pmid', 'year']
     for col in nan_integer_columns:
