@@ -210,6 +210,10 @@ def clean_phibase_csv(phi_df):
     # Replace an invalid PubMed ID
     phi_df.pmid = phi_df.pmid.replace(24056836, 23881098)
 
+    # These columns need to start lowercased to map correctly later
+    for column in ['exp_technique_stable', 'gene_protein_modification']:
+        phi_df[column] = phi_df[column].str[0].str.lower() + phi_df[column].str[1:]
+
     return phi_df
 
 
