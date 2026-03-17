@@ -81,6 +81,7 @@ def clean_phibase_csv(phi_df):
     column_replacements = {
         'protein_id_source': {
             'Uniprot': 'UniProt',
+            'uniprot': 'UniProt',
         },
         'gene_id_source': {
             'Genbank': 'GenBank',
