@@ -444,7 +444,8 @@ def test_all_default_paths():
         (loaders.load_tissue_replacements, ('bto_renames.csv',)),
         (loaders.load_phig_uniprot_mapping, ('phig_uniprot_mapping.csv',)),
         (loaders.load_phipo_chebi_mapping, ('phipo_chebi_mapping.csv',)),
-        (loaders.load_obsolete_phido_mapping, ('obsolete_phido_mapping.csv',))
+        (loaders.load_obsolete_phido_mapping, ('obsolete_phido_mapping.csv',)),
+        (loaders.load_species_roles, ('species_roles.csv',)),
     )
     loaders_and_args = tuple(
         (
@@ -471,4 +472,14 @@ def test_load_obsolete_phido_mapping():
         'PHIDO:0000014': ['PHIDO:0000013', 'PHIDO:0000211'],
     }
     actual = loaders.load_obsolete_phido_mapping(path)
+    assert actual == expected
+
+
+def test_load_species_roles():
+    path = TEST_DATA_DIR / 'species_roles.csv'
+    expected = {
+        47965: 'host',
+        80867: 'pathogen',
+    }
+    actual = loaders.load_species_roles(path)
     assert actual == expected

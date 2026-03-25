@@ -2446,6 +2446,10 @@ def test_add_organism_roles():
             'b6e0a5f3d92c8b17': {},
         }
     }
+    species_roles = {
+        161934: 'host',
+        562: 'pathogen',
+    }
     expected = {
         'curation_sessions': {
             '3a7f9b2e8c4d71e5': {
@@ -2468,7 +2472,7 @@ def test_add_organism_roles():
         }
     }
     actual = canto_json
-    add_organism_roles(actual)
+    add_organism_roles(actual, species_roles)
     assert actual == expected
 
 

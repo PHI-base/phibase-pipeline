@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+import copy
 import hashlib
 import itertools
 import re
@@ -897,24 +898,13 @@ def add_metadata_objects(canto_json, phi_df):
         }
 
 
-def add_organism_roles(canto_json):
-    pathogen_taxids, host_taxids = (
-        set(pd.read_csv(path)['ncbi_taxid'])
-        for path in (
-            DATA_DIR / 'phicanto_pathogen_species.csv',
-            DATA_DIR / 'phicanto_host_species.csv',
-        )
-    )
+def add_organism_roles(canto_json, species_roles):
     for session in canto_json['curation_sessions'].values():
         if 'organisms' not in session:
             continue
         for taxon_id, organism in session['organisms'].items():
             taxid = int(taxon_id)
-            organism['role'] = (
-                'pathogen'
-                if taxid in pathogen_taxids
-                else 'host' if taxid in host_taxids else 'unknown'
-            )
+            organism['role'] = species_roles.get(taxid, 'unknown')
 
 
 def add_pathogen_gene_names_to_alleles(canto_json, phi_df):
@@ -1020,11 +1010,12 @@ def make_phibase_json(phi_df, superseded_pmids):
 
 
 def make_combined_export(phi_df, phicanto_json, superseded_pmids=None):
+    species_roles = loaders.load_species_roles()
     if superseded_pmids is None:
         superseded_pmids = get_approved_pmids(phicanto_json)
     phibase_json = make_phibase_json(phi_df, superseded_pmids)
     postprocess.postprocess_phibase_json(phibase_json)
     combined_export = merge.merge_exports(phibase_json, phicanto_json)
-    add_organism_roles(combined_export)
+    add_organism_roles(combined_export, species_roles)
     postprocess.postprocess_combined_json(combined_export)
     return combined_export

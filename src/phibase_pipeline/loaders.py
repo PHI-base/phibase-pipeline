@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
+import csv
 import itertools
 import json
 import re
@@ -165,3 +166,13 @@ def load_obsolete_phido_mapping(path=None):
         )
         mapping[obsolete_id] = replacement_ids
     return mapping
+
+
+def load_species_roles(path=None):
+    path = DATA_DIR / 'species_roles.csv' if path is None else path
+    with open(path) as csv_file:
+        reader = csv.DictReader(csv_file)
+        return {
+            int(row['ncbi_taxid']): row['role']
+            for row in reader
+        }
