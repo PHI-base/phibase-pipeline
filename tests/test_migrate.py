@@ -1370,7 +1370,7 @@ def test_get_disease_annotations():
         ],
     }
     phi_df = pd.DataFrame.from_dict(data, orient='index')
-    phi_df.curation_date = pd.to_datetime(phi_df.curation_date)
+    phi_df['curation_date'] = pd.to_datetime(phi_df.curation_date)
     actual = get_disease_annotations(phi_df)
     assert actual == expected
 
@@ -1999,7 +1999,7 @@ def test_add_disease_annotations():
             }
         ]
     )
-    phi_df.curation_date = pd.to_datetime(phi_df.curation_date)
+    phi_df['curation_date'] = pd.to_datetime(phi_df.curation_date)
     expected = {
         'curation_sessions': {
             'addf90acaa7ff81f': {
