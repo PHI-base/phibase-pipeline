@@ -213,6 +213,8 @@ def clean_phibase_csv(phi_df):
 
     # These columns need to start lowercased to map correctly later
     for column in ['exp_technique_stable', 'gene_protein_modification']:
+        if phi_df[column].isna().all():
+            continue
         phi_df[column] = phi_df[column].str[0].str.lower() + phi_df[column].str[1:]
 
     return phi_df
