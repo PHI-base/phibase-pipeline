@@ -1,6 +1,7 @@
 ﻿ncbi_taxid,scientific_name,role
 5755,Acanthamoeba castellanii,host
 5757,Acanthamoeba polyphaga,host
+47965,Acer truncatum,host
 80867,Acidovorax avenae,pathogen
 862720,Acidovorax oryzae,pathogen
 470,Acinetobacter baumannii,pathogen
@@ -8,6 +9,7 @@
 61970,Acipenser sinensis,host
 64478,Actinidia arguta,host
 3625,Actinidia chinensis,host
+3627,Actinidia deliciosa,host
 715,Actinobacillus pleuropneumoniae,pathogen
 7029,Acyrthosiphon pisum,host
 7084,Adalia bipunctata,host
@@ -79,6 +81,7 @@
 3707,Brassica juncea,host
 3708,Brassica napus,host
 3712,Brassica oleracea,host
+320797,Brassica parachinensis,host
 3711,Brassica rapa,host
 4779,Bremia lactucae,pathogen
 235,Brucella abortus,pathogen
@@ -98,6 +101,7 @@
 385388,Camellia oleifera,host
 197,Campylobacter jejuni,pathogen
 5476,Candida albicans,pathogen
+498019,Candida auris,pathogen
 42374,Candida dubliniensis,pathogen
 5478,Candida glabrata,pathogen
 5480,Candida parapsilosis,pathogen
@@ -237,6 +241,7 @@
 5127,Fusarium fujikuroi,pathogen
 5518,Fusarium graminearum,pathogen
 5507,Fusarium oxysporum,pathogen
+61366,Fusarium oxysporum f. sp. cubense,pathogen
 2502994,Fusarium oxysporum f. sp. cubense (strain race 4),pathogen
 948311,Fusarium proliferatum,pathogen
 1227346,Fusarium proliferatum (strain ET1),pathogen
@@ -274,6 +279,7 @@
 272952,Hyaloperonospora arabidopsidis,pathogen
 336126,Hylocereus trigonus,host
 7998,Ictalurus punctatus,host
+4120,Ipomoea batatas,host
 6945,Ixodes scapularis,host
 23013,Kalanchoe daigremontiana,host
 504,Kingella kingae,pathogen
@@ -327,6 +333,7 @@
 38448,Monilinia fructicola,pathogen
 153609,Moniliophthora perniciosa,pathogen
 221103,Moniliophthora roreri,pathogen
+229046,Morus alba,host
 552546,Muricauda olearia,pathogen
 10090,Mus musculus,host
 4641,Musa acuminata,host
@@ -365,6 +372,7 @@
 1464,Paenibacillus larvae,pathogen
 4054,Panax ginseng,host
 44586,Panax notoginseng,host
+71645,Pinus patula,host
 553,Pantoea ananatis,pathogen
 66269,Pantoea stewartii,pathogen
 80869,Paracidovorax citrulli,pathogen
@@ -387,6 +395,7 @@
 230439,Peronospora tabacina,pathogen
 3435,Persea americana,host
 4043,Petroselinum crispum,host
+170000,Phakopsora pachyrhizi,pathogen
 3885,Phaseolus vulgaris,host
 38293,Photobacterium damselae,pathogen
 29488,Photorhabdus luminescens,pathogen
@@ -470,6 +479,7 @@
 4550,Secale cereale,host
 39703,Septoria lycopersici,pathogen
 615,Serratia marcescens,pathogen
+300181,Serratia ureilytica,pathogen
 4555,Setaria italica,host
 93612,Setosphaeria turcica,pathogen
 623,Shigella flexneri,pathogen
@@ -491,6 +501,7 @@
 7107,Spodoptera exigua,host
 7108,Spodoptera frugiperda,host
 7109,Spodoptera littoralis,host
+72558,Sporisorium reilianum,pathogen
 49012,Sporisorium scitamineum,pathogen
 29908,Sporothrix schenckii,pathogen
 1280,Staphylococcus aureus,pathogen
@@ -525,6 +536,7 @@
 523103,Trichophyton mentagrophytes,pathogen
 5551,Trichophyton rubrum,pathogen
 7111,Trichoplusia ni,host
+47278,Trichothecium roseum,pathogen
 57577,Trifolium pratense,host
 4565,Triticum aestivum,host
 4566,Triticum aestivum x Triticum timopheevi,host
@@ -535,6 +547,7 @@
 120017,Ustilago hordei,pathogen
 5270,Ustilago maydis,pathogen
 105487,Valsa mali,pathogen
+694573,Cytospora mali,pathogen
 5025,Venturia inaequalis,pathogen
 27337,Verticillium dahliae,pathogen
 100787,Verticillium longisporum,pathogen
@@ -571,5 +584,6 @@
 69721,Zantedeschia aethiopica,host
 94108,Zantedeschia elliotiana,host
 4577,Zea mays,host
+4579,Zea mays subsp. mexicana,host
 326968,Ziziphus jujuba,host
 1047171,Zymoseptoria tritici,pathogen
