@@ -217,6 +217,11 @@ def clean_phibase_csv(phi_df):
             continue
         phi_df[column] = phi_df[column].str[0].str.lower() + phi_df[column].str[1:]
 
+    # Fix separators in experimental technique column
+    phi_df.exp_technique_stable = (
+        phi_df.exp_technique_stable.str.replace(r'\s*;\s*', '; ', regex=True)
+    )
+
     return phi_df
 
 
