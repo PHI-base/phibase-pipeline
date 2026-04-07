@@ -390,6 +390,8 @@ def get_amr_records(canto_export, phig_mapping, chebi_mapping):
                 continue  # Multi-allele genotypes are not yet supported by Ensembl
 
             genotype_data = get_genotype_data(session, genotype_id)
+            if genotype_data is None:
+                continue
             uniprot_id = genotype_data['uniprot_a']
             phig_id = phig_mapping.get(uniprot_id)
             if not phig_id:
