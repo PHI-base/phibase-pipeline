@@ -141,18 +141,24 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
     }
     curation_sessions = canto_export['curation_sessions']
     records = []
+
     for session in curation_sessions.values():
         pmid = int(next(iter(session['publications'].keys())).replace('PMID:', ''))
         for annotation in session.get('annotations', []):
+            phenotype = None
+            disease = None
             data = None
+            tissue_ids = None
+            high_level_term_str = None
             if metagenotype_id := annotation.get('metagenotype'):
                 data = get_metagenotype_data(session, metagenotype_id)
                 if data is None:
                     continue  # Multi-allele genotypes not handled yet
-                is_disease = annotation['type'] == 'disease_name'
                 term_id = annotation['term']
-                phenotype = None if is_disease else term_id
-                disease = term_id if is_disease else None
+                if annotation['type'] == 'disease_name':
+                    disease = term_id
+                else:
+                    phenotype = term_id
                 tissue_ids = get_tissue_id_str(annotation)
                 high_level_terms = get_high_level_terms(annotation)
                 has_effector_gene = (
@@ -169,18 +175,16 @@ def get_canto_columns(canto_export: dict, effector_ids: set[str]) -> pd.DataFram
                     gene_id=annotation['gene'],
                     interacting_gene_id=annotation['interacting_genes'][0],
                 )
-                phenotype = None
-                disease = None
-                tissue_ids = None
-                high_level_term_str = None
 
             if data is None:
                 continue
+
             interaction_type = interaction_type_map.get(annotation['type'])
             # Sometimes the evidence_code is an empty string instead of null
             evidence_code = annotation.get('evidence_code')
             if evidence_code == '':
                 evidence_code = None
+
             records.append(
                 {
                     **data,
