@@ -163,7 +163,7 @@ def uniprot_xref_dataframe():
         'taxid_species': 'Int64',
         'taxid_strain': 'Int64',
     }
-    return pd.read_csv(path, dtype=dtypes)
+    return pd.read_csv(path, dtype=dtypes)  # pyright: ignore[reportArgumentType]
 
 
 @pytest.fixture
