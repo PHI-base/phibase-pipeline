@@ -492,7 +492,7 @@ def make_ensembl_phibase_export(
         column in phi_df, then concatenate the IDs into one string per row.
         """
         phenotype_columns = list(phenotype_mapping.column_1.unique())
-        df = phi_df[phenotype_columns].dropna(axis=1).copy()
+        df = phi_df[phenotype_columns].dropna(axis=1, how='all').copy()
         # Add this column back in since it's needed for mapping
         df['is_filamentous'] = phi_df.is_filamentous
         selector = pd.MultiIndex.from_tuples(tuple(df.transpose()[0].to_dict().items()))
