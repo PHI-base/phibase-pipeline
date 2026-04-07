@@ -681,6 +681,9 @@ def write_ensembl_exports(
     canto_export = loaders.load_json(canto_export_path)
     uniprot_data = pd.read_csv(uniprot_data_path, sep='\t')
     dir_path = Path(dir_path)
+    exp_tech_traversable = DATA_DIR / 'phibase4_exp_tech_mapping.csv'
+    with importlib.resources.as_file(exp_tech_traversable) as exp_tech_path:
+        exp_tech_mapping = pd.read_csv(exp_tech_path)
     kwargs = {
         'uniprot_data': uniprot_data,
         'phig_mapping': loaders.load_phig_uniprot_mapping(),
@@ -689,9 +692,7 @@ def write_ensembl_exports(
         'phenotype_mapping': loaders.load_phenotype_column_mapping(),
         'disease_mapping': loaders.load_disease_column_mapping(),
         'tissue_mapping': loaders.load_bto_id_mapping(),
-        'exp_tech_mapping': pd.read_csv(
-            DATA_DIR / 'phibase4_exp_tech_mapping.csv',
-        ),
+        'exp_tech_mapping': exp_tech_mapping,
     }
     exports = make_ensembl_exports(phi_df, canto_export, **kwargs)
     export_filenames = {
