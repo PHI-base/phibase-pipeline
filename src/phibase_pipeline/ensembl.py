@@ -365,7 +365,7 @@ def make_ensembl_canto_export(
     combined_df[['sequence_A', 'sequence_B', 'buffer_col']] = np.nan
     combined_df = combined_df.rename(columns={'phibase_id': 'phig_id'})
     # TODO: Move this to get_canto_columns
-    combined_df.phig_id = [
+    combined_df['phig_id'] = [
         phig_mapping.get(x, np.nan) for x in combined_df.uniprot_a.values
     ]
     return combined_df
@@ -615,18 +615,18 @@ def make_ensembl_phibase_export(
 
     # TODO: Change add_disease_term_ids to return a series
     export_df = migrate.add_disease_term_ids(disease_mapping, export_df)
-    export_df.disease = export_df.disease_id
+    export_df['disease'] = export_df.disease_id
     export_df = export_df.drop('disease_id', axis=1)
 
-    export_df.host_tissue = migrate.get_tissue_id_series(
+    export_df['host_tissue'] = migrate.get_tissue_id_series(
         tissue_mapping, export_df.rename(columns={'host_tissue': 'tissue'})
     )
     # TODO: Unify this with existing code in clean.py
     common_name_pattern = r'\s*\(.+$'
-    export_df.organism_b = export_df.organism_b.str.replace(
+    export_df['organism_b'] = export_df.organism_b.str.replace(
         common_name_pattern, '', regex=True
     )
-    export_df.high_level_terms = export_df.high_level_terms.str.capitalize()
+    export_df['high_level_terms'] = export_df.high_level_terms.str.capitalize()
     return export_df
 
 
