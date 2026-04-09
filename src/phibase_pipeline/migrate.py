@@ -110,10 +110,9 @@ def add_alleles_and_evidence(exp_tech_df, phi_df):
     merge_columns = ['exp_technique_stable', 'gene_protein_modification']
     columns = ['allele_type', 'name', 'description', 'evidence_code', 'expression']
     return phi_df.merge(
-        exp_tech_df.set_index(merge_columns)[columns],
-        left_on=merge_columns,
-        right_index=True,
-        how='left',
+        exp_tech_df[merge_columns + columns],
+        on=merge_columns,
+                how='left',
     )
 
 
