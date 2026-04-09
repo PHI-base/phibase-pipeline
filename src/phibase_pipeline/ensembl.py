@@ -582,7 +582,7 @@ def make_ensembl_phibase_export(
     phi_df = map_experimental_techniques(phi_df, exp_tech_mapping)
 
     column_renames = {
-        'phi_molconn_id': 'phibase_id',
+        'phi_id': 'phibase_id',
         'protein_id': 'uniprot_a',
         'pathogen_id': 'taxid_a',
         'pathogen_species': 'organism_a',

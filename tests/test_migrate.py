@@ -624,19 +624,19 @@ def test_fill_multiple_mutation_ids():
     df = pd.DataFrame.from_records(
         [
             {
-                'phi_molconn_id': 'PHI:1',
+                'phi_id': 'PHI:1',
                 'multiple_mutation': 'PHI:2',
             },
             {
-                'phi_molconn_id': 'PHI:2',
+                'phi_id': 'PHI:2',
                 'multiple_mutation': 'PHI:1',
             },
             {
-                'phi_molconn_id': 'PHI:1',
+                'phi_id': 'PHI:1',
                 'multiple_mutation': 'PHI:3; PHI:2',
             },
             {
-                'phi_molconn_id': 'PHI:4',
+                'phi_id': 'PHI:4',
                 'multiple_mutation': np.nan,
             },
         ]
@@ -644,19 +644,19 @@ def test_fill_multiple_mutation_ids():
     expected = pd.DataFrame.from_records(
         [
             {
-                'phi_molconn_id': 'PHI:1',
+                'phi_id': 'PHI:1',
                 'multiple_mutation': 'PHI:1; PHI:2',
             },
             {
-                'phi_molconn_id': 'PHI:2',
+                'phi_id': 'PHI:2',
                 'multiple_mutation': 'PHI:1; PHI:2',
             },
             {
-                'phi_molconn_id': 'PHI:1',
+                'phi_id': 'PHI:1',
                 'multiple_mutation': 'PHI:1; PHI:2; PHI:3',
             },
             {
-                'phi_molconn_id': 'PHI:4',
+                'phi_id': 'PHI:4',
                 'multiple_mutation': np.nan,
             },
         ]
@@ -671,7 +671,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -683,7 +683,7 @@ test_add_genotype_ids_data = {
                     'expression': 'Overexpression',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -700,7 +700,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -714,7 +714,7 @@ test_add_genotype_ids_data = {
                     'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -735,7 +735,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -747,7 +747,7 @@ test_add_genotype_ids_data = {
                     'expression': 'Overexpression',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -764,7 +764,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -778,7 +778,7 @@ test_add_genotype_ids_data = {
                     'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': np.nan,
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -799,7 +799,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -811,7 +811,7 @@ test_add_genotype_ids_data = {
                     'expression': 'Overexpression',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:2',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -828,7 +828,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1; PHI:3',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -842,7 +842,7 @@ test_add_genotype_ids_data = {
                     'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:2; PHI:3',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -863,7 +863,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -875,7 +875,7 @@ test_add_genotype_ids_data = {
                     'expression': 'Overexpression',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -892,7 +892,7 @@ test_add_genotype_ids_data = {
         pd.DataFrame.from_records(
             [
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1; PHI:3',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -906,7 +906,7 @@ test_add_genotype_ids_data = {
                     'canto_host_genotype_id': 'Triticum-aestivum-wild-type-genotype-cv.-Chinese-Spring',
                 },
                 {
-                    'phi_molconn_id': 'PHI:3',
+                    'phi_id': 'PHI:3',
                     'session_id': '0123456789abcdef',
                     'multiple_mutation': 'PHI:1; PHI:3',
                     'pathogen_allele_id': 'Q00909:0123456789abcdef-1',
@@ -2528,15 +2528,15 @@ def test_get_phi_id_column():
     phi_df = pd.DataFrame.from_records(
         [
             {
-                'phi_molconn_id': 'PHI:1',
+                'phi_id': 'PHI:1',
                 'multiple_mutation': np.nan,
             },
             {
-                'phi_molconn_id': 'PHI:2',
+                'phi_id': 'PHI:2',
                 'multiple_mutation': 'PHI:11; PHI:10',
             },
             {
-                'phi_molconn_id': 'PHI:3',
+                'phi_id': 'PHI:3',
                 'multiple_mutation': 'PHI:3; PHI:7; PHI:8',
             },
         ]
@@ -2547,7 +2547,7 @@ def test_get_phi_id_column():
             'PHI:2; PHI:10; PHI:11',
             'PHI:3; PHI:7; PHI:8',
         ],
-        name='phi_molconn_id',
+        name='phi_id',
     )
     actual = get_phi_id_column(phi_df)
     pd.testing.assert_series_equal(actual, expected)

@@ -112,7 +112,7 @@ def add_alleles_and_evidence(exp_tech_df, phi_df):
     return phi_df.merge(
         exp_tech_df[merge_columns + columns],
         on=merge_columns,
-                how='left',
+        how='left',
     )
 
 
@@ -177,7 +177,7 @@ def fill_multiple_mutation_ids(df):
     df2 = df.loc[indexer]
     sep = '; '
     multi_mut_ids = (
-        df2.phi_molconn_id.str.cat(df2.multiple_mutation, sep)
+        df2.phi_id.str.cat(df2.multiple_mutation, sep)
         .str.split(sep)
         .apply(lambda x: sorted(set(x)))
         .str.join(sep)
@@ -924,8 +924,8 @@ def get_phi_id_column(phi_df):
         x if x is np.nan else sorted(list(set(x)), key=sort_by_id_num)
     )
     phi_ids = (
-        phi_df.phi_molconn_id.str.cat(phi_df.multiple_mutation, sep)
-        .mask(phi_df.multiple_mutation.isna(), phi_df.phi_molconn_id)
+        phi_df.phi_id.str.cat(phi_df.multiple_mutation, sep)
+        .mask(phi_df.multiple_mutation.isna(), phi_df.phi_id)
         .str.split(sep)
         .apply(sort_uniques)
         .str.join(sep)
