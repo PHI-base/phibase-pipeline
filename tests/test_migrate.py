@@ -1454,7 +1454,7 @@ def test_add_allele_objects():
                 'pathogen_allele_id': 'P10486:3a7f9b2e8c4d71e5-1',
                 'allele_type': 'deletion',
                 'canto_pathogen_gene_id': 'Escherichia coli P10486',
-                'description': np.nan,
+                'description': None,
                 'gene': 'hsdR',
                 'name': 'hsdRdelta',
                 'pathogen_gene_synonym': 'T1R1delta',
@@ -1467,14 +1467,14 @@ def test_add_allele_objects():
                 'description': 'test',
                 'gene': 'hsdR',
                 'name': 'hsdR+',
-                'pathogen_gene_synonym': np.nan,
+                'pathogen_gene_synonym': None,
             },
             {
                 'session_id': 'b6e0a5f3d92c8b17',
                 'pathogen_allele_id': 'P10486:b6e0a5f3d92c8b17-1',
                 'allele_type': 'deletion',
                 'canto_pathogen_gene_id': 'Escherichia coli P10486',
-                'description': np.nan,
+                'description': None,
                 'gene': 'hsdR',
                 'name': 'hsdRdelta',
                 'pathogen_gene_synonym': ['FOO', 'BAR'],
@@ -2529,7 +2529,7 @@ def test_get_phi_id_column():
         [
             {
                 'phi_id': 'PHI:1',
-                'multiple_mutation': np.nan,
+                'multiple_mutation': None,
             },
             {
                 'phi_id': 'PHI:2',

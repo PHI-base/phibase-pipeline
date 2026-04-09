@@ -361,7 +361,7 @@ def get_disease_annotations(phi_df):
     for row in disease_df.itertuples(index=False):
         session_id = row.session_id
         metagenotype = row.wt_metagenotype_id
-        if row.tissue_id is np.nan:
+        if pd.isna(row.tissue_id):
             extension = []
         else:
             extension = [
@@ -438,7 +438,7 @@ def add_allele_objects(canto_json, phi_df):
             if allele_type == type_name:
                 if suffix not in gene_name:
                     gene_name += suffix
-                if synonym is not np.nan and suffix not in synonym:
+                if pd.notna(synonym) and suffix not in synonym:
                     synonym += suffix
         return (gene_name, synonym)
 
@@ -460,13 +460,13 @@ def add_allele_objects(canto_json, phi_df):
         allele_id = row.pathogen_allele_id
         synonym = row.pathogen_gene_synonym
         allele_name = row.name
-        if row.name is np.nan:
+        if pd.isna(row.name):
             allele_name, synonym = format_gene_name_and_synonym(
                 row.allele_type, row.gene, synonym
             )
         synonym_list = (
             []
-            if synonym is np.nan
+            if not isinstance(synonym, list) and pd.isna(synonym)
             else synonym if isinstance(synonym, list) else [synonym]
         )
         allele = {
@@ -478,7 +478,7 @@ def add_allele_objects(canto_json, phi_df):
             'synonyms': synonym_list,
         }
         # This is probably inefficient, but inserting keys at a set location is a pain
-        if row.description is np.nan or not row.description:
+        if pd.isna(row.description) or not row.description:
             del allele['description']
 
         curation_sessions[row.session_id]['alleles'][allele_id] = allele
@@ -722,18 +722,18 @@ def make_phenotype_mapping(phenotype_mapping_df, phipo_mapping, phi_df):
         for column_name, column_df in indexed_mapping.items():
             for row in column_df.itertuples():
                 index = row.Index
-                term = row.primary_id if row.primary_id is not np.nan else 'PHIPO:0000001'
+                term = row.primary_id if pd.notna(row.primary_id) else 'PHIPO:0000001'
                 data = {
                     'conditions': [],
                     'term': term,
                     'extension': [],
                     'feature_type': row.feature,
                 }
-                if row.eco_id is not np.nan:
+                if pd.notna(row.eco_id):
                     data['conditions'].append(row.eco_id)
                 has_extension = (
-                    row.extension_range is not np.nan
-                    and row.extension_relation is not np.nan
+                    pd.notna(row.extension_range)
+                    and pd.notna(row.extension_relation)
                 )
                 if has_extension:
                     # TODO: Handle range types other than 'Ontology' and ontologies
@@ -779,10 +779,10 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
             'term': None,
             'type': 'pathogen_host_interaction_phenotype',
         }
-        if row.comments is not np.nan:
+        if pd.notna(row.comments):
             annotation_template['submitter_comment'] = row.comments
 
-        if row.metagenotype_id is not np.nan:
+        if pd.notna(row.metagenotype_id):
             metagenotype_annotations = [
                 annotation
                 for annotation in annotation_data
@@ -794,7 +794,7 @@ def add_phenotype_annotations(canto_json, phenotype_lookup, phi_df):
                 phi_annotation['metagenotype'] = row.metagenotype_id
                 phi_annotation['conditions'] = annotation['conditions']
                 extensions = annotation['extension']
-                if row.tissue_id is not np.nan:
+                if pd.notna(row.tissue_id):
                     tissue_extensions = [
                         {
                             'rangeDisplayName': tissue,
@@ -921,7 +921,9 @@ def get_phi_id_column(phi_df):
     sep = '; '
     sort_by_id_num = lambda x: int(x.split(':')[1])
     sort_uniques = lambda x: (
-        x if x is np.nan else sorted(list(set(x)), key=sort_by_id_num)
+        x
+        if not isinstance(x, list) and pd.isna(x)
+        else sorted(list(set(x)), key=sort_by_id_num)
     )
     phi_ids = (
         phi_df.phi_id.str.cat(phi_df.multiple_mutation, sep)

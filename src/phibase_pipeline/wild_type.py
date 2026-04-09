@@ -6,7 +6,7 @@ import copy
 import re
 from collections import defaultdict
 
-import numpy as np
+import pandas as pd
 
 
 def is_genotype_wild_type(session, genotype):
@@ -94,7 +94,7 @@ def get_wt_feature_mapping(feature_counts, session):
 
 def convert_allele_to_wild_type(allele_id, allele):
     new_allele = allele.copy()
-    gene_name = allele['name'] if allele['gene_name'] is np.nan else allele['gene_name']
+    gene_name = allele['name'] if pd.isna(allele['gene_name']) else allele['gene_name']
     new_allele['allele_type'] = 'wild type'
     new_allele['name'] = gene_name + '+'
     new_allele['primary_identifier'] = allele_id

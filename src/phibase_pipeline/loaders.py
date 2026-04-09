@@ -239,7 +239,7 @@ def load_obsolete_phido_mapping(path=None):
     mapping = {}
     for obsolete_id, rows in term_groups:
         replacement_ids = sorted(
-            list(set(row.replaced_by for row in rows if row.replaced_by is not np.nan))
+            list(set(row.replaced_by for row in rows if pd.notna(row.replaced_by)))
         )
         mapping[obsolete_id] = replacement_ids
     return mapping
