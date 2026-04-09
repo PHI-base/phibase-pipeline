@@ -3222,7 +3222,7 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [
                             {
@@ -3230,13 +3230,7 @@ def test_make_combined_export():
                                 'rangeType': 'Ontology',
                                 'rangeValue': 'PHIPO:0000004',
                                 'relation': 'infective_ability',
-                            },
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            },
+                            }
                         ],
                         'curator': {'community_curated': False},
                         'figure': '',
@@ -3251,16 +3245,9 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:3'],
@@ -3274,16 +3261,9 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:3'],
@@ -3297,7 +3277,7 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [],
                         'curator': {'community_curated': False},
@@ -3313,17 +3293,10 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'curator': {'community_curated': False},
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'figure': '',
                         'metagenotype': 'f86e79b5ed64a342-metagenotype-2',
                         'phi4_id': ['PHI:3'],
@@ -3371,22 +3344,22 @@ def test_make_combined_export():
                     },
                 },
                 'metadata': {
-                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'accepted_timestamp': '2005-05-04 10:00:00',
                     'annotation_mode': 'standard',
                     'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2000-05-10 14:00:00',
-                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
-                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'annotation_status_datestamp': '2005-05-04 14:00:00',
+                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
+                    'approved_timestamp': '2005-05-04 14:00:00',
                     'canto_session': 'f86e79b5ed64a342',
-                    'curation_accepted_date': '2000-05-10 10:00:00',
-                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_accepted_date': '2005-05-04 10:00:00',
+                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
                     'curation_pub_id': 'PMID:2152162',
                     'curator_role': 'Molecular Connections',
-                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'first_approved_timestamp': '2005-05-04 14:00:00',
                     'has_community_curation': False,
-                    'needs_approval_timestamp': '2000-05-10 12:00:00',
-                    'session_created_timestamp': '2000-05-10 09:00:00',
-                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'needs_approval_timestamp': '2005-05-04 12:00:00',
+                    'session_created_timestamp': '2005-05-04 09:00:00',
+                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
                     'session_genes_count': '1',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
@@ -3432,16 +3405,9 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:7'],
@@ -3453,7 +3419,7 @@ def test_make_combined_export():
                     },
                     {
                         'checked': 'yes',
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [],
                         'curator': {'community_curated': False},
@@ -3468,17 +3434,10 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'curator': {'community_curated': False},
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'figure': '',
                         'metagenotype': '2d4bcfa71ccca168-metagenotype-2',
                         'phi4_id': ['PHI:7'],
@@ -3519,22 +3478,22 @@ def test_make_combined_export():
                     },
                 },
                 'metadata': {
-                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'accepted_timestamp': '2005-05-04 10:00:00',
                     'annotation_mode': 'standard',
                     'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2000-05-10 14:00:00',
-                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
-                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'annotation_status_datestamp': '2005-05-04 14:00:00',
+                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
+                    'approved_timestamp': '2005-05-04 14:00:00',
                     'canto_session': '2d4bcfa71ccca168',
-                    'curation_accepted_date': '2000-05-10 10:00:00',
-                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_accepted_date': '2005-05-04 10:00:00',
+                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
                     'curation_pub_id': 'PMID:1799694',
                     'curator_role': 'Molecular Connections',
-                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'first_approved_timestamp': '2005-05-04 14:00:00',
                     'has_community_curation': False,
-                    'needs_approval_timestamp': '2000-05-10 12:00:00',
-                    'session_created_timestamp': '2000-05-10 09:00:00',
-                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'needs_approval_timestamp': '2005-05-04 12:00:00',
+                    'session_created_timestamp': '2005-05-04 09:00:00',
+                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
                     'session_genes_count': '1',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
@@ -3559,28 +3518,20 @@ def test_make_combined_export():
                 },
                 'publications': {'PMID:1799694': {}},
             },
-            '144c8f8625c95e5e': {
+            '7ce9018575492179': {
                 'alleles': {
-                    'Q4VKJ6:144c8f8625c95e5e-1': {
-                        'allele_type': 'unknown',
-                        'gene': 'Hyaloperonospora arabidopsidis Q4VKJ6',
-                        'name': 'ATR1',
-                        'primary_identifier': 'Q4VKJ6:144c8f8625c95e5e-1',
-                        'synonyms': ['ATR1NdWsB'],
-                    },
-                    'Q4VKJ6:144c8f8625c95e5e-2': {
-                        'allele_type': 'wild type',
-                        'gene': 'Hyaloperonospora arabidopsidis Q4VKJ6',
-                        'name': 'ATR1+',
-                        'primary_identifier': 'Q4VKJ6:144c8f8625c95e5e-2',
+                    'Q01886:7ce9018575492179-1': {
+                        'allele_type': 'deletion',
+                        'gene': 'Bipolaris zeicola Q01886',
+                        'name': 'HTS1Δ',
+                        'primary_identifier': 'Q01886:7ce9018575492179-1',
                         'synonyms': [],
                     },
-                    'Q7WT47:144c8f8625c95e5e-7': {
-                        'allele_type': 'nucleotide_insertion',
-                        'description': '618-A',
-                        'gene': 'Enterococcus faecalis Q7WT47',
-                        'name': 'lsa',
-                        'primary_identifier': 'Q7WT47:144c8f8625c95e5e-7',
+                    'Q01886:7ce9018575492179-2': {
+                        'allele_type': 'wild type',
+                        'gene': 'Bipolaris zeicola Q01886',
+                        'name': 'HTS1+',
+                        'primary_identifier': 'Q01886:7ce9018575492179-2',
                         'synonyms': [],
                     },
                 },
@@ -3588,86 +3539,125 @@ def test_make_combined_export():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2016-01-13',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [
                             {
-                                'rangeDisplayName': 'leaf',
+                                'rangeDisplayName': 'loss of pathogenicity',
                                 'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
+                                'rangeValue': 'PHIPO:0000010',
+                                'relation': 'infective_ability',
                             }
                         ],
                         'curator': {'community_curated': False},
                         'figure': '',
-                        'phi4_id': ['PHI:531'],
-                        'publication': 'PMID:12821484',
-                        'status': 'new',
-                        'term': 'PHIPO:0000192',
-                        'type': 'pathogen_host_interaction_phenotype',
-                        'submitter_comment': 'avirulent. Differential recognition of ATR1 alleles from different Hpa isolates by RPP1 resistance genes from different Arabidopsis lines (Nd and Ws).',
-                        'metagenotype': '144c8f8625c95e5e-metagenotype-1',
-                    },
-                    {
-                        'checked': 'yes',
-                        'conditions': [],
-                        'creation_date': '2016-01-13',
-                        'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:531'],
-                        'publication': 'PMID:12821484',
+                        'phi4_id': ['PHI:12'],
+                        'publication': 'PMID:11607305',
                         'status': 'new',
                         'term': 'PHIPO:0000001',
                         'type': 'pathogen_host_interaction_phenotype',
-                        'submitter_comment': 'avirulent. Differential recognition of ATR1 alleles from different Hpa isolates by RPP1 resistance genes from different Arabidopsis lines (Nd and Ws).',
-                        'metagenotype': '144c8f8625c95e5e-metagenotype-1',
-                    },
-                    {
-                        'checked': 'yes',
-                        'creation_date': '2016-01-13',
-                        'evidence_code': '',
-                        'extension': [],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:531'],
-                        'publication': 'PMID:12821484',
-                        'status': 'new',
-                        'term': 'GO:0140418',
-                        'type': 'biological_process',
-                        'submitter_comment': 'avirulent. Differential recognition of ATR1 alleles from different Hpa isolates by RPP1 resistance genes from different Arabidopsis lines (Nd and Ws).',
-                        'gene': 'Hyaloperonospora arabidopsidis Q4VKJ6',
+                        'submitter_comment': 'pathogen formerly called Cochliobolus carbonum teleomorph name',
+                        'metagenotype': '7ce9018575492179-metagenotype-1',
                     },
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2016-01-13',
+                        'creation_date': '2005-05-04',
                         'curator': {'community_curated': False},
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'figure': '',
-                        'metagenotype': '144c8f8625c95e5e-metagenotype-2',
-                        'phi4_id': ['PHI:531'],
-                        'publication': 'PMID:12821484',
+                        'metagenotype': '7ce9018575492179-metagenotype-2',
+                        'phi4_id': ['PHI:12'],
+                        'publication': 'PMID:11607305',
                         'status': 'new',
-                        'term': 'PHIDO:0000124',
+                        'term': 'PHIDO:0000211',
                         'type': 'disease_name',
                     },
+                ],
+                'genes': {
+                    'Bipolaris zeicola Q01886': {
+                        'organism': 'Bipolaris zeicola',
+                        'uniquename': 'Q01886',
+                    }
+                },
+                'genotypes': {
+                    '7ce9018575492179-genotype-1': {
+                        'loci': [[{'id': 'Q01886:7ce9018575492179-1'}]],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                    'Zea-mays-wild-type-genotype-Unknown-strain': {
+                        'loci': [],
+                        'organism_strain': 'Unknown strain',
+                        'organism_taxonid': 4577,
+                    },
+                    '7ce9018575492179-genotype-2': {
+                        'loci': [
+                            [
+                                {
+                                    'id': 'Q01886:7ce9018575492179-2',
+                                    'expression': 'Not assayed',
+                                }
+                            ]
+                        ],
+                        'organism_strain': 'SB111',
+                        'organism_taxonid': 5017,
+                    },
+                },
+                'metadata': {
+                    'accepted_timestamp': '2005-05-04 10:00:00',
+                    'annotation_mode': 'standard',
+                    'annotation_status': 'APPROVED',
+                    'annotation_status_datestamp': '2005-05-04 14:00:00',
+                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
+                    'approved_timestamp': '2005-05-04 14:00:00',
+                    'canto_session': '7ce9018575492179',
+                    'curation_accepted_date': '2005-05-04 10:00:00',
+                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
+                    'curation_pub_id': 'PMID:11607305',
+                    'curator_role': 'Molecular Connections',
+                    'first_approved_timestamp': '2005-05-04 14:00:00',
+                    'has_community_curation': False,
+                    'needs_approval_timestamp': '2005-05-04 12:00:00',
+                    'session_created_timestamp': '2005-05-04 09:00:00',
+                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
+                    'session_genes_count': '1',
+                    'session_term_suggestions_count': '0',
+                    'session_unknown_conditions_count': '0',
+                    'term_suggestion_count': '0',
+                    'unknown_conditions_count': '0',
+                },
+                'metagenotypes': {
+                    '7ce9018575492179-metagenotype-1': {
+                        'pathogen_genotype': '7ce9018575492179-genotype-1',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                    '7ce9018575492179-metagenotype-2': {
+                        'pathogen_genotype': '7ce9018575492179-genotype-2',
+                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
+                        'type': 'pathogen-host',
+                    },
+                },
+                'organisms': {
+                    '5017': {'full_name': 'Bipolaris zeicola', 'role': 'pathogen'},
+                    '4577': {'full_name': 'Zea mays', 'role': 'host'},
+                },
+                'publications': {'PMID:11607305': {}},
+            },
+            '144c8f8625c95e5e': {
+                'alleles': {
+                    'Q7WT47:144c8f8625c95e5e-7': {
+                        'allele_type': 'nucleotide_insertion',
+                        'description': '618-A',
+                        'gene': 'Enterococcus faecalis Q7WT47',
+                        'name': 'lsa',
+                        'primary_identifier': 'Q7WT47:144c8f8625c95e5e-7',
+                        'synonyms': [],
+                    }
+                },
+                'annotations': [
                     {
                         'conditions': [
                             'PECO:0000102',
@@ -3693,49 +3683,16 @@ def test_make_combined_export():
                         'submitter_comment': '',
                         'term': 'PHIPO:0000560',
                         'type': 'pathogen_phenotype',
-                    },
+                    }
                 ],
                 'genes': {
-                    'Hyaloperonospora arabidopsidis Q4VKJ6': {
-                        'organism': 'Hyaloperonospora arabidopsidis',
-                        'uniquename': 'Q4VKJ6',
-                    },
                     'Enterococcus faecalis Q7WT47': {
                         'organism': 'Enterococcus faecalis',
                         'uniquename': 'Q7WT47',
-                    },
+                    }
                 },
                 'genotypes': {
                     '144c8f8625c95e5e-genotype-1': {
-                        'loci': [
-                            [
-                                {
-                                    'expression': 'Not assayed',
-                                    'id': 'Q4VKJ6:144c8f8625c95e5e-1',
-                                }
-                            ]
-                        ],
-                        'organism_strain': 'Emoy2',
-                        'organism_taxonid': 272952,
-                    },
-                    'Arabidopsis-thaliana-wild-type-genotype-RIL-3860-line': {
-                        'loci': [],
-                        'organism_strain': 'RIL 3860 line',
-                        'organism_taxonid': 3702,
-                    },
-                    '144c8f8625c95e5e-genotype-2': {
-                        'loci': [
-                            [
-                                {
-                                    'expression': 'Not assayed',
-                                    'id': 'Q4VKJ6:144c8f8625c95e5e-2',
-                                }
-                            ]
-                        ],
-                        'organism_strain': 'Emoy2',
-                        'organism_taxonid': 272952,
-                    },
-                    '144c8f8625c95e5e-genotype-3': {
                         'loci': [
                             [
                                 {
@@ -3746,7 +3703,7 @@ def test_make_combined_export():
                         ],
                         'organism_strain': 'UCN32',
                         'organism_taxonid': 1351,
-                    },
+                    }
                 },
                 'metadata': {
                     'accepted_timestamp': '2023-11-02 23:41:46',
@@ -3765,134 +3722,28 @@ def test_make_combined_export():
                     'needs_approval_timestamp': '2024-01-31 11:51:09',
                     'session_created_timestamp': '2023-11-02 23:41:39',
                     'session_first_submitted_timestamp': '2024-01-31 11:51:09',
-                    'session_genes_count': '2',
+                    'session_genes_count': '1',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
                     'term_suggestion_count': '0',
                     'unknown_conditions_count': '0',
                 },
-                'metagenotypes': {
-                    '144c8f8625c95e5e-metagenotype-1': {
-                        'pathogen_genotype': '144c8f8625c95e5e-genotype-1',
-                        'host_genotype': 'Arabidopsis-thaliana-wild-type-genotype-RIL-3860-line',
-                        'type': 'pathogen-host',
-                    },
-                    '144c8f8625c95e5e-metagenotype-2': {
-                        'pathogen_genotype': '144c8f8625c95e5e-genotype-2',
-                        'host_genotype': 'Arabidopsis-thaliana-wild-type-genotype-RIL-3860-line',
-                        'type': 'pathogen-host',
-                    },
-                },
                 'organisms': {
-                    '272952': {
-                        'full_name': 'Hyaloperonospora arabidopsidis',
-                        'role': 'pathogen',
-                    },
-                    '3702': {'full_name': 'Arabidopsis thaliana', 'role': 'host'},
-                    '1351': {'full_name': 'Enterococcus faecalis', 'role': 'pathogen'},
+                    '1351': {'full_name': 'Enterococcus faecalis', 'role': 'pathogen'}
                 },
                 'publications': {'PMID:12821484': {}},
             },
             'baeff7a059e5f6c4': {
                 'alleles': {
-                    'M5C8P6:baeff7a059e5f6c4-1': {
-                        'allele_type': 'unknown',
-                        'gene': 'Cercospora beticola M5C8P6',
-                        'name': 'RsLysM',
-                        'primary_identifier': 'M5C8P6:baeff7a059e5f6c4-1',
-                        'synonyms': [],
-                    },
-                    'M5C8P6:baeff7a059e5f6c4-2': {
-                        'allele_type': 'wild type',
-                        'gene': 'Cercospora beticola M5C8P6',
-                        'name': 'RsLysM+',
-                        'primary_identifier': 'M5C8P6:baeff7a059e5f6c4-2',
-                        'synonyms': [],
-                    },
                     'A0A0K6FU48:baeff7a059e5f6c4-1': {
                         'allele_type': 'wild_type',
                         'gene': 'Rhizoctonia solani A0A0K6FU48',
                         'name': 'RSOLAG22IIIB_04067+',
                         'primary_identifier': 'A0A0K6FU48:baeff7a059e5f6c4-1',
                         'synonyms': [],
-                    },
+                    }
                 },
                 'annotations': [
-                    {
-                        'checked': 'yes',
-                        'conditions': [],
-                        'creation_date': '2021-07-01',
-                        'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:11444'],
-                        'publication': 'PMID:31076860',
-                        'status': 'new',
-                        'term': 'PHIPO:0000001',
-                        'type': 'pathogen_host_interaction_phenotype',
-                        'submitter_comment': 'When RsLysM was heterologously expressed in Cercospora beticola, necrotic lesion size and fungal colonization ability were increased, indicating a role in virulence.',
-                        'metagenotype': 'baeff7a059e5f6c4-metagenotype-1',
-                    },
-                    {
-                        'checked': 'yes',
-                        'creation_date': '2021-07-01',
-                        'evidence_code': '',
-                        'extension': [],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:11444'],
-                        'publication': 'PMID:31076860',
-                        'status': 'new',
-                        'term': 'GO:0140418',
-                        'type': 'biological_process',
-                        'submitter_comment': 'When RsLysM was heterologously expressed in Cercospora beticola, necrotic lesion size and fungal colonization ability were increased, indicating a role in virulence.',
-                        'gene': 'Cercospora beticola M5C8P6',
-                    },
-                    {
-                        'checked': 'yes',
-                        'creation_date': '2021-07-01',
-                        'evidence_code': '',
-                        'extension': [],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:11444'],
-                        'publication': 'PMID:31076860',
-                        'status': 'new',
-                        'term': 'GO:0140418',
-                        'type': 'biological_process',
-                        'submitter_comment': 'When RsLysM was heterologously expressed in Cercospora beticola, necrotic lesion size and fungal colonization ability were increased, indicating a role in virulence.',
-                        'gene': 'Rhizoctonia solani M5C8P6',
-                    },
-                    {
-                        'checked': 'yes',
-                        'conditions': [],
-                        'creation_date': '2021-07-01',
-                        'curator': {'community_curated': False},
-                        'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
-                        'figure': '',
-                        'metagenotype': 'baeff7a059e5f6c4-metagenotype-3',
-                        'phi4_id': ['PHI:11444'],
-                        'publication': 'PMID:31076860',
-                        'status': 'new',
-                        'term': 'PHIDO:0000211',
-                        'type': 'disease_name',
-                    },
                     {
                         'conditions': [],
                         'creation_date': '2019-12-02',
@@ -4108,32 +3959,12 @@ def test_make_combined_export():
                     },
                 ],
                 'genes': {
-                    'Cercospora beticola M5C8P6': {
-                        'organism': 'Cercospora beticola',
-                        'uniquename': 'M5C8P6',
-                    },
-                    'Rhizoctonia solani M5C8P6': {
-                        'organism': 'Rhizoctonia solani',
-                        'uniquename': 'M5C8P6',
-                    },
                     'Rhizoctonia solani A0A0K6FU48': {
                         'organism': 'Rhizoctonia solani',
                         'uniquename': 'A0A0K6FU48',
-                    },
+                    }
                 },
                 'genotypes': {
-                    'baeff7a059e5f6c4-genotype-1': {
-                        'loci': [
-                            [
-                                {
-                                    'expression': 'Not assayed',
-                                    'id': 'M5C8P6:baeff7a059e5f6c4-1',
-                                }
-                            ]
-                        ],
-                        'organism_strain': 'Ty1',
-                        'organism_taxonid': 122368,
-                    },
                     'Beta-vulgaris-wild-type-genotype-Unknown-strain': {
                         'loci': [],
                         'organism_strain': 'Unknown strain',
@@ -4144,17 +3975,17 @@ def test_make_combined_export():
                         'organism_strain': 'Unknown strain',
                         'organism_taxonid': 4100,
                     },
-                    'baeff7a059e5f6c4-genotype-3': {
+                    'baeff7a059e5f6c4-genotype-7': {
                         'loci': [
                             [
                                 {
                                     'expression': 'Not assayed',
-                                    'id': 'M5C8P6:baeff7a059e5f6c4-2',
+                                    'id': 'A0A0K6FU48:baeff7a059e5f6c4-1',
                                 }
                             ]
                         ],
-                        'organism_strain': 'Ty1',
-                        'organism_taxonid': 122368,
+                        'organism_strain': 'AG2-2IIIB',
+                        'organism_taxonid': 456999,
                     },
                 },
                 'metadata': {
@@ -4177,7 +4008,7 @@ def test_make_combined_export():
                     'reactivated_timestamp': '2021-03-09 09:34:31',
                     'session_created_timestamp': '2019-09-30 11:29:01',
                     'session_first_submitted_timestamp': '2021-01-25 19:22:13',
-                    'session_genes_count': '3',
+                    'session_genes_count': '1',
                     'session_reactivated_timestamp': '2021-03-09 09:34:31',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
@@ -4186,28 +4017,22 @@ def test_make_combined_export():
                 },
                 'metagenotypes': {
                     'baeff7a059e5f6c4-metagenotype-1': {
-                        'pathogen_genotype': 'baeff7a059e5f6c4-genotype-1',
                         'host_genotype': 'Beta-vulgaris-wild-type-genotype-Unknown-strain',
+                        'pathogen_genotype': 'baeff7a059e5f6c4-genotype-7',
                         'type': 'pathogen-host',
                     },
-                    'baeff7a059e5f6c4-metagenotype-3': {
-                        'pathogen_genotype': 'baeff7a059e5f6c4-genotype-3',
-                        'host_genotype': 'Beta-vulgaris-wild-type-genotype-Unknown-strain',
-                        'type': 'pathogen-host',
-                    },
-                    'baeff7a059e5f6c4-metagenotype-4': {
-                        'host_genotype': 'Beta-vulgaris-wild-type-genotype-Unknown-strain',
+                    'baeff7a059e5f6c4-metagenotype-2': {
+                        'host_genotype': 'Nicotiana-benthamiana-wild-type-genotype-Unknown-strain',
                         'pathogen_genotype': 'baeff7a059e5f6c4-genotype-7',
                         'type': 'pathogen-host',
                     },
                 },
                 'organisms': {
-                    '122368': {'full_name': 'Cercospora beticola', 'role': 'pathogen'},
-                    '456999': {'full_name': 'Rhizoctonia solani', 'role': 'pathogen'},
                     '161934': {'full_name': 'Beta vulgaris', 'role': 'host'},
                     '4100': {'full_name': 'Nicotiana benthamiana', 'role': 'host'},
+                    '456999': {'full_name': 'Rhizoctonia solani', 'role': 'pathogen'},
                 },
-                'publications': {'PMID:31076860': {}},
+                'publications': {'PMID:11607305': {}},
             },
         },
         'schema_version': 1,
