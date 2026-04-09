@@ -2864,7 +2864,7 @@ def test_add_annotation_objects():
 
 def test_make_phibase_json():
     phibase_path = DATA_DIR / 'phibase_test.csv'
-    superseded_pmids = [15894715]
+    superseded_pmids = [11607305]
     expected = {
         'curation_sessions': {
             'f86e79b5ed64a342': {
@@ -2890,7 +2890,7 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [
                             {
@@ -2898,13 +2898,7 @@ def test_make_phibase_json():
                                 'rangeType': 'Ontology',
                                 'rangeValue': 'PHIPO:0000004',
                                 'relation': 'infective_ability',
-                            },
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            },
+                            }
                         ],
                         'curator': {'community_curated': False},
                         'figure': '',
@@ -2919,16 +2913,9 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:3'],
@@ -2942,16 +2929,9 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:3'],
@@ -2965,7 +2945,7 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [],
                         'curator': {'community_curated': False},
@@ -2981,17 +2961,10 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'curator': {'community_curated': False},
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'figure': '',
                         'metagenotype': 'f86e79b5ed64a342-metagenotype-2',
                         'phi4_id': ['PHI:3'],
@@ -3039,22 +3012,22 @@ def test_make_phibase_json():
                     },
                 },
                 'metadata': {
-                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'accepted_timestamp': '2005-05-04 10:00:00',
                     'annotation_mode': 'standard',
                     'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2000-05-10 14:00:00',
-                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
-                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'annotation_status_datestamp': '2005-05-04 14:00:00',
+                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
+                    'approved_timestamp': '2005-05-04 14:00:00',
                     'canto_session': 'f86e79b5ed64a342',
-                    'curation_accepted_date': '2000-05-10 10:00:00',
-                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_accepted_date': '2005-05-04 10:00:00',
+                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
                     'curation_pub_id': 'PMID:2152162',
                     'curator_role': 'Molecular Connections',
-                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'first_approved_timestamp': '2005-05-04 14:00:00',
                     'has_community_curation': False,
-                    'needs_approval_timestamp': '2000-05-10 12:00:00',
-                    'session_created_timestamp': '2000-05-10 09:00:00',
-                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'needs_approval_timestamp': '2005-05-04 12:00:00',
+                    'session_created_timestamp': '2005-05-04 09:00:00',
+                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
                     'session_genes_count': '1',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
@@ -3102,16 +3075,9 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'curator': {'community_curated': False},
                         'figure': '',
                         'phi4_id': ['PHI:7'],
@@ -3123,7 +3089,7 @@ def test_make_phibase_json():
                     },
                     {
                         'checked': 'yes',
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'evidence_code': '',
                         'extension': [],
                         'curator': {'community_curated': False},
@@ -3138,17 +3104,10 @@ def test_make_phibase_json():
                     {
                         'checked': 'yes',
                         'conditions': [],
-                        'creation_date': '2000-05-10',
+                        'creation_date': '2005-05-04',
                         'curator': {'community_curated': False},
                         'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
+                        'extension': [],
                         'figure': '',
                         'metagenotype': '2d4bcfa71ccca168-metagenotype-2',
                         'phi4_id': ['PHI:7'],
@@ -3189,22 +3148,22 @@ def test_make_phibase_json():
                     },
                 },
                 'metadata': {
-                    'accepted_timestamp': '2000-05-10 10:00:00',
+                    'accepted_timestamp': '2005-05-04 10:00:00',
                     'annotation_mode': 'standard',
                     'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2000-05-10 14:00:00',
-                    'approval_in_progress_timestamp': '2000-05-10 13:00:00',
-                    'approved_timestamp': '2000-05-10 14:00:00',
+                    'annotation_status_datestamp': '2005-05-04 14:00:00',
+                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
+                    'approved_timestamp': '2005-05-04 14:00:00',
                     'canto_session': '2d4bcfa71ccca168',
-                    'curation_accepted_date': '2000-05-10 10:00:00',
-                    'curation_in_progress_timestamp': '2000-05-10 11:00:00',
+                    'curation_accepted_date': '2005-05-04 10:00:00',
+                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
                     'curation_pub_id': 'PMID:1799694',
                     'curator_role': 'Molecular Connections',
-                    'first_approved_timestamp': '2000-05-10 14:00:00',
+                    'first_approved_timestamp': '2005-05-04 14:00:00',
                     'has_community_curation': False,
-                    'needs_approval_timestamp': '2000-05-10 12:00:00',
-                    'session_created_timestamp': '2000-05-10 09:00:00',
-                    'session_first_submitted_timestamp': '2000-05-10 12:00:00',
+                    'needs_approval_timestamp': '2005-05-04 12:00:00',
+                    'session_created_timestamp': '2005-05-04 09:00:00',
+                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
                     'session_genes_count': '1',
                     'session_term_suggestions_count': '0',
                     'session_unknown_conditions_count': '0',
@@ -3228,156 +3187,6 @@ def test_make_phibase_json():
                     '4081': {'full_name': 'Solanum lycopersicum'},
                 },
                 'publications': {'PMID:1799694': {}},
-            },
-            '7ce9018575492179': {
-                'alleles': {
-                    'Q01886:7ce9018575492179-1': {
-                        'allele_type': 'unknown',
-                        'gene': 'Bipolaris zeicola Q01886',
-                        'name': 'HTS1',
-                        'primary_identifier': 'Q01886:7ce9018575492179-1',
-                        'synonyms': [],
-                        'gene_name': 'HTS1',
-                    },
-                    'Q01886:7ce9018575492179-2': {
-                        'allele_type': 'wild type',
-                        'gene': 'Bipolaris zeicola Q01886',
-                        'name': 'HTS1+',
-                        'primary_identifier': 'Q01886:7ce9018575492179-2',
-                        'synonyms': [],
-                        'gene_name': 'HTS1',
-                    },
-                },
-                'annotations': [
-                    {
-                        'checked': 'yes',
-                        'conditions': [],
-                        'creation_date': '2005-05-04',
-                        'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'loss of pathogenicity',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'PHIPO:0000010',
-                                'relation': 'infective_ability',
-                            },
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            },
-                        ],
-                        'curator': {'community_curated': False},
-                        'figure': '',
-                        'phi4_id': ['PHI:12'],
-                        'publication': 'PMID:11607305',
-                        'status': 'new',
-                        'term': 'PHIPO:0000001',
-                        'type': 'pathogen_host_interaction_phenotype',
-                        'submitter_comment': 'pathogen formerly called Cochliobolus carbonum teleomorph name',
-                        'metagenotype': '7ce9018575492179-metagenotype-1',
-                    },
-                    {
-                        'checked': 'yes',
-                        'conditions': [],
-                        'creation_date': '2005-05-04',
-                        'curator': {'community_curated': False},
-                        'evidence_code': '',
-                        'extension': [
-                            {
-                                'rangeDisplayName': 'leaf',
-                                'rangeType': 'Ontology',
-                                'rangeValue': 'BTO:0000713',
-                                'relation': 'infects_tissue',
-                            }
-                        ],
-                        'figure': '',
-                        'metagenotype': '7ce9018575492179-metagenotype-2',
-                        'phi4_id': ['PHI:12'],
-                        'publication': 'PMID:11607305',
-                        'status': 'new',
-                        'term': 'PHIDO:0000211',
-                        'type': 'disease_name',
-                    },
-                ],
-                'genes': {
-                    'Bipolaris zeicola Q01886': {
-                        'organism': 'Bipolaris zeicola',
-                        'uniquename': 'Q01886',
-                    }
-                },
-                'genotypes': {
-                    '7ce9018575492179-genotype-1': {
-                        'loci': [
-                            [
-                                {
-                                    'expression': 'Not assayed',
-                                    'id': 'Q01886:7ce9018575492179-1',
-                                }
-                            ]
-                        ],
-                        'organism_strain': 'SB111',
-                        'organism_taxonid': 5017,
-                    },
-                    'Zea-mays-wild-type-genotype-Unknown-strain': {
-                        'loci': [],
-                        'organism_strain': 'Unknown strain',
-                        'organism_taxonid': 4577,
-                    },
-                    '7ce9018575492179-genotype-2': {
-                        'loci': [
-                            [
-                                {
-                                    'expression': 'Not assayed',
-                                    'id': 'Q01886:7ce9018575492179-2',
-                                }
-                            ]
-                        ],
-                        'organism_strain': 'SB111',
-                        'organism_taxonid': 5017,
-                    },
-                },
-                'metadata': {
-                    'accepted_timestamp': '2005-05-04 10:00:00',
-                    'annotation_mode': 'standard',
-                    'annotation_status': 'APPROVED',
-                    'annotation_status_datestamp': '2005-05-04 14:00:00',
-                    'approval_in_progress_timestamp': '2005-05-04 13:00:00',
-                    'approved_timestamp': '2005-05-04 14:00:00',
-                    'canto_session': '7ce9018575492179',
-                    'curation_accepted_date': '2005-05-04 10:00:00',
-                    'curation_in_progress_timestamp': '2005-05-04 11:00:00',
-                    'curation_pub_id': 'PMID:11607305',
-                    'curator_role': 'Molecular Connections',
-                    'first_approved_timestamp': '2005-05-04 14:00:00',
-                    'has_community_curation': False,
-                    'needs_approval_timestamp': '2005-05-04 12:00:00',
-                    'session_created_timestamp': '2005-05-04 09:00:00',
-                    'session_first_submitted_timestamp': '2005-05-04 12:00:00',
-                    'session_genes_count': '1',
-                    'session_term_suggestions_count': '0',
-                    'session_unknown_conditions_count': '0',
-                    'term_suggestion_count': '0',
-                    'unknown_conditions_count': '0',
-                },
-                'metagenotypes': {
-                    '7ce9018575492179-metagenotype-1': {
-                        'pathogen_genotype': '7ce9018575492179-genotype-1',
-                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
-                        'type': 'pathogen-host',
-                    },
-                    '7ce9018575492179-metagenotype-2': {
-                        'pathogen_genotype': '7ce9018575492179-genotype-2',
-                        'host_genotype': 'Zea-mays-wild-type-genotype-Unknown-strain',
-                        'type': 'pathogen-host',
-                    },
-                },
-                'organisms': {
-                    '5017': {'full_name': 'Bipolaris zeicola'},
-                    '4577': {'full_name': 'Zea mays'},
-                },
-                'publications': {'PMID:11607305': {}},
             },
         },
         'schema_version': 1,
