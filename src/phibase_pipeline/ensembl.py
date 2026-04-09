@@ -574,7 +574,6 @@ def make_ensembl_phibase_export(
         return phi_df
 
     phi_df = phi_df.copy()
-    phi_df.columns = clean.get_normalized_column_names(phi_df)
 
     phi_df['host_uniprot'] = phi_df.host_target_id.str.extract(
         r'uniprot: (.+?);', flags=re.I, expand=False
