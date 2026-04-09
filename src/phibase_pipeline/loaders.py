@@ -218,10 +218,9 @@ def load_phibase5_json_schema():
 def load_phibase_csv(path):
     return pd.read_csv(
         path,
-        skipinitialspace=True,
-        skiprows=1,
+        dtype=get_phibase_dtypes(),
+        parse_dates=['curation_date'],
         na_values=['', 'no data found'],
-        dtype=str,
     )
 
 
