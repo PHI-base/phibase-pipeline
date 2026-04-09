@@ -2680,7 +2680,7 @@ def test_make_phenotype_mapping():
                 'extension_range': np.nan,
             },
             {
-                'column_1': 'postpenetration_defect',
+                'column_1': 'post_penetration_defect',
                 'value_1': 'no',
                 'column_2': np.nan,
                 'value_2': np.nan,
@@ -2704,14 +2704,14 @@ def test_make_phenotype_mapping():
                 'mutant_phenotype': 'unaffected pathogenicity',
                 'in_vitro_growth': 'defective on minimal media',
                 'is_filamentous': False,
-                'postpenetration_defect': 'no',
+                'post_penetration_defect': 'no',
             },
             {
                 'record_id': 'Record 2',
                 'mutant_phenotype': 'effector (plant avirulence determinant)',
                 'in_vitro_growth': np.nan,
                 'is_filamentous': np.nan,
-                'postpenetration_defect': np.nan,
+                'post_penetration_defect': np.nan,
             },
         ]
     )

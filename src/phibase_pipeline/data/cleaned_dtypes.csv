@@ -33,9 +33,9 @@ database,str
 pathway,str
 mutant_phenotype,str
 mating_defect,str
-prepenetration_defect,str
+pre_penetration_defect,str
 penetration_defect,str
-postpenetration_defect,str
+post_penetration_defect,str
 disease_manifestation,str
 vegetative_spores,str
 sexual_spores,str
