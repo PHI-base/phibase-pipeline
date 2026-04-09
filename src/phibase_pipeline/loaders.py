@@ -16,6 +16,84 @@ DATA_DIR = Path(__file__).parent / 'data'
 SCHEMA_DIR = Path(__file__).parent / 'schema'
 
 
+def get_phibase_dtypes():
+    columns = [
+        'record_id',
+        'phi_id',
+        'protein_id_source',
+        'protein_id',
+        'gene_id_source',
+        'gene_id',
+        'aa_sequence',
+        'nt_sequence',
+        'sequence_strain',
+        'gene',
+        'chromosome_location',
+        'gene_protein_modification',
+        'modified_gene_protein_id',
+        'interacting_partners',
+        'interacting_partners_id',
+        'multiple_mutation',
+        'pathogen_id',
+        'pathogen_species',
+        'pathogen_strain_id',
+        'pathogen_strain',
+        'disease',
+        'host_description',
+        'host_id',
+        'host_species',
+        'host_strain',
+        'host_genotype',
+        'host_genotype_id',
+        'tissue',
+        'gene_function',
+        'go_annotation',
+        'database',
+        'pathway',
+        'mutant_phenotype',
+        'mating_defect',
+        'pre_penetration_defect',
+        'penetration_defect',
+        'post_penetration_defect',
+        'disease_manifestation',
+        'vegetative_spores',
+        'sexual_spores',
+        'in_vitro_growth',
+        'spore_germination',
+        'essential_gene',
+        'gene_inducer',
+        'gene_inducer_id',
+        'host_target',
+        'host_target_id',
+        'interaction_phenotype',
+        'host_response',
+        'exp_technique_stable',
+        'exp_technique_transient',
+        'pmid',
+        'reference_source',
+        'doi',
+        'reference_detail',
+        'comments',
+        'author_reference',
+        'year',
+        'curation_details',
+        'curation_date',
+        'curator_organization',
+        'lab'
+    ]
+    integer_columns = {
+        'pathogen_id',
+        'host_id',
+        'pmid',
+        'year',
+    }
+    dtypes = {
+        col: pd.Int64Dtype() if col in integer_columns else pd.StringDtype()
+        for col in columns
+    }
+    return dtypes
+
+
 def load_phig_uniprot_mapping(path=None):
     path = DATA_DIR / 'phig_uniprot_mapping.csv' if path is None else path
     return pd.read_csv(path, index_col='uniprot_id')['phig_id'].to_dict()
