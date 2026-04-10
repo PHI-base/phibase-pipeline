@@ -130,8 +130,9 @@ def remove_invalid_genotypes(session):
                     allele = alleles[allele_id]
                     gene_id = allele['gene']
                     gene = genes[gene_id]
-                    organism_name = gene['organism']
-                    taxon_id = taxon_of_organism[organism_name]
+                    gene_organism_name = gene['organism']
+                    # TODO: Investigate why some genes don't match an organism.
+                    taxon_id = taxon_of_organism.get(gene_organism_name)
                     if taxon_id != genotype_taxon_id:
                         invalid_ids.append(genotype_id)
         return set(invalid_ids)
