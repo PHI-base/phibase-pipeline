@@ -21,6 +21,19 @@ pd.set_option('future.no_silent_downcasting', True)
 DATA_DIR = Path(__file__).parent / 'data'
 
 
+def props_not_equal(props, next_props):
+    for prop, next_prop in zip(props, next_props):
+        if pd.isna(prop):
+            if pd.notna(next_prop):
+                return True
+        elif pd.isna(next_prop):
+            if pd.notna(prop):
+                return True
+        elif prop != next_prop:
+            return True
+    return False
+
+
 def split_compound_rows(df, column, sep='; '):
     original_columns = df.columns
     split_df = df[column].str.split(sep, regex=False).explode().to_frame()
@@ -158,7 +171,7 @@ def add_allele_ids(df):
         allele_ids.append(f'{protein_id}:{session_id}-{i}')
         if (next_session_id != session_id) | (protein_id != next_protein_id):
             i = 1
-        elif props != next_props:
+        elif props_not_equal(props, next_props):
             i += 1
 
     # Append the final row because iteration stops early.
@@ -215,7 +228,7 @@ def add_genotype_ids(df):
                 if append_ids:
                     i_offset = session_genotype_counts[next_session_id]
                 i = 1 + i_offset
-            elif props != next_props:
+            elif props_not_equal(props, next_props):
                 i += 1
 
         # Append the final row because pairwise iteration stops early
@@ -285,7 +298,7 @@ def add_metagenotype_ids(df):
         metagenotype_nums.append(i)
         if session_id != next_session_id:
             i = 1
-        elif props != next_props:
+        elif props_not_equal(props, next_props):
             i += 1
     # Append the final row because iteration stops early
     metagenotype_nums.append(i)

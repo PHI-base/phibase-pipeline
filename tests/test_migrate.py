@@ -43,11 +43,27 @@ from phibase_pipeline.migrate import (
     make_combined_export,
     make_phenotype_mapping,
     make_phibase_json,
+    props_not_equal,
     split_compound_columns,
     split_compound_rows,
 )
 
 DATA_DIR = Path(__file__).parent / 'data'
+
+
+@pytest.mark.parametrize(
+    'props, next_props, expected',
+    [
+        ([None], [None], False),
+        ([None], ['10'], True),
+        (['10'], [None], True),
+        (['10'], ['10'], False),
+        (['10'], ['20'], True),
+    ],
+    ids=['both_na', 'left_na', 'right_na', 'equal', 'not_equal'],
+)
+def test_props_not_equal(props, next_props, expected):
+    assert props_not_equal(props, next_props) == expected
 
 
 def test_split_compound_rows():
