@@ -374,7 +374,7 @@ def get_disease_annotations(phi_df):
     for row in disease_df.itertuples(index=False):
         session_id = row.session_id
         metagenotype = row.wt_metagenotype_id
-        if pd.isna(row.tissue_id):
+        if not isinstance(row.tissue_id, list) and pd.isna(row.tissue_id):
             extension = []
         else:
             extension = [
