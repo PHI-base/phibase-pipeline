@@ -1,4 +1,4 @@
-﻿term_label,term_id
+term_label,term_id
 abscess; sepsis,PHIDO:0000327
 acute diarrhea,PHIDO:0000116
 acute enteric disease,PHIDO:0000168
@@ -34,6 +34,7 @@ anthrax,PHIDO:0000015
 anthrax-like lung infection,
 apple Valsa canker,PHIDO:0000499
 ascending pyelonephritis; urinary tract infection,PHIDO:0000018; PHIDO:0000379
+Ascochyta blight,PHIDO:0000019
 Ascochyta blight (chickpea),PHIDO:0000430
 aspergillosis,PHIDO:0000020
 avian colibacillosis,PHIDO:0000022
@@ -48,7 +49,9 @@ bacterial blight (pelargonium),PHIDO:0000024
 bacterial blight (rice),PHIDO:0000024
 bacterial blight (soybean),PHIDO:0000024
 bacterial brown stripe,PHIDO:0000421
+bacterial brown stripe (rice),PHIDO:0000511
 bacterial canker,PHIDO:0000025
+bacterial canker (kiwifruit),PHIDO:0000521
 bacterial cold-water disease,PHIDO:0000026
 bacterial fruit blotch,PHIDO:0000423
 bacterial grain rot,PHIDO:0000027
@@ -75,6 +78,7 @@ bakanae,PHIDO:0000036
 bakanae disease,PHIDO:0000036
 banana Fusarium wilt,PHIDO:0000037
 bark cancer disease,PHIDO:0000425
+bark canker,PHIDO:0000435
 bark canker (poplar),PHIDO:0000425
 basal plate rot (onion),PHIDO:0000043
 bitter rot,PHIDO:0000426
@@ -92,6 +96,7 @@ blackleg,PHIDO:0000051
 blackleg (rapeseed),PHIDO:0000051
 blast,PHIDO:0000053
 blast (rice),PHIDO:0000053
+bleeding canker,PHIDO:0000516
 blight,PHIDO:0000430
 blight (bean),PHIDO:0000430
 blight (chestnut),PHIDO:0000430
@@ -105,6 +110,7 @@ blue mold (Citrus),PHIDO:0000058
 blue rot,PHIDO:0000432
 bordetellosis,PHIDO:0000060
 botryosphaeria canker and apple ring rot,PHIDO:0000433; PHIDO:0000473
+botryosphaeria canker; ring rot (apple),PHIDO:0000433; PHIDO:0000507
 bovine mastitis,PHIDO:0000061
 bronchial fibrosis,PHIDO:0000434
 brown blotch (mushroom),PHIDO:0000062
@@ -124,6 +130,7 @@ campylobacteriosis,PHIDO:0000069
 campylobacteriosis; gastroenteritis,PHIDO:0000069; PHIDO:0000167
 candidemia,PHIDO:0000070
 candidiasis,PHIDO:0000071
+canker,PHIDO:0000435
 canker (Citrus),PHIDO:0000435
 canker (grape),PHIDO:0000435
 canker disease,PHIDO:0000435
@@ -167,6 +174,7 @@ cryptococcal meningitis,PHIDO:0000446
 cryptococcal meningoencephalitis,PHIDO:0000104
 cryptococcosis,PHIDO:0000105
 Curvularia leaf spot,PHIDO:0000108
+Curvularia leaf spot (maize),PHIDO:0000509
 Curvularia leaf spot of maize,PHIDO:0000108
 cutaneous infection,PHIDO:0000336
 cyst (potato),PHIDO:0000292
@@ -256,6 +264,7 @@ glume blotch (wheat),PHIDO:0000171
 gonorrhea,PHIDO:0000172
 granuloma,
 grape rot,PHIDO:0000474
+grapevine canker,PHIDO:0000508
 grapevine canker disease,PHIDO:0000435
 gray mold,PHIDO:0000178
 green mold,PHIDO:0000174
@@ -263,6 +272,7 @@ green mold (Citrus),PHIDO:0000174
 green mould,PHIDO:0000174
 green muscardine,PHIDO:0000177
 green rot,PHIDO:0000454
+grey leaf spot,PHIDO:0000455
 grey leaf spot (maize),PHIDO:0000455
 grey leaf spot disease,PHIDO:0000455
 grey mold,PHIDO:0000178
@@ -274,6 +284,8 @@ Haemophilus influenzae disease,PHIDO:0000456
 halo blight,PHIDO:0000182
 head blight,PHIDO:0000162
 head blight (wheat),PHIDO:0000162
+head rot (cabbage),PHIDO:0000518
+head smut (maize),PHIDO:0000514
 hemolymph bleeding,
 hemolytic uremic syndrome,PHIDO:0000185
 hemolytic uremic syndrome; colitis,PHIDO:0000185; PHIDO:0000091
@@ -353,6 +365,7 @@ mucormycosis,PHIDO:0000240
 mycopathogen,
 mycosis,PHIDO:0000243
 mycotic mastitis,PHIDO:0000244
+necrosis (onion),
 necrosis in onion foliage and bulb tissues,
 necrotic abscesses,
 necrotic enteritis,PHIDO:0000246
@@ -428,6 +441,7 @@ pokkah boeng,PHIDO:0000284
 pokkah boeng disease,PHIDO:0000284
 poplar canker,PHIDO:0000435
 porcine contagious pleuropneumoniae,PHIDO:0000288
+post-harvest disease (fruit),
 postharvest diseases in fruit,
 postpartum infection,PHIDO:0000289
 potato wart,PHIDO:0000417
@@ -466,6 +480,7 @@ root rot; collar rot; crown rot; foliar infection; fruit infection,PHIDO:0000318
 rot (grape),PHIDO:0000474
 rot (potato),PHIDO:0000474
 rot (wheat),PHIDO:0000474
+rust (asian soybean),PHIDO:0000515
 salmonellosis,PHIDO:0000321
 salmonellosis (cattle),PHIDO:0000321
 salmonellosis; colitis,PHIDO:0000321; PHIDO:0000091
@@ -477,6 +492,7 @@ scab (potato),PHIDO:0000477
 scab (wheat),PHIDO:0000477
 scald,PHIDO:0000322
 scald; leaf blotch,PHIDO:0000322; PHIDO:0000208
+seedling blight (rice),PHIDO:0000511
 seedling rot,PHIDO:0000478
 self-limiting gastroenteritis; typhoid-like disease (mice),PHIDO:0000326; PHIDO:0000376
 sepsis,PHIDO:0000327
@@ -503,11 +519,13 @@ skin infection; nail infection,PHIDO:0000336; PHIDO:0000463
 skin infection; soft tissue infection,PHIDO:0000336
 skin infection; soft tissue infection; urinary tract infection; meningitis; wound infection,PHIDO:0000336; PHIDO:0000379; PHIDO:0000237
 skin lesion,
+slippery skin (onion),PHIDO:0000482
 slippery skin of onion,PHIDO:0000482
 smut,PHIDO:0000338
 smut (barley),PHIDO:0000338
 smut (corn),PHIDO:0000338
 smut (maize),PHIDO:0000338
+smut (sugarcane),PHIDO:0000506
 smut disease,PHIDO:0000338
 soft rot,PHIDO:0000339
 soft rot (potato),PHIDO:0000339
@@ -551,6 +569,7 @@ subcutaneous infection,PHIDO:0000491
 sudden death syndrome,PHIDO:0000356
 sugarcane smut,PHIDO:0000338
 sulcal caries,
+summer canker,PHIDO:0000519
 systemic candidiasis,PHIDO:0000492
 systemic cryptococcosis,PHIDO:0000359
 systemic disease (cattle),PHIDO:0000493
@@ -597,6 +616,7 @@ white root rot,PHIDO:0000395
 wildfire disease,PHIDO:0000396
 wilt,PHIDO:0000397
 wilt (banana),PHIDO:0000397
+wilt (mango),PHIDO:0000510
 wilt (melon),PHIDO:0000397
 wilt (muskmelon),PHIDO:0000397
 wilt (tomato),PHIDO:0000397
@@ -604,6 +624,7 @@ wilt (tomato); canker (tomato),PHIDO:0000397
 Witches' broom,PHIDO:0000398
 yellow rust,PHIDO:0000400
 yellow rust (wheat),PHIDO:0000400
+yellow vine disease (cucurbita),PHIDO:0000520
 yellow wilt (sunflower),PHIDO:0000500
 yersiniosis,PHIDO:0000401
 yersiniosis; acute gastroenteritis,PHIDO:0000401; PHIDO:0000167
