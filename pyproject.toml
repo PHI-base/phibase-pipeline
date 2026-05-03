@@ -16,8 +16,8 @@ authors = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-    "Programming Language :: Python :: 3.11",
-"Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
@@ -28,6 +28,7 @@ dependencies = [
   "requests==2.32.4",
   "jsonschema==4.24.0",
   "openpyxl==3.1.2",
+  "tabulate",
 ]
 
 [project.urls]
