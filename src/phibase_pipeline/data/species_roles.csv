@@ -416,6 +416,7 @@ ncbi_taxid,scientific_name,role
 40296,Penicillium italicum,pathogen
 6978,Periplaneta americana,host
 100870,Peronophythora litchii,pathogen
+86334,Peronospora manshurica,pathogen
 230439,Peronospora tabacina,pathogen
 3435,Persea americana,host
 4043,Petroselinum crispum,host
@@ -426,6 +427,7 @@ ncbi_taxid,scientific_name,role
 29920,Phytophthora cactorum,pathogen
 4784,Phytophthora capsici,pathogen
 4787,Phytophthora infestans,pathogen
+4796,Phytophthora palmivora,pathogen
 4792,Phytophthora parasitica,pathogen
 67593,Phytophthora sojae,pathogen
 7116,Pieris brassicae,host
@@ -473,6 +475,7 @@ ncbi_taxid,scientific_name,role
 5297,Puccinia graminis,pathogen
 27350,Puccinia striiformis,pathogen
 208348,Puccinia triticina,pathogen
+630390,Puccinia triticina (isolate 1-1 / race 1 (BBBD)),pathogen
 22663,Punica granatum,host
 76659,Pyrenopeziza brassicae,pathogen
 53485,Pyrenophora teres,pathogen
@@ -516,6 +519,7 @@ ncbi_taxid,scientific_name,role
 623,Shigella flexneri,pathogen
 7048,Sitophilus oryzae,host
 315333,Solanum albicans,host
+109975,Solanum americanum,host
 4108,Solanum chacoense,host
 62890,Solanum habrochaites,host
 856898,Solanum huancabambense,host
