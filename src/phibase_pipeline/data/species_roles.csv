@@ -38,8 +38,8 @@ ncbi_taxid,scientific_name,role
 226677,Anthurium andraeanum,host
 7460,Apis mellifera,host
 4045,Apium graveolens,host
-3702,Arabidopsis thaliana,host
 81972,Arabidopsis lyrata subsp. lyrata,host
+3702,Arabidopsis thaliana,host
 3818,Arachis hypogaea,host
 6661,Artemia franciscana,host
 85549,Artemia salina,host
@@ -117,6 +117,7 @@ ncbi_taxid,scientific_name,role
 5480,Candida parapsilosis,pathogen
 5482,Candida tropicalis,pathogen
 34021,Candidatus Liberibacter asiaticus,pathogen
+135727,Candidatus Phytoplasma ziziphi,pathogen
 9612,Canis lupus,host
 4072,Capsicum annuum,host
 4073,Capsicum frutescens,host
@@ -172,6 +173,7 @@ ncbi_taxid,scientific_name,role
 27357,Colletotrichum acutatum,pathogen
 538528,Colletotrichum camelliae,pathogen
 27358,Colletotrichum coccodes,pathogen
+129314,Colletotrichum falcatum,pathogen
 690256,Colletotrichum fructicola,pathogen
 474922,Colletotrichum gloeosporioides,pathogen
 31870,Colletotrichum graminicola,pathogen
@@ -188,6 +190,7 @@ ncbi_taxid,scientific_name,role
 1717,Corynebacterium diphtheriae,pathogen
 65058,Corynebacterium ulcerans,pathogen
 59586,Corynespora cassiicola,pathogen
+1448308,Corynespora cassiicola Philippines,pathogen
 269719,Cotinus coggygria,host
 292731,Cotinus obovatus,host
 2567903,Coturnix coromandelica,host
@@ -221,6 +224,7 @@ ncbi_taxid,scientific_name,role
 35525,Daphnia magna,host
 4039,Daucus carota,host
 3570,Dianthus caryophyllus,host
+1214568,Diaporthe amygdali,pathogen
 204038,Dickeya dadantii,pathogen
 1778540,Dickeya fangzhongdai,pathogen
 1240404,Dickeya oryzae,pathogen
@@ -275,6 +279,7 @@ ncbi_taxid,scientific_name,role
 29850,Gaeumannomyces graminis,pathogen
 7137,Galleria mellonella,host
 9031,Gallus gallus,host
+58640,Geotrichum citri-aurantii,pathogen
 738,Glaesserella parasuis,pathogen
 36090,Globodera pallida,pathogen
 31243,Globodera rostochiensis,pathogen
@@ -439,6 +444,7 @@ ncbi_taxid,scientific_name,role
 3350,Pinus thunbergii,host
 13216,Piper nigrum,host
 3888,Pisum sativum,host
+37360,Plasmodiophora brassicae,pathogen
 5821,Plasmodium berghei,pathogen
 5833,Plasmodium falciparum,pathogen
 143451,Plasmopara viticola,pathogen
@@ -469,6 +475,7 @@ ncbi_taxid,scientific_name,role
 29438,Pseudomonas savastanoi,pathogen
 317,Pseudomonas syringae,pathogen
 323,Pseudomonas syringae pv. tomato,pathogen
+223283,Pseudomonas syringae pv. tomato (strain ATCC BAA-871 / DC3000),pathogen
 29442,Pseudomonas tolaasii,pathogen
 285811,Pseudopyrenochaeta lycopersici,pathogen
 418402,Pseudostellaria heterophylla,host
@@ -483,6 +490,7 @@ ncbi_taxid,scientific_name,role
 225117,Pyrus bretchneideri,host
 23211,Pyrus communis,host
 3767,Pyrus pyrifolia,host
+363829,Pyrus sinkiangensis,host
 65070,Pythium aphanidermatum,pathogen
 46012,Radopholus similis,pathogen
 329,Ralstonia pickettii,pathogen
